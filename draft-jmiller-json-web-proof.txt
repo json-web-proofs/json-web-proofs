@@ -7,7 +7,7 @@ todo                                                           J. Miller
                                                            Ping Identity
                                                                 M. Jones
                                                                Microsoft
-                                                             2 June 2022
+                                                            12 June 2022
 
 
                              JSON Web Proof
@@ -368,6 +368,8 @@ Table of Contents
    N2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ" }
 
 # Security Considerations
+
+Notes to be expanded:
 
 * Requirements for supporting algorithms, see JPA
 * Application interface for verification
