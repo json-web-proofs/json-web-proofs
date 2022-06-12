@@ -10,7 +10,7 @@
 <meta content="
        The JSON Proof Algorithms (JPA) specification registers cryptographic algorithms and identifiers to be used with the JSON Web Proof (JWP) and JSON Web Key (JWK) specifications. It defines several IANA registries for these identifiers. 
     " name="description">
-<meta content="xml2rfc 3.12.7" name="generator">
+<meta content="xml2rfc 3.12.10" name="generator">
 <meta content="jose" name="keyword">
 <meta content="zkp" name="keyword">
 <meta content="jwp" name="keyword">
@@ -18,22 +18,22 @@
 <meta content="jpa" name="keyword">
 <meta content="draft-jmiller-json-proof-algorithms" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.7
-    Python 3.9.7
+  xml2rfc 3.12.10
+    Python 3.10.4
     appdirs 1.4.4
-    ConfigArgParse 1.3
+    ConfigArgParse 1.5.3
     google-i18n-address 2.5.1
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 2.11.3
     kitchen 1.2.6
-    lxml 4.6.5
+    lxml 4.8.0
     MarkupSafe 2.0.1
     pycountry 20.7.3
-    pyflakes 2.3.1
-    PyYAML 5.4.1
-    requests 2.26.0
-    setuptools 52.0.0
+    pyflakes 2.4.0
+    PyYAML 6.0
+    requests 2.27.1
+    setuptools 59.4.0
     six 1.16.0
 -->
 <link href="draft-jmiller-json-proof-algorithms.xml" rel="alternate" type="application/rfc+xml">
@@ -158,6 +158,14 @@
   font-weight: 700;
   font-display: swap;
   src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -341,7 +349,7 @@ ol, ul {
   padding: 0;
   margin: 0 0 0.5em 2em;
 }
-ol ol, ul ul, ol ul, ul ol {
+:is(ol, ul) :is(ol, ul) {
   margin-left: 1em;
 }
 li {
@@ -356,8 +364,7 @@ ul.empty, .ulEmpty {
 ul.empty li, .ulEmpty li {
   margin-top: 0.5em;
 }
-ul.compact, .ulCompact,
-ol.compact, .olCompact {
+:is(ul, ol).compact, .ulCompact, .olCompact {
   line-height: 100%;
   margin: 0 0 0 2em;
 }
@@ -373,7 +380,7 @@ dl > dd {
   margin-bottom: .8em;
   min-height: 1.3em;
 }
-dl.compact > dd, .dlCompact > dd {
+:is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0em;
 }
 dl > dd > dl {
@@ -415,6 +422,9 @@ tt, code {
      remove leading to avoid altering the final height of lines */
   line-height: 0;
 }
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
 pre {
   border: 1px solid var(--line-color);
   font-size: 13.5px;
@@ -439,6 +449,19 @@ figcaption, caption {
   text-align: left;
 }
 @media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
   pre, svg {
     display: inline-block;
     overflow-x: auto;
@@ -454,7 +477,7 @@ figcaption, caption {
     display: block;
     width: calc(100% - 25px);
   }
-  pre + .pilcrow, svg + .pilcrow {
+  :is(pre, svg) + .pilcrow {
     display: inline-block;
     vertical-align: text-bottom;
     padding-bottom: 8px;
@@ -503,17 +526,11 @@ th, td {
 th {
   background-color: var(--line-color);
 }
-tr:nth-child(2n) > td {
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
   background-color: var(--background-color);
 }
-tr:nth-child(2n+1) > td {
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
   background-color: var(--highlight-color);
-}
-thead+tbody > tr:nth-child(2n) > td {
-  background-color: var(--highlight-color);
-}
-thead+tbody > tr:nth-child(2n+1) > td {
-  background-color: var(--background-color);
 }
 table caption {
   margin: 0;
@@ -553,8 +570,9 @@ hr {
 }
 .bcp14 {
   font-variant: small-caps;
+  font-weight: 600;
+  font-size: 14.5px;
 }
-
 .role {
   font-variant: all-small-caps;
 }
@@ -793,7 +811,7 @@ hr.addr {
     margin: 0 0 0 4px;
     font-size: var(--small-font-size);
   }
-  #toc ul p, #toc ul li {
+  #toc ul :is(p, li) {
     margin: 2px 0;
     line-height: 22px;
   }
@@ -903,13 +921,13 @@ dl.dlNewline > dt {
 }
 
 /* Provide styling for table cell text alignment */
-table .text-left, table .text-left {
+table .text-left {
   text-align: left;
 }
-table .text-center, table .text-center {
+table .text-center {
   text-align: center;
 }
-table .text-right, table .text-right {
+table .text-right {
   text-align: right;
 }
 
@@ -976,12 +994,6 @@ address div.right {
   }
 
 }
-/* Tweak the bcp14 keyword presentation */
-.bcp14 {
-  font-variant: small-caps;
-  font-weight: bold;
-  font-size: 0.9em;
-}
 
 /* Dark mode. */
 @media (prefers-color-scheme: dark) {
@@ -996,19 +1008,20 @@ address div.right {
   --pilcrow-strong: #666;
   scrollbar-color: #777 #333;
 }
-/* Trick: a prefix match works because only black and white are allowed */
-svg [stroke="black"], svg [stroke^="#000"] {
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
   stroke: var(--text-color);
 }
-svg [stroke="white"], svg [stroke^="#fff"] {
+svg :is([stroke="white"], [stroke^="#fff"]) {
   stroke: var(--background-color);
 }
-svg [fill="black"], svg [fill^="#000"], svg :not([fill]) {
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
   fill: var(--text-color);
 }
-svg [stroke="fill"], svg [fill^="#fff"] {
+svg :is([stroke="fill"], [fill^="#fff"]) {
   fill: var(--background-color);
-}
 }
 </style>
 
@@ -1018,7 +1031,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <thead><tr>
 <td class="left"></td>
 <td class="center">jpa</td>
-<td class="right">May 2022</td>
+<td class="right">June 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Miller &amp; Jones</td>
@@ -1155,39 +1168,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="xref">6.3</a>.  <a href="#name-message-authentication-code" class="xref">Message Authentication Code</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.1">
-                    <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="xref">6.3.1</a>.  <a href="#name-holder-setup-2" class="xref">Holder Setup</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.2">
-                    <p id="section-toc.1-1.6.2.3.2.2.1"><a href="#section-6.3.2" class="xref">6.3.2</a>.  <a href="#name-issuer-setup-2" class="xref">Issuer Setup</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.3">
-                    <p id="section-toc.1-1.6.2.3.2.3.1"><a href="#section-6.3.3" class="xref">6.3.3</a>.  <a href="#name-issuer-protected-header-3" class="xref">Issuer Protected Header</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.4">
-                    <p id="section-toc.1-1.6.2.3.2.4.1"><a href="#section-6.3.4" class="xref">6.3.4</a>.  <a href="#name-payloads-3" class="xref">Payloads</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.5">
-                    <p id="section-toc.1-1.6.2.3.2.5.1"><a href="#section-6.3.5" class="xref">6.3.5</a>.  <a href="#name-issuer-proof" class="xref">Issuer Proof</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.6">
-                    <p id="section-toc.1-1.6.2.3.2.6.1"><a href="#section-6.3.6" class="xref">6.3.6</a>.  <a href="#name-presentation-protected-heade" class="xref">Presentation Protected Header</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.7">
-                    <p id="section-toc.1-1.6.2.3.2.7.1"><a href="#section-6.3.7" class="xref">6.3.7</a>.  <a href="#name-presentation-3" class="xref">Presentation</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.8">
-                    <p id="section-toc.1-1.6.2.3.2.8.1"><a href="#section-6.3.8" class="xref">6.3.8</a>.  <a href="#name-verifier-setup" class="xref">Verifier Setup</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.9">
-                    <p id="section-toc.1-1.6.2.3.2.9.1"><a href="#section-6.3.9" class="xref">6.3.9</a>.  <a href="#name-jpa-registration-3" class="xref">JPA Registration</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
-                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="xref">6.4</a>.  <a href="#name-zksnark" class="xref">ZKSnark</a></p>
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="xref">6.3</a>.  <a href="#name-zksnark" class="xref">ZKSnark</a></p>
 </li>
             </ul>
 </li>
@@ -1637,179 +1618,255 @@ The resulting verifiable JWP in JSON serialization is:
 </pre><a href="#section-6.2.9-11" class="pilcrow">¶</a>
 </div>
 <p id="section-6.2.9-12">The same JWP in compact serialization:
-<code>text bbs_present_compact
-ImV5SnBjM01pT2lKb2RIUndjem92TDJsemMzVmxjaTVsZUdGdGNHeGxJaXdpWTJ4aGFXMXpJanBiSW1aaGJXbHNlVjl1WVcxbElpd2laMmwyWlc1ZmJtRnRaU0lzSW1WdFlXbHNJaXdpWVdkbElsMHNJblI1Y0NJNklrcFFWQ0lzSW1Gc1p5STZJa0pDVXkxWUluMCI.~IkpheSI~~NDI.AAUVqUnyMW_qGrrCzK7xHqUydeyQX5O6276HzUKz41aX9q7qzC6r-eHGh1GD4Y3ZL9l_sA9ibulK3OYbyXVy0ym3LEC5LYyZMUnHXdD41K9qx1P_gE2Y-qZlTvgKauwY7hUihoC6hJl7Vlic9ssX_fjZ6QGo0AzB3o5aHN_xgqSQUwAPpRmckfMnWPn2uZgD3Ei0AAAAdIW0OjVpeHzjoE7lStFvpGW3VnrUfloX5G24SUtysY6yWWtkvbtKj6fausG99w6GKAAAAAIFgnhW_xwhkRSVwwgEyNSyQ5PmrsAJnl6zkD88Uv_YBFVs0cLRsWpF1-uxU_QBw2aHYxR5B_wau84Q-oYB_8VcgmnxryMW0mWecdbeAwSovPsi1dPglpMmpOWX4t-8tbTM5DprN-iUtMcqtX876eq8AAAABF3EHyaXaecu5C5WxIjUr6pTFU4T4NN6B1xHEatCejiCLROs2UE_9icGHk2EViQpA-pIkshllp9sjA_DOfmav8xbHp8gnRgDblpmY84qOgG111UdIIMuTBkFK8sg16epbDiukjOuKL4WJV2c9dAaN7SHc0ZgavPVg8Q_pSqdFl4u
-</code><a href="#section-6.2.9-12" class="pilcrow">¶</a></p>
-</section>
+```text bbs<em>present</em>compact
+ImV5SnBjM01pT2lKb2RIUndjem92TDJsemMzVmxjaTVsZUdGdGNHeGxJaXdpWTJ4aGFXMXpJanBiSW1aaGJXbHNlVjl1WVcxbElpd2laMmwyWlc1ZmJtRnRaU0lzSW1WdFlXbHNJaXdpWVdkbElsMHNJblI1Y0NJNklrcFFWQ0lzSW1Gc1p5STZJa0pDVXkxWUluMCI.<sub>IkpheSI</sub><sub>NDI.AAUVqUnyMW_qGrrCzK7xHqUydeyQX5O6276HzUKz41aX9q7qzC6r-eHGh1GD4Y3ZL9l_sA9ibulK3OYbyXVy0ym3LEC5LYyZMUnHXdD41K9qx1P_gE2Y-qZlTvgKauwY7hUihoC6hJl7Vlic9ssX_fjZ6QGo0AzB3o5aHN_xgqSQUwAPpRmckfMnWPn2uZgD3Ei0AAAAdIW0OjVpeHzjoE7lStFvpGW3VnrUfloX5G24SUtysY6yWWtkvbtKj6fausG99w6GKAAAAAIFgnhW_xwhkRSVwwgEyNSyQ5PmrsAJnl6zkD88Uv_YBFVs0cLRsWpF1-uxU_QBw2aHYxR5B_wau84Q-oYB_8VcgmnxryMW0mWecdbeAwSovPsi1dPglpMmpOWX4t-8tbTM5DprN-iUtMcqtX876eq8AAAABF3EHyaXaecu5C5WxIjUr6pTFU4T4NN6B1xHEatCejiCLROs2UE_9icGHk2EViQpA-pIkshllp9sjA_DOfmav8xbHp8gnRgDblpmY84qOgG111UdIIMuTBkFK8sg16epbDiukjOuKL4WJV2c9dAaN7SHc0ZgavPVg8Q_pSqdFl4u</sub><a href="#section-6.2.9-12" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.9-13">
+<pre>
+
+## Message Authentication Code
+
+The Message Authentication Code (MAC) JPA uses a MAC to both generate ephemeral keys and compute authentication codes to protect the issuer header and each payload individually.
+
+Like the JWS-based JPA, it also does not support unlinkability if the same JWP is presented multiple times and requires an individually issued JWP for each presentation in order to fully protect privacy.  When compared to the JWS approach, using a MAC requires less compute but can result in potentially larger presentation proof values.
+
+The design is intentionally minimal and only involves using a single standardized MAC method instead of a mix of MAC/hash methods or a custom hash-based construct.  It is able to use any published cryptographic MAC method such as [HMAC](https://datatracker.ietf.org/doc/html/rfc2104) or [KMAC](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf).  It uses traditional public-key based signatures to verify the authenticity of the issuer and holder.
+
+### Holder Setup
+
+Prior to the issuer creating a new JWP it must have presentation binding information provided by the holder.  This enables the holder to perform replay prevention while presenting the JWP.
+
+The presentation key used by the holder must be transferred to the issuer and verified, likely through a challenge and self-signing mechanism.  If the holder requires unlinkability it must also generate a new key that is verified and bound to each new JWP.
+
+How these holder presentation keys are transfered and verified is out of scope of this specification, protocols such as OpenID Connect can be used to accomplish this.  What is required by this definition is that the holder's presentation key MUST be included in the issuer's protected header using the `pjwk` claim with a JWK as the value.
+
+### Issuer Setup
+
+To use the MAC algorithm the issuer must have a stable public key pair to perform signing.  To start the issuance process a single 32 byte random Shared Secret must first be generated.  This value will be shared privately to the holder as part of the issuer's JWP proof value.
+
+The Shared Secret is used by both the issuer and holder as the MAC method's key to generate a new set of unique ephemeral keys.  These keys are then used as the input to generate a MAC that protects each payload.
+
+### Issuer Protected Header
+
+The holder's presentation key JWK MUST be included in the issuer protected header using the `pjwk` claim.  The issuer MUST validate that the holder has posession of this key through a trusted mechanism such as verifying the signature of a unique nonce value from the holder.
+
+For consistency, the issuer header is also protected by a MAC by using the fixed value "issuer_header" as the input key.  The issuer header JSON is serialized using UTF-8 and encoded with base64url into an octet array.  The final issuer header MAC is generated from the octet array and the fixed key, and the resulting value becomes the first input into the larger octet array that will be signed by the issuer.
+
+### Payloads
+
+A unique key is generated for each payload using the MAC with the Shared Secret as the key and the values "payload_X" where "X" is replaced by the zero-based array index of the payload, for example "payload_0", "payload_1", etc.
+
+Each payload is serialized using UTF-8 and encoded with base64url into an octet array.  The generated key for that payload based on its index is used to generate the MAC for the payload's encoded octet array.  The resulting value is appended to the larger octet array that will be signed by the issuer.
+
+### Issuer Proof
+
+The issuer proof consists of two items appended together, the issuer's signature of the appended array of MACs, and the Shared Secret used to generate the set of payload keys.
+
+To generate the signature, the array containing the final MAC of the issuer protected header followed by all of the payload MACs appended in order is used as the input to a new JWS.
+
+`jws_payload = [issuer_header_mac, payload_mac_1, payload_mac_2, ... payload_mac_n]`
+
+The issuer signs the JWS using its stable public key and a fixed header containing the `alg` associated with MAC algorithm in use.
+
+`jws_header = '{"alg":"ES256"}'`
+
+The resulting signature is decoded and used as the first item in the issuer proof value.  The octet array of the Shared Secret is appended, resulting in the final issuer proof value.
+
+`issuer_proof = [jws_signature, shared_secret]`
+
+### Presentation Protected Header
+
+See the JWS [Presentation Protected Header](#presentation-protected-header) section.
+
+### Presentation
+
+The presentation proof is constructed as a large octet array containing multiple appended items similar to the issuer proof value.  The first item is the JWS decoded signature value generated when the holder uses the presentation key to sign the presentation header.  The second item is the issuer signature from the issuer's proof value.
+
+These two signatures are then followed by a MAC value for each payload.  The MAC values used will depend on if that payload has been disclosed or is hidden.  Disclosed payloads will include the MAC key input, and hidden payloads will include only their final MAC value.
+
+`presentation_proof = [presentation_signature, issuer_signature. disclosed_key_0, hidden_mac_1, hidden_mac_2, ... disclosed_key_n]`
+
+The size of this value will depend on the underlying cryptographich algorithms.  For example, `MAC-H256` uses the `ES256` JWS with a decoded signature of 64 octets, and for a JWP with five payloads using `HMAC-SHA256` the total presentation proof value length would be `64 + 64 + (5 * 32) = 288` octets.
+
+### Verifier Setup
+
+In order to verify that the presentation was protected from replay attacks, the verifier must be able to validate the presentation protected header.  This involves the following steps:
+
+1. JSON parse the presentation header
+2. Validate the contained `nonce` claim
+3. JSON parse the issuer header
+4. Validate the contained `pjwk` claim
+5. Create a JWS using the correct fixed header with `alg` value and the presentation header as the body
+6. Remove the `presentation_signature` from the beginning of the `presentation_proof` octet array
+7. Validate the JWS using the JWK from the `pjwk` claim and the `presentation_signature` value
+
+Next, the verifier must validate all of the disclosed payloads using the following steps:
+
+1. JSON parse the issuer header
+2. Resolve the `kid` using a trusted mechanism to obtain the correct issuer JWK
+3. Remove the `issuer_signature` from the beginning of the remaining `presentation_proof` octet array (after the `presentation_signature` was removed)
+4. Perform the MAC on the presented `issuer_header` value using the "issuer_header" value as the input key
+5. Store the resulting value as the first entry in a new `jws_payload` octet array
+6. Iterate on each presented payload (disclosed or hidden)
+   1. Extract the next hash value from the remaining `presentation_proof` octet array
+   2. If the payload was disclosed: perform a MAC using the given hash value as the input key and append the result to the `jws_payload` octet array
+   3. If the payload was hidden: append the given hash value to the `jws_payload` octet array
+7. Create a JWS using a header containing the `alg` parameter along with the generated `jws_payload` value as the payload
+8. Validate the JWS using the resolved issuer JWK and the extracted `issuer_signature` value
+
+### JPA Registration
+
+Proposed JWP `alg` value is of the format "MAC-" appended with a unique identifier for the set of MAC and signing algorithms used.  Below is the initial registrations:
+
+* `MAC-H256` uses `HMAC SHA-256` as the MAC and `ECDSA using P-256 and SHA-256` for the signatures
+* `MAC-H384` uses `HMAC SHA-384` as the MAC and `ECDSA using P-384 and SHA-384` for the signatures
+* `MAC-H512` uses `HMAC SHA-512` as the MAC and `ECDSA using P-521 and SHA-512` for the signatures
+* `MAC-K25519` uses `KMAC SHAKE128` as the MAC and `EdDSA using Curve25519` for the signatures
+* `MAC-K448` uses `KMAC SHAKE256` as the MAC and `EdDSA using Curve448` for the signatures
+* `MAC-H256K` uses `HMAC SHA-256` as the MAC and `ECDSA using secp256k1 and SHA-256` for the signatures
+
+### Example
+
+The following example uses the `MAC-H256` algorithm.
+
+This is the Signer's stable private key in the JWK format:
+```json issuer_private_jwk
+{
+  "crv": "P-256",
+  "kty": "EC",
+  "x": "ONebN43-G5DOwZX6jCVpEYEe0bYd5WDybXAG0sL3iDA",
+  "y": "b0MHuYfSxu3Pj4DAyDXabAc0mPjpB1worEpr3yyrft4",
+  "d": "jnE0-9YvxQtLJEKcyUHU6HQ3Y9nSDnh0NstYJFn7RuI"
+}
+</pre><a href="#section-6.2.9-13" class="pilcrow">¶</a>
 </div>
-</section>
+<p id="section-6.2.9-14">This is the Signer's generated Shared Secret:
+```json mac<em>shared</em>secret
+[100, 109, 91, 184, 139, 20, 107, 86, 1, 252, 86, 159, 126, 251, 228, 4, 35, 177, 75, 96, 11, 205, 144, 189, 42, 95, 135, 170, 107, 58, 99, 142]<a href="#section-6.2.9-14" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.9-15">
+<pre>
+This is the Holder's presentation private key in the JWK format:
+```json holder_presentation_jwk
+{
+  "crv": "P-256",
+  "kty": "EC",
+  "x": "oB1TPrE_QJIL61fUOOK5DpKgd8j2zbZJtqpILDTJX6I",
+  "y": "3JqnrkucLobkdRuOqZXOP9MMlbFyenFOLyGlG-FPACM",
+  "d": "AvyDPl1I4xwjrI2iEOi6DxM9ipJe_h_VUN5OvoKvvW8"
+}
+</pre><a href="#section-6.2.9-15" class="pilcrow">¶</a>
 </div>
-<div id="message-authentication-code">
-<section id="section-6.3">
-        <h3 id="name-message-authentication-code">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-message-authentication-code" class="section-name selfRef">Message Authentication Code</a>
-        </h3>
-<p id="section-6.3-1">The Message Authentication Code (MAC) JPA uses a MAC to both generate ephemeral keys and compute authentication codes to protect the issuer header and each payload individually.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.3-2">Like the JWS-based JPA, it also does not support unlinkability if the same JWP is presented multiple times and requires an individually issued JWP for each presentation in order to fully protect privacy.  When compared to the JWS approach, using a MAC requires less compute but can result in potentially larger presentation proof values.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
-<p id="section-6.3-3">The design is intentionally minimal and only involves using a single standardized MAC method instead of a mix of MAC/hash methods or a custom hash-based construct.  It is able to use any published cryptographic MAC method such as <a href="https://datatracker.ietf.org/doc/html/rfc2104">HMAC</a> or <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf">KMAC</a>.  It uses traditional public-key based signatures to verify the authenticity of the issuer and holder.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
-<div id="holder-setup-1">
-<section id="section-6.3.1">
-          <h4 id="name-holder-setup-2">
-<a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-holder-setup-2" class="section-name selfRef">Holder Setup</a>
-          </h4>
-<p id="section-6.3.1-1">Prior to the issuer creating a new JWP it must have presentation binding information provided by the holder.  This enables the holder to perform replay prevention while presenting the JWP.<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.1-2">The presentation key used by the holder must be transferred to the issuer and verified, likely through a challenge and self-signing mechanism.  If the holder requires unlinkability it must also generate a new key that is verified and bound to each new JWP.<a href="#section-6.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.3.1-3">How these holder presentation keys are transfered and verified is out of scope of this specification, protocols such as OpenID Connect can be used to accomplish this.  What is required by this definition is that the holder's presentation key MUST be included in the issuer's protected header using the <code>pjwk</code> claim with a JWK as the value.<a href="#section-6.3.1-3" class="pilcrow">¶</a></p>
-</section>
+<p id="section-6.2.9-16">The first MAC is generated using the key <code>issuer_header</code> and the base64url-encoded issuer protected header, resulting in this octet array:
+```json mac<em>issuer</em>header_mac
+[140, 88, 59, 30, 127, 113, 27, 237, 78, 200, 182, 114, 94, 123, 198, 128, 102, 232, 178, 88, 252, 248, 57, 2, 231, 19, 145, 8, 160, 197, 66, 166]<a href="#section-6.2.9-16" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.9-17">
+<pre>
+The issuer generates an array of derived keys with one for each payload by using the shared secret as the key and the index of the payload as the input:
+```json mac_issuer_keys
+[
+ [180, 129, 55, 94, 125, 158, 179, 245, 30, 199, 148, 60, 184, 28, 197, 123, 231, 232, 95, 91, 65, 74, 38, 242, 253, 96, 67, 44, 40, 220, 250, 4],
+ [143, 172, 182, 156, 184, 138, 228, 172, 215, 26, 175, 137, 137, 25, 159, 141, 213, 12, 214, 29, 231, 200, 13, 94, 116, 22, 41, 115, 72, 214, 57, 98],
+ [144, 73, 77, 66, 230, 187, 217, 186, 246, 41, 138, 25, 39, 203, 101, 76, 156, 161, 244, 130, 203, 166, 184, 154, 7, 4, 218, 84, 168, 199, 36, 245],
+ [70, 55, 182, 105, 101, 130, 254, 234, 68, 224, 219, 97, 119, 98, 244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49, 246, 109, 155, 242, 236, 21, 138]
+]
+</pre><a href="#section-6.2.9-17" class="pilcrow">¶</a>
 </div>
-<div id="issuer-setup-1">
-<section id="section-6.3.2">
-          <h4 id="name-issuer-setup-2">
-<a href="#section-6.3.2" class="section-number selfRef">6.3.2. </a><a href="#name-issuer-setup-2" class="section-name selfRef">Issuer Setup</a>
-          </h4>
-<p id="section-6.3.2-1">To use the MAC algorithm the issuer must have a stable public key pair to perform signing.  To start the issuance process a single 32 byte random Shared Secret must first be generated.  This value will be shared privately to the holder as part of the issuer's JWP proof value.<a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.2-2">The Shared Secret is used by both the issuer and holder as the MAC method's key to generate a new set of unique ephemeral keys.  These keys are then used as the input to generate a MAC that protects each payload.<a href="#section-6.3.2-2" class="pilcrow">¶</a></p>
-</section>
+<p id="section-6.2.9-18">The first payload is the string <code>"Doe"</code> with the octet sequence of <code>[34, 68, 111, 101, 34]</code> and base64url-encoded as <code>IkRvZSI</code>.<a href="#section-6.2.9-18" class="pilcrow">¶</a></p>
+<p id="section-6.2.9-19">The second payload is the string <code>"Jay"</code> with the octet sequence of <code>[34, 74, 97, 121, 34]</code> and base64url-encoded as <code>IkpheSI</code>.<a href="#section-6.2.9-19" class="pilcrow">¶</a></p>
+<p id="section-6.2.9-20">The third payload is the string <code>"jaydoe@example.org"</code> with the octet sequence of <code>[34, 106, 97, 121, 100, 111, 101, 64, 101, 120, 97, 109, 112, 108, 101, 46, 111, 114, 103, 34]</code> and base64url-encoded as <code>ImpheWRvZUBleGFtcGxlLm9yZyI</code>.<a href="#section-6.2.9-20" class="pilcrow">¶</a></p>
+<p id="section-6.2.9-21">The fourth payload is the string <code>42</code> with the octet sequence of <code>[52, 50]</code> and base64url-encoded as <code>NDI</code>.<a href="#section-6.2.9-21" class="pilcrow">¶</a></p>
+<p id="section-6.2.9-22">A MAC is generated for each payload using the generated key for its given index, resulting in an array of MACs:
+```json mac<em>issuer</em>macs
+[
+ [156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28, 220, 237, 112, 161, 91, 39, 68, 137, 203, 92, 243, 16, 116, 64, 129, 61, 172],
+ [239, 17, 12, 35, 111, 129, 51, 87, 43, 86, 234, 38, 89, 149, 169, 157, 33, 104, 81, 246, 190, 154, 74, 195, 194, 158, 50, 208, 203, 203, 249, 237],
+ [162, 174, 12, 27, 190, 250, 112, 1, 139, 177, 49, 124, 110, 201, 83, 233, 14, 109, 60, 253, 121, 184, 126, 121, 26, 138, 5, 214, 97, 96, 216, 80],
+ [61, 109, 78, 172, 255, 189, 67, 83, 247, 65, 234, 128, 30, 47, 145, 70, 129, 26, 41, 41, 78, 4, 151, 230, 232, 127, 135, 230, 14, 208, 178, 50]
+]<a href="#section-6.2.9-22" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.9-23">
+<pre>
+Concatenating the issuer protected header MAC with the array of payload MACs produces a single octet array that is signed using the issuer's stable key, resulting in the following signature:
+```json mac_issuer_signature
+[120, 172, 15, 230, 138, 230, 150, 139, 241, 196, 79, 134, 122, 43, 149, 11, 253, 104, 58, 199, 49, 87, 32, 64, 237, 50, 86, 155, 153, 58, 63, 116, 245, 130, 136, 197, 164, 207, 232, 238, 106, 171, 246, 98, 149, 254, 22, 1, 114, 187, 233, 168, 116, 173, 211, 208, 234, 245, 76, 238, 143, 157, 83, 202]
+</pre><a href="#section-6.2.9-23" class="pilcrow">¶</a>
 </div>
-<div id="issuer-protected-header-2">
-<section id="section-6.3.3">
-          <h4 id="name-issuer-protected-header-3">
-<a href="#section-6.3.3" class="section-number selfRef">6.3.3. </a><a href="#name-issuer-protected-header-3" class="section-name selfRef">Issuer Protected Header</a>
-          </h4>
-<p id="section-6.3.3-1">The holder's presentation key JWK MUST be included in the issuer protected header using the <code>pjwk</code> claim.  The issuer MUST validate that the holder has posession of this key through a trusted mechanism such as verifying the signature of a unique nonce value from the holder.<a href="#section-6.3.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.3-2">For consistency, the issuer header is also protected by a MAC by using the fixed value "issuer_header" as the input key.  The issuer header JSON is serialized using UTF-8 and encoded with base64url into an octet array.  The final issuer header MAC is generated from the octet array and the fixed key, and the resulting value becomes the first input into the larger octet array that will be signed by the issuer.<a href="#section-6.3.3-2" class="pilcrow">¶</a></p>
-</section>
+<p id="section-6.2.9-24">The orignal shared secret octet string is then concatenated to the end of the issuer signature octet string and the result is base64url-encoded as the issuer's proof value.<a href="#section-6.2.9-24" class="pilcrow">¶</a></p>
+<p id="section-6.2.9-25">The final issued JWP in JSON serialization is:
+```json mac<em>issued</em>jwp
+{
+  "payloads": [
+    "IkRvZSI",
+    "IkpheSI",
+    "ImpheWRvZUBleGFtcGxlLm9yZyI",
+    "NDI"
+  ],
+  "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9",
+  "proof": "eKwP5ormlovxxE-GeiuVC<em>1oOscxVyBA7TJWm5k6P3T1gojFpM</em>o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6prOmOO"
+}<a href="#section-6.2.9-25" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.9-26">
+<pre>
+The same JWP in compact serialization:
+```text mac_issued_compact
+eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6prOmOO
+</pre><a href="#section-6.2.9-26" class="pilcrow">¶</a>
 </div>
-<div id="payloads-2">
-<section id="section-6.3.4">
-          <h4 id="name-payloads-3">
-<a href="#section-6.3.4" class="section-number selfRef">6.3.4. </a><a href="#name-payloads-3" class="section-name selfRef">Payloads</a>
-          </h4>
-<p id="section-6.3.4-1">A unique key is generated for each payload using the MAC with the Shared Secret as the key and the values "payload<em>X" where "X" is replaced by the zero-based array index of the payload, for example "payload</em>0", "payload_1", etc.<a href="#section-6.3.4-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.4-2">Each payload is serialized using UTF-8 and encoded with base64url into an octet array.  The generated key for that payload based on its index is used to generate the MAC for the payload's encoded octet array.  The resulting value is appended to the larger octet array that will be signed by the issuer.<a href="#section-6.3.4-2" class="pilcrow">¶</a></p>
-</section>
+<p id="section-6.2.9-27">Next we show the presentation of the JWP with selective disclosure.<a href="#section-6.2.9-27" class="pilcrow">¶</a></p>
+<p id="section-6.2.9-28">We start with this presentation header using a nonce provided by the Verifier:
+```json mac<em>presentation</em>header
+{
+  "nonce": "uTEB371l1pzWJl7afB0wi0HWUNk1Le-bComFLxa8K-s"
+}<a href="#section-6.2.9-28" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.9-29">
+<pre>
+When signed with the holder's presentation key, the resulting signature octets are:
+```json mac_presentation_header_signature
+[126, 134, 175, 2, 165, 12, 103, 11, 116, 72, 94, 228, 240, 142, 107, 195, 198, 238, 218, 203, 63, 198, 105, 175, 1, 69, 182, 5, 204, 239, 35, 149, 85, 55, 4, 169, 109, 243, 88, 213, 12, 1, 167, 235, 222, 17, 232, 118, 110, 111, 47, 165, 102, 142, 0, 1, 226, 117, 143, 125, 132, 62, 231, 145]
+</pre><a href="#section-6.2.9-29" class="pilcrow">¶</a>
 </div>
-<div id="issuer-proof">
-<section id="section-6.3.5">
-          <h4 id="name-issuer-proof">
-<a href="#section-6.3.5" class="section-number selfRef">6.3.5. </a><a href="#name-issuer-proof" class="section-name selfRef">Issuer Proof</a>
-          </h4>
-<p id="section-6.3.5-1">The issuer proof consists of two items appended together, the issuer's signature of the appended array of MACs, and the Shared Secret used to generate the set of payload keys.<a href="#section-6.3.5-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.5-2">To generate the signature, the array containing the final MAC of the issuer protected header followed by all of the payload MACs appended in order is used as the input to a new JWS.<a href="#section-6.3.5-2" class="pilcrow">¶</a></p>
-<p id="section-6.3.5-3"><code>jws_payload = [issuer_header_mac, payload_mac_1, payload_mac_2, ... payload_mac_n]</code><a href="#section-6.3.5-3" class="pilcrow">¶</a></p>
-<p id="section-6.3.5-4">The issuer signs the JWS using its stable public key and a fixed header containing the <code>alg</code> associated with MAC algorithm in use.<a href="#section-6.3.5-4" class="pilcrow">¶</a></p>
-<p id="section-6.3.5-5"><code>jws_header = '{"alg":"ES256"}'</code><a href="#section-6.3.5-5" class="pilcrow">¶</a></p>
-<p id="section-6.3.5-6">The resulting signature is decoded and used as the first item in the issuer proof value.  The octet array of the Shared Secret is appended, resulting in the final issuer proof value.<a href="#section-6.3.5-6" class="pilcrow">¶</a></p>
-<p id="section-6.3.5-7"><code>issuer_proof = [jws_signature, shared_secret]</code><a href="#section-6.3.5-7" class="pilcrow">¶</a></p>
-</section>
+<p id="section-6.2.9-30">Then by applying selective disclosure of only the given name and age claims (family name and email hidden, payload array indexes 0 and 2), the holder builds a mixed array of either the payload key (if disclosed) or MAC (if hidden):
+```json mac<em>presentation</em>keyormac
+[
+ [156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28, 220, 237, 112, 161, 91, 39, 68, 137, 203, 92, 243, 16, 116, 64, 129, 61, 172],
+ [143, 172, 182, 156, 184, 138, 228, 172, 215, 26, 175, 137, 137, 25, 159, 141, 213, 12, 214, 29, 231, 200, 13, 94, 116, 22, 41, 115, 72, 214, 57, 98],
+ [162, 174, 12, 27, 190, 250, 112, 1, 139, 177, 49, 124, 110, 201, 83, 233, 14, 109, 60, 253, 121, 184, 126, 121, 26, 138, 5, 214, 97, 96, 216, 80],
+ [70, 55, 182, 105, 101, 130, 254, 234, 68, 224, 219, 97, 119, 98, 244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49, 246, 109, 155, 242, 236, 21, 138]
+]<a href="#section-6.2.9-30" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.9-31">
+<pre>
+The final presented proof value is generated by concatenating first the presentation header signature octet string, followed by the issuer signature octet string, then followed by the mixed array of keys and MACs:
+```json mac_presentation_proof
+[126, 134, 175, 2, 165, 12, 103, 11, 116, 72, 94, 228, 240, 142, 107, 195, 198, 238, 218, 203, 63, 198, 105, 175, 1, 69, 182, 5, 204, 239, 35, 149, 85, 55, 4, 169, 109, 243, 88, 213, 12, 1, 167, 235, 222, 17, 232, 118, 110, 111, 47, 165, 102, 142, 0, 1, 226, 117, 143, 125, 132, 62, 231, 145, 120, 172, 15, 230, 138, 230, 150, 139, 241, 196, 79, 134, 122, 43, 149, 11, 253, 104, 58, 199, 49, 87, 32, 64, 237, 50, 86, 155, 153, 58, 63, 116, 245, 130, 136, 197, 164, 207, 232, 238, 106, 171, 246, 98, 149, 254, 22, 1, 114, 187, 233, 168, 116, 173, 211, 208, 234, 245, 76, 238, 143, 157, 83, 202, 156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28, 220, 237, 112, 161, 91, 39, 68, 137, 203, 92, 243, 16, 116, 64, 129, 61, 172, 143, 172, 182, 156, 184, 138, 228, 172, 215, 26, 175, 137, 137, 25, 159, 141, 213, 12, 214, 29, 231, 200, 13, 94, 116, 22, 41, 115, 72, 214, 57, 98, 162, 174, 12, 27, 190, 250, 112, 1, 139, 177, 49, 124, 110, 201, 83, 233, 14, 109, 60, 253, 121, 184, 126, 121, 26, 138, 5, 214, 97, 96, 216, 80, 70, 55, 182, 105, 101, 130, 254, 234, 68, 224, 219, 97, 119, 98, 244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49, 246, 109, 155, 242, 236, 21, 138]
+</pre><a href="#section-6.2.9-31" class="pilcrow">¶</a>
 </div>
-<div id="presentation-protected-header-1">
-<section id="section-6.3.6">
-          <h4 id="name-presentation-protected-heade">
-<a href="#section-6.3.6" class="section-number selfRef">6.3.6. </a><a href="#name-presentation-protected-heade" class="section-name selfRef">Presentation Protected Header</a>
-          </h4>
-<p id="section-6.3.6-1">See the JWS <a href="#presentation-protected-header">Presentation Protected Header</a> section.<a href="#section-6.3.6-1" class="pilcrow">¶</a></p>
-</section>
+<p id="section-6.2.9-32">The resulting presented JWP in JSON serialization is:
+```json mac<em>presentation</em>jwp
+{
+  "payloads": [
+    null,
+    "IkpheSI",
+    null,
+    "NDI"
+  ],
+  "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9",
+  "proof": "foavAqUMZwt0SF7k8I5rw8bu2ss<em>xmmvAUW2BczvI5VVNwSpbfNY1QwBp-veEeh2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj909YKIxaTP6O5qq</em>Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8IVxzc7XChWydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQWKXNI1jlioq4MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m2b8uwVig",
+  "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ"
+}<a href="#section-6.2.9-32" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.9-33">
+<pre>
+The same JWP in compact serialization:
+```text mac_presentation_compact
+eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ.~IkpheSI~~NDI.foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwBp-veEeh2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj909YKIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8IVxzc7XChWydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQWKXNI1jlioq4MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m2b8uwVig
+</pre><a href="#section-6.2.9-33" class="pilcrow">¶</a>
 </div>
-<div id="presentation-2">
-<section id="section-6.3.7">
-          <h4 id="name-presentation-3">
-<a href="#section-6.3.7" class="section-number selfRef">6.3.7. </a><a href="#name-presentation-3" class="section-name selfRef">Presentation</a>
-          </h4>
-<p id="section-6.3.7-1">The presentation proof is constructed as a large octet array containing multiple appended items similar to the issuer proof value.  The first item is the JWS decoded signature value generated when the holder uses the presentation key to sign the presentation header.  The second item is the issuer signature from the issuer's proof value.<a href="#section-6.3.7-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.7-2">These two signatures are then followed by a MAC value for each payload.  The MAC values used will depend on if that payload has been disclosed or is hidden.  Disclosed payloads will include the MAC key input, and hidden payloads will include only their final MAC value.<a href="#section-6.3.7-2" class="pilcrow">¶</a></p>
-<p id="section-6.3.7-3"><code>presentation_proof = [presentation_signature, issuer_signature. disclosed_key_0, hidden_mac_1, hidden_mac_2, ... disclosed_key_n]</code><a href="#section-6.3.7-3" class="pilcrow">¶</a></p>
-<p id="section-6.3.7-4">The size of this value will depend on the underlying cryptographich algorithms.  For example, <code>MAC-H256</code> uses the <code>ES256</code> JWS with a decoded signature of 64 octets, and for a JWP with five payloads using <code>HMAC-SHA256</code> the total presentation proof value length would be <code>64 + 64 + (5 * 32) = 288</code> octets.<a href="#section-6.3.7-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="verifier-setup">
-<section id="section-6.3.8">
-          <h4 id="name-verifier-setup">
-<a href="#section-6.3.8" class="section-number selfRef">6.3.8. </a><a href="#name-verifier-setup" class="section-name selfRef">Verifier Setup</a>
-          </h4>
-<p id="section-6.3.8-1">In order to verify that the presentation was protected from replay attacks, the verifier must be able to validate the presentation protected header.  This involves the following steps:<a href="#section-6.3.8-1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-6.3.8-2">
-<li id="section-6.3.8-2.1">JSON parse the presentation header<a href="#section-6.3.8-2.1" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-2.2">Validate the contained <code>nonce</code> claim<a href="#section-6.3.8-2.2" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-2.3">JSON parse the issuer header<a href="#section-6.3.8-2.3" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-2.4">Validate the contained <code>pjwk</code> claim<a href="#section-6.3.8-2.4" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-2.5">Create a JWS using the correct fixed header with <code>alg</code> value and the presentation header as the body<a href="#section-6.3.8-2.5" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-2.6">Remove the <code>presentation_signature</code> from the beginning of the <code>presentation_proof</code> octet array<a href="#section-6.3.8-2.6" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-2.7">Validate the JWS using the JWK from the <code>pjwk</code> claim and the <code>presentation_signature</code> value<a href="#section-6.3.8-2.7" class="pilcrow">¶</a>
-</li>
-          </ol>
-<p id="section-6.3.8-3">Next, the verifier must validate all of the disclosed payloads using the following steps:<a href="#section-6.3.8-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-6.3.8-4">
-<li id="section-6.3.8-4.1">JSON parse the issuer header<a href="#section-6.3.8-4.1" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-4.2">Resolve the <code>kid</code> using a trusted mechanism to obtain the correct issuer JWK<a href="#section-6.3.8-4.2" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-4.3">Remove the <code>issuer_signature</code> from the beginning of the remaining <code>presentation_proof</code> octet array (after the <code>presentation_signature</code> was removed)<a href="#section-6.3.8-4.3" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-4.4">Perform the MAC on the presented <code>issuer_header</code> value using the "issuer_header" value as the input key<a href="#section-6.3.8-4.4" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-4.5">Store the resulting value as the first entry in a new <code>jws_payload</code> octet array<a href="#section-6.3.8-4.5" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-4.6">
-              <p id="section-6.3.8-4.6.1">Iterate on each presented payload (disclosed or hidden)<a href="#section-6.3.8-4.6.1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-6.3.8-4.6.2">
-<li id="section-6.3.8-4.6.2.1">Extract the next hash value from the remaining <code>presentation_proof</code> octet array<a href="#section-6.3.8-4.6.2.1" class="pilcrow">¶</a>
-</li>
-                <li id="section-6.3.8-4.6.2.2">If the payload was disclosed: perform a MAC using the given hash value as the input key and append the result to the <code>jws_payload</code> octet array<a href="#section-6.3.8-4.6.2.2" class="pilcrow">¶</a>
-</li>
-                <li id="section-6.3.8-4.6.2.3">If the payload was hidden: append the given hash value to the <code>jws_payload</code> octet array<a href="#section-6.3.8-4.6.2.3" class="pilcrow">¶</a>
-</li>
-              </ol>
-</li>
-            <li id="section-6.3.8-4.7">Create a JWS using a header containing the <code>alg</code> parameter along with the generated <code>jws_payload</code> value as the payload<a href="#section-6.3.8-4.7" class="pilcrow">¶</a>
-</li>
-            <li id="section-6.3.8-4.8">Validate the JWS using the resolved issuer JWK and the extracted <code>issuer_signature</code> value<a href="#section-6.3.8-4.8" class="pilcrow">¶</a>
-</li>
-          </ol>
-</section>
-</div>
-<div id="jpa-registration-2">
-<section id="section-6.3.9">
-          <h4 id="name-jpa-registration-3">
-<a href="#section-6.3.9" class="section-number selfRef">6.3.9. </a><a href="#name-jpa-registration-3" class="section-name selfRef">JPA Registration</a>
-          </h4>
-<p id="section-6.3.9-1">Proposed JWP <code>alg</code> value is of the format "MAC-" appended with a unique identifier for the set of MAC and signing algorithms used.  Below is the initial registrations:<a href="#section-6.3.9-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-6.3.9-2.1">
-              <code>MAC-H256</code> uses <code>HMAC SHA-256</code> as the MAC and <code>ECDSA using P-256 and SHA-256</code> for the signatures<a href="#section-6.3.9-2.1" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-6.3.9-2.2">
-              <code>MAC-H384</code> uses <code>HMAC SHA-384</code> as the MAC and <code>ECDSA using P-384 and SHA-384</code> for the signatures<a href="#section-6.3.9-2.2" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-6.3.9-2.3">
-              <code>MAC-H512</code> uses <code>HMAC SHA-512</code> as the MAC and <code>ECDSA using P-521 and SHA-512</code> for the signatures<a href="#section-6.3.9-2.3" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-6.3.9-2.4">
-              <code>MAC-K25519</code> uses <code>KMAC SHAKE128</code> as the MAC and <code>EdDSA using Curve25519</code> for the signatures<a href="#section-6.3.9-2.4" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-6.3.9-2.5">
-              <code>MAC-K448</code> uses <code>KMAC SHAKE256</code> as the MAC and <code>EdDSA using Curve448</code> for the signatures<a href="#section-6.3.9-2.5" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-6.3.9-2.6">
-              <code>MAC-H256K</code> uses <code>HMAC SHA-256</code> as the MAC and <code>ECDSA using secp256k1 and SHA-256</code> for the signatures<a href="#section-6.3.9-2.6" class="pilcrow">¶</a>
-</li>
-          </ul>
 </section>
 </div>
 </section>
 </div>
 <div id="zksnark">
-<section id="section-6.4">
+<section id="section-6.3">
         <h3 id="name-zksnark">
-<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-zksnark" class="section-name selfRef">ZKSnark</a>
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-zksnark" class="section-name selfRef">ZKSnark</a>
         </h3>
-<p id="section-6.4-1">TBD<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">TBD<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

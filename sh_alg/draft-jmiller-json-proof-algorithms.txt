@@ -6,7 +6,7 @@ todo                                                           J. Miller
                                                            Ping Identity
                                                                 M. Jones
                                                                Microsoft
-                                                             31 May 2022
+                                                            12 June 2022
 
 
                          JSON Proof Algorithms
@@ -52,17 +52,7 @@ Table of Contents
        6.2.7.  Verification
        6.2.8.  JPA Registration
        6.2.9.  Example
-     6.3.  Message Authentication Code
-       6.3.1.  Holder Setup
-       6.3.2.  Issuer Setup
-       6.3.3.  Issuer Protected Header
-       6.3.4.  Payloads
-       6.3.5.  Issuer Proof
-       6.3.6.  Presentation Protected Header
-       6.3.7.  Presentation
-       6.3.8.  Verifier Setup
-       6.3.9.  JPA Registration
-     6.4.  ZKSnark
+     6.3.  ZKSnark
    7.  Security Considerations
    8.  IANA Considerations
      8.1.  JWP Algorithms Registry
@@ -610,11 +600,11 @@ The resulting verifiable JWP in JSON serialization is:
   "proof": "AAUVqUnyMW_qGrrCzK7xHqUydeyQX5O6276HzUKz41aX9q7qzC6r-eHGh1GD4Y3ZL9l_sA9ibulK3OYbyXVy0ym3LEC5LYyZMUnHXdD41K9qx1P_gE2Y-qZlTvgKauwY7hUihoC6hJl7Vlic9ssX_fjZ6QGo0AzB3o5aHN_xgqSQUwAPpRmckfMnWPn2uZgD3Ei0AAAAdIW0OjVpeHzjoE7lStFvpGW3VnrUfloX5G24SUtysY6yWWtkvbtKj6fausG99w6GKAAAAAIFgnhW_xwhkRSVwwgEyNSyQ5PmrsAJnl6zkD88Uv_YBFVs0cLRsWpF1-uxU_QBw2aHYxR5B_wau84Q-oYB_8VcgmnxryMW0mWecdbeAwSovPsi1dPglpMmpOWX4t-8tbTM5DprN-iUtMcqtX876eq8AAAABF3EHyaXaecu5C5WxIjUr6pTFU4T4NN6B1xHEatCejiCLROs2UE_9icGHk2EViQpA-pIkshllp9sjA_DOfmav8xbHp8gnRgDblpmY84qOgG111UdIIMuTBkFK8sg16epbDiukjOuKL4WJV2c9dAaN7SHc0ZgavPVg8Q_pSqdFl4u"
 }
 
-   The same JWP in compact serialization: text bbs_present_compact ImV5S
-   nBjM01pT2lKb2RIUndjem92TDJsemMzVmxjaTVsZUdGdGNHeGxJaXdpWTJ4aGFXMXpJan
-   BiSW1aaGJXbHNlVjl1WVcxbElpd2laMmwyWlc1ZmJtRnRaU0lzSW1WdFlXbHNJaXdpWVd
-   kbElsMHNJblI1Y0NJNklrcFFWQ0lzSW1Gc1p5STZJa0pDVXkxWUluMCI.~IkpheSI~~ND
-   I.AAUVqUnyMW_qGrrCzK7xHqUydeyQX5O6276HzUKz41aX9q7qzC6r-
+   The same JWP in compact serialization: ```text bbs_present_compact Im
+   V5SnBjM01pT2lKb2RIUndjem92TDJsemMzVmxjaTVsZUdGdGNHeGxJaXdpWTJ4aGFXMXp
+   JanBiSW1aaGJXbHNlVjl1WVcxbElpd2laMmwyWlc1ZmJtRnRaU0lzSW1WdFlXbHNJaXdp
+   WVdkbElsMHNJblI1Y0NJNklrcFFWQ0lzSW1Gc1p5STZJa0pDVXkxWUluMCI._IkpheSI_
+   (NDI.AAUVqUnyMW_qGrrCzK7xHqUydeyQX5O6276HzUKz41aX9q7qzC6r-
    eHGh1GD4Y3ZL9l_sA9ibulK3OYbyXVy0ym3LEC5LYyZMUnHXdD41K9qx1P_gE2Y-qZlTv
    gKauwY7hUihoC6hJl7Vlic9ssX_fjZ6QGo0AzB3o5aHN_xgqSQUwAPpRmckfMnWPn2uZg
    D3Ei0AAAAdIW0OjVpeHzjoE7lStFvpGW3VnrUfloX5G24SUtysY6yWWtkvbtKj6fausG9
@@ -622,223 +612,250 @@ The resulting verifiable JWP in JSON serialization is:
    uxU_QBw2aHYxR5B_wau84Q-oYB_8VcgmnxryMW0mWecdbeAwSovPsi1dPglpMmpOWX4t-
    8tbTM5DprN-iUtMcqtX876eq8AAAABF3EHyaXaecu5C5WxIjUr6pTFU4T4NN6B1xHEatC
    ejiCLROs2UE_9icGHk2EViQpA-pIkshllp9sjA_DOfmav8xbHp8gnRgDblpmY84qOgG11
-   1UdIIMuTBkFK8sg16epbDiukjOuKL4WJV2c9dAaN7SHc0ZgavPVg8Q_pSqdFl4u
+   1UdIIMuTBkFK8sg16epbDiukjOuKL4WJV2c9dAaN7SHc0ZgavPVg8Q_pSqdFl4u)
 
-6.3.  Message Authentication Code
+## Message Authentication Code
 
-   The Message Authentication Code (MAC) JPA uses a MAC to both generate
-   ephemeral keys and compute authentication codes to protect the issuer
-   header and each payload individually.
+The Message Authentication Code (MAC) JPA uses a MAC to both generate ephemeral keys and compute authentication codes to protect the issuer header and each payload individually.
 
-   Like the JWS-based JPA, it also does not support unlinkability if the
-   same JWP is presented multiple times and requires an individually
-   issued JWP for each presentation in order to fully protect privacy.
-   When compared to the JWS approach, using a MAC requires less compute
-   but can result in potentially larger presentation proof values.
+Like the JWS-based JPA, it also does not support unlinkability if the same JWP is presented multiple times and requires an individually issued JWP for each presentation in order to fully protect privacy.  When compared to the JWS approach, using a MAC requires less compute but can result in potentially larger presentation proof values.
 
-   The design is intentionally minimal and only involves using a single
-   standardized MAC method instead of a mix of MAC/hash methods or a
-   custom hash-based construct.  It is able to use any published
-   cryptographic MAC method such as HMAC
-   (https://datatracker.ietf.org/doc/html/rfc2104) or KMAC
-   (https://nvlpubs.nist.gov/nistpubs/SpecialPublications/
-   NIST.SP.800-185.pdf).  It uses traditional public-key based
-   signatures to verify the authenticity of the issuer and holder.
+The design is intentionally minimal and only involves using a single standardized MAC method instead of a mix of MAC/hash methods or a custom hash-based construct.  It is able to use any published cryptographic MAC method such as [HMAC](https://datatracker.ietf.org/doc/html/rfc2104) or [KMAC](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf).  It uses traditional public-key based signatures to verify the authenticity of the issuer and holder.
 
-6.3.1.  Holder Setup
+### Holder Setup
 
-   Prior to the issuer creating a new JWP it must have presentation
-   binding information provided by the holder.  This enables the holder
-   to perform replay prevention while presenting the JWP.
+Prior to the issuer creating a new JWP it must have presentation binding information provided by the holder.  This enables the holder to perform replay prevention while presenting the JWP.
 
-   The presentation key used by the holder must be transferred to the
-   issuer and verified, likely through a challenge and self-signing
-   mechanism.  If the holder requires unlinkability it must also
-   generate a new key that is verified and bound to each new JWP.
+The presentation key used by the holder must be transferred to the issuer and verified, likely through a challenge and self-signing mechanism.  If the holder requires unlinkability it must also generate a new key that is verified and bound to each new JWP.
 
-   How these holder presentation keys are transfered and verified is out
-   of scope of this specification, protocols such as OpenID Connect can
-   be used to accomplish this.  What is required by this definition is
-   that the holder's presentation key MUST be included in the issuer's
-   protected header using the pjwk claim with a JWK as the value.
+How these holder presentation keys are transfered and verified is out of scope of this specification, protocols such as OpenID Connect can be used to accomplish this.  What is required by this definition is that the holder's presentation key MUST be included in the issuer's protected header using the `pjwk` claim with a JWK as the value.
 
-6.3.2.  Issuer Setup
+### Issuer Setup
 
-   To use the MAC algorithm the issuer must have a stable public key
-   pair to perform signing.  To start the issuance process a single 32
-   byte random Shared Secret must first be generated.  This value will
-   be shared privately to the holder as part of the issuer's JWP proof
-   value.
+To use the MAC algorithm the issuer must have a stable public key pair to perform signing.  To start the issuance process a single 32 byte random Shared Secret must first be generated.  This value will be shared privately to the holder as part of the issuer's JWP proof value.
 
-   The Shared Secret is used by both the issuer and holder as the MAC
-   method's key to generate a new set of unique ephemeral keys.  These
-   keys are then used as the input to generate a MAC that protects each
-   payload.
+The Shared Secret is used by both the issuer and holder as the MAC method's key to generate a new set of unique ephemeral keys.  These keys are then used as the input to generate a MAC that protects each payload.
 
-6.3.3.  Issuer Protected Header
+### Issuer Protected Header
 
-   The holder's presentation key JWK MUST be included in the issuer
-   protected header using the pjwk claim.  The issuer MUST validate that
-   the holder has posession of this key through a trusted mechanism such
-   as verifying the signature of a unique nonce value from the holder.
+The holder's presentation key JWK MUST be included in the issuer protected header using the `pjwk` claim.  The issuer MUST validate that the holder has posession of this key through a trusted mechanism such as verifying the signature of a unique nonce value from the holder.
 
-   For consistency, the issuer header is also protected by a MAC by
-   using the fixed value "issuer_header" as the input key.  The issuer
-   header JSON is serialized using UTF-8 and encoded with base64url into
-   an octet array.  The final issuer header MAC is generated from the
-   octet array and the fixed key, and the resulting value becomes the
-   first input into the larger octet array that will be signed by the
-   issuer.
+For consistency, the issuer header is also protected by a MAC by using the fixed value "issuer_header" as the input key.  The issuer header JSON is serialized using UTF-8 and encoded with base64url into an octet array.  The final issuer header MAC is generated from the octet array and the fixed key, and the resulting value becomes the first input into the larger octet array that will be signed by the issuer.
 
-6.3.4.  Payloads
+### Payloads
 
-   A unique key is generated for each payload using the MAC with the
-   Shared Secret as the key and the values "payload_X" where "X" is
-   replaced by the zero-based array index of the payload, for example
-   "payload_0", "payload_1", etc.
+A unique key is generated for each payload using the MAC with the Shared Secret as the key and the values "payload_X" where "X" is replaced by the zero-based array index of the payload, for example "payload_0", "payload_1", etc.
 
-   Each payload is serialized using UTF-8 and encoded with base64url
-   into an octet array.  The generated key for that payload based on its
-   index is used to generate the MAC for the payload's encoded octet
-   array.  The resulting value is appended to the larger octet array
-   that will be signed by the issuer.
+Each payload is serialized using UTF-8 and encoded with base64url into an octet array.  The generated key for that payload based on its index is used to generate the MAC for the payload's encoded octet array.  The resulting value is appended to the larger octet array that will be signed by the issuer.
 
-6.3.5.  Issuer Proof
+### Issuer Proof
 
-   The issuer proof consists of two items appended together, the
-   issuer's signature of the appended array of MACs, and the Shared
-   Secret used to generate the set of payload keys.
+The issuer proof consists of two items appended together, the issuer's signature of the appended array of MACs, and the Shared Secret used to generate the set of payload keys.
 
-   To generate the signature, the array containing the final MAC of the
-   issuer protected header followed by all of the payload MACs appended
-   in order is used as the input to a new JWS.
+To generate the signature, the array containing the final MAC of the issuer protected header followed by all of the payload MACs appended in order is used as the input to a new JWS.
 
-   jws_payload = [issuer_header_mac, payload_mac_1, payload_mac_2, ...
-   payload_mac_n]
+`jws_payload = [issuer_header_mac, payload_mac_1, payload_mac_2, ... payload_mac_n]`
 
-   The issuer signs the JWS using its stable public key and a fixed
-   header containing the alg associated with MAC algorithm in use.
+The issuer signs the JWS using its stable public key and a fixed header containing the `alg` associated with MAC algorithm in use.
 
-   jws_header = '{"alg":"ES256"}'
+`jws_header = '{"alg":"ES256"}'`
 
-   The resulting signature is decoded and used as the first item in the
-   issuer proof value.  The octet array of the Shared Secret is
-   appended, resulting in the final issuer proof value.
+The resulting signature is decoded and used as the first item in the issuer proof value.  The octet array of the Shared Secret is appended, resulting in the final issuer proof value.
 
-   issuer_proof = [jws_signature, shared_secret]
+`issuer_proof = [jws_signature, shared_secret]`
 
-6.3.6.  Presentation Protected Header
+### Presentation Protected Header
 
-   See the JWS Presentation Protected Header (#presentation-protected-
-   header) section.
+See the JWS [Presentation Protected Header](#presentation-protected-header) section.
 
-6.3.7.  Presentation
+### Presentation
 
-   The presentation proof is constructed as a large octet array
-   containing multiple appended items similar to the issuer proof value.
-   The first item is the JWS decoded signature value generated when the
-   holder uses the presentation key to sign the presentation header.
-   The second item is the issuer signature from the issuer's proof
-   value.
+The presentation proof is constructed as a large octet array containing multiple appended items similar to the issuer proof value.  The first item is the JWS decoded signature value generated when the holder uses the presentation key to sign the presentation header.  The second item is the issuer signature from the issuer's proof value.
 
-   These two signatures are then followed by a MAC value for each
-   payload.  The MAC values used will depend on if that payload has been
-   disclosed or is hidden.  Disclosed payloads will include the MAC key
-   input, and hidden payloads will include only their final MAC value.
+These two signatures are then followed by a MAC value for each payload.  The MAC values used will depend on if that payload has been disclosed or is hidden.  Disclosed payloads will include the MAC key input, and hidden payloads will include only their final MAC value.
 
-   presentation_proof = [presentation_signature, issuer_signature.
-   disclosed_key_0, hidden_mac_1, hidden_mac_2, ... disclosed_key_n]
+`presentation_proof = [presentation_signature, issuer_signature. disclosed_key_0, hidden_mac_1, hidden_mac_2, ... disclosed_key_n]`
 
-   The size of this value will depend on the underlying cryptographich
-   algorithms.  For example, MAC-H256 uses the ES256 JWS with a decoded
-   signature of 64 octets, and for a JWP with five payloads using HMAC-
-   SHA256 the total presentation proof value length would be 64 + 64 +
-   (5 * 32) = 288 octets.
+The size of this value will depend on the underlying cryptographich algorithms.  For example, `MAC-H256` uses the `ES256` JWS with a decoded signature of 64 octets, and for a JWP with five payloads using `HMAC-SHA256` the total presentation proof value length would be `64 + 64 + (5 * 32) = 288` octets.
 
-6.3.8.  Verifier Setup
+### Verifier Setup
 
-   In order to verify that the presentation was protected from replay
-   attacks, the verifier must be able to validate the presentation
-   protected header.  This involves the following steps:
+In order to verify that the presentation was protected from replay attacks, the verifier must be able to validate the presentation protected header.  This involves the following steps:
 
-   1.  JSON parse the presentation header
+1. JSON parse the presentation header
+2. Validate the contained `nonce` claim
+3. JSON parse the issuer header
+4. Validate the contained `pjwk` claim
+5. Create a JWS using the correct fixed header with `alg` value and the presentation header as the body
+6. Remove the `presentation_signature` from the beginning of the `presentation_proof` octet array
+7. Validate the JWS using the JWK from the `pjwk` claim and the `presentation_signature` value
 
-   2.  Validate the contained nonce claim
+Next, the verifier must validate all of the disclosed payloads using the following steps:
 
-   3.  JSON parse the issuer header
+1. JSON parse the issuer header
+2. Resolve the `kid` using a trusted mechanism to obtain the correct issuer JWK
+3. Remove the `issuer_signature` from the beginning of the remaining `presentation_proof` octet array (after the `presentation_signature` was removed)
+4. Perform the MAC on the presented `issuer_header` value using the "issuer_header" value as the input key
+5. Store the resulting value as the first entry in a new `jws_payload` octet array
+6. Iterate on each presented payload (disclosed or hidden)
+   1. Extract the next hash value from the remaining `presentation_proof` octet array
+   2. If the payload was disclosed: perform a MAC using the given hash value as the input key and append the result to the `jws_payload` octet array
+   3. If the payload was hidden: append the given hash value to the `jws_payload` octet array
+7. Create a JWS using a header containing the `alg` parameter along with the generated `jws_payload` value as the payload
+8. Validate the JWS using the resolved issuer JWK and the extracted `issuer_signature` value
 
-   4.  Validate the contained pjwk claim
+### JPA Registration
 
-   5.  Create a JWS using the correct fixed header with alg value and
-       the presentation header as the body
+Proposed JWP `alg` value is of the format "MAC-" appended with a unique identifier for the set of MAC and signing algorithms used.  Below is the initial registrations:
 
-   6.  Remove the presentation_signature from the beginning of the
-       presentation_proof octet array
+* `MAC-H256` uses `HMAC SHA-256` as the MAC and `ECDSA using P-256 and SHA-256` for the signatures
+* `MAC-H384` uses `HMAC SHA-384` as the MAC and `ECDSA using P-384 and SHA-384` for the signatures
+* `MAC-H512` uses `HMAC SHA-512` as the MAC and `ECDSA using P-521 and SHA-512` for the signatures
+* `MAC-K25519` uses `KMAC SHAKE128` as the MAC and `EdDSA using Curve25519` for the signatures
+* `MAC-K448` uses `KMAC SHAKE256` as the MAC and `EdDSA using Curve448` for the signatures
+* `MAC-H256K` uses `HMAC SHA-256` as the MAC and `ECDSA using secp256k1 and SHA-256` for the signatures
 
-   7.  Validate the JWS using the JWK from the pjwk claim and the
-       presentation_signature value
+### Example
 
-   Next, the verifier must validate all of the disclosed payloads using
-   the following steps:
+The following example uses the `MAC-H256` algorithm.
 
-   1.  JSON parse the issuer header
+This is the Signer's stable private key in the JWK format:
+```json issuer_private_jwk
+{
+  "crv": "P-256",
+  "kty": "EC",
+  "x": "ONebN43-G5DOwZX6jCVpEYEe0bYd5WDybXAG0sL3iDA",
+  "y": "b0MHuYfSxu3Pj4DAyDXabAc0mPjpB1worEpr3yyrft4",
+  "d": "jnE0-9YvxQtLJEKcyUHU6HQ3Y9nSDnh0NstYJFn7RuI"
+}
 
-   2.  Resolve the kid using a trusted mechanism to obtain the correct
-       issuer JWK
+   This is the Signer's generated Shared Secret: ```json
+   mac_shared_secret [100, 109, 91, 184, 139, 20, 107, 86, 1, 252, 86,
+   159, 126, 251, 228, 4, 35, 177, 75, 96, 11, 205, 144, 189, 42, 95,
+   135, 170, 107, 58, 99, 142]
 
-   3.  Remove the issuer_signature from the beginning of the remaining
-       presentation_proof octet array (after the presentation_signature
-       was removed)
+   This is the Holder's presentation private key in the JWK format:
+   ```json holder_presentation_jwk
+   {
+     "crv": "P-256",
+     "kty": "EC",
+     "x": "oB1TPrE_QJIL61fUOOK5DpKgd8j2zbZJtqpILDTJX6I",
+     "y": "3JqnrkucLobkdRuOqZXOP9MMlbFyenFOLyGlG-FPACM",
+     "d": "AvyDPl1I4xwjrI2iEOi6DxM9ipJe_h_VUN5OvoKvvW8"
+   }
 
-   4.  Perform the MAC on the presented issuer_header value using the
-       "issuer_header" value as the input key
+   The first MAC is generated using the key issuer_header and the
+   base64url-encoded issuer protected header, resulting in this octet
+   array: ```json mac_issuer_header_mac [140, 88, 59, 30, 127, 113, 27,
+   237, 78, 200, 182, 114, 94, 123, 198, 128, 102, 232, 178, 88, 252,
+   248, 57, 2, 231, 19, 145, 8, 160, 197, 66, 166]
 
-   5.  Store the resulting value as the first entry in a new jws_payload
-       octet array
+The issuer generates an array of derived keys with one for each payload by using the shared secret as the key and the index of the payload as the input:
+```json mac_issuer_keys
+[
+ [180, 129, 55, 94, 125, 158, 179, 245, 30, 199, 148, 60, 184, 28, 197, 123, 231, 232, 95, 91, 65, 74, 38, 242, 253, 96, 67, 44, 40, 220, 250, 4],
+ [143, 172, 182, 156, 184, 138, 228, 172, 215, 26, 175, 137, 137, 25, 159, 141, 213, 12, 214, 29, 231, 200, 13, 94, 116, 22, 41, 115, 72, 214, 57, 98],
+ [144, 73, 77, 66, 230, 187, 217, 186, 246, 41, 138, 25, 39, 203, 101, 76, 156, 161, 244, 130, 203, 166, 184, 154, 7, 4, 218, 84, 168, 199, 36, 245],
+ [70, 55, 182, 105, 101, 130, 254, 234, 68, 224, 219, 97, 119, 98, 244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49, 246, 109, 155, 242, 236, 21, 138]
+]
 
-   6.  Iterate on each presented payload (disclosed or hidden)
+   The first payload is the string "Doe" with the octet sequence of [34,
+   68, 111, 101, 34] and base64url-encoded as IkRvZSI.
 
-       1.  Extract the next hash value from the remaining
-           presentation_proof octet array
+   The second payload is the string "Jay" with the octet sequence of
+   [34, 74, 97, 121, 34] and base64url-encoded as IkpheSI.
 
-       2.  If the payload was disclosed: perform a MAC using the given
-           hash value as the input key and append the result to the
-           jws_payload octet array
+   The third payload is the string "jaydoe@example.org" with the octet
+   sequence of [34, 106, 97, 121, 100, 111, 101, 64, 101, 120, 97, 109,
+   112, 108, 101, 46, 111, 114, 103, 34] and base64url-encoded as
+   ImpheWRvZUBleGFtcGxlLm9yZyI.
 
-       3.  If the payload was hidden: append the given hash value to the
-           jws_payload octet array
+   The fourth payload is the string 42 with the octet sequence of [52,
+   50] and base64url-encoded as NDI.
 
-   7.  Create a JWS using a header containing the alg parameter along
-       with the generated jws_payload value as the payload
+   A MAC is generated for each payload using the generated key for its
+   given index, resulting in an array of MACs: ```json mac_issuer_macs [
+   [156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28,
+   220, 237, 112, 161, 91, 39, 68, 137, 203, 92, 243, 16, 116, 64, 129,
+   61, 172], [239, 17, 12, 35, 111, 129, 51, 87, 43, 86, 234, 38, 89,
+   149, 169, 157, 33, 104, 81, 246, 190, 154, 74, 195, 194, 158, 50,
+   208, 203, 203, 249, 237], [162, 174, 12, 27, 190, 250, 112, 1, 139,
+   177, 49, 124, 110, 201, 83, 233, 14, 109, 60, 253, 121, 184, 126,
+   121, 26, 138, 5, 214, 97, 96, 216, 80], [61, 109, 78, 172, 255, 189,
+   67, 83, 247, 65, 234, 128, 30, 47, 145, 70, 129, 26, 41, 41, 78, 4,
+   151, 230, 232, 127, 135, 230, 14, 208, 178, 50] ]
 
-   8.  Validate the JWS using the resolved issuer JWK and the extracted
-       issuer_signature value
+Concatenating the issuer protected header MAC with the array of payload MACs produces a single octet array that is signed using the issuer's stable key, resulting in the following signature:
+```json mac_issuer_signature
+[120, 172, 15, 230, 138, 230, 150, 139, 241, 196, 79, 134, 122, 43, 149, 11, 253, 104, 58, 199, 49, 87, 32, 64, 237, 50, 86, 155, 153, 58, 63, 116, 245, 130, 136, 197, 164, 207, 232, 238, 106, 171, 246, 98, 149, 254, 22, 1, 114, 187, 233, 168, 116, 173, 211, 208, 234, 245, 76, 238, 143, 157, 83, 202]
 
-6.3.9.  JPA Registration
+   The orignal shared secret octet string is then concatenated to the
+   end of the issuer signature octet string and the result is base64url-
+   encoded as the issuer's proof value.
 
-   Proposed JWP alg value is of the format "MAC-" appended with a unique
-   identifier for the set of MAC and signing algorithms used.  Below is
-   the initial registrations:
+   The final issued JWP in JSON serialization is: ```json mac_issued_jwp
+   { "payloads": [ "IkRvZSI", "IkpheSI", "ImpheWRvZUBleGFtcGxlLm9yZyI",
+   "NDI" ], "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiO
+   lsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSl
+   BUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUp
+   JTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2Jr
+   ZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9"
+   , "proof": "eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7mqr9
+   mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6prOm
+   OO" }
 
-   *  MAC-H256 uses HMAC SHA-256 as the MAC and ECDSA using P-256 and
-      SHA-256 for the signatures
+The same JWP in compact serialization:
+```text mac_issued_compact
+eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6prOmOO
 
-   *  MAC-H384 uses HMAC SHA-384 as the MAC and ECDSA using P-384 and
-      SHA-384 for the signatures
+   Next we show the presentation of the JWP with selective disclosure.
 
-   *  MAC-H512 uses HMAC SHA-512 as the MAC and ECDSA using P-521 and
-      SHA-512 for the signatures
+   We start with this presentation header using a nonce provided by the
+   Verifier: ```json mac_presentation_header { "nonce":
+   "uTEB371l1pzWJl7afB0wi0HWUNk1Le-bComFLxa8K-s" }
 
-   *  MAC-K25519 uses KMAC SHAKE128 as the MAC and EdDSA using
-      Curve25519 for the signatures
+When signed with the holder's presentation key, the resulting signature octets are:
+```json mac_presentation_header_signature
+[126, 134, 175, 2, 165, 12, 103, 11, 116, 72, 94, 228, 240, 142, 107, 195, 198, 238, 218, 203, 63, 198, 105, 175, 1, 69, 182, 5, 204, 239, 35, 149, 85, 55, 4, 169, 109, 243, 88, 213, 12, 1, 167, 235, 222, 17, 232, 118, 110, 111, 47, 165, 102, 142, 0, 1, 226, 117, 143, 125, 132, 62, 231, 145]
 
-   *  MAC-K448 uses KMAC SHAKE256 as the MAC and EdDSA using Curve448
-      for the signatures
+   Then by applying selective disclosure of only the given name and age
+   claims (family name and email hidden, payload array indexes 0 and 2),
+   the holder builds a mixed array of either the payload key (if
+   disclosed) or MAC (if hidden): ```json mac_presentation_keyormac [
+   [156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28,
+   220, 237, 112, 161, 91, 39, 68, 137, 203, 92, 243, 16, 116, 64, 129,
+   61, 172], [143, 172, 182, 156, 184, 138, 228, 172, 215, 26, 175, 137,
+   137, 25, 159, 141, 213, 12, 214, 29, 231, 200, 13, 94, 116, 22, 41,
+   115, 72, 214, 57, 98], [162, 174, 12, 27, 190, 250, 112, 1, 139, 177,
+   49, 124, 110, 201, 83, 233, 14, 109, 60, 253, 121, 184, 126, 121, 26,
+   138, 5, 214, 97, 96, 216, 80], [70, 55, 182, 105, 101, 130, 254, 234,
+   68, 224, 219, 97, 119, 98, 244, 33, 43, 55, 148, 238, 225, 177, 101,
+   160, 49, 246, 109, 155, 242, 236, 21, 138] ]
 
-   *  MAC-H256K uses HMAC SHA-256 as the MAC and ECDSA using secp256k1
-      and SHA-256 for the signatures
+The final presented proof value is generated by concatenating first the presentation header signature octet string, followed by the issuer signature octet string, then followed by the mixed array of keys and MACs:
+```json mac_presentation_proof
+[126, 134, 175, 2, 165, 12, 103, 11, 116, 72, 94, 228, 240, 142, 107, 195, 198, 238, 218, 203, 63, 198, 105, 175, 1, 69, 182, 5, 204, 239, 35, 149, 85, 55, 4, 169, 109, 243, 88, 213, 12, 1, 167, 235, 222, 17, 232, 118, 110, 111, 47, 165, 102, 142, 0, 1, 226, 117, 143, 125, 132, 62, 231, 145, 120, 172, 15, 230, 138, 230, 150, 139, 241, 196, 79, 134, 122, 43, 149, 11, 253, 104, 58, 199, 49, 87, 32, 64, 237, 50, 86, 155, 153, 58, 63, 116, 245, 130, 136, 197, 164, 207, 232, 238, 106, 171, 246, 98, 149, 254, 22, 1, 114, 187, 233, 168, 116, 173, 211, 208, 234, 245, 76, 238, 143, 157, 83, 202, 156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28, 220, 237, 112, 161, 91, 39, 68, 137, 203, 92, 243, 16, 116, 64, 129, 61, 172, 143, 172, 182, 156, 184, 138, 228, 172, 215, 26, 175, 137, 137, 25, 159, 141, 213, 12, 214, 29, 231, 200, 13, 94, 116, 22, 41, 115, 72, 214, 57, 98, 162, 174, 12, 27, 190, 250, 112, 1, 139, 177, 49, 124, 110, 201, 83, 233, 14, 109, 60, 253, 121, 184, 126, 121, 26, 138, 5, 214, 97, 96, 216, 80, 70, 55, 182, 105, 101, 130, 254, 234, 68, 224, 219, 97, 119, 98, 244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49, 246, 109, 155, 242, 236, 21, 138]
 
-6.4.  ZKSnark
+   The resulting presented JWP in JSON serialization is: ```json
+   mac_presentation_jwp { "payloads": [ null, "IkpheSI", null, "NDI" ],
+   "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaW
+   x5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp
+   3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVP
+   T0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaW
+   E9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9",
+   "proof": "foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwBp-
+   veEeh2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj9
+   09YKIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-
+   I8qGTcT_8IVxzc7XChWydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQ
+   WKXNI1jlioq4MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-
+   6kTg22F3YvQhKzeU7uGxZaAx9m2b8uwVig", "presentation": "eyJub25jZSI6InV
+   URUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ" }
+
+The same JWP in compact serialization:
+```text mac_presentation_compact
+eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ.~IkpheSI~~NDI.foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwBp-veEeh2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj909YKIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8IVxzc7XChWydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQWKXNI1jlioq4MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m2b8uwVig
+
+6.3.  ZKSnark
 
    TBD
 
