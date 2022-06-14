@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-02T01:11:38.102698+00:00",
+  "timestamp": "2022-06-14T01:16:41.299811+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -1333,7 +1333,7 @@
       "labels": [],
       "body": "H/T @OR13 on looping me into a thread about the difficulty (complete lack-of) of supporting multiple signatures in JWTs,  this is definitely a use case we should try to directly support for JWPs.\r\n\r\nMy initial take would be to extend the use of ~ to support compound issuer headers and proofs:\r\n`issuer_header_alice~issuer_header_bob.payload_1~payload_2~payload_3.issuer_proof_alice~issuer_proof_bob`\r\nand the presentation\r\n`issuer_header_alice~issuer_header_bob.payload_1~~payload_3.presentation_proof_alice~presentation_proof_bob`\r\n\r\nThe multiple issuer headers/proofs wouldn't have any intrinsic linking/relationship (unless they encoded such internally in their headers), so the presenter would be free to include/exclude whatever ones they choose to.  The verifier would be required to verify _all_ of them (that are included).",
       "createdAt": "2022-05-02T16:49:39Z",
-      "updatedAt": "2022-05-11T09:38:02Z",
+      "updatedAt": "2022-06-13T18:18:35Z",
       "closedAt": null,
       "comments": [
         {
@@ -1384,6 +1384,27 @@
           "body": "> My initial take would be to extend the use of ~ to support compound issuer headers and proofs\r\n\r\nI think one thing to highlight here is that at the JWP layer there are two serialisations to consider how this would be represented [JSON](https://github.com/json-web-proofs/json-web-proofs/blob/main/draft-jmiller-json-web-proof.md#json-serialization) and [compact](https://github.com/json-web-proofs/json-web-proofs/blob/main/draft-jmiller-json-web-proof.md#compact-serialization) and the constraint referred to around how JWT cannot express multiple signatures is actually due to the fact that a valid JWT can only be expressed in compact JWS form.\r\n\r\nSuffice to say I think there are a few things to un-pack here\r\n\r\n1) Do we want to support expressing multiple signatures in JWP (i think the answer is yes and at a minimum supporting this in the JSON serialisation would not be a great lift IMO)\r\n2) Do we want to support multiple signatures in compact JWP form such as how @quartzjer has made a proposal\r\n3) Will JPT be limited like JWT to just compact serialisation (apologies if that decision has already been taken and I missed it)\r\n\r\n> My suggestion is that there is only a single presentation header that every included proof must provide integrity protection for (by the holder). If there are JPA-specific fields in that header they must all be included in the same single presentation header (and must be using registered non-conflicting header parameter names already anyway).\r\n\r\nI agree with this\r\n\r\n> For the different categories of multisig (listed above): could we used the word \"conjoined\" to describe when the issuers are aware of and witnessing each other's issuance (in a verifiable way), and \"disjoined\" to describe when they are unaware and the holder is independently combining different issuer header/proof pairs?\r\n\r\nUn sure about the exact language at this stage but agree its an important distinction to make, not to make it even more complex but some multisig protocols might mean all signers aren't entirely mutually aware of one and other e.g the last signer in a chain might know all other signers but not the first signer depending on the protocol.",
           "createdAt": "2022-05-11T09:38:02Z",
           "updatedAt": "2022-05-11T09:38:02Z"
+        },
+        {
+          "author": "quartzjer",
+          "authorAssociation": "COLLABORATOR",
+          "body": "After mulling on this a LOT, I'm currently thinking that support for multiple issuers/proofs/etc is always most properly done by adding a JPA specifically to address the needs and underlying cryptographic relationships.\r\n\r\nThere's a lot of subtlety in what an application is expecting when using any type of multisig, and providing a single/simple high level encoding for just one of them isn't likely to even be an 80% solution.  It may even be actively harmful if used in situations where it is not exactly what is needed.\r\n\r\nI'm proposing to close this for now, and we can address with better requirements in future JPA development",
+          "createdAt": "2022-06-12T23:16:32Z",
+          "updatedAt": "2022-06-12T23:16:32Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Is there any example regarding your proposal to define this in JPA?  AFAIK, there are no concrete schemes that support any form of multisig in either JPA, JWP, or JWS as of this date.",
+          "createdAt": "2022-06-13T16:39:25Z",
+          "updatedAt": "2022-06-13T16:39:25Z"
+        },
+        {
+          "author": "quartzjer",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe the flexibility will be there to do this within an algorithm definition. For example, use an `alg=\"BBS-MULTI\"` that is just an extension of the BBS alg that supports multiple signatures and has specific semantics around how they are validated.\r\n\r\nIf we adopt #59 then the algorithm can use the `~` to assist with this.",
+          "createdAt": "2022-06-13T18:18:35Z",
+          "updatedAt": "2022-06-13T18:18:35Z"
         }
       ]
     },
@@ -1399,9 +1420,9 @@
         "quartzjer"
       ],
       "labels": [],
-      "body": "This is tracking items to be done on the main JWP draft before being published as an IETF ID\r\n\r\n- [ ] Decide on example (BBS vs. SU)\r\n- [ ] Update SU-JWS alg naming (s/SU/JWS/)\r\n- [ ] Finish MAC alg #48 \r\n- [ ] Add language for #27 \r\n- [ ] Formalize language\r\n- [ ] Verify/add all references\r\n- [ ] Decide on #50 \r\n- [ ] Introduce JPA/JPT #20 \r\n- [ ] #19 \r\n- [ ] #7 \r\n- [ ] #8 \r\n- [ ] #11 ",
+      "body": "This is tracking items to be done on the main JWP draft before being published as an IETF ID\r\n\r\n- [ ] Decide on example (BBS vs. SU)\r\n- [ ] Update SU-JWS alg naming (s/SU/JWS/)\r\n- [x] Finish MAC alg #48 \r\n- [ ] Add language for #27 \r\n- [ ] Formalize language\r\n- [ ] Verify/add all references\r\n- [ ] Decide on #50 \r\n- [ ] Introduce JPA/JPT #20 \r\n- [ ] #19 \r\n- [ ] #7 \r\n- [ ] #8 \r\n- [ ] #11 ",
       "createdAt": "2022-05-17T17:28:09Z",
-      "updatedAt": "2022-05-17T17:28:10Z",
+      "updatedAt": "2022-06-12T22:08:37Z",
       "closedAt": null,
       "comments": []
     },
@@ -1450,6 +1471,44 @@
       "body": "Implementations need to know which JPAs MUST and/or SHOULD be implemented, and which are OPTIONAL.",
       "createdAt": "2022-06-01T18:19:40Z",
       "updatedAt": "2022-06-01T18:19:40Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 57,
+      "id": "I_kwDOFsQObc5LnxrO",
+      "title": "Proposal: expand presented form to support separate presentation signature",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/57",
+      "state": "OPEN",
+      "author": "quartzjer",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "JPA",
+        "JWP"
+      ],
+      "body": "I'd like to add another presentation form with five sections:\r\n`<presentation_header>.<issuer_header>.<payload_1>~<payload_2>.<presentation_proof>.<presentation_signature>`\r\n\r\nRight now, the SU/MAC algs incorporate the presentation signature into the proof and it doesn't feel right.  The holder should be able to choose their own presentation algorithm independently from the issuer, and it should be able to be any normal JWS one.  \r\n\r\nFor algorithms such as BBS that internally incorporate replay protection and presentation header support, they would remain four-part but also re-order to be consistent:\r\n`<presentation_header>.<issuer_header>.<payload_1>~<payload_2>.<presentation_proof>`\r\n",
+      "createdAt": "2022-06-12T22:26:47Z",
+      "updatedAt": "2022-06-12T22:26:47Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 59,
+      "id": "I_kwDOFsQObc5LnzNY",
+      "title": "Allow algorithms to use ~ separator in proof values",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/59",
+      "state": "OPEN",
+      "author": "quartzjer",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "JPT",
+        "JPA"
+      ],
+      "body": "Having worked on the SU and MAC algo drafts which both make use of proof values that are actually arrays, I would like to update the JPT core definition to treat all proof values as an array natively.\r\n\r\nThe array would be identical to how payloads are encoded, in compact it would use `~` separator, and in JSON it would simply be an array of base64url-encoded strings.\r\n\r\nThe JWP implementation would be required to always decode it into an array of individual variable-length octet strings and then pass that array into the algorithm, even if there is only one item.\r\n\r\nThis provides notable cryptographic simplification benefit to algorithm definitions, such that they don't have to internally define their own separators, padding, etc.",
+      "createdAt": "2022-06-12T23:00:44Z",
+      "updatedAt": "2022-06-12T23:00:44Z",
       "closedAt": null,
       "comments": []
     }
@@ -4167,24 +4226,26 @@
       "id": "PR_kwDOFsQObc42cZ7d",
       "title": "[WIP] Salted Hash Algorithm (MAC)",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/48",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This is still a work-in-progress.\r\n\r\nAdding a Salted Hash (SH) JPA that works similarly to the Single Use algorithm but uses salts and hashes instead of an ephemeral key-pair.  It will be more efficient on compute, but could result in larger proof values depending on the number of payloads and selective disclosure.\r\n\r\nIt works similarly to the salted hash technique used by ISO 18013-5 for selective release.",
       "createdAt": "2022-04-19T18:28:47Z",
-      "updatedAt": "2022-05-31T18:00:40Z",
+      "updatedAt": "2022-06-12T21:32:34Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "6efee849a816c270785f58734990f4c02e185d5d",
       "headRepository": "json-web-proofs/json-web-proofs",
       "headRefName": "sh_alg",
-      "headRefOid": "863af24a9f52d5a90088ee57f32dc0fee0afcb49",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "52fbc9c9acd0c69bfa1422e8d2d43d67548033a6",
+      "closedAt": "2022-06-12T21:32:31Z",
+      "mergedAt": "2022-06-12T21:32:31Z",
+      "mergedBy": "quartzjer",
+      "mergeCommit": {
+        "oid": "1603f1fe4d5aad24fe3feb3fc3f2f022a4405fe9"
+      },
       "comments": [
         {
           "author": "christianpaquin",
@@ -4713,6 +4774,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOFsQObc45hmAq",
+      "title": "Adding editors notes and cleanups",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/58",
+      "state": "OPEN",
+      "author": "quartzjer",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Just some helpful notes for those that might be reading a draft directly.\r\n\r\nAlso fixed some language that closes #27 in the JPT draft.",
+      "createdAt": "2022-06-12T22:54:56Z",
+      "updatedAt": "2022-06-12T22:54:56Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "1603f1fe4d5aad24fe3feb3fc3f2f022a4405fe9",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "editor_notes",
+      "headRefOid": "fa6e311af7ba4641879d265aba42e9d06fb40ee0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
