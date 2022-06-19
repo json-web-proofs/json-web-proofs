@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-14T01:16:41.299811+00:00",
+  "timestamp": "2022-06-19T01:09:12.523870+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -4799,6 +4799,40 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 60,
+      "id": "PR_kwDOFsQObc45x_BK",
+      "title": "update charter-ietf-jose-03",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/60",
+      "state": "OPEN",
+      "author": "panva",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This update makes it so that the proposed charter does not restrict adopting new algorithms solely for the purpose of JWPs\n",
+      "createdAt": "2022-06-16T14:34:35Z",
+      "updatedAt": "2022-06-16T14:35:30Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "1603f1fe4d5aad24fe3feb3fc3f2f022a4405fe9",
+      "headRepository": "panva/json-web-proofs",
+      "headRefName": "charter",
+      "headRefOid": "baabb96785f1bb4d1eb08a69d526df2b2a4134fe",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "panva",
+          "authorAssociation": "NONE",
+          "body": "cc @selfissued ",
+          "createdAt": "2022-06-16T14:35:30Z",
+          "updatedAt": "2022-06-16T14:35:30Z"
+        }
+      ],
       "reviews": []
     }
   ]
