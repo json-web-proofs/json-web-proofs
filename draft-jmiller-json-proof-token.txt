@@ -6,7 +6,7 @@ todo                                                           J. Miller
                                                            Ping Identity
                                                                 M. Jones
                                                                Microsoft
-                                                            12 June 2022
+                                                            11 July 2022
 
 
                             JSON Proof Token
@@ -56,6 +56,14 @@ Table of Contents
    the payloads and are stored in a separate structure that can be
    externalized and shared across multiple JPTs.
 
+   |  Editors Note: This draft is still early and incomplete, there will
+   |  be significant changes to the algorithms as currently defined
+   |  here.  Please do not use any of these definitions or examples for
+   |  anything except personal experimentation and learning.
+   |  Contributions and feedback are welcome at https://github.com/json-
+   |  web-proofs/json-web-proofs (https://github.com/json-web-proofs/
+   |  json-web-proofs).
+
 2.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -103,10 +111,10 @@ Table of Contents
    selective disclosure, JPTs must go a step further to ensure that
    applications can effectively provide choice and consent on exactly
    what is being disclosed.  Software using JWPs must know the mappings
-   from payloads to claims and predicates.  JPTs do not support
-   disclosing claims that are intended to be private from the issuer to
-   the relying party.  All revealed payloads MUST be mapped to claims
-   that are accessible to the application.
+   from payloads to claims.  JPTs do not support disclosing claims that
+   are intended to be private from the issuer to the relying party.  All
+   disclosed payloads MUST be mapped to claims and made accessible to
+   the application.
 
 4.3.  Familiarity
 
@@ -127,14 +135,14 @@ Table of Contents
 
 4.4.  Proofs
 
-   In order to generate a variety of ZKPs of knowledge, range,
-   membeship, or other predicates, it is essential that the individual
-   payloads are individual claims or predicates.  This greatly
-   simplifies the task of linking a derived proof of a given claim or
-   predicate to the specific payload that was also signed by the issuer.
-   While JPTs definitely support claims that have complex object or
-   array compound values, they also also allow simple claim values such
-   as JSON strings, numbers, and booleans.
+   In order to generate a variety of efficient ZKPs of knowledge, range,
+   membership, or other predicates, it is essential that each individual
+   payload is only a single claim value.  This greatly simplifies the
+   task of linking a derived proof of a given claim to the specific
+   payload that was also signed by the issuer.  While JPTs support
+   claims that have complex object or array compound values, they also
+   allow for simple claim values such as JSON strings, numbers, and
+   booleans that can be used directly in generating predicate proofs.
 
 5.  Claim Names
 
@@ -153,7 +161,7 @@ Table of Contents
    When the claims array is stored in the header, any variations of it
    are disclosed to the verifier and can be used to correlate and link
    usages.  Given the privacy design considerations around linkability
-   it is recomended that the claims are defined external to an
+   it is recommended that the claims are defined external to an
    individual JPT and either referenced or known by the application
    context.
 
@@ -188,13 +196,16 @@ Table of Contents
 
 7.  Payloads
 
+   |  Editors Note: This section is significantly incomplete, use it
+   |  only as an indicator of the intended direction.
+
    Application resolves each claim as required when processing the JPT.
    Resolution can result in one of three things: 1.  A disclosed JSON
    value 2.  A custom proof method 3.  A null value
 
 7.1.  Disclosed
 
-   *  Always an octet string of valid JSON text.
+   Always an octet string of valid JSON text.
 
 7.2.  Proof Methods
 
@@ -206,7 +217,7 @@ Table of Contents
    *  a proof method may be custom based on the capabilities of the
       algorithm
 
-   *  define common proof method types avalable?
+   *  define common proof method types available?
 
       -  range
 
@@ -220,7 +231,7 @@ Table of Contents
 
 8.  Example JPT
 
-   TBD An example is desperately needed here!
+   See the JSON Web Proof draft appendix.
 
 9.  Security Considerations
 

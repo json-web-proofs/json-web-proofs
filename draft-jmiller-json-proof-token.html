@@ -10,7 +10,7 @@
 <meta content="
        JSON Proof Token (JPT) is a compact, URL-safe, privacy-preserving representation of claims to be transferred between three parties.  The claims in a JPT are encoded as base64url-encoded JSON objects that are used as the payloads of a JSON Web Proof (JWP) structure, enabling them to be digitally signed and selectively disclosed.  JPTs also support reusability and unlinkability when using Zero-Knowledge Proofs (ZKPs). 
     " name="description">
-<meta content="xml2rfc 3.12.10" name="generator">
+<meta content="xml2rfc 3.13.0" name="generator">
 <meta content="jose" name="keyword">
 <meta content="zkp" name="keyword">
 <meta content="jwp" name="keyword">
@@ -18,18 +18,18 @@
 <meta content="jpt" name="keyword">
 <meta content="draft-jmiller-json-proof-token" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.10
+  xml2rfc 3.13.0
     Python 3.10.4
     appdirs 1.4.4
     ConfigArgParse 1.5.3
-    google-i18n-address 2.5.1
+    google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
-    Jinja2 2.11.3
+    Jinja2 3.1.2
     kitchen 1.2.6
-    lxml 4.8.0
-    MarkupSafe 2.0.1
-    pycountry 20.7.3
+    lxml 4.9.1
+    MarkupSafe 2.1.1
+    pycountry 22.3.5
     pyflakes 2.4.0
     PyYAML 6.0
     requests 2.27.1
@@ -1030,8 +1030,8 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left"></td>
-<td class="center">jpa</td>
-<td class="right">June 2022</td>
+<td class="center">JSON Proof Token</td>
+<td class="right">July 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Miller &amp; Jones</td>
@@ -1142,6 +1142,9 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">JSON Proof Token (JPT) is a compact claims representation format intended to be used in the same ways as a JSON Web Token (JWT), but with additional support for selective disclosure and unlinkability.  JPTs encode claim values to be transmitted as payloads of a JSON Web Proof (JWP).  JPTs are always represented using the JWP Compact Serialization.  The corresponding claim names are not transmitted in the payloads and are stored in a separate structure that can be externalized and shared across multiple JPTs.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<blockquote id="section-1-2">
+        <p id="section-1-2.1">Editors Note: This draft is still early and incomplete, there will be significant changes to the algorithms as currently defined here.  Please do not use any of these definitions or examples for anything except personal experimentation and learning.  Contributions and feedback are welcome at <a href="https://github.com/json-web-proofs/json-web-proofs">https://github.com/json-web-proofs/json-web-proofs</a>.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
+</blockquote>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1184,7 +1187,7 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
         <h3 id="name-selective-disclosure">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-selective-disclosure" class="section-name selfRef">Selective Disclosure</a>
         </h3>
-<p id="section-4.2-1">While JWPs provide the underling structure for easily supporting selective disclosure, JPTs must go a step further to ensure that applications can effectively provide choice and consent on exactly what is being disclosed.  Software using JWPs must know the mappings from payloads to claims and predicates.  JPTs do not support disclosing claims that are intended to be private from the issuer to the relying party.  All revealed payloads MUST be mapped to claims that are accessible to the application.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">While JWPs provide the underling structure for easily supporting selective disclosure, JPTs must go a step further to ensure that applications can effectively provide choice and consent on exactly what is being disclosed.  Software using JWPs must know the mappings from payloads to claims.  JPTs do not support disclosing claims that are intended to be private from the issuer to the relying party.  All disclosed payloads MUST be mapped to claims and made accessible to the application.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="familiarity">
@@ -1202,7 +1205,7 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
         <h3 id="name-proofs">
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-proofs" class="section-name selfRef">Proofs</a>
         </h3>
-<p id="section-4.4-1">In order to generate a variety of ZKPs of knowledge, range, membeship, or other predicates, it is essential that the individual payloads are individual claims or predicates.  This greatly simplifies the task of linking a derived proof of a given claim or predicate to the specific payload that was also signed by the issuer.  While JPTs definitely support claims that have complex object or array compound values, they also also allow simple claim values such as JSON strings, numbers, and booleans.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">In order to generate a variety of efficient ZKPs of knowledge, range, membership, or other predicates, it is essential that each individual payload is only a single claim value.  This greatly simplifies the task of linking a derived proof of a given claim to the specific payload that was also signed by the issuer.  While JPTs support claims that have complex object or array compound values, they also allow for simple claim values such as JSON strings, numbers, and booleans that can be used directly in generating predicate proofs.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1221,7 +1224,7 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-claims" class="section-name selfRef">Claims</a>
       </h2>
 <p id="section-6-1">Using a JSON Proof Token requires combining information from two sources: the claim names and the payloads.  The simplest solution is to list the claim names in an ordered array that aligns with the included payloads.  This claims array can be conveniently included in the JWP Protected Header using the <code>claims</code> key.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">When the claims array is stored in the header, any variations of it are disclosed to the verifier and can be used to correlate and link usages.  Given the privacy design considerations around linkability it is recomended that the claims are defined external to an individual JPT and either referenced or known by the application context.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-2">When the claims array is stored in the header, any variations of it are disclosed to the verifier and can be used to correlate and link usages.  Given the privacy design considerations around linkability it is recommended that the claims are defined external to an individual JPT and either referenced or known by the application context.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">In order to facilitate this external definition of the claim names, an additional <code>cid</code> key is defined with a required digest value calculated as defined here.  This <code>cid</code> can be used similar to a <code>kid</code> in order to ensure externally resolve and then verify that the correct list of claim names are being used when processing the payloads containing the claim values.<a href="#section-6-3" class="pilcrow">¶</a></p>
 <p id="section-6-4">If there is an associated JWK containing the signing key information, the <code>claims</code> key is also registered there as a convenient location for the claim names.<a href="#section-6-4" class="pilcrow">¶</a></p>
 <p id="section-6-5">All payloads are claim values and MUST be the base64url encoding of the UTF-8 representation of a JSON value.<a href="#section-6-5" class="pilcrow">¶</a></p>
@@ -1247,19 +1250,19 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
       <h2 id="name-payloads">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-payloads" class="section-name selfRef">Payloads</a>
       </h2>
-<p id="section-7-1">Application resolves each claim as required when processing the JPT.  Resolution can result in one of three things:
+<blockquote id="section-7-1">
+        <p id="section-7-1.1">Editors Note: This section is significantly incomplete, use it only as an indicator of the intended direction.<a href="#section-7-1.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="section-7-2">Application resolves each claim as required when processing the JPT.  Resolution can result in one of three things:
 1. A disclosed JSON value
 2. A custom proof method
-3. A <code>null</code> value<a href="#section-7-1" class="pilcrow">¶</a></p>
+3. A <code>null</code> value<a href="#section-7-2" class="pilcrow">¶</a></p>
 <div id="disclosed">
 <section id="section-7.1">
         <h3 id="name-disclosed">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-disclosed" class="section-name selfRef">Disclosed</a>
         </h3>
-<ul class="normal">
-<li class="normal" id="section-7.1-1.1">Always an octet string of valid JSON text.<a href="#section-7.1-1.1" class="pilcrow">¶</a>
-</li>
-        </ul>
+<p id="section-7.1-1">Always an octet string of valid JSON text.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proof-methods">
@@ -1275,7 +1278,7 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
           <li class="normal" id="section-7.2-1.3">a proof method may be custom based on the capabilities of the algorithm<a href="#section-7.2-1.3" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-7.2-1.4">
-            <p id="section-7.2-1.4.1">define common proof method types avalable?<a href="#section-7.2-1.4.1" class="pilcrow">¶</a></p>
+            <p id="section-7.2-1.4.1">define common proof method types available?<a href="#section-7.2-1.4.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.2-1.4.2.1">range<a href="#section-7.2-1.4.2.1" class="pilcrow">¶</a>
 </li>
@@ -1299,7 +1302,7 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
       <h2 id="name-example-jpt">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-example-jpt" class="section-name selfRef">Example JPT</a>
       </h2>
-<p id="section-8-1">TBD An example is desperately needed here!<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">See the JSON Web Proof draft appendix.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">

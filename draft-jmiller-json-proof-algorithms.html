@@ -10,7 +10,7 @@
 <meta content="
        The JSON Proof Algorithms (JPA) specification registers cryptographic algorithms and identifiers to be used with the JSON Web Proof (JWP) and JSON Web Key (JWK) specifications. It defines several IANA registries for these identifiers. 
     " name="description">
-<meta content="xml2rfc 3.12.10" name="generator">
+<meta content="xml2rfc 3.13.0" name="generator">
 <meta content="jose" name="keyword">
 <meta content="zkp" name="keyword">
 <meta content="jwp" name="keyword">
@@ -18,18 +18,18 @@
 <meta content="jpa" name="keyword">
 <meta content="draft-jmiller-json-proof-algorithms" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.10
+  xml2rfc 3.13.0
     Python 3.10.4
     appdirs 1.4.4
     ConfigArgParse 1.5.3
-    google-i18n-address 2.5.1
+    google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
-    Jinja2 2.11.3
+    Jinja2 3.1.2
     kitchen 1.2.6
-    lxml 4.8.0
-    MarkupSafe 2.0.1
-    pycountry 20.7.3
+    lxml 4.9.1
+    MarkupSafe 2.1.1
+    pycountry 22.3.5
     pyflakes 2.4.0
     PyYAML 6.0
     requests 2.27.1
@@ -1030,8 +1030,8 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left"></td>
-<td class="center">jpa</td>
-<td class="right">June 2022</td>
+<td class="center">JSON Proof Algorithms</td>
+<td class="right">July 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Miller &amp; Jones</td>
@@ -1133,6 +1133,9 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.10">
                     <p id="section-toc.1-1.6.2.1.2.10.1"><a href="#section-6.1.10" class="xref">6.1.10</a>. <a href="#name-jpa-registration" class="xref">JPA Registration</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.11">
+                    <p id="section-toc.1-1.6.2.1.2.11.1"><a href="#section-6.1.11" class="xref">6.1.11</a>. <a href="#name-example" class="xref">Example</a></p>
+</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
@@ -1163,7 +1166,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.6.2.2.2.8.1"><a href="#section-6.2.8" class="xref">6.2.8</a>.  <a href="#name-jpa-registration-2" class="xref">JPA Registration</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.9">
-                    <p id="section-toc.1-1.6.2.2.2.9.1"><a href="#section-6.2.9" class="xref">6.2.9</a>.  <a href="#name-example" class="xref">Example</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.9.1"><a href="#section-6.2.9" class="xref">6.2.9</a>.  <a href="#name-example-2" class="xref">Example</a></p>
 </li>
                 </ul>
 </li>
@@ -1199,6 +1202,9 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">The JSON Web Proof (JWP) draft establishes a new secure container format that supports selective disclosure and unlinkability using Zero-Knowledge Proofs (ZKPs) or other cryptographic algorithms.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<blockquote id="section-1-2">
+        <p id="section-1-2.1">Editors Note: This draft is still early and incomplete, there will be significant changes to the algorithms as currently defined here.  Please do not use any of these definitions or examples for anything except personal experimentation and learning.  Contributions and feedback are welcome at <a href="https://github.com/json-web-proofs/json-web-proofs">https://github.com/json-web-proofs/json-web-proofs</a>.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
+</blockquote>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1250,19 +1256,8 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-issue" class="section-name selfRef">Issue</a>
         </h3>
 <p id="section-5.1-1">The JWP is first created as the output of a JPA's <code>issue</code> operation.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">TODO:<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.1-3.1">MUST support the issuer protected header as an octet string<a href="#section-5.1-3.1" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.1-3.2">MUST support one or more payloads, each as an octet string<a href="#section-5.1-3.2" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.1-3.3">MAY support algorithm-specific options from the holder (for blinded payloads, replay prevention, etc)<a href="#section-5.1-3.3" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.1-3.4">MUST include integrity protection for the issuer header and all payloads<a href="#section-5.1-3.4" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.1-3.5">MUST specify all digest and/or hash2curve methods used<a href="#section-5.1-3.5" class="pilcrow">¶</a>
-</li>
-        </ul>
+<p id="section-5.1-2">Every algorithm MUST support a JSON issuer protected header along with one or more octet string payloads.  The algorithm MAY support using additional items provided by the holder for issuance such as blinded payloads, keys for replay prevention, etc.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">All algorithms MUST provide integrity protection for the issuer header and all payloads, and MUST specify all digest and/or hash2curve methods used.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="confirm">
@@ -1271,17 +1266,8 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-confirm" class="section-name selfRef">Confirm</a>
         </h3>
 <p id="section-5.2-1">Performed by the holder to validate the issued JWP is correctly formed and protected.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">TODO:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.2-3.1">MAY support algorithm-specific options (such as those sent to the issuer)<a href="#section-5.2-3.1" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.2-3.2">MAY return a modified JWP for serialized storage without the local state (such as with blinded payloads now un-blinded)<a href="#section-5.2-3.2" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.2-3.3">MUST fully verify the proof value against the issuer protected header and all payloads<a href="#section-5.2-3.3" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.2-3.4">MUST fail if given a presented JWP<a href="#section-5.2-3.4" class="pilcrow">¶</a>
-</li>
-        </ul>
+<p id="section-5.2-2">Each algorithm MAY support using additional input items options such as those sent to the issuer for issuance. After confirmation an algorithm MAY return a modified JWP for serialized storage without the local state (such as with blinded payloads now un-blinded).<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">The algorithm MUST fully verify the issued proof value against the issuer protected header and all payloads.  If given a presented JWP instead of an issued one the confirm process and MUST return an error.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="present">
@@ -1290,19 +1276,9 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-present" class="section-name selfRef">Present</a>
         </h3>
 <p id="section-5.3-1">Used to apply any selective disclosure choices and perform any unlinkability transformations.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">TODO:<a href="#section-5.3-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.3-3.1">MAY support algorithm-specific options from the requesting party (for predicate proofs and verifiable computation requests)<a href="#section-5.3-3.1" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.3-3.2">MUST support the ability to hide any payload<a href="#section-5.3-3.2" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.3-3.3">MUST always include the issuer protected header<a href="#section-5.3-3.3" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.3-3.4">MUST replace the proof value<a href="#section-5.3-3.4" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.3-3.5">MUST include a new presentation protected header that provides replay protection<a href="#section-5.3-3.5" class="pilcrow">¶</a>
-</li>
-        </ul>
+<p id="section-5.3-2">An algorithm MAY support additional input options from the requesting party such as for predicate proofs and verifiable computation requests.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">Every algorithm MUST support the ability to hide any or all payloads.  It MUST always include the issuer protected header unmodified in the presentation.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">The algorithm MUST replace the issued proof value and generate a new presented proof value.  It also MUST include a new presentation protected header that provides replay protection.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="verify">
@@ -1310,22 +1286,11 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
         <h3 id="name-verify">
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-verify" class="section-name selfRef">Verify</a>
         </h3>
-<p id="section-5.4-1">Performed by the verifier to verify the protected headers along with any revealed payloads and/or assertions about them from the proving party, while also verifying they are the same payloads and ordering as witnessed by the issuer.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.4-2">TODO:<a href="#section-5.4-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-5.4-3.1">MUST verify the integrity of all revealed payloads<a href="#section-5.4-3.1" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.4-3.2">MUST verify the integrity of both the issuer and presentation protected headers<a href="#section-5.4-3.2" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.4-3.3">MUST verify any included assertions about a hidden payload as true<a href="#section-5.4-3.3" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.4-3.4">MAY support algorithm-specific options (such as those sent to the holder)<a href="#section-5.4-3.4" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.4-3.5">Out of scope is the app interface to interact with the resulting verified assertions<a href="#section-5.4-3.5" class="pilcrow">¶</a>
-</li>
-          <li class="normal" id="section-5.4-3.6">MUST fail if given only an issued JWP<a href="#section-5.4-3.6" class="pilcrow">¶</a>
-</li>
-        </ul>
+<p id="section-5.4-1">Performed by the verifier to verify the protected headers along with any disclosed payloads and/or assertions about them from the proving party, while also verifying they are the same payloads and ordering as witnessed by the issuer.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2">The algorithm MUST verify the integrity of all disclosed payloads and MUST also verify the integrity of both the issuer and presentation protected headers.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.4-3">If the presented proof contains any assertions about the hidden payloads, the algorithm MUST also verify all of those assertions.
+It MAY support additional options such as those sent to the holder to generate the presentation.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-4">If given an issued JWP for verification, the algorithm MUST return an error.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1341,8 +1306,11 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
         <h3 id="name-single-use">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-single-use" class="section-name selfRef">Single Use</a>
         </h3>
-<p id="section-6.1-1">The Single Use (SU) algorithm is based on composing multiple traditional JWS values into a single JWP proof value.  It enables a very simple form of selective disclosure without requiring any advanced cryptographic techniques.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">It does not support unlinkability if the same JWP is presented multiple times, therefore when privacy is required the holder will need to interact with the issuer again to receive new single-use JWPs (dynamically or in batches).<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<blockquote id="section-6.1-1">
+          <p id="section-6.1-1.1">Editors Note: This algorithm is going to be renamed and slightly refactored, new name is still TBD.<a href="#section-6.1-1.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="section-6.1-2">The Single Use (SU) algorithm is based on composing multiple traditional JWS values into a single JWP proof value.  It enables a very simple form of selective disclosure without requiring any advanced cryptographic techniques.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">It does not support unlinkability if the same JWP is presented multiple times, therefore when privacy is required the holder will need to interact with the issuer again to receive new single-use JWPs (dynamically or in batches).<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <div id="jws-algorithm">
 <section id="section-6.1.1">
           <h4 id="name-jws-algorithm">
@@ -1413,10 +1381,13 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
           <h4 id="name-presentation">
 <a href="#section-6.1.8" class="section-number selfRef">6.1.8. </a><a href="#name-presentation" class="section-name selfRef">Presentation</a>
           </h4>
-<p id="section-6.1.8-1">The holder derives a new proof value when presenting it to a verifier.  The presented proof value will always contain the issuer's Stable Key signature for the issuer protected header as the first element.<a href="#section-6.1.8-1" class="pilcrow">¶</a></p>
-<p id="section-6.1.8-2">The second element of the presented proof value is always the holder's Presentation Key signature of the presentation protected header, constructed identically to the issuer protected header by using the serialized JSON value octet string as the JWS body.  Signing only the presentation header with the Presentation Key is sufficient to protect the entire presentation since that key is private to the holder and only the contents of the presentation header are used for replay prevention.<a href="#section-6.1.8-2" class="pilcrow">¶</a></p>
-<p id="section-6.1.8-3">The two header signatures are then followed by only the issuer's Ephemeral Key signatures for each payload that is disclosed.  The order of the payload signatures is preserved and MUST be in the same order as the included disclosed payloads in the presented JWP.  Non-disclosed payloads will NOT have a signature value included.  For example, if the second and fifth payloads are hidden then the holder's derived proof value would be of the length <code>64 * (1 + 1 + the 1st, 2nd, and 4th payload signatures) = 320 octets</code>.<a href="#section-6.1.8-3" class="pilcrow">¶</a></p>
-<p id="section-6.1.8-4">Since the individual signatures in the proof value are unique and remain unchanged across multiple presentations, a Single Use JWP SHOULD only be presented a single time to each verifier in order for the holder to remain unlinkable across multiple presentations.<a href="#section-6.1.8-4" class="pilcrow">¶</a></p>
+<blockquote id="section-6.1.8-1">
+            <p id="section-6.1.8-1.1">Editors Note: The current definition here is incomplete, the holder's signature needs to also incorporate the presented proof.<a href="#section-6.1.8-1.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="section-6.1.8-2">The holder derives a new proof value when presenting it to a verifier.  The presented proof value will always contain the issuer's Stable Key signature for the issuer protected header as the first element.<a href="#section-6.1.8-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.8-3">The second element of the presented proof value is always the holder's Presentation Key signature of the presentation protected header, constructed identically to the issuer protected header by using the serialized JSON value octet string as the JWS body.  Signing only the presentation header with the Presentation Key is sufficient to protect the entire presentation since that key is private to the holder and only the contents of the presentation header are used for replay prevention.<a href="#section-6.1.8-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.8-4">The two header signatures are then followed by only the issuer's Ephemeral Key signatures for each payload that is disclosed.  The order of the payload signatures is preserved and MUST be in the same order as the included disclosed payloads in the presented JWP.  Non-disclosed payloads will NOT have a signature value included.  For example, if the second and fifth payloads are hidden then the holder's derived proof value would be of the length <code>64 * (1 + 1 + the 1st, 2nd, and 4th payload signatures) = 320 octets</code>.<a href="#section-6.1.8-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.8-5">Since the individual signatures in the proof value are unique and remain unchanged across multiple presentations, a Single Use JWP SHOULD only be presented a single time to each verifier in order for the holder to remain unlinkable across multiple presentations.<a href="#section-6.1.8-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="verification">
@@ -1434,6 +1405,14 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
 <a href="#section-6.1.10" class="section-number selfRef">6.1.10. </a><a href="#name-jpa-registration" class="section-name selfRef">JPA Registration</a>
           </h4>
 <p id="section-6.1.10-1">Proposed JWP <code>alg</code> value is of the format "SU-" appended with the relevant JWS <code>alg</code> value for the chosen public and ephemeral key-pair algorithm, for example "SU-ES256".<a href="#section-6.1.10-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="example">
+<section id="section-6.1.11">
+          <h4 id="name-example">
+<a href="#section-6.1.11" class="section-number selfRef">6.1.11. </a><a href="#name-example" class="section-name selfRef">Example</a>
+          </h4>
+<p id="section-6.1.11-1">See the example in the appendix of the JSON Web Proof draft.<a href="#section-6.1.11-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1518,10 +1497,10 @@ when, and only when, they appear in all capitals, as shown here.<a href="#sectio
 <p id="section-6.2.8-1">Proposed JWP <code>alg</code> value for BBS based on the software implementation is "BBS-X".<a href="#section-6.2.8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="example">
+<div id="example-1">
 <section id="section-6.2.9">
-          <h4 id="name-example">
-<a href="#section-6.2.9" class="section-number selfRef">6.2.9. </a><a href="#name-example" class="section-name selfRef">Example</a>
+          <h4 id="name-example-2">
+<a href="#section-6.2.9" class="section-number selfRef">6.2.9. </a><a href="#name-example-2" class="section-name selfRef">Example</a>
           </h4>
 <p id="section-6.2.9-1">The following example uses the given BLS12-384 key-pair:<a href="#section-6.2.9-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.9-2">Public:
@@ -1678,6 +1657,8 @@ The resulting signature is decoded and used as the first item in the issuer proo
 See the JWS [Presentation Protected Header](#presentation-protected-header) section.
 
 ### Presentation
+
+&gt; Editors Note: The current definition here is incomplete, the holder's signature needs to also incorporate the presented proof.
 
 The presentation proof is constructed as a large octet array containing multiple appended items similar to the issuer proof value.  The first item is the JWS decoded signature value generated when the holder uses the presentation key to sign the presentation header.  The second item is the issuer signature from the issuer's proof value.
 
@@ -1866,7 +1847,9 @@ eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9u
         <h3 id="name-zksnark">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-zksnark" class="section-name selfRef">ZKSnark</a>
         </h3>
-<p id="section-6.3-1">TBD<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<blockquote id="section-6.3-1">
+          <p id="section-6.3-1.1">Editors Note: This is just a placeholder for a future definition that is in the early stages of development as part of the <a href="https://github.com/decentralized-identity/spartan_zkSNARK_signatures">Decentralized Identity Foundation</a>.<a href="#section-6.3-1.1" class="pilcrow">¶</a></p>
+</blockquote>
 </section>
 </div>
 </section>
@@ -1876,10 +1859,13 @@ eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9u
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
+<blockquote id="section-7-1">
+        <p id="section-7-1.1">Editors Note: This will follow once the algorithms defined here have become more stable.<a href="#section-7-1.1" class="pilcrow">¶</a></p>
+</blockquote>
 <ul class="normal">
-<li class="normal" id="section-7-1.1">Data minimization of the proof value<a href="#section-7-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-7-2.1">Data minimization of the proof value<a href="#section-7-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-7-1.2">Unlinkability of the protected header contents<a href="#section-7-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-7-2.2">Unlinkability of the protected header contents<a href="#section-7-2.2" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
