@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-19T01:09:12.523870+00:00",
+  "timestamp": "2022-07-12T01:17:22.285701+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -930,7 +930,7 @@
       "id": "I_kwDOFsQObc4-u7n8",
       "title": "Payloads can be predicates - not just claims",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -941,8 +941,8 @@
       ],
       "body": "There are a number of places in the current drafts where we say that predicates represent claims but we fail to say that they can also represent predicates.  We should develop consistent language for describing both and uniformly use it.",
       "createdAt": "2021-11-13T00:09:37Z",
-      "updatedAt": "2022-02-08T17:26:49Z",
-      "closedAt": null,
+      "updatedAt": "2022-07-11T23:36:11Z",
+      "closedAt": "2022-07-11T23:36:11Z",
       "comments": [
         {
           "author": "quartzjer",
@@ -4780,24 +4780,26 @@
       "id": "PR_kwDOFsQObc45hmAq",
       "title": "Adding editors notes and cleanups",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/58",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Just some helpful notes for those that might be reading a draft directly.\r\n\r\nAlso fixed some language that closes #27 in the JPT draft.",
       "createdAt": "2022-06-12T22:54:56Z",
-      "updatedAt": "2022-06-12T22:54:56Z",
+      "updatedAt": "2022-07-11T23:36:14Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "1603f1fe4d5aad24fe3feb3fc3f2f022a4405fe9",
       "headRepository": "json-web-proofs/json-web-proofs",
       "headRefName": "editor_notes",
       "headRefOid": "fa6e311af7ba4641879d265aba42e9d06fb40ee0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-07-11T23:36:11Z",
+      "mergedAt": "2022-07-11T23:36:11Z",
+      "mergedBy": "quartzjer",
+      "mergeCommit": {
+        "oid": "c7fc769a833065944d89c6c41dc05058a35019b0"
+      },
       "comments": [],
       "reviews": []
     },
@@ -4833,6 +4835,32 @@
           "updatedAt": "2022-06-16T14:35:30Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 61,
+      "id": "PR_kwDOFsQObc47OmXD",
+      "title": "manual 72 for draft",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/61",
+      "state": "OPEN",
+      "author": "quartzjer",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-07-11T23:56:47Z",
+      "updatedAt": "2022-07-11T23:56:47Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "c7fc769a833065944d89c6c41dc05058a35019b0",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "linelen-force",
+      "headRefOid": "51a08ab8870066fdf25a82010f51857512d506d2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
