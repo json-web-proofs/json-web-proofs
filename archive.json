@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-07-12T01:17:22.285701+00:00",
+  "timestamp": "2022-07-21T01:11:19.848207+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -4815,7 +4815,7 @@
       "labels": [],
       "body": "This update makes it so that the proposed charter does not restrict adopting new algorithms solely for the purpose of JWPs\n",
       "createdAt": "2022-06-16T14:34:35Z",
-      "updatedAt": "2022-06-16T14:35:30Z",
+      "updatedAt": "2022-07-20T20:54:51Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "1603f1fe4d5aad24fe3feb3fc3f2f022a4405fe9",
@@ -4835,7 +4835,48 @@
           "updatedAt": "2022-06-16T14:35:30Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc4-U4Xk",
+          "commit": {
+            "abbreviatedOid": "baabb96"
+          },
+          "author": "Sakurann",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-07-20T20:50:06Z",
+          "updatedAt": "2022-07-20T20:50:12Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "I would keep the original text.",
+              "createdAt": "2022-07-20T20:50:06Z",
+              "updatedAt": "2022-07-20T20:50:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFsQObc4-U5hJ",
+          "commit": {
+            "abbreviatedOid": "baabb96"
+          },
+          "author": "panva",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-07-20T20:54:50Z",
+          "updatedAt": "2022-07-20T20:54:51Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Why? There's a backlog of algorithms that do not fall within \"needed for JWPs\".",
+              "createdAt": "2022-07-20T20:54:50Z",
+              "updatedAt": "2022-07-20T20:54:51Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 61,
@@ -4849,7 +4890,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-07-11T23:56:47Z",
-      "updatedAt": "2022-07-11T23:56:47Z",
+      "updatedAt": "2022-07-20T20:49:21Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "c7fc769a833065944d89c6c41dc05058a35019b0",
@@ -4861,7 +4902,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc4-U4MM",
+          "commit": {
+            "abbreviatedOid": "51a08ab"
+          },
+          "author": "Sakurann",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-07-20T20:49:21Z",
+          "updatedAt": "2022-07-20T20:49:21Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
