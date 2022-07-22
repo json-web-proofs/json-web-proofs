@@ -6,7 +6,7 @@ todo                                                           J. Miller
                                                            Ping Identity
                                                                 M. Jones
                                                                Microsoft
-                                                            11 July 2022
+                                                            22 July 2022
 
 
                          JSON Proof Algorithms
@@ -531,18 +531,22 @@ The message array used as an input to the BLS implementation is:
    21, 106, 136, 161, 115, 142, 3, 196, 155, 52, 174, 205, 212, 13, 174,
    220]
 
-The resulting signed JWP in JSON serialization is:
-```json bbs_issued_jwp
-{
-  "protected": "eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiY2xhaW1zIjpbImZhbWlseV9uYW1lIiwiZ2l2ZW5fbmFtZSIsImVtYWlsIiwiYWdlIl0sInR5cCI6IkpQVCIsImFsZyI6IkJCUy1YIn0",
-  "payloads": [
-    "IkRvZSI",
-    "IkpheSI",
-    "ImpheWRvZUBleGFtcGxlLm9yZyI",
-    "NDI"
-  ],
-  "proof": "tANC_gnNFFivUloiGrJQ4VvReBe5n0xJvexzjR9TKyq698TsRhN7UPmS7aww0ME-ZDuaFjSluPpHNGrpGvD71nqFPfFGf1PwcIK1l6DWK9VT0-6_AUGHk-LFGGi3CY3PFWqIoXOOA8SbNK7N1A2u3A"
-}
+ The resulting signed JWP in JSON serialization is:
+ ```json bbs_issued_jwp
+ {
+   "protected": "eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiY2xhaW1zIjp
+   bImZhbWlseV9uYW1lIiwiZ2l2ZW5fbmFtZSIsImVtYWlsIiwiYWdlIl0sInR5cCI6IkpQ
+   VCIsImFsZyI6IkJCUy1YIn0",
+   "payloads": [
+     "IkRvZSI",
+     "IkpheSI",
+     "ImpheWRvZUBleGFtcGxlLm9yZyI",
+     "NDI"
+   ],
+   "proof": "tANC_gnNFFivUloiGrJQ4VvReBe5n0xJvexzjR9TKyq698TsRhN7UPmS7aw
+   w0ME-ZDuaFjSluPpHNGrpGvD71nqFPfFGf1PwcIK1l6DWK9VT0-6_AUGHk-LFGGi3CY3P
+   FWqIoXOOA8SbNK7N1A2u3A"
+ }
 
    The same JWP in compact serialization: ```text bbs_issued_compact ImV
    5SnBjM01pT2lKb2RIUndjem92TDJsemMzVmxjaTVsZUdGdGNHeGxJaXdpWTJ4aGFXMXpJ
@@ -591,32 +595,44 @@ For verification a nonce is needed:
    26, 55, 180, 135, 115, 70, 96, 106, 243, 213, 131, 196, 63, 165, 42,
    157, 22, 94, 46]
 
-The resulting verifiable JWP in JSON serialization is:
-```json bbs_present_jwp
-{
-  "protected": "eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiY2xhaW1zIjpbImZhbWlseV9uYW1lIiwiZ2l2ZW5fbmFtZSIsImVtYWlsIiwiYWdlIl0sInR5cCI6IkpQVCIsImFsZyI6IkJCUy1YIn0",
-  "payloads": [
-    null,
-    "IkpheSI",
-    null,
-    "NDI"
-  ],
-  "proof": "AAUVqUnyMW_qGrrCzK7xHqUydeyQX5O6276HzUKz41aX9q7qzC6r-eHGh1GD4Y3ZL9l_sA9ibulK3OYbyXVy0ym3LEC5LYyZMUnHXdD41K9qx1P_gE2Y-qZlTvgKauwY7hUihoC6hJl7Vlic9ssX_fjZ6QGo0AzB3o5aHN_xgqSQUwAPpRmckfMnWPn2uZgD3Ei0AAAAdIW0OjVpeHzjoE7lStFvpGW3VnrUfloX5G24SUtysY6yWWtkvbtKj6fausG99w6GKAAAAAIFgnhW_xwhkRSVwwgEyNSyQ5PmrsAJnl6zkD88Uv_YBFVs0cLRsWpF1-uxU_QBw2aHYxR5B_wau84Q-oYB_8VcgmnxryMW0mWecdbeAwSovPsi1dPglpMmpOWX4t-8tbTM5DprN-iUtMcqtX876eq8AAAABF3EHyaXaecu5C5WxIjUr6pTFU4T4NN6B1xHEatCejiCLROs2UE_9icGHk2EViQpA-pIkshllp9sjA_DOfmav8xbHp8gnRgDblpmY84qOgG111UdIIMuTBkFK8sg16epbDiukjOuKL4WJV2c9dAaN7SHc0ZgavPVg8Q_pSqdFl4u"
-}
+ The resulting verifiable JWP in JSON serialization is:
+ ```json bbs_present_jwp
+ {
+   "protected": "eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiY2xhaW1zIjp
+   bImZhbWlseV9uYW1lIiwiZ2l2ZW5fbmFtZSIsImVtYWlsIiwiYWdlIl0sInR5cCI6IkpQ
+   VCIsImFsZyI6IkJCUy1YIn0",
+   "payloads": [
+     null,
+     "IkpheSI",
+     null,
+     "NDI"
+   ],
+   "proof": "AAUVqUnyMW_qGrrCzK7xHqUydeyQX5O6276HzUKz41aX9q7qzC6r-eHGh1G
+   D4Y3ZL9l_sA9ibulK3OYbyXVy0ym3LEC5LYyZMUnHXdD41K9qx1P_gE2Y-qZlTvgKauwY
+   7hUihoC6hJl7Vlic9ssX_fjZ6QGo0AzB3o5aHN_xgqSQUwAPpRmckfMnWPn2uZgD3Ei0A
+   AAAdIW0OjVpeHzjoE7lStFvpGW3VnrUfloX5G24SUtysY6yWWtkvbtKj6fausG99w6GKA
+   AAAAIFgnhW_xwhkRSVwwgEyNSyQ5PmrsAJnl6zkD88Uv_YBFVs0cLRsWpF1-uxU_QBw2a
+   HYxR5B_wau84Q-oYB_8VcgmnxryMW0mWecdbeAwSovPsi1dPglpMmpOWX4t-8tbTM5Dpr
+   N-iUtMcqtX876eq8AAAABF3EHyaXaecu5C5WxIjUr6pTFU4T4NN6B1xHEatCejiCLROs2
+   UE_9icGHk2EViQpA-pIkshllp9sjA_DOfmav8xbHp8gnRgDblpmY84qOgG111UdIIMuTB
+   kFK8sg16epbDiukjOuKL4WJV2c9dAaN7SHc0ZgavPVg8Q_pSqdFl4u"
+ }
 
    The same JWP in compact serialization: ```text bbs_present_compact Im
    V5SnBjM01pT2lKb2RIUndjem92TDJsemMzVmxjaTVsZUdGdGNHeGxJaXdpWTJ4aGFXMXp
    JanBiSW1aaGJXbHNlVjl1WVcxbElpd2laMmwyWlc1ZmJtRnRaU0lzSW1WdFlXbHNJaXdp
-   WVdkbElsMHNJblI1Y0NJNklrcFFWQ0lzSW1Gc1p5STZJa0pDVXkxWUluMCI._IkpheSI_
-   (NDI.AAUVqUnyMW_qGrrCzK7xHqUydeyQX5O6276HzUKz41aX9q7qzC6r-
-   eHGh1GD4Y3ZL9l_sA9ibulK3OYbyXVy0ym3LEC5LYyZMUnHXdD41K9qx1P_gE2Y-qZlTv
-   gKauwY7hUihoC6hJl7Vlic9ssX_fjZ6QGo0AzB3o5aHN_xgqSQUwAPpRmckfMnWPn2uZg
-   D3Ei0AAAAdIW0OjVpeHzjoE7lStFvpGW3VnrUfloX5G24SUtysY6yWWtkvbtKj6fausG9
-   9w6GKAAAAAIFgnhW_xwhkRSVwwgEyNSyQ5PmrsAJnl6zkD88Uv_YBFVs0cLRsWpF1-
-   uxU_QBw2aHYxR5B_wau84Q-oYB_8VcgmnxryMW0mWecdbeAwSovPsi1dPglpMmpOWX4t-
-   8tbTM5DprN-iUtMcqtX876eq8AAAABF3EHyaXaecu5C5WxIjUr6pTFU4T4NN6B1xHEatC
-   ejiCLROs2UE_9icGHk2EViQpA-pIkshllp9sjA_DOfmav8xbHp8gnRgDblpmY84qOgG11
-   1UdIIMuTBkFK8sg16epbDiukjOuKL4WJV2c9dAaN7SHc0ZgavPVg8Q_pSqdFl4u)
+   WV dkbElsMHNJblI1Y0NJNklrcFFWQ0lzSW1Gc1p5STZJa0pDVXkxWUluMCI._IkpheSI
+   ~NDI .AAUVqUnyMW_qGrrCzK7xHqUydeyQX5O6276HzUKz41aX9q7qzC6r-
+   eHGh1GD4Y3ZL9l_sA 9ibulK3OYbyXVy0ym3LEC5LYyZMUnHXdD41K9qx1P_gE2Y-
+   qZlTvgKauwY7hUihoC6hJl7V lic9ssX_fjZ6QGo0AzB3o5aHN_xgqSQUwAPpRmckfMnW
+   Pn2uZgD3Ei0AAAAdIW0OjVpeHzj oE7lStFvpGW3VnrUfloX5G24SUtysY6yWWtkvbtKj
+   6fausG99w6GKAAAAAIFgnhW_xwhkRS
+   VwwgEyNSyQ5PmrsAJnl6zkD88Uv_YBFVs0cLRsWpF1-uxU_QBw2aHYxR5B_wau84Q-
+   oYB_8 VcgmnxryMW0mWecdbeAwSovPsi1dPglpMmpOWX4t-8tbTM5DprN-
+   iUtMcqtX876eq8AAAAB
+   F3EHyaXaecu5C5WxIjUr6pTFU4T4NN6B1xHEatCejiCLROs2UE_9icGHk2EViQpA-
+   pIkshl lp9sjA_DOfmav8xbHp8gnRgDblpmY84qOgG111UdIIMuTBkFK8sg16epbDiukj
+   OuKL4WJV2 c9dAaN7SHc0ZgavPVg8Q_pSqdFl4u
 
 ## Message Authentication Code
 
@@ -801,18 +817,26 @@ Concatenating the issuer protected header MAC with the array of payload MACs pro
 
    The final issued JWP in JSON serialization is: ```json mac_issued_jwp
    { "payloads": [ "IkRvZSI", "IkpheSI", "ImpheWRvZUBleGFtcGxlLm9yZyI",
-   "NDI" ], "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiO
-   lsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSl
-   BUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUp
-   JTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2Jr
-   ZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9"
-   , "proof": "eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7mqr9
-   mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6prOm
-   OO" }
+   "NDI" ], "issuer":
+   "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaW
+   x5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp
+   3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVP
+   T0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaW
+   E9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9",
+   "proof": "eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7mqr9mK
+   V_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6prOmOO
+   " }
 
-The same JWP in compact serialization:
-```text mac_issued_compact
-eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6prOmOO
+ The same JWP in compact serialization:
+ ```text mac_issued_compact
+ eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJ
+ naXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOi
+ JQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6Y
+ lpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9M
+ eUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.IkRvZSI~IkpheSI~ImpheWRvZUBleG
+ FtcGxlLm9yZyI~NDI.eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7
+ mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6pr
+ OmOO
 
    Next we show the presentation of the JWP with selective disclosure.
 
@@ -849,17 +873,28 @@ The final presented proof value is generated by concatenating first the presenta
    3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVP
    T0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaW
    E9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9",
-   "proof": "foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwBp-
-   veEeh2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj9
-   09YKIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-
-   I8qGTcT_8IVxzc7XChWydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQ
-   WKXNI1jlioq4MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-
-   6kTg22F3YvQhKzeU7uGxZaAx9m2b8uwVig", "presentation": "eyJub25jZSI6InV
-   URUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ" }
+   "proof": "foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwBp-v
+   eEeh2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj90
+   9YKIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8IVxzc7XChW
+   ydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQWKXNI1jlioq4MG776cA
+   GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m2
+   b8uwVig", "presentation":
+   "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFM
+   ZS1iQ29tRkx4YThLLXMifQ" }
 
-The same JWP in compact serialization:
-```text mac_presentation_compact
-eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ.~IkpheSI~~NDI.foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwBp-veEeh2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj909YKIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8IVxzc7XChWydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQWKXNI1jlioq4MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m2b8uwVig
+ The same JWP in compact serialization:
+ ```text mac_presentation_compact
+ eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJ
+ naXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJjcnYiOi
+ JQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBLZ2Q4ajJ6Y
+ lpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9M
+ eUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.eyJub25jZSI6InVURUIzNzFsMXB6V0
+ psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ.~IkpheSI~~NDI.foavAqUMZwt0
+ SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwBp-veEeh2bm8vpWaOAAHidY99hD7
+ nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj909YKIxaTP6O5qq_Zilf4WAXK76a
+ h0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8IVxzc7XChWydEictc8xB0QIE9rI-stpy4iuSs1
+ xqviYkZn43VDNYd58gNXnQWKXNI1jlioq4MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg
+ 2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m2b8uwVig
 
 6.3.  ZKSnark
 
