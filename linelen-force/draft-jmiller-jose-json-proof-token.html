@@ -8,7 +8,7 @@
 <meta content="Jeremie Miller" name="author">
 <meta content="Michael B. Jones" name="author">
 <meta content="
-       JSON Proof Token (JPT) is a compact, URL-safe, privacy-preserving representation of claims to be transferred between three parties.  The claims in a JPT are encoded as base64url-encoded JSON objects that are used as the payloads of a JSON Web Proof (JWP) structure, enabling them to be digitally signed and selectively disclosed.  JPTs also support reusability and unlinkability when using Zero-Knowledge Proofs (ZKPs). 
+       JSON Proof Token (JPT) is a compact, URL-safe, privacy-preserving representation of claims to be transferred between three parties.  The claims in a JPT are encoded as base64url-encoded JSON objects that are used as the payloads of a  JSON Web Proof (JWP)  structure, enabling them to be digitally signed and selectively disclosed.  JPTs also support reusability and unlinkability when using Zero-Knowledge Proofs (ZKPs). 
     " name="description">
 <meta content="xml2rfc 3.13.0" name="generator">
 <meta content="jose" name="keyword">
@@ -16,7 +16,7 @@
 <meta content="jwp" name="keyword">
 <meta content="jws" name="keyword">
 <meta content="jpt" name="keyword">
-<meta content="draft-jmiller-json-proof-token" name="ietf.draft">
+<meta content="draft-jmiller-jose-json-proof-token" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.13.0
     Python 3.10.4
@@ -36,7 +36,7 @@
     setuptools 59.4.0
     six 1.16.0
 -->
-<link href="draft-jmiller-json-proof-token.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-jmiller-jose-json-proof-token.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -1065,7 +1065,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <h1 id="title">JSON Proof Token</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">JSON Proof Token (JPT) is a compact, URL-safe, privacy-preserving representation of claims to be transferred between three parties.  The claims in a JPT are encoded as base64url-encoded JSON objects that are used as the payloads of a JSON Web Proof (JWP) structure, enabling them to be digitally signed and selectively disclosed.  JPTs also support reusability and unlinkability when using Zero-Knowledge Proofs (ZKPs).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">JSON Proof Token (JPT) is a compact, URL-safe, privacy-preserving representation of claims to be transferred between three parties.  The claims in a JPT are encoded as base64url-encoded JSON objects that are used as the payloads of a <a href="https://www.ietf.org/archive/id/draft-jmiller-jose-json-web-proof-00.html">JSON Web Proof (JWP)</a> structure, enabling them to be digitally signed and selectively disclosed.  JPTs also support reusability and unlinkability when using Zero-Knowledge Proofs (ZKPs).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="toc">
 <section id="section-toc.1">
@@ -1146,7 +1146,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">JSON Proof Token (JPT) is a compact claims representation format intended to be used in the same ways as a JSON Web Token (JWT), but with additional support for selective disclosure and unlinkability.  JPTs encode claim values to be transmitted as payloads of a JSON Web Proof (JWP).  JPTs are always represented using the JWP Compact Serialization.  The corresponding claim names are not transmitted in the payloads and are stored in a separate structure that can be externalized and shared across multiple JPTs.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">JSON Proof Token (JPT) is a compact claims representation format intended to be used in the same ways as a JSON Web Token (JWT), but with additional support for selective disclosure and unlinkability.  JPTs encode claim values to be transmitted as payloads of a <a href="https://www.ietf.org/archive/id/draft-jmiller-jose-json-web-proof-00.html">JSON Web Proof (JWP)</a>.  JPTs are always represented using the JWP Compact Serialization.  The corresponding claim names are not transmitted in the payloads and are stored in a separate structure that can be externalized and shared across multiple JPTs.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <blockquote id="section-1-2">
         <p id="section-1-2.1">Editors Note: This draft is still early and incomplete, there will be significant changes to the algorithms as currently defined here.  Please do not use any of these definitions or examples for anything except personal experimentation and learning.  Contributions and feedback are welcome at <a href="https://github.com/json-web-proofs/json-web-proofs">https://github.com/json-web-proofs/json-web-proofs</a>.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
 </blockquote>

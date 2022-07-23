@@ -7,11 +7,11 @@ todo                                                           J. Miller
                                                            Ping Identity
                                                                 M. Jones
                                                                Microsoft
-                                                            22 July 2022
+                                                            23 July 2022
 
 
                              JSON Web Proof
-                      draft-jmiller-json-web-proof
+                   draft-jmiller-jose-json-web-proof
 
 Abstract
 
@@ -126,9 +126,11 @@ Table of Contents
 
    *  JWP: JSON Web Proof (this specification)
 
-   *  JPA: JSON Proof Algorithms
+   *  JPA: JSON Proof Algorithms (https://www.ietf.org/archive/id/draft-
+      jmiller-jose-json-proof-algorithms-00.html)
 
-   *  JPT: JSON Proof Token
+   *  JPT: JSON Proof Token (https://www.ietf.org/archive/id/draft-
+      jmiller-jose-json-proof-token-00.html)
 
 3.  Background
 
@@ -174,8 +176,9 @@ Table of Contents
    Algorithm definitions that support JWPs are being done in separate
    companion specifications - just as the [JSON Web Algorithms]
    [RFC7518] specification does for JWS and JWE [RFC7516].  The JSON
-   Proof Algorithms specification defines how an initial set of
-   algorithms are used with JWP.
+   Proof Algorithms (https://www.ietf.org/archive/id/draft-jmiller-jose-
+   json-proof-algorithms-00.html) specification defines how an initial
+   set of algorithms are used with JWP.
 
 4.  JWP Forms
 

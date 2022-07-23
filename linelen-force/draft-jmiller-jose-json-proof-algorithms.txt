@@ -6,18 +6,19 @@ todo                                                           J. Miller
                                                            Ping Identity
                                                                 M. Jones
                                                                Microsoft
-                                                            22 July 2022
+                                                            23 July 2022
 
 
                          JSON Proof Algorithms
-                  draft-jmiller-json-proof-algorithms
+                draft-jmiller-jose-json-proof-algorithms
 
 Abstract
 
    The JSON Proof Algorithms (JPA) specification registers cryptographic
    algorithms and identifiers to be used with the JSON Web Proof (JWP)
-   and JSON Web Key (JWK) specifications.  It defines several IANA
-   registries for these identifiers.
+   (https://www.ietf.org/archive/id/draft-jmiller-jose-json-web-proof-
+   00.html) and JSON Web Key (JWK) specifications.  It defines several
+   IANA registries for these identifiers.
 
 Table of Contents
 
@@ -62,9 +63,10 @@ Table of Contents
 
 1.  Introduction
 
-   The JSON Web Proof (JWP) draft establishes a new secure container
-   format that supports selective disclosure and unlinkability using
-   Zero-Knowledge Proofs (ZKPs) or other cryptographic algorithms.
+   The JSON Web Proof (JWP) (https://www.ietf.org/archive/id/draft-
+   jmiller-jose-json-web-proof-00.html) draft establishes a new secure
+   container format that supports selective disclosure and unlinkability
+   using Zero-Knowledge Proofs (ZKPs) or other cryptographic algorithms.
 
    |  Editors Note: This draft is still early and incomplete, there will
    |  be significant changes to the algorithms as currently defined

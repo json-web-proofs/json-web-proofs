@@ -17,7 +17,7 @@
 <meta content="zkp" name="keyword">
 <meta content="jwp" name="keyword">
 <meta content="jws" name="keyword">
-<meta content="draft-jmiller-json-web-proof" name="ietf.draft">
+<meta content="draft-jmiller-jose-json-web-proof" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.13.0
     Python 3.10.4
@@ -37,7 +37,7 @@
     setuptools 59.4.0
     six 1.16.0
 -->
-<link href="draft-jmiller-json-web-proof.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-jmiller-jose-json-web-proof.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -1204,9 +1204,9 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </li>
           <li class="normal" id="section-2.1-1.2">JWP: JSON Web Proof (this specification)<a href="#section-2.1-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-2.1-1.3">JPA: JSON Proof Algorithms<a href="#section-2.1-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-2.1-1.3">JPA: <a href="https://www.ietf.org/archive/id/draft-jmiller-jose-json-proof-algorithms-00.html">JSON Proof Algorithms</a><a href="#section-2.1-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-2.1-1.4">JPT: JSON Proof Token<a href="#section-2.1-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="section-2.1-1.4">JPT: <a href="https://www.ietf.org/archive/id/draft-jmiller-jose-json-proof-token-00.html">JSON Proof Token</a><a href="#section-2.1-1.4" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -1224,7 +1224,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <p id="section-3-4">A JWP is initially created by the issuer using the <code>issue</code> interaction with an implementation.  A successful result is an issued JWP that has a single issuer-protected header, one or more payloads, and an initial proof value that contains the issuing algorithm output.  The holder, upon receiving an issued JWP, then uses <code>confirm</code> to check the integrity protection of the header and all payloads using the given proof value.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">After validation, the holder uses <code>present</code> to apply any selective disclosure choices, perform privacy-preserving transformations for unlinkability, and add a presentation-protected header that ensures the resulting presented JWP cannot be replayed.  The verifier then uses <code>verify</code> to ensure the integrity protection of the protected headers and any disclosed payloads, along with verifying any additional ZKPs covering non-disclosed payloads.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">While <code>issue</code> and <code>confirm</code> only occur when a JWP is initially created by the issuer, the <code>present</code> and <code>verify</code> steps may be safely repeated by a holder on an issued JWP.  The unlinkability of the resulting presented JWP is only provided when supported by the underlying algorithm.<a href="#section-3-6" class="pilcrow">¶</a></p>
-<p id="section-3-7">Algorithm definitions that support JWPs are being done in separate companion specifications - just as the [JSON Web Algorithms] [RFC7518] specification does for JWS and JWE [RFC7516].  The JSON Proof Algorithms specification defines how an initial set of algorithms are used with JWP.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-7">Algorithm definitions that support JWPs are being done in separate companion specifications - just as the [JSON Web Algorithms] [RFC7518] specification does for JWS and JWE [RFC7516].  The <a href="https://www.ietf.org/archive/id/draft-jmiller-jose-json-proof-algorithms-00.html">JSON Proof Algorithms</a> specification defines how an initial set of algorithms are used with JWP.<a href="#section-3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="jwp-forms">
