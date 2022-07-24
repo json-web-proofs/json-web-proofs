@@ -2,15 +2,15 @@
 
 
 
-todo                                                           J. Miller
-                                                           Ping Identity
-                                                                M. Jones
-                                                               Microsoft
-                                                            23 July 2022
+jose                                                           J. Miller
+Internet-Draft                                             Ping Identity
+Intended status: Standards Track                                M. Jones
+Expires: 25 January 2023                                       Microsoft
+                                                            24 July 2022
 
 
                             JSON Proof Token
-                  draft-jmiller-jose-json-proof-token
+               draft-jmiller-jose-json-proof-token-latest
 
 Abstract
 
@@ -22,6 +22,37 @@ Abstract
    00.html) structure, enabling them to be digitally signed and
    selectively disclosed.  JPTs also support reusability and
    unlinkability when using Zero-Knowledge Proofs (ZKPs).
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 25 January 2023.
+
+Copyright Notice
+
+   Copyright (c) 2022 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
 
 Table of Contents
 
@@ -41,8 +72,7 @@ Table of Contents
    8.  Example JPT
    9.  Security Considerations
    10. IANA Considerations
-   11. Normative References
-   12. Informative References
+   11. Informative References
    Appendix A.  Acknowledgements
    Authors' Addresses
 
@@ -243,14 +273,12 @@ Table of Contents
 
    This document has no IANA actions.
 
-11.  Normative References
+11.  Informative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-12.  Informative References
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
