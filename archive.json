@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-07-21T01:11:19.848207+00:00",
+  "timestamp": "2022-07-24T01:19:00.813129+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -4881,7 +4881,7 @@
     {
       "number": 61,
       "id": "PR_kwDOFsQObc47OmXD",
-      "title": "manual 72 for draft",
+      "title": "lots of fixing for draft publishing",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/61",
       "state": "OPEN",
       "author": "quartzjer",
@@ -4890,13 +4890,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-07-11T23:56:47Z",
-      "updatedAt": "2022-07-20T20:49:21Z",
+      "updatedAt": "2022-07-23T22:07:07Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "c7fc769a833065944d89c6c41dc05058a35019b0",
       "headRepository": "json-web-proofs/json-web-proofs",
       "headRefName": "linelen-force",
-      "headRefOid": "51a08ab8870066fdf25a82010f51857512d506d2",
+      "headRefOid": "3fabd45513d92ed2e29fa1a614f87d539b960393",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -4914,6 +4914,19 @@
           "body": "",
           "createdAt": "2022-07-20T20:49:21Z",
           "updatedAt": "2022-07-20T20:49:21Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOFsQObc4-f760",
+          "commit": {
+            "abbreviatedOid": "886b423"
+          },
+          "author": "Sakurann",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-07-23T18:21:39Z",
+          "updatedAt": "2022-07-23T18:21:39Z",
           "comments": []
         }
       ]
