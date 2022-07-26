@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-07-24T01:19:00.813129+00:00",
+  "timestamp": "2022-07-26T01:17:05.426394+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -4808,28 +4808,30 @@
       "id": "PR_kwDOFsQObc45x_BK",
       "title": "update charter-ietf-jose-03",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/60",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "panva",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This update makes it so that the proposed charter does not restrict adopting new algorithms solely for the purpose of JWPs\n",
       "createdAt": "2022-06-16T14:34:35Z",
-      "updatedAt": "2022-07-20T20:54:51Z",
+      "updatedAt": "2022-07-24T16:44:26Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "1603f1fe4d5aad24fe3feb3fc3f2f022a4405fe9",
       "headRepository": "panva/json-web-proofs",
       "headRefName": "charter",
       "headRefOid": "baabb96785f1bb4d1eb08a69d526df2b2a4134fe",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-07-24T16:44:26Z",
+      "mergedAt": "2022-07-24T16:44:26Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "dbd64e6c0e0509abf8da11736f9ffcf65b427e33"
+      },
       "comments": [
         {
           "author": "panva",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "cc @selfissued ",
           "createdAt": "2022-06-16T14:35:30Z",
           "updatedAt": "2022-06-16T14:35:30Z"
@@ -4862,7 +4864,7 @@
             "abbreviatedOid": "baabb96"
           },
           "author": "panva",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2022-07-20T20:54:50Z",
@@ -4875,6 +4877,19 @@
               "updatedAt": "2022-07-20T20:54:51Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOFsQObc4-gVvP",
+          "commit": {
+            "abbreviatedOid": "baabb96"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "We'd discussed this during a Connect call and agreed that there's a need to register new algorithm identifiers for algorithms used with JWS and JWE.  Therefore, it makes sense to broaden the charter language as done in this PR.",
+          "createdAt": "2022-07-24T16:44:09Z",
+          "updatedAt": "2022-07-24T16:44:09Z",
+          "comments": []
         }
       ]
     },
@@ -4883,25 +4898,35 @@
       "id": "PR_kwDOFsQObc47OmXD",
       "title": "lots of fixing for draft publishing",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/61",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2022-07-11T23:56:47Z",
-      "updatedAt": "2022-07-23T22:07:07Z",
+      "updatedAt": "2022-07-25T00:54:50Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "c7fc769a833065944d89c6c41dc05058a35019b0",
       "headRepository": "json-web-proofs/json-web-proofs",
       "headRefName": "linelen-force",
-      "headRefOid": "3fabd45513d92ed2e29fa1a614f87d539b960393",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "44ebcd68ecde40bdc6ddb45bceefeddb2e99daad",
+      "closedAt": "2022-07-25T00:54:50Z",
+      "mergedAt": "2022-07-25T00:54:50Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "17a5108961a087ff7ef6559719adf3583d98571b"
+      },
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "With the docname fix, LGTM",
+          "createdAt": "2022-07-24T05:35:41Z",
+          "updatedAt": "2022-07-24T05:35:41Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOFsQObc4-U4MM",
@@ -4927,6 +4952,32 @@
           "body": "",
           "createdAt": "2022-07-23T18:21:39Z",
           "updatedAt": "2022-07-23T18:21:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOFsQObc4-gEB1",
+          "commit": {
+            "abbreviatedOid": "44ebcd6"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-07-24T05:36:42Z",
+          "updatedAt": "2022-07-24T05:36:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOFsQObc4-gieq",
+          "commit": {
+            "abbreviatedOid": "44ebcd6"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Used to build the released IETF draft-jmiller-jose-*-00 versions.",
+          "createdAt": "2022-07-25T00:54:38Z",
+          "updatedAt": "2022-07-25T00:54:38Z",
           "comments": []
         }
       ]
