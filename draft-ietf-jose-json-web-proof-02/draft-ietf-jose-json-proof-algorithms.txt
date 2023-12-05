@@ -1,0 +1,1216 @@
+
+
+
+
+jose                                                           J. Miller
+Internet-Draft                                             Ping Identity
+Intended status: Standards Track                                M. Jones
+Expires: 24 April 2024                            Self-Issued Consulting
+                                                                D. Waite
+                                                           Ping Identity
+                                                         22 October 2023
+
+
+                         JSON Proof Algorithms
+              draft-ietf-jose-json-proof-algorithms-latest
+
+Abstract
+
+   The JSON Proof Algorithms (JPA) specification registers cryptographic
+   algorithms and identifiers to be used with the JSON Web Proof and
+   JSON Web Key (JWK) specifications.  It defines several IANA
+   registries for these identifiers.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 24 April 2024.
+
+Copyright Notice
+
+   Copyright (c) 2023 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Terminology
+   4.  Background
+   5.  Algorithm Basics
+     5.1.  Issue
+     5.2.  Confirm
+     5.3.  Present
+     5.4.  Verify
+   6.  Algorithm Specifications
+     6.1.  Single Use
+       6.1.1.  JWS Algorithm
+       6.1.2.  Holder Setup
+       6.1.3.  Issuer Setup
+       6.1.4.  Using JWS
+       6.1.5.  Issuer Protected Header
+       6.1.6.  Payloads
+       6.1.7.  Presentation Protected Header
+       6.1.8.  Presentation
+       6.1.9.  Verification
+       6.1.10. JPA Registration
+       6.1.11. Example
+     6.2.  BBS
+       6.2.1.  Algorithms
+       6.2.2.  Key Format
+       6.2.3.  Issuance
+       6.2.4.  Issuance Proof Verification
+       6.2.5.  Presentation
+       6.2.6.  Presentation Verification
+     6.3.  Message Authentication Code
+       6.3.1.  Holder Setup
+       6.3.2.  Issuer Setup
+       6.3.3.  Issuer Protected Header
+       6.3.4.  Payloads
+       6.3.5.  Issuer Proof
+       6.3.6.  Presentation Protected Header
+       6.3.7.  Presentation
+       6.3.8.  Verifier Setup
+       6.3.9.  JPA Registration
+       6.3.10. Example
+   7.  Security Considerations
+   8.  IANA Considerations
+     8.1.  JWP Algorithms Registry
+   9.  Normative References
+   10. Informative References
+   Appendix A.  Acknowledgements
+   Appendix B.  Document History
+   Authors' Addresses
+
+1.  Introduction
+
+   The JSON Web Proof (JWP) [I-D.ietf-jose-json-web-proof] draft
+   establishes a new secure container format that supports selective
+   disclosure and unlinkability using Zero-Knowledge Proofs (ZKPs) or
+   other cryptographic algorithms.
+
+   |  Editor's Note: This draft is still early and incomplete, there
+   |  will be significant changes to the algorithms as currently defined
+   |  here.  Please do not use any of these definitions or examples for
+   |  anything except personal experimentation and learning.
+   |  Contributions and feedback are welcome at https://github.com/json-
+   |  web-proofs/json-web-proofs (https://github.com/json-web-proofs/
+   |  json-web-proofs).
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in BCP
+   14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   The roles of "issuer", "holder", and "verifier" are used as defined
+   by the Verifiable Credentials Data Model v1.1
+   (https://www.w3.org/TR/2021/REC-vc-data-model-20211109/).  The term
+   "presentation" is also used as defined by this source, but the term
+   "credential" is avoided in this specification in order to minimize
+   confusion with other definitions.
+
+3.  Terminology
+
+   The terms "JSON Web Signature (JWS)", "Base64url Encoding", "Header
+   Parameter", "JOSE Header", "JWS Payload", "JWS Signature", and "JWS
+   Protected Header" are defined by [RFC7515].
+
+   The terms "JSON Web Proof (JWP)", "JWP Payload", "JWP Proof", and
+   "JWP Protected Header" are defined by the JWP draft.
+
+   These terms are defined by this specification:
+
+   Stable Key An asymmetric key-pair used by an issuer that is also
+   shared via an out-of-band mechanism to a verifier in order to
+   validate the signature.
+
+   Ephemeral Key An asymmetric key-pair that is generated for one-time
+   use by an issuer and never stored or used again outside of the
+   creation of a single JWP.
+
+   Presentation Key An asymmetric key-pair that is generated by a holder
+   and used to ensure that a presentation is not able to be replayed by
+   any other party.
+
+4.  Background
+
+   JWP defines a container binding together a protected header, one or
+   more payloads, and a cryptographic proof.  It does not define any
+   details about the interactions between an application and the
+   cryptographic libraries that implement proof-supporting algorithms.
+
+   Due to the nature of ZKPs, this specification also documents the
+   subtle but important differences in proof algorithms versus those
+   defined by the JSON Web Algorithms [RFC7518].  These differences help
+   support more advanced capabilities such as blinded signatures and
+   predicate proofs.
+
+5.  Algorithm Basics
+
+   The four principal interactions that every proof algorithm MUST
+   support are [issue](#issue), [confirm](#confirm),
+   [present](#present), and [verify](#verify).
+
+5.1.  Issue
+
+   The JWP is first created as the output of a JPA's issue operation.
+
+   Every algorithm MUST support a JSON issuer protected header along
+   with one or more octet string payloads.  The algorithm MAY support
+   using additional items provided by the holder for issuance such as
+   blinded payloads, keys for replay prevention, etc.
+
+   All algorithms MUST provide integrity protection for the issuer
+   header and all payloads and MUST specify all digest and/or hash2curve
+   methods used.
+
+5.2.  Confirm
+
+   Performed by the holder to validate the issued JWP is correctly
+   formed and protected.
+
+   Each algorithm MAY support using additional input items options such
+   as those sent to the issuer for issuance.  After confirmation, an
+   algorithm MAY return a modified JWP for serialized storage without
+   the local state (such as with blinded payloads now unblinded).
+
+   The algorithm MUST fully verify the issued proof value against the
+   issuer protected header and all payloads.  If given a presented JWP
+   instead of an issued one the confirm process MUST return an error.
+
+5.3.  Present
+
+   Used to apply any selective disclosure choices and perform any
+   unlinkability transformations.
+
+   An algorithm MAY support additional input options from the requesting
+   party such as for predicate proofs and verifiable computation
+   requests.
+
+   Every algorithm MUST support the ability to hide any or all payloads.
+   It MUST always include the issuer protected header unmodified in the
+   presentation.
+
+   The algorithm MUST replace the issued proof value and generate a new
+   presented proof value.  It also MUST include a new presentation
+   protected header that provides replay protection.
+
+5.4.  Verify
+
+   Performed by the verifier to verify the protected headers along with
+   any disclosed payloads and/or assertions about them from the proving
+   party, while also verifying they are the same payloads and ordering
+   as witnessed by the issuer.
+
+   The algorithm MUST verify the integrity of all disclosed payloads and
+   MUST also verify the integrity of both the issuer and presentation
+   protected headers.
+
+   If the presented proof contains any assertions about the hidden
+   payloads, the algorithm MUST also verify all of those assertions.  It
+   MAY support additional options such as those sent to the holder to
+   generate the presentation.
+
+   If given an issued JWP for verification, the algorithm MUST return an
+   error.
+
+6.  Algorithm Specifications
+
+   This section defines how to use specific algorithms for JWPs.
+
+6.1.  Single Use
+
+   |  Editor's Note: This algorithm is going to be renamed and slightly
+   |  refactored; the new name is still TBD.
+
+   The Single Use (SU) algorithm is based on composing multiple
+   traditional JWS values into a single JWP proof value.  It enables a
+   very simple form of selective disclosure without requiring any
+   advanced cryptographic techniques.
+
+   It does not support unlinkability if the same JWP is presented
+   multiple times, therefore when privacy is required the holder will
+   need to interact with the issuer again to receive new single-use JWPs
+   (dynamically or in batches).
+
+6.1.1.  JWS Algorithm
+
+   The Single Use algorithm is based on using multiple JWS values, all
+   of which are generated with the same JSON Web Algorithm (JWA) for
+   signing.  This JWA identifier is included as part of the Single Use
+   identifier for JWP.
+
+   The chosen JWA MUST be an asymmetric signing algorithm so that each
+   signature can be verified without sharing any private values between
+   the parties.  This ensures that the verifier cannot brute force any
+   non-disclosed payloads based only on their disclosed individual
+   signatures.
+
+6.1.2.  Holder Setup
+
+   In order to support the protection of a presentation by a holder to a
+   verifier, the holder MUST use a Presentation Key during the issuance
+   and the presentation of every Single Use JWP.  This Presentation Key
+   MUST be generated and used for only one JWP.
+
+   The issuer MUST verify that the holder has possession of this key.
+   The holder-issuer communication to exchange this information is out
+   of scope of this specification but can be easily accomplished by the
+   holder using this key to generate a JWS that signs a value the issuer
+   can verify as unique.
+
+6.1.3.  Issuer Setup
+
+   To create a Single Use JWP the issuer first generates a unique
+   Ephemeral Key using the selected JWS algorithm.  This key-pair will
+   be used to sign each of the payloads of a single JWP and then
+   discarded.
+
+6.1.4.  Using JWS
+
+   JSON Web Signatures are used to create all of the signature values
+   used by the SU algorithm.  This allows an implementation to use an
+   existing JWS library directly for all necessary cryptographic
+   operations without requiring any additional primitives.
+
+   Each individual JWS uses a fixed protected header containing only the
+   minimum required alg value.  Since this JWS protected header itself
+   is the same for every JWS, it SHOULD be a static value in the form of
+   {"alg":"***"} where *** is the JWA asymmetric signing key algorithm
+   identifier being used.  This value is recreated by a verifier using
+   the correct JWA algorithm value included in the SU algorithm
+   identifier.
+
+   If an implementation uses an alternative JWS protected header than
+   this fixed value, a base64url encoded serialized form of the
+   alternate fixed header MUST be included using the jws_header claim in
+   the issuer protected header.
+
+6.1.5.  Issuer Protected Header
+
+   The JWK of the issuer's Ephemeral Key MUST be included in the issuer
+   protected header with the property name of proof_jwk and contain only
+   the REQUIRED values to represent the public key.
+
+   The holder's Presentation Key JWK MUST be included in issuer
+   protected header using the presentation_jwk claim.
+
+   The final issuer protected header is then used directly as the body
+   of a JWS and signed using the issuer's Stable Key.  The resulting JWS
+   signature value unencoded octet string is the first value in the JWP
+   proof.
+
+   In various examples in this specification the octet string serialized
+   issuer header is referenced as issuer_header.
+
+6.1.6.  Payloads
+
+   Each JWP payload is processed in order and signed as a JWS body using
+   the issuer's Ephemeral Key.  The resulting JWS signature value
+   unencoded octet string is appended to the JWP proof.
+
+   The proof value as an octet string will have a total length that is
+   the sum of the fixed length of the issuer protected header signature
+   plus the fixed length of each of the payload Ephemeral Key
+   signatures.  For example, the signature for the ES256 algorithm is 64
+   octets and for a JWP with five payloads the total proof value length
+   would be 64 * (1 + 5) = 384 octets).
+
+6.1.7.  Presentation Protected Header
+
+   In order to generate a new presentation, the holder first creates a
+   presentation protected header that is specific to the verifier being
+   presented to.  This header MUST contain a claim that both the holder
+   and verifier trust as being unique and non-replayable.
+
+   This specification registers a nonce claim for the presentation
+   protected header that contains a string value either generated by the
+   verifier or derived from values provided by the verifier.  When
+   present, the verifier MUST ensure the nonce value matches during
+   verification.
+
+   The presentation protected header MAY contain other claims that are
+   either provided by the verifier or by the holder.  These presentation
+   claims SHOULD NOT contain values that are common across multiple
+   presentations and SHOULD be unique to a single presentation and
+   verifier.
+
+   In various examples in this specification the octet string serialized
+   presentation header is referenced as presentation_header.
+
+6.1.8.  Presentation
+
+   |  Editor's Note: The current definition here is incomplete, the
+   |  holder's signature needs to also incorporate the presented proof.
+
+   The holder derives a new proof value when presenting it to a
+   verifier.  The presented proof value will always contain the issuer's
+   Stable Key signature for the issuer protected header as the first
+   element.
+
+   The second element of the presented proof value is always the
+   holder's Presentation Key signature of the presentation protected
+   header, constructed identically to the issuer protected header by
+   using the serialized JSON value octet string as the JWS body.
+   Signing only the presentation header with the Presentation Key is
+   sufficient to protect the entire presentation since that key is
+   private to the holder and only the contents of the presentation
+   header are used for replay prevention.
+
+   The two header signatures are then followed by only the issuer's
+   Ephemeral Key signatures for each payload that is disclosed.  The
+   order of the payload signatures is preserved and MUST be in the same
+   order as the included disclosed payloads in the presented JWP.  Non-
+   disclosed payloads will NOT have a signature value included.  For
+   example, if the second and fifth payloads are hidden then the
+   holder's derived proof value would be of the length 64 * (1 + 1 + the
+   1st, 2nd, and 4th payload signatures) = 320 octets.
+
+   Since the individual signatures in the proof value are unique and
+   remain unchanged across multiple presentations, a Single Use JWP
+   SHOULD only be presented a single time to each verifier in order for
+   the holder to remain unlinkable across multiple presentations.
+
+6.1.9.  Verification
+
+   The verifier MUST verify the issuer protected header against the
+   first matching JWS signature part in the proof value using the
+   issuer's Stable Key.  It MUST also verify the presentation protected
+   header against the second JWS signature part in the proof value using
+   the holder's Presentation Key as provided in the presentation_jwk
+   claim in the issuer protected header.
+
+   With the headers verified, the issuer's Ephemeral Key as given in the
+   issuer protected header proof_jwk claim can then be used to verify
+   each of the disclosed payload signatures.
+
+6.1.10.  JPA Registration
+
+   Proposed JWP alg value is of the format "SU-" appended with the
+   relevant JWS alg value for the chosen public and ephemeral key-pair
+   algorithm, for example "SU-ES256".
+
+6.1.11.  Example
+
+   See the example in the appendix of the JSON Web Proof draft.
+
+6.2.  BBS
+
+   The BBS Signature Scheme [I-D.irtf-cfrg-bbs-signatures] is under
+   active development within the CRFG.  Prior to this effort work was
+   done under the DIF Applied Cryptography Working Group
+   (https://identity.foundation/working-groups/crypto.html), an effort
+   to clarify and bring best practices to early prototypes leveraged by
+   multiple early stage decentralized identity projects.
+
+   This algorithm supports both selective disclosure and unlinkability,
+   enabling the holder to generate multiple presentations from one
+   issued JWP without a verifier being able to correlate those
+   presentations together based on the proof.
+
+6.2.1.  Algorithms
+
+   The BBS-DRAFT-3 alg parameter value in the issuance protected header
+   corresponds to a ciphersuite identifier of BBS_BLS12381G1_XMD:SHA-
+   256_SSWU_RO_H2G_HM2S_ from [I-D.irtf-cfrg-bbs-signatures].
+
+   The BBS-PROOF-DRAFT-3 alg parameter value in the presentation
+   protected header corresponds to the same ciphersuite, but used in
+   presentation form.
+
+6.2.2.  Key Format
+
+   The key used for the BBS-DRAFT-3 algorithm is an elliptic curve-based
+   key pair, specifically against the G_2 subgroup of a pairing friendly
+   curve.  Additional details on key generation can be found in
+   [I-D.irtf-cfrg-bbs-signatures]
+
+   The JWK form of this key is an OKP type with a curve of BLs12381G2,
+   with x being the BASE64URL-encoded form of the output of
+   point_to_octets_g2.  The use of this curve is described in
+   [I-D.looker-cose-bls-key-representations].
+
+   {
+     "kty": "OKP",
+     "alg": "BBS-DRAFT-3",
+     "use": "proof",
+     "crv": "BLs12381G2",
+     "x": "jj2L4HoTodTf7AVxBLiPgH_DAd9OPAS7j0QjHkB6RbnmSSu1Q2JXpQXsoKZiG
+          nq9Ehbo0qdSe4eI_mi-YAqqJx2qLdbktEbifHYYnVyZtzJO6QD50tXgdlJ3OBy
+          5G8Kr",
+     "d": "FfmOrsA8plX9e8ALEbeGj4RWl_gwkKZ5y8hX3Bxivbk"
+   }
+
+   Figure: BBS private key in JWK format
+
+   There is no additional prover key necessary for presentation proofs.
+
+6.2.3.  Issuance
+
+   Issuance is performed using the Sign operation from
+   [I-D.irtf-cfrg-bbs-signatures].  This operation utilizes the issuer's
+   BLS12-381 G2 key pair as SK and PK, along with desired protected
+   header and payloads as the octets header and the octets array
+   messages.
+
+   The octets result of this operation forms the issuance proof, to be
+   used along with the protected header and payloads to serialize the
+   JWP.
+
+   As an example, consider following protected header and array of
+   payloads:
+
+   {
+       "alg": "BBS-DRAFT-3",
+       "typ": "JPT",
+       "iss": "https://issuer.example",
+       "claims": [
+           "family_name",
+           "given_name",
+           "email",
+           "age"
+       ]
+   }
+
+   Figure: Example issuer protected header
+
+   [
+       "Doe",
+       "Jay",
+       "jaydoe@example.org",
+       42
+   ]
+
+   Figure: Example issuer payloads (as members of a JSON array)
+
+   These components along with the private issuer key previously given
+   would be representable in the following serializations:
+
+   {
+     "issuer": "eyJhbGciOiJCQlMtRFJBRlQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0
+          dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLC
+          JnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0",
+     "payloads": [
+       "IkRvZSI",
+       "IkpheSI",
+       "ImpheWRvZUBleGFtcGxlLm9yZyI",
+       "NDI"
+     ],
+     "proof": "uTmL_hSLXyM4B9RaI1eW-lRF0nEgk2yV5KIN6JiGQKU5NpbV9Js8qHwFy
+          sua2UfXNcxOUulRPIoBTRysmOlbGqclUEpQLc1AVo8SLwfKhyU"
+   }
+
+   Figure: Issued JWP (JSON serialization)
+
+   eyJhbGciOiJCQlMtRFJBRlQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
+   WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
+   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.uTm
+   L_hSLXyM4B9RaI1eW-lRF0nEgk2yV5KIN6JiGQKU5NpbV9Js8qHwFysua2UfXNcxOUulR
+   PIoBTRysmOlbGqclUEpQLc1AVo8SLwfKhyU
+
+   Figure: Issued JWP (compact serialization)
+
+6.2.4.  Issuance Proof Verification
+
+   Holder verification of the signature on issuance form is performed
+   using the Verify operation from [I-D.irtf-cfrg-bbs-signatures].
+
+   This operation utilizes the issuer's public key as PK, the proof as
+   signature, the protected header octets as header and the array of
+   payload octets as messages.
+
+6.2.5.  Presentation
+
+   Derivation of a presentation is done by the holder using the ProofGen
+   operation from [I-D.irtf-cfrg-bbs-signatures].
+
+   This operation utilizes the issuer's public key as PK, the issuer
+   protected header as header, the issuance proof as signature, the
+   issuance payloads as messages, and the holder's presentation
+   protected header as ph.
+
+   The operation also takes a vector of indexes into messages,
+   describing which payloads the holder wishes to disclose.  All
+   payloads are required for proof generation, but only these indicated
+   payloads will be required to be disclosed for later proof
+   verification.
+
+   The output of this operation is the presentation proof.
+
+   Presentation serialization leverages the two protected headers and
+   presentation proof, along with the disclosed payloads.  Non-disclosed
+   payloads are represented with the absent value of null in JSON
+   serialization and a zero-length string in compact serialization.
+
+   For example, given the following presentation header:
+
+   {
+       "alg": "BBS-PROOF-DRAFT-3",
+       "aud": "https://recipient.example.com",
+       "nonce": "wrmBRkKtXjQ"
+   }
+
+   Figure: Holder Presentation Header
+
+   The prover decides to share all information other than the email
+   address, and generates a proof.  That proof is represented in the
+   following serializations:
+
+   Figure: Presentation JWP (JSON serialization)
+
+   eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtMyIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
+   mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
+   lQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
+   FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
+   vZSI~IkpheSI~~NDI.jswNjFBMybqYyhM5etm4SsnP-K5rUq_K2U7ozEZjLdfvbv8oiCz
+   ZXgOGUVzL_2Hci8aY5gq_U1nAh9RsOJHbMtTlTXCbBZL4GhPMWkyXPCfRZk3gDs9MpuSQ
+   lvUyYDo4Rfmq_5n3Oq4-qMOtEPswK_nixHRUVxaYmJxV9cFqonpmAH39sBa5AS27V-7B4
+   UcO6J_fhGHQnym1Hcsn4QHlGBlDCL-BgqPi3c-fo3ZzedcM0YhBGzkOE0Th59kx7IgmEo
+   7eeBQvkc8kUOlLwW-2uXUpdG68xGioZEwNd30KHfA
+
+   Figure: Presentation JWP (compact serialization)
+
+6.2.6.  Presentation Verification
+
+   Verification of a presentation is done by the verifier using the
+   ProofVerify operation from [I-D.irtf-cfrg-bbs-signatures].
+
+   This operation utilizes the issuer's public key as PK, the issuer
+   protected header as header, the issuance proof as signature, the
+   holder's presentation protected header as ph, and the payloads as
+   disclosed_messages.
+
+   In addition, the disclosed_indexes vector value is calculated from
+   the payloads.  For each absent value in payloads (null in JSON
+   serialization or a zero-length string in compact serialization), the
+   index of that payload is added to this vector.
+
+6.3.  Message Authentication Code
+
+   The Message Authentication Code (MAC) JPA uses a MAC to both generate
+   ephemeral keys and compute authentication codes to protect the issuer
+   header and each payload individually.
+
+   Like the JWS-based JPA, it also does not support unlinkability if the
+   same JWP is presented multiple times and requires an individually
+   issued JWP for each presentation in order to fully protect privacy.
+   When compared to the JWS approach, using a MAC requires less
+   computation but can result in potentially larger presentation proof
+   values.
+
+   The design is intentionally minimal and only involves using a single
+   standardized MAC method instead of a mix of MAC/hash methods or a
+   custom hash-based construct.  It is able to use any published
+   cryptographic MAC method such as HMAC [RFC2104] or KMAC
+   (https://nvlpubs.nist.gov/nistpubs/SpecialPublications/
+   NIST.SP.800-185.pdf).  It uses traditional public-key based
+   signatures to verify the authenticity of the issuer and holder.
+
+6.3.1.  Holder Setup
+
+   Prior to the issuer creating a new JWP it must have presentation
+   binding information provided by the holder.  This enables the holder
+   to perform replay prevention while presenting the JWP.
+
+   The presentation key used by the holder must be transferred to the
+   issuer and verified, likely through a challenge and self-signing
+   mechanism.  If the holder requires unlinkability it must also
+   generate a new key that is verified and bound to each new JWP.
+
+   How these holder presentation keys are transferred and verified is
+   out of scope of this specification, protocols such as OpenID Connect
+   can be used to accomplish this.  What is required by this definition
+   is that the holder's presentation key MUST be included in the
+   issuer's protected header using the pjwk claim with a JWK as the
+   value.
+
+6.3.2.  Issuer Setup
+
+   To use the MAC algorithm the issuer must have a stable public key
+   pair to perform signing.  To start the issuance process, a single
+   32-byte random Shared Secret must first be generated.  This value
+   will be shared privately to the holder as part of the issuer's JWP
+   proof value.
+
+   The Shared Secret is used by both the issuer and holder as the MAC
+   method's key to generate a new set of unique ephemeral keys.  These
+   keys are then used as the input to generate a MAC that protects each
+   payload.
+
+6.3.3.  Issuer Protected Header
+
+   The holder's presentation key JWK MUST be included in the issuer
+   protected header using the pjwk claim.  The issuer MUST validate that
+   the holder has possession of this key through a trusted mechanism
+   such as verifying the signature of a unique nonce value from the
+   holder.
+
+   For consistency, the issuer header is also protected by a MAC by
+   using the fixed value "issuer_header" as the input key.  The issuer
+   header JSON is serialized using UTF-8 and encoded with base64url into
+   an octet array.  The final issuer header MAC is generated from the
+   octet array and the fixed key, and the resulting value becomes the
+   first input into the larger octet array that will be signed by the
+   issuer.
+
+6.3.4.  Payloads
+
+   A unique key is generated for each payload using the MAC with the
+   Shared Secret as the key and the values "payload_X" where "X" is
+   replaced by the zero-based array index of the payload, for example
+   "payload_0", "payload_1", etc.
+
+   Each payload is serialized using UTF-8 and encoded with base64url
+   into an octet array.  The generated key for that payload based on its
+   index is used to generate the MAC for the payload's encoded octet
+   array.  The resulting value is appended to the larger octet array
+   that will be signed by the issuer.
+
+6.3.5.  Issuer Proof
+
+   The issuer proof consists of two items appended together, the
+   issuer's signature of the appended array of MACs, and the Shared
+   Secret used to generate the set of payload keys.
+
+   To generate the signature, the array containing the final MAC of the
+   issuer protected header followed by all of the payload MACs appended
+   in order is used as the input to a new JWS.
+
+   jws_payload = [issuer_header_mac, payload_mac_1, ... payload_mac_n]
+
+   The issuer signs the JWS using its stable public key and a fixed
+   header containing the alg associated with MAC algorithm in use.
+
+   jws_header = '{"alg":"ES256"}'
+
+   The resulting signature is decoded and used as the first item in the
+   issuer proof value.  The octet array of the Shared Secret is
+   appended, resulting in the final issuer proof value.
+
+   issuer_proof = [jws_signature, shared_secret]
+
+6.3.6.  Presentation Protected Header
+
+   See the JWS Presentation Protected Header (#presentation-protected-
+   header) section.
+
+6.3.7.  Presentation
+
+   |  Editor's Note: The current definition here is incomplete, the
+   |  holder's signature needs to also incorporate the presented proof.
+
+   The presentation proof is constructed as a large octet array
+   containing multiple appended items similar to the issuer proof value.
+   The first item is the JWS decoded signature value generated when the
+   holder uses the presentation key to sign the presentation header.
+   The second item is the issuer signature from the issuer's proof
+   value.
+
+   These two signatures are then followed by a MAC value for each
+   payload.  The MAC values used will depend on if that payload has been
+   disclosed or is hidden.  Disclosed payloads will include the MAC key
+   input, and hidden payloads will include only their final MAC value.
+
+   presentation_proof = [presentation_signature, issuer_signature,
+                         disclosed_key_0, hidden_mac_1, hidden_mac_2,
+                         ... disclosed_key_n]
+
+   The size of this value will depend on the underlying cryptographic
+   algorithms.  For example, MAC-H256 uses the ES256 JWS with a decoded
+   signature of 64 octets, and for a JWP with five payloads using HMAC-
+   SHA256 the total presentation proof value length would be 64 + 64 +
+   (5 * 32) = 288 octets.
+
+6.3.8.  Verifier Setup
+
+   In order to verify that the presentation was protected from replay
+   attacks, the verifier must be able to validate the presentation
+   protected header.  This involves the following steps:
+
+   1.  JSON parse the presentation header
+
+   2.  Validate the contained nonce claim
+
+   3.  JSON parse the issuer header
+
+   4.  Validate the contained pjwk claim
+
+   5.  Create a JWS using the correct fixed header with alg value and
+       the presentation header as the body
+
+   6.  Remove the presentation_signature from the beginning of the
+       presentation_proof octet array
+
+   7.  Validate the JWS using the JWK from the pjwk claim and the
+       presentation_signature value
+
+   Next, the verifier must validate all of the disclosed payloads using
+   the following steps:
+
+   1.  JSON parse the issuer header
+
+   2.  Resolve the kid using a trusted mechanism to obtain the correct
+       issuer JWK
+
+   3.  Remove the issuer_signature from the beginning of the remaining
+       presentation_proof octet array (after the presentation_signature
+       was removed)
+
+   4.  Perform the MAC on the presented issuer_header value using the
+       "issuer_header" value as the input key
+
+   5.  Store the resulting value as the first entry in a new jws_payload
+       octet array
+
+   6.  Iterate on each presented payload (disclosed or hidden)
+
+       1.  Extract the next hash value from the remaining
+           presentation_proof octet array
+
+       2.  If the payload was disclosed: perform a MAC using the given
+           hash value as the input key and append the result to the
+           jws_payload octet array
+
+       3.  If the payload was hidden: append the given hash value to the
+           jws_payload octet array
+
+   7.  Create a JWS using a header containing the alg parameter along
+       with the generated jws_payload value as the payload
+
+   8.  Validate the JWS using the resolved issuer JWK and the extracted
+       issuer_signature value
+
+6.3.9.  JPA Registration
+
+   Proposed JWP alg value is of the format "MAC-" appended with a unique
+   identifier for the set of MAC and signing algorithms used.  Below are
+   the initial registrations:
+
+   *  MAC-H256 uses HMAC SHA-256 as the MAC and ECDSA using P-256 and
+      SHA-256 for the signatures
+
+   *  MAC-H384 uses HMAC SHA-384 as the MAC and ECDSA using P-384 and
+      SHA-384 for the signatures
+
+   *  MAC-H512 uses HMAC SHA-512 as the MAC and ECDSA using P-521 and
+      SHA-512 for the signatures
+
+   *  MAC-K25519 uses KMAC SHAKE128 as the MAC and EdDSA using
+      Curve25519 for the signatures
+
+   *  MAC-K448 uses KMAC SHAKE256 as the MAC and EdDSA using Curve448
+      for the signatures
+
+   *  MAC-H256K uses HMAC SHA-256 as the MAC and ECDSA using secp256k1
+      and SHA-256 for the signatures
+
+6.3.10.  Example
+
+   The following example uses the MAC-H256 algorithm.
+
+   This is the Signer's stable private key in the JWK format:
+
+   {
+     "crv": "P-256",
+     "kty": "EC",
+     "x": "ONebN43-G5DOwZX6jCVpEYEe0bYd5WDybXAG0sL3iDA",
+     "y": "b0MHuYfSxu3Pj4DAyDXabAc0mPjpB1worEpr3yyrft4",
+     "d": "jnE0-9YvxQtLJEKcyUHU6HQ3Y9nSDnh0NstYJFn7RuI"
+   }
+
+                        Figure 1: issuer-private-jwk
+
+   This is the Signer's generated Shared Secret:
+
+   [100, 109, 91, 184, 139, 20, 107, 86, 1, 252, 86, 159, 126, 251,
+   228, 4, 35, 177, 75, 96, 11, 205, 144, 189, 42, 95, 135, 170, 107,
+   58, 99, 142]
+
+                        Figure 2: mac-shared-secret
+
+   This is the Holder's presentation private key in the JWK format:
+
+   {
+     "crv": "P-256",
+     "kty": "EC",
+     "x": "oB1TPrE_QJIL61fUOOK5DpKgd8j2zbZJtqpILDTJX6I",
+     "y": "3JqnrkucLobkdRuOqZXOP9MMlbFyenFOLyGlG-FPACM",
+     "d": "AvyDPl1I4xwjrI2iEOi6DxM9ipJe_h_VUN5OvoKvvW8"
+   }
+
+                     Figure 3: holder-presentation-jwk
+
+   The first MAC is generated using the key issuer_header and the
+   base64url-encoded issuer protected header, resulting in this octet
+   array:
+
+   [140, 88, 59, 30, 127, 113, 27, 237, 78, 200, 182, 114, 94, 123,
+   198, 128, 102, 232, 178, 88, 252, 248, 57, 2, 231, 19, 145, 8, 160,
+   197, 66, 166]
+
+                      Figure 4: mac-issuer-header-mac
+
+   The issuer generates an array of derived keys with one for each
+   payload by using the shared secret as the key and the index of the
+   payload as the input:
+
+   [
+    [180, 129, 55, 94, 125, 158, 179, 245, 30, 199, 148, 60, 184, 28,
+    197, 123, 231, 232, 95, 91, 65, 74, 38, 242, 253, 96, 67, 44, 40,
+    220, 250, 4],
+    [143, 172, 182, 156, 184, 138, 228, 172, 215, 26, 175, 137, 137,
+    25, 159, 141, 213, 12, 214, 29, 231, 200, 13, 94, 116, 22, 41, 115,
+    72, 214, 57, 98],
+    [144, 73, 77, 66, 230, 187, 217, 186, 246, 41, 138, 25, 39, 203,
+    101, 76, 156, 161, 244, 130, 203, 166, 184, 154, 7, 4, 218, 84,
+    168, 199, 36, 245],
+    [70, 55, 182, 105, 101, 130, 254, 234, 68, 224, 219, 97, 119, 98,
+    244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49, 246, 109, 155,
+    242, 236, 21, 138]
+   ]
+
+                         Figure 5: mac-issuer-keys
+
+   The first payload is the string "Doe" with the octet sequence of [
+   34, 68, 111, 101, 34 ] and base64url-encoded as IkRvZSI.
+
+   The second payload is the string "Jay" with the octet sequence of [
+   34, 74, 97, 121, 34 ] and base64url-encoded as IkpheSI.
+
+   The third payload is the string "jaydoe@example.org" with the octet
+   sequence of [ 34, 106, 97, 121, 100, 111, 101, 64, 101, 120, 97, 109,
+   112, 108, 101, 46, 111, 114, 103, 34 ] and base64url-encoded as
+   ImpheWRvZUBleGFtcGxlLm9yZyI.
+
+   The fourth payload is the string 42 with the octet sequence of [ 52,
+   50 ] and base64url-encoded as NDI.
+
+   A MAC is generated for each payload using the generated key for its
+   given index, resulting in an array of MACs:
+
+   [
+    [156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28,
+    220, 237, 112, 161, 91, 39, 68, 137, 203, 92, 243, 16, 116, 64,
+    129, 61, 172],
+    [239, 17, 12, 35, 111, 129, 51, 87, 43, 86, 234, 38, 89, 149, 169,
+    157, 33, 104, 81, 246, 190, 154, 74, 195, 194, 158, 50, 208, 203,
+    203, 249, 237],
+    [162, 174, 12, 27, 190, 250, 112, 1, 139, 177, 49, 124, 110, 201,
+    83, 233, 14, 109, 60, 253, 121, 184, 126, 121, 26, 138, 5, 214, 97,
+    96, 216, 80],
+    [61, 109, 78, 172, 255, 189, 67, 83, 247, 65, 234, 128, 30, 47,
+    145, 70, 129, 26, 41, 41, 78, 4, 151, 230, 232, 127, 135, 230, 14,
+    208, 178, 50]
+   ]
+
+                         Figure 6: mac-issuer-macs
+
+   Concatenating the issuer protected header MAC with the array of
+   payload MACs produces a single octet array that is signed using the
+   issuer's stable key, resulting in the following signature:
+
+   [120, 172, 15, 230, 138, 230, 150, 139, 241, 196, 79, 134, 122, 43,
+   149, 11, 253, 104, 58, 199, 49, 87, 32, 64, 237, 50, 86, 155, 153,
+   58, 63, 116, 245, 130, 136, 197, 164, 207, 232, 238, 106, 171, 246,
+   98, 149, 254, 22, 1, 114, 187, 233, 168, 116, 173, 211, 208, 234,
+   245, 76, 238, 143, 157, 83, 202]
+
+                       Figure 7: mac-issuer-signature
+
+   The original shared secret octet string is then concatenated to the
+   end of the issuer signature octet string and the result is base64url-
+   encoded as the issuer's proof value.
+
+   The final issued JWP in JSON serialization is:
+
+   {
+     "payloads": [
+       "IkRvZSI",
+       "IkpheSI",
+       "ImpheWRvZUBleGFtcGxlLm9yZyI",
+       "NDI"
+     ],
+     "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmF
+     taWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUI
+     iwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUp
+     JTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb
+     2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI
+     1NiJ9",
+     "proof": "eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7mqr
+     9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6
+     prOmOO"
+   }
+
+                          Figure 8: mac-issued-jwp
+
+   The same JWP in compact serialization:
+
+   eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUi
+   LCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJj
+   cnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBL
+   Z2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1N
+   bGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.IkRvZSI~IkpheSI
+   ~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJ
+   Wm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn37
+   75AQjsUtgC82QvSpfh6prOmOO
+
+                        Figure 9: mac-issued-compact
+
+   Next, we show the presentation of the JWP with selective disclosure.
+
+   We start with this presentation header using a nonce provided by the
+   Verifier:
+
+   {
+     "nonce": "uTEB371l1pzWJl7afB0wi0HWUNk1Le-bComFLxa8K-s"
+   }
+
+                     Figure 10: mac-presentation-header
+
+   When signed with the holder's presentation key, the resulting
+   signature octets are:
+
+   [126, 134, 175, 2, 165, 12, 103, 11, 116, 72, 94, 228, 240, 142,
+   107, 195, 198, 238, 218, 203, 63, 198, 105, 175, 1, 69, 182, 5, 204,
+   239, 35, 149, 85, 55, 4, 169, 109, 243, 88, 213, 12, 1, 167, 235,
+   222, 17, 232, 118, 110, 111, 47, 165, 102, 142, 0, 1, 226, 117, 143,
+   125, 132, 62, 231, 145]
+
+                Figure 11: mac-presentation-header-signature
+
+   Then by applying selective disclosure of only the given name and age
+   claims (family name and email hidden, payload array indexes 0 and 2),
+   the holder builds a mixed array of either the payload key (if
+   disclosed) or MAC (if hidden):
+
+   [
+    [156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28,
+    220, 237, 112, 161, 91, 39, 68, 137, 203, 92, 243, 16, 116, 64,
+    129, 61, 172],
+    [143, 172, 182, 156, 184, 138, 228, 172, 215, 26, 175, 137, 137,
+    25, 159, 141, 213, 12, 214, 29, 231, 200, 13, 94, 116, 22, 41, 115,
+    72, 214, 57, 98],
+    [162, 174, 12, 27, 190, 250, 112, 1, 139, 177, 49, 124, 110, 201,
+    83, 233, 14, 109, 60, 253, 121, 184, 126, 121, 26, 138, 5, 214, 97,
+    96, 216, 80],
+    [70, 55, 182, 105, 101, 130, 254, 234, 68, 224, 219, 97, 119, 98,
+    244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49, 246, 109, 155,
+    242, 236, 21, 138]
+   ]
+
+                    Figure 12: mac-presentation-keyormac
+
+   The final presented proof value is generated by concatenating first
+   the presentation header signature octet string, followed by the
+   issuer signature octet string, then followed by the mixed array of
+   keys and MACs:
+
+   [126, 134, 175, 2, 165, 12, 103, 11, 116, 72, 94, 228, 240, 142,
+   107, 195, 198, 238, 218, 203, 63, 198, 105, 175, 1, 69, 182, 5, 204,
+   239, 35, 149, 85, 55, 4, 169, 109, 243, 88, 213, 12, 1, 167, 235,
+   222, 17, 232, 118, 110, 111, 47, 165, 102, 142, 0, 1, 226, 117, 143,
+   125, 132, 62, 231, 145, 120, 172, 15, 230, 138, 230, 150, 139, 241,
+   196, 79, 134, 122, 43, 149, 11, 253, 104, 58, 199, 49, 87, 32, 64,
+   237, 50, 86, 155, 153, 58, 63, 116, 245, 130, 136, 197, 164, 207,
+   232, 238, 106, 171, 246, 98, 149, 254, 22, 1, 114, 187, 233, 168,
+   116, 173, 211, 208, 234, 245, 76, 238, 143, 157, 83, 202, 156, 53,
+   90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28, 220, 237,
+   112, 161, 91, 39, 68, 137, 203, 92, 243, 16, 116, 64, 129, 61, 172,
+   143, 172, 182, 156, 184, 138, 228, 172, 215, 26, 175, 137, 137, 25,
+   159, 141, 213, 12, 214, 29, 231, 200, 13, 94, 116, 22, 41, 115, 72,
+   214, 57, 98, 162, 174, 12, 27, 190, 250, 112, 1, 139, 177, 49, 124,
+   110, 201, 83, 233, 14, 109, 60, 253, 121, 184, 126, 121, 26, 138, 5,
+   214, 97, 96, 216, 80, 70, 55, 182, 105, 101, 130, 254, 234, 68, 224,
+   219, 97, 119, 98, 244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49,
+   246, 109, 155, 242, 236, 21, 138]
+
+                     Figure 13: mac-presentation-proof
+
+   The resulting presented JWP in JSON serialization is:
+
+   {
+     "payloads": [
+       null,
+       "IkpheSI",
+       null,
+       "NDI"
+     ],
+     "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmF
+     taWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUI
+     iwicGp3ayI6eyJjcnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUp
+     JTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb
+     2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI
+     1NiJ9",
+     "proof": "foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwB
+     p-veEeh2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVp
+     uZOj909YKIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8I
+     Vxzc7XChWydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQWKXNI1j
+     lioq4MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQh
+     KzeU7uGxZaAx9m2b8uwVig",
+     "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOa
+     zFMZS1iQ29tRkx4YThLLXMifQ"
+   }
+
+                      Figure 14: mac-presentation-jwp
+
+   The same JWP in compact serialization:
+
+   eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUi
+   LCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJj
+   cnYiOiJQLTI1NiIsImt0eSI6IkVDIiwieCI6Im9CMVRQckVfUUpJTDYxZlVPT0s1RHBL
+   Z2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb2JrZFJ1T3FaWE9QOU1N
+   bGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI1NiJ9.eyJub25jZSI6InV
+   URUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ.~IkpheSI
+   ~~NDI.foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwBp-veEe
+   h2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj909Y
+   KIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8IVxzc7XChWy
+   dEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQWKXNI1jlioq4MG776cA
+   GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m
+   2b8uwVig
+
+                    Figure 15: mac-presentation-compact
+
+7.  Security Considerations
+
+   |  Editor's Note: This will follow once the algorithms defined here
+   |  have become more stable.
+
+   *  Data minimization of the proof value
+
+   *  Unlinkability of the protected header contents
+
+8.  IANA Considerations
+
+8.1.  JWP Algorithms Registry
+
+   This section establishes the IANA JWP Algorithms Registry.  It also
+   registers the following algorithms.
+
+   TBD
+
+9.  Normative References
+
+   [I-D.ietf-jose-json-web-proof]
+              Miller, J., Waite, D., and M. B. Jones, "JSON Web Proof",
+              Work in Progress, Internet-Draft, draft-ietf-jose-json-
+              web-proof-01, 10 July 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
+              json-web-proof-01>.
+
+   [I-D.irtf-cfrg-bbs-signatures]
+              Looker, T., Kalos, V., Whitehead, A., and M. Lodder, "The
+              BBS Signature Scheme", Work in Progress, Internet-Draft,
+              draft-irtf-cfrg-bbs-signatures-03, 10 July 2023,
+              <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
+              bbs-signatures-03>.
+
+   [I-D.looker-cose-bls-key-representations]
+              Looker, T. and M. Jones, "Barreto-Lynn-Scott Elliptic
+              Curve Key Representations for JOSE and COSE", Work in
+              Progress, Internet-Draft, draft-looker-cose-bls-key-
+              representations-00, 1 March 2022,
+              <https://datatracker.ietf.org/doc/html/draft-looker-cose-
+              bls-key-representations-00>.
+
+10.  Informative References
+
+   [RFC2104]  Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
+              Hashing for Message Authentication", RFC 2104,
+              DOI 10.17487/RFC2104, February 1997,
+              <https://www.rfc-editor.org/info/rfc2104>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC7515]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web
+              Signature (JWS)", RFC 7515, DOI 10.17487/RFC7515, May
+              2015, <https://www.rfc-editor.org/info/rfc7515>.
+
+   [RFC7518]  Jones, M., "JSON Web Algorithms (JWA)", RFC 7518,
+              DOI 10.17487/RFC7518, May 2015,
+              <https://www.rfc-editor.org/info/rfc7518>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+Appendix A.  Acknowledgements
+
+   We would like to thank Alberto Solavagione for his valuable
+   contributions to this specification.
+
+   The BBS examples were generated using the library at
+   https://github.com/mattrglobal/pairing_crypto
+   (https://github.com/mattrglobal/pairing_crypto) .
+
+Appendix B.  Document History
+
+   [[ To be removed from the final specification ]]
+
+   -02
+
+   *  Add new BBS-DRAFT-3 and BBS-PROOF-DRAFT-3 algorithms based on
+      [I-D.irtf-cfrg-bbs-signatures], Draft 3.
+
+   *  Remove prior BBS-X algorithm based on a particular implementation
+      of earlier drafts.
+
+   -01
+
+   *  Correct cross-references within group
+
+   *  Describe issuer_header and presentation_header
+
+   *  Update BBS references to CFRG drafts
+
+   *  Rework reference to HMAC ( RFC2104 )
+
+   *  Remove ZKSnark placeholder
+
+   -00
+
+   *  Created initial working group draft based on draft-jmiller-jose-
+      json-proof-algorithms-01
+
+Authors' Addresses
+
+   Jeremie Miller
+   Ping Identity
+   Email: jmiller@pingidentity.com
+
+
+   Michael B. Jones
+   Self-Issued Consulting
+   Email: michael_b_jones@hotmail.com
+   URI:   https://self-issued.info/
+
+
+   David Waite
+   Ping Identity
+   Email: dwaite+jwp@pingidentity.com
