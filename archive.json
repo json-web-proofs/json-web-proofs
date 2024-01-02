@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-12-31T00:40:34.232728+00:00",
+  "timestamp": "2024-01-02T00:37:12.387162+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -1503,9 +1503,17 @@
       "labels": [],
       "body": "JPAs should probably be renamed.\r\n\r\n- There's an initialism [clash](https://duckduckgo.com/?q=jpa&kp=1&t=newext&atb=v316-1&ia=web) with Java Persistence API (JPA), making it hard to search for\r\n- Things like the Single Use JPA support multiple crypto \"algorithms\", which rapidly gets confusing: \"which algorithm does this JSON Proof Algorithm use?\"\r\n- Using the JOSE \"alg\" key to point to something other than a cryptographic algorithm seems like a stretch and doesn't follow the principle of least surprise\r\n\r\nI'd suggest \"JSON Proof Method\" or \"JSON Proof Strategy\".",
       "createdAt": "2022-05-31T17:53:46Z",
-      "updatedAt": "2022-05-31T17:53:46Z",
+      "updatedAt": "2024-01-01T02:38:21Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This name is intentionally parallel to JSON Web Algorithms (JWA) [RFC 7518].\r\n\r\nConflicts among short acronyms are inevitable.  I was upset when IBM introduced the IBM PC, because up until that point in computer circles, PC stood for Program Counter.  I got over it. ;-)\r\n\r\nI don't see a compelling case for a name change.",
+          "createdAt": "2024-01-01T02:38:20Z",
+          "updatedAt": "2024-01-01T02:38:20Z"
+        }
+      ]
     },
     {
       "number": 55,
@@ -1519,9 +1527,17 @@
       "labels": [],
       "body": "[Media type(s)](https://datatracker.ietf.org/doc/html/rfc6838) for JWPs will need to be defined and registered.\r\n\r\nFor comparison, JWTs use `application/jwt+json`.\r\n\r\nWe could similarly use `application/jwp+json` and leave it to applications to determine which form is being parsed. We could also consider registering multiple media types, one for each form. I'm not sure what the best practice is in this case.",
       "createdAt": "2022-06-01T18:04:14Z",
-      "updatedAt": "2022-06-01T18:04:14Z",
+      "updatedAt": "2024-01-01T02:39:00Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agreed, this is needed.",
+          "createdAt": "2024-01-01T02:38:59Z",
+          "updatedAt": "2024-01-01T02:38:59Z"
+        }
+      ]
     },
     {
       "number": 56,
@@ -1709,9 +1725,17 @@
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> An example with a mixed algorithm for issue and holder would be nice here,\r\nor a comment about it being forbidden... for example issuer signing with\r\nES256 and holder presenting with EdDSA.",
       "createdAt": "2023-07-13T06:15:20Z",
-      "updatedAt": "2023-07-13T06:15:20Z",
+      "updatedAt": "2024-01-01T02:46:23Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Clearly the issuer and holder algorithms have to be able to be different.  I'll review the specs with this in mind.",
+          "createdAt": "2024-01-01T02:46:22Z",
+          "updatedAt": "2024-01-01T02:46:22Z"
+        }
+      ]
     },
     {
       "number": 83,
@@ -1725,9 +1749,17 @@
       "labels": [],
       "body": "What, if any, should the relationship be between JWP and JWE?\r\n\r\nThis Issue is to track the question that was brought up during IETF 117.",
       "createdAt": "2023-07-25T22:27:38Z",
-      "updatedAt": "2023-07-25T22:27:38Z",
+      "updatedAt": "2024-01-01T02:48:08Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My initial gut reaction to this is that ZKPs are more like signatures than encryption.  I *think* that encryption is out of scope.\r\n\r\nThat said, we may want to describe encrypting a JWP object with JWE.",
+          "createdAt": "2024-01-01T02:48:07Z",
+          "updatedAt": "2024-01-01T02:48:07Z"
+        }
+      ]
     },
     {
       "number": 89,
@@ -1741,9 +1773,17 @@
       "labels": [],
       "body": "There are a few cases where prover (e.g. prover key) is still used in the draft. Proposing these be changed to holder (e.g. holder key).",
       "createdAt": "2023-11-10T15:21:55Z",
-      "updatedAt": "2023-11-10T15:21:55Z",
+      "updatedAt": "2024-01-01T02:49:25Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agreed on replacing prover with holder.",
+          "createdAt": "2024-01-01T02:49:24Z",
+          "updatedAt": "2024-01-01T02:49:24Z"
+        }
+      ]
     },
     {
       "number": 90,
@@ -1773,9 +1813,17 @@
       "labels": [],
       "body": "I would like to contribute to the official JS implementation of your spec, and to make it super easy for anyone to integrate JWP in their apps. I could take care of developing a clean architecture for the lib, implementing the spec, writing tests, publishing the lib, writing examples for different use-cases / platforms (browser, mobile, server). I've been working with VCs/DIDs/DWNs for the past year and have experience in building isomorphic JS libs.\r\nIs this something you have on your roadmap?",
       "createdAt": "2023-12-03T10:46:12Z",
-      "updatedAt": "2023-12-03T11:09:09Z",
+      "updatedAt": "2024-01-01T07:22:36Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm curious - which of the algorithms did you build?  All of Single-Use, BBS, and MAC?",
+          "createdAt": "2024-01-01T07:22:34Z",
+          "updatedAt": "2024-01-01T07:22:34Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -6363,6 +6411,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 92,
+      "id": "PR_kwDOFsQObc5jBM11",
+      "title": "Mike's New Years Eve 2023 Proofread",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/92",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Apply improvements identified during a full proofread.\r\n\r\nFixes #89 ",
+      "createdAt": "2024-01-01T20:42:21Z",
+      "updatedAt": "2024-01-01T20:46:27Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "da9c0412b7b386fad173b4c9be41e2302c8f4985",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-2023-proofread",
+      "headRefOid": "3745e16303ba260a85a208f1104521e09f242eba",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
