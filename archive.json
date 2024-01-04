@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-02T00:37:12.387162+00:00",
+  "timestamp": "2024-01-04T00:38:08.973844+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -6424,7 +6424,7 @@
       "labels": [],
       "body": "Apply improvements identified during a full proofread.\r\n\r\nFixes #89 ",
       "createdAt": "2024-01-01T20:42:21Z",
-      "updatedAt": "2024-01-01T20:46:27Z",
+      "updatedAt": "2024-01-02T20:53:39Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "da9c0412b7b386fad173b4c9be41e2302c8f4985",
@@ -6436,7 +6436,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5rWW0r",
+          "commit": {
+            "abbreviatedOid": "3745e16"
+          },
+          "author": "quartzjer",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-01-02T20:53:39Z",
+          "updatedAt": "2024-01-02T20:53:39Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
