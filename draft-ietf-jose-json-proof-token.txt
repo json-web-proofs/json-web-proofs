@@ -5,10 +5,10 @@
 jose                                                           J. Miller
 Internet-Draft                                             Ping Identity
 Intended status: Standards Track                                M. Jones
-Expires: 24 April 2024                            Self-Issued Consulting
+Expires: 8 July 2024                              Self-Issued Consulting
                                                                 D. Waite
                                                            Ping Identity
-                                                         22 October 2023
+                                                          5 January 2024
 
 
                             JSON Proof Token
@@ -39,11 +39,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2024.
+   This Internet-Draft will expire on 8 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -73,8 +73,9 @@ Table of Contents
    8.  Example JPT
    9.  Security Considerations
    10. IANA Considerations
-   11. Normative References
-   12. Informative References
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Appendix A.  Acknowledgements
    Appendix B.  Document History
    Authors' Addresses
@@ -91,13 +92,13 @@ Table of Contents
    separate structure that can be externalized and shared across
    multiple JPTs.
 
-   |  Editor's Note: This draft is still early and incomplete, there
+   |  Editor's Note: This draft is still early and incomplete.  There
    |  will be significant changes to the algorithms as currently defined
    |  here.  Please do not use any of these definitions or examples for
    |  anything except personal experimentation and learning.
-   |  Contributions and feedback are welcome at https://github.com/json-
-   |  web-proofs/json-web-proofs (https://github.com/json-web-proofs/
-   |  json-web-proofs).
+   |  Contributions and feedback are welcomed at https://github.com/
+   |  json-web-proofs/json-web-proofs (https://github.com/json-web-
+   |  proofs/json-web-proofs).
 
 2.  Conventions and Definitions
 
@@ -119,7 +120,7 @@ Table of Contents
 
    The rationale behind the design for JSON Proof Tokens is important
    when considering how it is structured.  These sections detail the
-   underlying reasoning for the approach defined by JPTs.
+   underlying reasoning informing the JPT design.
 
 4.1.  Unlinkability
 
@@ -155,7 +156,7 @@ Table of Contents
 
    JPTs are intended to be as close to a JWT as possible in order to
    provide the simplest transition for any JWT-based system to add
-   support for a JPT.
+   support for JPTs.
 
    Although there are some stark differences in the lifecycle of a JPT,
    from the application's perspective, the interface to a JPT can be
@@ -170,7 +171,7 @@ Table of Contents
 
 4.4.  Proofs
 
-   In order to generate a variety of efficient ZKPs of knowledge, range,
+   To generate a variety of efficient ZKPs of knowledge, range,
    membership, or other predicates, it is essential that each individual
    payload is only a single claim value.  This greatly simplifies the
    task of linking a derived proof of a given claim to the specific
@@ -200,12 +201,12 @@ Table of Contents
    individual JPT and either referenced or known by the application
    context.
 
-   In order to facilitate this external definition of the claim names,
-   an additional cid key is defined with a required digest value
-   calculated as defined here.  This cid can be used similar to a kid in
-   order to ensure that is it possible to externally resolve and then
-   verify that the correct list of claim names is being used when
-   processing the payloads containing the claim values.
+   To facilitate this external definition of the claim names, an
+   additional cid key is defined with a required digest value calculated
+   as defined here.  This cid can be used similar to a kid in order to
+   ensure that is it possible to externally resolve and then verify that
+   the correct list of claim names is being used when processing the
+   payloads containing the claim values.
 
    If there is an associated JWK containing the signing key information,
    the claims key is also registered there as a convenient location for
@@ -239,8 +240,8 @@ Table of Contents
 
 7.  Payloads
 
-   |  Editor's Note: This section is significantly incomplete, use it
-   |  only as an indicator of the intended direction.
+   |  Editor's Note: This section is incomplete.  Use it only as an
+   |  indicator of the intended direction.
 
    Application resolves each claim as required when processing the JPT.
    Resolution can result in one of three things: 1.  A disclosed JSON
@@ -253,28 +254,20 @@ Table of Contents
 7.2.  Proof Methods
 
    *  proof methods can be returned instead of a disclosed payload
-
    *  these are generated by the algorithm from information in the JWP's
       proof value
-
    *  a proof method may be custom based on the capabilities of the
       algorithm
-
    *  define common proof method types available?
-
       -  range
-
       -  membership
-
       -  time
-
       -  knowledge
-
       -  linking
 
 8.  Example JPT
 
-   See the JSON Web Proof draft appendix.
+   See the [I-D.ietf-jose-json-web-proof] appendix.
 
 9.  Security Considerations
 
@@ -284,16 +277,18 @@ Table of Contents
 
    This document has no IANA actions.
 
-11.  Normative References
+11.  References
+
+11.1.  Normative References
 
    [I-D.ietf-jose-json-web-proof]
               Miller, J., Waite, D., and M. B. Jones, "JSON Web Proof",
               Work in Progress, Internet-Draft, draft-ietf-jose-json-
-              web-proof-01, 10 July 2023,
+              web-proof-02, 21 October 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              json-web-proof-01>.
+              json-web-proof-02>.
 
-12.  Informative References
+11.2.  Informative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -306,12 +301,19 @@ Table of Contents
 
 Appendix A.  Acknowledgements
 
+   This work was incubated in the DIF Applied Cryptography Working Group
+   (https://identity.foundation/working-groups/crypto.html).
+
    We would like to thank Brent Zundel for his valuable contributions to
    this specification.
 
 Appendix B.  Document History
 
    [[ To be removed from the final specification ]]
+
+   -03
+
+   *  Improvements resulting from a full proofreading.
 
    -02
 

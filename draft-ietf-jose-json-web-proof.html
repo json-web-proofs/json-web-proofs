@@ -9,30 +9,30 @@
 <meta content="David Waite" name="author">
 <meta content="Michael B. Jones" name="author">
 <meta content="
-       The JOSE set of standards established JSON-based container formats for  Keys ,  Signatures , and  Encryption .  They also established  IANA registries  to enable the algorithms and representations used for them to be extended.  Since those were created, newer cryptographic algorithms that support selective disclosure and unlinkability have matured and started seeing early market adoption. 
+       The JOSE set of standards established JSON-based container formats for Keys, Signatures, and Encryption.  They also established IANA registries to enable the algorithms and representations used for them to be extended.  Since those were created, newer cryptographic algorithms that support selective disclosure and unlinkability have matured and started seeing early market adoption. 
        This document defines a new container format similar in purpose and design to JSON Web Signature (JWS) called a  JSON Web Proof (JWP) .  Unlike JWS, which integrity-protects only a single payload, JWP can integrity-protect multiple payloads in one message.  It also specifies a new presentation form that supports selective disclosure of individual payloads, enables additional proof computation, and adds a protected header to prevent replay and support binding mechanisms. 
     " name="description">
-<meta content="xml2rfc 3.18.2" name="generator">
+<meta content="xml2rfc 3.19.0" name="generator">
 <meta content="jose" name="keyword">
 <meta content="zkp" name="keyword">
 <meta content="jwp" name="keyword">
 <meta content="jws" name="keyword">
 <meta content="draft-ietf-jose-json-web-proof-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.2
+  xml2rfc 3.19.0
     Python 3.11.6
-    ConfigArgParse 1.5.3
+    ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.11.0
+    platformdirs 4.1.0
     pycountry 22.3.5
-    PyYAML 6.0
+    PyYAML 6.0.1
     requests 2.31.0
-    setuptools 67.7.2
+    setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.8
+    wcwidth 0.2.12
 -->
 <link href="draft-ietf-jose-json-web-proof.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1031,11 +1031,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">json-web-proof</td>
-<td class="right">October 2023</td>
+<td class="right">January 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Miller, et al.</td>
-<td class="center">Expires 24 April 2024</td>
+<td class="center">Expires 8 July 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1048,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-jose-json-web-proof-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-10-22" class="published">22 October 2023</time>
+<time datetime="2024-01-05" class="published">5 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-04-24">24 April 2024</time></dd>
+<dd class="expires"><time datetime="2024-07-08">8 July 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1074,7 +1074,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">JSON Web Proof</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The JOSE set of standards established JSON-based container formats for <a href="https://datatracker.ietf.org/doc/rfc7517/">Keys</a>, <a href="https://datatracker.ietf.org/doc/rfc7515/">Signatures</a>, and <a href="https://datatracker.ietf.org/doc/rfc7516/">Encryption</a>.  They also established <a href="https://www.iana.org/assignments/jose/jose.xhtml">IANA registries</a> to enable the algorithms and representations used for them to be extended.  Since those were created, newer cryptographic algorithms that support selective disclosure and unlinkability have matured and started seeing early market adoption.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The JOSE set of standards established JSON-based container formats for Keys, Signatures, and Encryption.  They also established IANA registries to enable the algorithms and representations used for them to be extended.  Since those were created, newer cryptographic algorithms that support selective disclosure and unlinkability have matured and started seeing early market adoption.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This document defines a new container format similar in purpose and design to JSON Web Signature (JWS) called a <em>JSON Web Proof (JWP)</em>.  Unlike JWS, which integrity-protects only a single payload, JWP can integrity-protect multiple payloads in one message.  It also specifies a new presentation form that supports selective disclosure of individual payloads, enables additional proof computation, and adds a protected header to prevent replay and support binding mechanisms.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
@@ -1096,7 +1096,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1105,7 +1105,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2023 IETF Trust and the persons identified as the
+            Copyright (c) 2024 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1190,33 +1190,38 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-jwps" class="internal xref">Example JWPs</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-example-single-use-jwp" class="internal xref">Example Single-Use JWP</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-example-multi-use-jwp" class="internal xref">Example Multi-Use JWP</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-jwps" class="internal xref">Example JWPs</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-example-single-use-jwp" class="internal xref">Example Single-Use JWP</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-example-multi-use-jwp" class="internal xref">Example Multi-Use JWP</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-registries" class="internal xref">Registries</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-registries" class="internal xref">Registries</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1227,31 +1232,31 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The JOSE specifications are very widely deployed and well supported, enabling use of cryptographic primitives with a JSON representation.  JWTs <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> are one of the most common representations for identity and access claims.  For instance, they are used by the OpenID Connect and Secure Telephony Identity Revisited (STIR) standards.  Also, JWTs are used by W3C's Verifiable Credentials and are used in many Decentralized Identity systems.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">The JOSE specifications are very widely deployed and well supported, enabling use of cryptographic primitives with a JSON representation.  JWTs <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> are one of the most common representations for identity and access claims.  For instance, they are used by the OpenID Connect and Secure Telephony Identity Revisited (STIR) standards.  Also, JWTs are used by W3C's Verifiable Credentials and are used in many decentralized identity systems.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">With these new use cases, there is an increased focus on adopting privacy-protecting cryptographic primitives.  While such primitives are still an active area of academic and applied research, the leading candidates introduce new patterns that are not currently supported by JOSE.  These new patterns are largely focused on two areas: supporting selective disclosure when presenting information and minimizing correlation through the use of Zero-Knowledge Proofs (ZKPs) in addition to traditional signatures.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">There are a growing number of these cryptographic primitives that support selective disclosure while protecting privacy across multiple presentations.  Examples used in the context of Verifiable Credentials are:<a href="#section-1-3" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-1-4.1">
+<ul class="compact">
+<li class="compact" id="section-1-4.1">
           <a href="https://eprint.iacr.org/2012/562.pdf">CL Signatures</a><a href="#section-1-4.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-4.2">
+        <li class="compact" id="section-1-4.2">
           <a href="http://www.zurich.ibm.com/idemix">IDEMIX</a><a href="#section-1-4.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-4.3">BBS signatures, described in <span>[<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span><a href="#section-1-4.3" class="pilcrow">¶</a>
+        <li class="compact" id="section-1-4.3">BBS signatures, described in <span>[<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span><a href="#section-1-4.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-4.4">
+        <li class="compact" id="section-1-4.4">
           <a href="https://github.com/transmute-industries/merkle-disclosure-proof-2021">MerkleDisclosureProof2021</a><a href="#section-1-4.4" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-4.5">
+        <li class="compact" id="section-1-4.5">
           <a href="https://eprint.iacr.org/2020/979">Mercurial Signatures</a><a href="#section-1-4.5" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-4.6">
+        <li class="compact" id="section-1-4.6">
           <a href="https://eprint.iacr.org/2015/525.pdf">PS Signatures</a><a href="#section-1-4.6" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-4.7">
+        <li class="compact" id="section-1-4.7">
           <a href="https://www.microsoft.com/en-us/research/project/u-prove/">U-Prove</a><a href="#section-1-4.7" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-4.8">
+        <li class="compact" id="section-1-4.8">
           <a href="https://github.com/microsoft/Spartan">Spartan</a><a href="#section-1-4.8" class="pilcrow">¶</a>
 </li>
       </ul>
@@ -1265,20 +1270,20 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-2-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">The roles of "issuer", "holder", and "verifier" are used as defined by the <a href="https://www.w3.org/TR/2021/REC-vc-data-model-20211109/">Verifiable Credentials Data Model v1.1</a>.  The term "presentation" is also used as defined by this source, but the term "credential" is avoided in this specification in order to minimize confusion with other definitions.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-2">The roles of "issuer", "holder", and "verifier" are used as defined by the VC Data Model <span>[<a href="#VC-DATA-MODEL-2.0" class="cite xref">VC-DATA-MODEL-2.0</a>]</span>.  The term "presentation" is also used as defined by this source, but the term "credential" is avoided in this specification to minimize confusion with other definitions.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <div id="abbreviations">
 <section id="section-2.1">
         <h3 id="name-abbreviations">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-abbreviations" class="section-name selfRef">Abbreviations</a>
         </h3>
-<ul class="normal">
-<li class="normal" id="section-2.1-1.1">ZKP: Zero-Knowledge Proof<a href="#section-2.1-1.1" class="pilcrow">¶</a>
+<ul class="compact">
+<li class="compact" id="section-2.1-1.1">ZKP: Zero-Knowledge Proof<a href="#section-2.1-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-2.1-1.2">JWP: JSON Web Proof (this specification)<a href="#section-2.1-1.2" class="pilcrow">¶</a>
+          <li class="compact" id="section-2.1-1.2">JWP: JSON Web Proof (this specification)<a href="#section-2.1-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-2.1-1.3">JPA: JSON Proof Algorithms <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span><a href="#section-2.1-1.3" class="pilcrow">¶</a>
+          <li class="compact" id="section-2.1-1.3">JPA: JSON Proof Algorithms <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span><a href="#section-2.1-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-2.1-1.4">JPT: JSON Proof Token <span>[<a href="#I-D.ietf-jose-json-proof-token" class="cite xref">I-D.ietf-jose-json-proof-token</a>]</span><a href="#section-2.1-1.4" class="pilcrow">¶</a>
+          <li class="compact" id="section-2.1-1.4">JPT: JSON Proof Token <span>[<a href="#I-D.ietf-jose-json-proof-token" class="cite xref">I-D.ietf-jose-json-proof-token</a>]</span><a href="#section-2.1-1.4" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -1290,13 +1295,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-background">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-background" class="section-name selfRef">Background</a>
       </h2>
-<p id="section-3-1">A <em>JSON Web Proof (JWP)</em> is very similar to a JWS <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, with the addition that it can contain multiple individual secured payloads instead of a singular one.  JWP-supporting algorithms are then able to separate and act on the individual payloads contained within.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">A <em>JSON Web Proof (JWP)</em> is very similar to a JWS <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, with the addition that it can contain multiple individual secured payloads instead of a single one.  JWP-supporting algorithms are then able to separate and act on the individual payloads contained within.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The intent of JSON Web Proofs is to establish a common container format for multiple payloads that can be integrity-verified against a cryptographic proof value also in the container.  It does not create or specify any cryptographic protocols, multi-party protocols, or detail any algorithm-specific capabilities.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">In order to fully support the newer privacy primitives, JWP introduces the three roles of issuer, holder, and verifier as defined by the VC Data Model.  There are also two forms of a JWP: the issued form created by an issuer for a holder, and the presented form created by a holder for a verifier.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">A JWP is initially created by the issuer using the <code>issue</code> interaction with an implementation.  A successful result is an issued JWP that has a single issuer-protected header, one or more payloads, and an initial proof value that contains the issuing algorithm output.  The holder, upon receiving an issued JWP, then uses <code>confirm</code> to check the integrity protection of the header and all payloads using the given proof value.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">After validation, the holder uses <code>present</code> to apply any selective disclosure choices, perform privacy-preserving transformations for unlinkability, and add a presentation-protected header that ensures the resulting presented JWP cannot be replayed.  The verifier then uses <code>verify</code> to ensure the integrity protection of the protected headers and any disclosed payloads, along with verifying any additional ZKPs covering non-disclosed payloads.<a href="#section-3-5" class="pilcrow">¶</a></p>
-<p id="section-3-6">While <code>issue</code> and <code>confirm</code> only occur when a JWP is initially created by the issuer, the <code>present</code> and <code>verify</code> steps may be safely repeated by a holder on an issued JWP.  The unlinkability of the resulting presented JWP is only provided when supported by the underlying algorithm.<a href="#section-3-6" class="pilcrow">¶</a></p>
-<p id="section-3-7">Algorithm definitions that support JWPs are being done in separate companion specifications - just as the JSON Web Algorithms <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span> specification does for JWS and JWE <span>[<a href="#RFC7516" class="cite xref">RFC7516</a>]</span>.  The JSON Proof Algorithms (JPA) <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span> specification defines how an initial set of algorithms are used with JWP.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-3">To fully support the newer privacy primitives, JWP utilizes the three roles of issuer, holder, and verifier, as defined by the VC Data Model <span>[<a href="#VC-DATA-MODEL-2.0" class="cite xref">VC-DATA-MODEL-2.0</a>]</span>.  There are also two forms of a JWP: the issued form created by an issuer for a holder, and the presented form created by a holder for a verifier.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">The four principal interactions used by JWP are <code>issue</code>, <code>confirm</code>, <code>present</code>, and <code>verify</code>.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">A JWP is initially created by the issuer using the <code>issue</code> interaction.  A successful result is an issued JWP that has a single issuer-protected header, one or more payloads, and an initial proof value that contains the issuing algorithm output.  The holder, upon receiving an issued JWP, then uses the <code>confirm</code> interaction to check the integrity protection of the header and all payloads using the proof value.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6">After validation, the holder uses the <code>present</code> interaction to apply any selective disclosure choices, perform privacy-preserving transformations for unlinkability, and add a presentation-protected header that ensures the resulting presented JWP cannot be replayed.  The verifier then uses the <code>verify</code> interaction to ensure the integrity protection of the protected headers and any disclosed payloads, along with verifying any additional ZKPs covering non-disclosed payloads.<a href="#section-3-6" class="pilcrow">¶</a></p>
+<p id="section-3-7">While <code>issue</code> and <code>confirm</code> only occur when a JWP is initially created by the issuer, the <code>present</code> and <code>verify</code> steps may be safely repeated by a holder on an issued JWP.  He resulting presented JWP is only unlinkable when supported by the underlying algorithm.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-8">Algorithm definitions that support JWPs are in separate companion specifications - just as the JSON Web Algorithms <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span> specification does for JWS and JWE <span>[<a href="#RFC7516" class="cite xref">RFC7516</a>]</span>.  The JSON Proof Algorithms (JPA) <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span> specification defines how an initial set of algorithms are used with JWP.<a href="#section-3-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="jwp-forms">
@@ -1304,7 +1310,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-jwp-forms">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-jwp-forms" class="section-name selfRef">JWP Forms</a>
       </h2>
-<p id="section-4-1">A JWP is always in one of two forms: the issued form or the presented form.  The significant difference between the two forms is the number of protected headers.  An issued JWP has only one issuer protected header, while a presented JWP will have both the issuer protected header and an additional presentation protected header.  Each protected header is a JSON object that is serialized as a UTF-8 encoded octet string.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">A JWP is always in one of two forms: the issued form or the presented form.  A structural difference between the two forms is the number of protected headers.  An issued JWP has only one issuer protected header, while a presented JWP will have both the issuer protected header and an additional presentation protected header.  Each protected header is a JSON object that is serialized as a UTF-8 encoded octet string.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">All JWP forms have one or more payloads; each payload is an octet string.  The payloads are arranged in an array for which the ordering is preserved in all serializations.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">The JWP proof value is a single octet string that is only generated from and processed by the underlying JPA.  Internally, the proof value may contain one or more cryptographic statements that are used to check the integrity protection of the header(s) and all payloads.  Each of these statements may be a ZKP or a traditional cryptographic signature.  The algorithm is responsible for how these statements are serialized into a single proof value.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <div id="issued-form">
@@ -1313,19 +1319,20 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-issued-form" class="section-name selfRef">Issued Form</a>
         </h3>
 <p id="section-4.1-1">When a JWP is first created, it is always in the issued form.  It will contain the issuer protected header along with all of the payloads.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">The issued form can only be confirmed by a holder as being correctly formed and protected, it is NOT to be verified directly or presented as-is to a verifier.  The holder SHOULD treat an issued JWP as private and use appropriately protected storage.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">The issued form can only be confirmed by a holder as being correctly formed and protected. It is NOT to be verified directly or presented as-is to a verifier.  The holder SHOULD treat an issued JWP as private and use appropriately protected storage.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <div id="issuer-protected-header">
 <section id="section-4.1.1">
           <h4 id="name-issuer-protected-header">
 <a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-issuer-protected-header" class="section-name selfRef">Issuer Protected Header</a>
           </h4>
 <p id="section-4.1.1-1">The issuer protected header applies to all of the payloads equally.  It is recommended that any payload-specific information not be included in this header and instead be handled outside of the cryptographic envelope.  This is to minimize any correlatable signals in the metadata, to reduce a verifier's ability to group different presentations based on small header variations from the same issuer.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">Every issuer protected header MUST have, at minimum, an <code>alg</code> value that identifies a valid JPA.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">Every issuer protected header MUST have an <code>alg</code> value that identifies a valid JSON Proof Algorithm (JPA).<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-3">For example:<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.1.1-4">
 <pre>{
     "alg":"BBS-DRAFT-3"
 }
+
 </pre><a href="#section-4.1.1-4" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1357,7 +1364,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </h3>
 <p id="section-4.2-1">When an issued JWP is presented, it undergoes a transformation that adds a presentation protected header. It may also have one or more payloads hidden, disclosing only a subset of the original issued payloads.  The proof value will always be updated to add integrity protection of the presentation header along with the necessary cryptographic statements to verify the presented JWP.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">When supported by the underling JPA, a single issued JWP can be used to safely generate multiple presented JWPs without becoming correlatable.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">A JWP may also be single use, where an issued JWP can only be used once to generate a presented form, any additional presentations would be inherently correlatable.  These are still useful for applications needing only selective disclosure or where new unique issued JWPs can be retrieved easily.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">A JWP may also be single use, where an issued JWP can only be used once to generate a presented form. In this case, any additional presentations would be inherently correlatable.  These are still useful for applications needing only selective disclosure or where new unique issued JWPs can be retrieved easily.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <div id="presentation-protected-header">
 <section id="section-4.2.1">
           <h4 id="name-presentation-protected-head">
@@ -1383,9 +1390,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <h4 id="name-presentation-proof">
 <a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-presentation-proof" class="section-name selfRef">Presentation Proof</a>
           </h4>
-<p id="section-4.2.3-1">The proof value of a presented JWP will always be different than the issued proof.  At a minimum it MUST be updated to include protection of the added presentation header.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.3-1">The proof value of a presented JWP will always be different than the issued proof.  At a minimum, it MUST be updated to include protection of the added presentation header.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.3-2">Algorithms SHOULD generate an un-correlatable presentation proof in order to support multiple presentations from a single issued JWP.<a href="#section-4.2.3-2" class="pilcrow">¶</a></p>
-<p id="section-4.2.3-3">Any payload specific proofs are included in the single proof value for the presented JWP, the JPA is responsible for internally encoding multiple proof values into one and cryptographically binding them to a specific payload from the issuer.<a href="#section-4.2.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.3-3">Any payload specific proofs are included in the single proof value for the presented JWP. The JPA is responsible for internally encoding multiple proof values into one and cryptographically binding them to a specific payload from the issuer.<a href="#section-4.2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1414,7 +1421,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-json-serialization" class="section-name selfRef">JSON Serialization</a>
         </h3>
 <p id="section-5.2-1">Non-disclosed payloads in the JSON serialization are represented with a <code>null</code> value in the <code>payloads</code> array.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">Example flattened JSON serialization showing the presentation form with both the issuer and presentation headers along with the first and third payloads hidden.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">This example flattened JSON serialization shows the presentation form with both the issuer and presentation headers, and with the first and third payloads hidden.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <span id="name-jwp-final-presentation"></span><figure id="figure-1">
           <div class="lang-json sourcecode" id="section-5.2-3.1">
 <pre>{
@@ -1442,6 +1449,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
   "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOaz
   FMZS1iQ29tRkx4YThLLXMifQ"
 }
+
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
@@ -1457,14 +1465,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-6-1">Notes to be expanded:<a href="#section-6-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-6-2.1">Requirements for supporting algorithms, see JPA<a href="#section-6-2.1" class="pilcrow">¶</a>
+<ul class="compact">
+<li class="compact" id="section-6-2.1">Requirements for supporting algorithms, see JPA<a href="#section-6-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-6-2.2">Application interface for verification<a href="#section-6-2.2" class="pilcrow">¶</a>
+        <li class="compact" id="section-6-2.2">Application interface for verification<a href="#section-6-2.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-6-2.3">Data minimization of the protected header<a href="#section-6-2.3" class="pilcrow">¶</a>
+        <li class="compact" id="section-6-2.3">Data minimization of the protected header<a href="#section-6-2.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-6-2.4">In order to prevent accidentally introducing linkability, when an issuer uses the same key with the same grouping of payload types, they SHOULD also use the same issuer protected header.  Each of these headers SHOULD have the same base64url-serialized value to avoid any non-deterministic JSON serialization.<a href="#section-6-2.4" class="pilcrow">¶</a>
+        <li class="compact" id="section-6-2.4">To prevent accidentally introducing linkability, when an issuer uses the same key with the same grouping of payload types, they SHOULD also use the same issuer protected header.  Each of these headers SHOULD have the same base64url-serialized value to avoid any non-deterministic JSON serialization.<a href="#section-6-2.4" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1478,54 +1486,63 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </section>
 </div>
 <section id="section-8">
-      <h2 id="name-normative-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      <h2 id="name-references">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<section id="section-8.1">
+        <h3 id="name-normative-references">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
 <dl class="references">
 <dt id="I-D.ietf-jose-json-proof-algorithms">[I-D.ietf-jose-json-proof-algorithms]</dt>
-      <dd>
-<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-algorithms-01</span>, <time datetime="2023-07-10" class="refDate">10 July 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-01">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-01</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-algorithms-02</span>, <time datetime="2023-10-21" class="refDate">21 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-02">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-jose-json-proof-token">[I-D.ietf-jose-json-proof-token]</dt>
-    <dd>
-<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Token"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-token-01</span>, <time datetime="2023-07-10" class="refDate">10 July 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-01">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-01</a>&gt;</span>. </dd>
+      <dd>
+<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Token"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-token-02</span>, <time datetime="2023-10-21" class="refDate">21 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-02">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
-<section id="section-9">
-      <h2 id="name-informative-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-      </h2>
+<section id="section-8.2">
+        <h3 id="name-informative-references">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
 <dl class="references">
 <dt id="I-D.irtf-cfrg-bbs-signatures">[I-D.irtf-cfrg-bbs-signatures]</dt>
-      <dd>
-<span class="refAuthor">Looker, T.</span>, <span class="refAuthor">Kalos, V.</span>, <span class="refAuthor">Whitehead, A.</span>, and <span class="refAuthor">M. Lodder</span>, <span class="refTitle">"The BBS Signature Scheme"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bbs-signatures-03</span>, <time datetime="2023-07-10" class="refDate">10 July 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-03">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-03</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Looker, T.</span>, <span class="refAuthor">Kalos, V.</span>, <span class="refAuthor">Whitehead, A.</span>, and <span class="refAuthor">M. Lodder</span>, <span class="refTitle">"The BBS Signature Scheme"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bbs-signatures-05</span>, <time datetime="2023-12-21" class="refDate">21 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7515">[RFC7515]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Signature (JWS)"</span>, <span class="seriesInfo">RFC 7515</span>, <span class="seriesInfo">DOI 10.17487/RFC7515</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7515">https://www.rfc-editor.org/info/rfc7515</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7516">[RFC7516]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Jones, M.</span> and <span class="refAuthor">J. Hildebrand</span>, <span class="refTitle">"JSON Web Encryption (JWE)"</span>, <span class="seriesInfo">RFC 7516</span>, <span class="seriesInfo">DOI 10.17487/RFC7516</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7516">https://www.rfc-editor.org/info/rfc7516</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7518">[RFC7518]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refTitle">"JSON Web Algorithms (JWA)"</span>, <span class="seriesInfo">RFC 7518</span>, <span class="seriesInfo">DOI 10.17487/RFC7518</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7518">https://www.rfc-editor.org/info/rfc7518</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7519">[RFC7519]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-    <dd>
+        <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="VC-DATA-MODEL-2.0">[VC-DATA-MODEL-2.0]</dt>
+      <dd>
+<span class="refAuthor">Sporny, M.</span>, <span class="refAuthor">Jr, T. T.</span>, <span class="refAuthor">Herman, I.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">G. Cohen</span>, <span class="refTitle">"Verifiable Credentials Data Model 2.0"</span>, <time datetime="2023-12-27" class="refDate">27 December 2023</time>, <span>&lt;<a href="https://www.w3.org/TR/vc-data-model-2.0">https://www.w3.org/TR/vc-data-model-2.0</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 </dl>
+</section>
 </section>
 <div id="example-jwps">
 <section id="appendix-A">
@@ -1550,6 +1567,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
   "y": "b0MHuYfSxu3Pj4DAyDXabAc0mPjpB1worEpr3yyrft4",
   "d": "jnE0-9YvxQtLJEKcyUHU6HQ3Y9nSDnh0NstYJFn7RuI"
 }
+
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
@@ -1564,6 +1582,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
   "x": "acbIQiuMs3i8_uszEjJ2tpTtRM4EU3yz91PH6CdH2V0",
   "y": "_KcyLj9vWMptnmKtm46GqDz8wf74I5LKgrl2GzH3nSE"
 }
+
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
@@ -1578,6 +1597,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
   "x": "oB1TPrE_QJIL61fUOOK5DpKgd8j2zbZJtqpILDTJX6I",
   "y": "3JqnrkucLobkdRuOqZXOP9MMlbFyenFOLyGlG-FPACM"
 }
+
 </pre>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
@@ -1609,6 +1629,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
   },
   "alg": "SU-ES256"
 }
+
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
@@ -1643,6 +1664,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
  77, 108, 98, 70, 121, 101, 110, 70, 79, 76, 121, 71, 108, 71, 45,
  70, 80, 65, 67, 77, 34, 125, 44, 34, 97, 108, 103, 34, 58, 34, 83,
  85, 45, 69, 83, 50, 53, 54, 34, 125]
+
 </pre>
 </div>
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
@@ -1659,6 +1681,7 @@ ejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlvbl9qd2siOnsiY3J2IjoiU
 C0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw2MWZVT09LNURwS2dkOGoyem
 JaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2RSdU9xWlhPUDlNTWxiRnllbkZ
 PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
+
 </pre>
 </div>
 <figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
@@ -1669,7 +1692,7 @@ PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
 <p id="appendix-A.1-17">The second payload is the string <code>"Jay"</code> with the octet sequence of <code>[ 34, 74, 97, 121, 34 ]</code> and base64url-encoded as <code>IkpheSI</code>.<a href="#appendix-A.1-17" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-18">The third payload is the string <code>"jaydoe@example.org"</code> with the octet sequence of <code>[ 34, 106, 97, 121, 100, 111, 101, 64, 101, 120, 97, 109, 112, 108, 101, 46, 111, 114, 103, 34 ]</code> and base64url-encoded as <code>ImpheWRvZUBleGFtcGxlLm9yZyI</code>.<a href="#appendix-A.1-18" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-19">The fourth payload is the string <code>42</code> with the octet sequence of <code>[52, 50]</code> and base64url-encoded as <code>NDI</code>.<a href="#appendix-A.1-19" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-20">The Single Use algorithm utilizes multiple individual JWS Signatures.  Each signature value is generated by creating a JWS with a single Protected Header with the associated <code>alg</code> value, in this example the fixed header used for each JWS is the serialized JSON Object <code>{"alg":"ES256"}</code>.  The JWS payload for each varies and the resulting signature value is used in its unencoded form (the octet string, not the base64url-encoded form).<a href="#appendix-A.1-20" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-20">The Single Use algorithm utilizes multiple individual JWS Signatures.  Each signature value is generated by creating a JWS with a single Protected Header with the associated <code>alg</code> value. In this example, the fixed header used for each JWS is the serialized JSON Object <code>{"alg":"ES256"}</code>.  The JWS payload for each varies and the resulting signature value is used in its unencoded form (the octet string, not the base64url-encoded form).<a href="#appendix-A.1-20" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-21">The first signature is generated by creating a JWS using the fixed header with the payload set to the octet string of the JPT protected header from earlier.  The resulting JWS signature using the Signer's <em>stable key</em> is the octet string of:<a href="#appendix-A.1-21" class="pilcrow">¶</a></p>
 <span id="name-jwp-issuer-header-signature"></span><figure id="figure-8">
           <div class="lang-json sourcecode" id="appendix-A.1-22.1">
@@ -1678,6 +1701,7 @@ PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
  134, 36, 13, 70, 200, 156, 178, 173, 248, 228, 164, 1, 180, 112, 50,
  74, 102, 133, 32, 162, 97, 238, 228, 204, 216, 133, 53, 44, 107, 70,
  17, 93, 80, 103, 48]
+
 </pre>
 </div>
 <figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
@@ -1692,6 +1716,7 @@ PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
  182, 28, 156, 72, 243, 36, 140, 160, 218, 241, 207, 27, 106, 88,
  133, 72, 43, 12, 143, 224, 43, 119, 76, 96, 216, 245, 111, 233, 39,
  131, 244, 158, 53, 210, 69]
+
 </pre>
 </div>
 <figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
@@ -1705,6 +1730,7 @@ PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
  108, 61, 251, 90, 107, 212, 17, 13, 191, 235, 8, 96, 1, 128, 121,
  186, 4, 144, 55, 112, 99, 92, 75, 226, 8, 15, 255, 85, 125, 229,
  110, 17, 245, 69, 87, 54]
+
 </pre>
 </div>
 <figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
@@ -1718,6 +1744,7 @@ PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
  25, 102, 110, 215, 202, 193, 166, 80, 58, 239, 217, 242, 167, 58,
  167, 134, 135, 44, 199, 142, 161, 2, 27, 222, 34, 12, 211, 107, 94,
  51, 190, 187, 120, 123]
+
 </pre>
 </div>
 <figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
@@ -1731,12 +1758,13 @@ PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
  136, 148, 154, 94, 123, 191, 96, 67, 209, 211, 107, 100, 8, 57, 63,
  91, 80, 59, 227, 142, 73, 14, 250, 50, 191, 206, 224, 227, 103, 8,
  121, 50, 74, 220, 105]
+
 </pre>
 </div>
 <figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-jwp-payload-3-signature" class="selfRef">jwp-payload-3-signature</a>
           </figcaption></figure>
-<p id="appendix-A.1-32">Each payload's individual signature is concatenated in order, resulting in a larger octet string with a length of an individual signature (64 octets for ES256) multiplied by the number of payloads (4 for this example).  These payload ephemeral signatures are then appended to the initial protected header stable signature.  Using the above examples, the resulting octet string is 320 in length (<code>5 * 64</code>):<a href="#appendix-A.1-32" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-32">Each payload's individual signature is concatenated in order, resulting in a larger octet string with a length of an individual signature (64 octets for ES256) multiplied by the number of payloads (4 for this example).  These payload ephemeral signatures are then appended to the initial protected header stable signature.  Using the above examples, the resulting octet string is 320 bytes in length (<code>5 * 64</code>):<a href="#appendix-A.1-32" class="pilcrow">¶</a></p>
 <span id="name-jwp-signatures"></span><figure id="figure-13">
           <div class="lang-json sourcecode" id="appendix-A.1-33.1">
 <pre>[44, 147, 34, 55, 167, 26, 18, 164, 161, 48, 158, 99, 60, 219, 108,
@@ -1761,6 +1789,7 @@ PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
  101, 18, 216, 214, 39, 149, 136, 148, 154, 94, 123, 191, 96, 67,
  209, 211, 107, 100, 8, 57, 63, 91, 80, 59, 227, 142, 73, 14, 250,
  50, 191, 206, 224, 227, 103, 8, 121, 50, 74, 220, 105]
+
 </pre>
 </div>
 <figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
@@ -1794,6 +1823,7 @@ PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
   hveIgzTa14zvrt4e-xGJER3UYBkMFjbbhMSs-zpsB_KFos6ZRLY1ieViJSaXnu_YEPR
   02tkCDk_W1A7 445JDvoyv87g42cIeTJK3Gk"
 }
+
 </pre>
 </div>
 <figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
@@ -1817,6 +1847,7 @@ yyrfjkpAG0cDJKZoUgomHu5MzYhTUsa0YRXVBnMKsRXWGBdsEklg7lcTw8cvPwmOXafNp
 Vc2w1nD-9IXRVsHQgkL1WFNkYa544M3F6-zl86kGvD-GWZu18rBplA679nypzqnhocsx4
 6hAhveIgzTa14zvrt4e-xGJER3UYBkMFjbbhMSs-zpsB_KFos6ZRLY1ieViJSaXnu_YEP
 R02tkCDk_W1A7445JDvoyv87g42cIeTJK3Gk
+
 </pre>
 </div>
 <figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
@@ -1828,6 +1859,7 @@ R02tkCDk_W1A7445JDvoyv87g42cIeTJK3Gk
 <pre>{
   "nonce": "uTEB371l1pzWJl7afB0wi0HWUNk1Le-bComFLxa8K-s"
 }
+
 </pre>
 </div>
 <figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
@@ -1840,6 +1872,7 @@ R02tkCDk_W1A7445JDvoyv87g42cIeTJK3Gk
  55, 49, 108, 49, 112, 122, 87, 74, 108, 55, 97, 102, 66, 48, 119,
  105, 48, 72, 87, 85, 78, 107, 49, 76, 101, 45, 98, 67, 111, 109, 70,
  76, 120, 97, 56, 75, 45, 115, 34, 125]
+
 </pre>
 </div>
 <figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
@@ -1850,6 +1883,7 @@ R02tkCDk_W1A7445JDvoyv87g42cIeTJK3Gk
           <div class="lang-text sourcecode" id="appendix-A.1-44.1">
 <pre>eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLL
 XMifQ
+
 </pre>
 </div>
 <figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
@@ -1863,6 +1897,7 @@ XMifQ
  125, 158, 43, 216, 19, 191, 136, 138, 195, 129, 143, 233, 24, 116,
  216, 241, 8, 1, 80, 47, 158, 27, 110, 137, 40, 76, 156, 250, 149,
  195, 91, 66, 5, 216]
+
 </pre>
 </div>
 <figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
@@ -1889,6 +1924,7 @@ XMifQ
  154, 94, 123, 191, 96, 67, 209, 211, 107, 100, 8, 57, 63, 91, 80,
  59, 227, 142, 73, 14, 250, 50, 191, 206, 224, 227, 103, 8, 121, 50,
  74, 220, 105]
+
 </pre>
 </div>
 <figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
@@ -1922,6 +1958,7 @@ XMifQ
   "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOaz
   FMZS1iQ29tRkx4YThLLXMifQ"
 }
+
 </pre>
 </div>
 <figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
@@ -1944,6 +1981,7 @@ Usa0YRXVBnMB91RjonrnWVsakfXtfm2h7gHxA_8G1wkB09x09kon2eK9gTv4iKw4GP6Rh
 02PEIAVAvnhtuiShMnPqVw1tCBdhweWzjyxJbG86J7Y8MDt2H9f5hhHIwmSLwXYzCbD37
 WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc27EYkRHdRgGQwWNtuExKz7OmwH
 8oWizplEtjWJ5WIlJpee79gQ9HTa2QIOT9bUDvjjkkO-jK_zuDjZwh5MkrcaQ
+
 </pre>
 </div>
 <figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
@@ -1966,9 +2004,10 @@ WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc27EYkRHdRgGQwWNtuExKz7OmwH
       <h2 id="name-acknowledgements">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-B-1">We would like to thank
+<p id="appendix-B-1">This work was incubated in the DIF <a href="https://identity.foundation/working-groups/crypto.html">Applied Cryptography Working Group</a>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">We would like to thank
 Brent Zundel
-for his valuable contributions to this specification.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+for his valuable contributions to this specification.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="registries">
@@ -1976,10 +2015,10 @@ for his valuable contributions to this specification.<a href="#appendix-B-1" cla
       <h2 id="name-registries">
 <a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-registries" class="section-name selfRef">Registries</a>
       </h2>
-<ul class="normal">
-<li class="normal" id="appendix-C-1.1">Issuer Protected Header<a href="#appendix-C-1.1" class="pilcrow">¶</a>
+<ul class="compact">
+<li class="compact" id="appendix-C-1.1">Issuer Protected Header<a href="#appendix-C-1.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="appendix-C-1.2">Presentation Protected Header<a href="#appendix-C-1.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-1.2">Presentation Protected Header<a href="#appendix-C-1.2" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1990,19 +2029,24 @@ for his valuable contributions to this specification.<a href="#appendix-B-1" cla
 <a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-D-1">[[ To be removed from the final specification ]]<a href="#appendix-D-1" class="pilcrow">¶</a></p>
-<p id="appendix-D-2">-02<a href="#appendix-D-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="appendix-D-3.1">Update reference to current BBS algorithm<a href="#appendix-D-3.1" class="pilcrow">¶</a>
+<p id="appendix-D-2">-03<a href="#appendix-D-2" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-D-3.1">Improvements resulting from a full proofreading.<a href="#appendix-D-3.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-D-4">-01<a href="#appendix-D-4" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="appendix-D-5.1">Correct cross-references within group.<a href="#appendix-D-5.1" class="pilcrow">¶</a>
+<p id="appendix-D-4">-02<a href="#appendix-D-4" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-D-5.1">Update reference to current BBS algorithm<a href="#appendix-D-5.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-D-6">-00<a href="#appendix-D-6" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="appendix-D-7.1">Created initial working group draft based on draft-jmiller-jose-json-web-proof-01<a href="#appendix-D-7.1" class="pilcrow">¶</a>
+<p id="appendix-D-6">-01<a href="#appendix-D-6" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-D-7.1">Correct cross-references within group.<a href="#appendix-D-7.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-D-8">-00<a href="#appendix-D-8" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-D-9.1">Created initial working group draft based on draft-jmiller-jose-json-web-proof-01<a href="#appendix-D-9.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>

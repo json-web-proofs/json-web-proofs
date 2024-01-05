@@ -5,9 +5,9 @@
 jose                                                           J. Miller
 Internet-Draft                                                  D. Waite
 Intended status: Standards Track                           Ping Identity
-Expires: 24 April 2024                                          M. Jones
+Expires: 8 July 2024                                            M. Jones
                                                   Self-Issued Consulting
-                                                         22 October 2023
+                                                          5 January 2024
 
 
                              JSON Web Proof
@@ -16,14 +16,11 @@ Expires: 24 April 2024                                          M. Jones
 Abstract
 
    The JOSE set of standards established JSON-based container formats
-   for Keys (https://datatracker.ietf.org/doc/rfc7517/), Signatures
-   (https://datatracker.ietf.org/doc/rfc7515/), and Encryption
-   (https://datatracker.ietf.org/doc/rfc7516/).  They also established
-   IANA registries (https://www.iana.org/assignments/jose/jose.xhtml) to
-   enable the algorithms and representations used for them to be
-   extended.  Since those were created, newer cryptographic algorithms
-   that support selective disclosure and unlinkability have matured and
-   started seeing early market adoption.
+   for Keys, Signatures, and Encryption.  They also established IANA
+   registries to enable the algorithms and representations used for them
+   to be extended.  Since those were created, newer cryptographic
+   algorithms that support selective disclosure and unlinkability have
+   matured and started seeing early market adoption.
 
    This document defines a new container format similar in purpose and
    design to JSON Web Signature (JWS) called a _JSON Web Proof (JWP)_.
@@ -49,11 +46,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2024.
+   This Internet-Draft will expire on 8 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -85,8 +82,9 @@ Table of Contents
      5.2.  JSON Serialization
    6.  Security Considerations
    7.  IANA Considerations
-   8.  Normative References
-   9.  Informative References
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Appendix A.  Example JWPs
      A.1.  Example Single-Use JWP
      A.2.  Example Multi-Use JWP
@@ -103,7 +101,7 @@ Table of Contents
    identity and access claims.  For instance, they are used by the
    OpenID Connect and Secure Telephony Identity Revisited (STIR)
    standards.  Also, JWTs are used by W3C's Verifiable Credentials and
-   are used in many Decentralized Identity systems.
+   are used in many decentralized identity systems.
 
    With these new use cases, there is an increased focus on adopting
    privacy-protecting cryptographic primitives.  While such primitives
@@ -120,21 +118,14 @@ Table of Contents
    Credentials are:
 
    *  CL Signatures (https://eprint.iacr.org/2012/562.pdf)
-
    *  IDEMIX (http://www.zurich.ibm.com/idemix)
-
    *  BBS signatures, described in [I-D.irtf-cfrg-bbs-signatures]
-
    *  MerkleDisclosureProof2021 (https://github.com/transmute-
       industries/merkle-disclosure-proof-2021)
-
    *  Mercurial Signatures (https://eprint.iacr.org/2020/979)
-
    *  PS Signatures (https://eprint.iacr.org/2015/525.pdf)
-
    *  U-Prove (https://www.microsoft.com/en-us/research/project/
       u-prove/)
-
    *  Spartan (https://github.com/microsoft/Spartan)
 
    All of these follow the same pattern of taking multiple claims
@@ -153,28 +144,24 @@ Table of Contents
    capitals, as shown here.
 
    The roles of "issuer", "holder", and "verifier" are used as defined
-   by the Verifiable Credentials Data Model v1.1
-   (https://www.w3.org/TR/2021/REC-vc-data-model-20211109/).  The term
-   "presentation" is also used as defined by this source, but the term
-   "credential" is avoided in this specification in order to minimize
-   confusion with other definitions.
+   by the VC Data Model [VC-DATA-MODEL-2.0].  The term "presentation" is
+   also used as defined by this source, but the term "credential" is
+   avoided in this specification to minimize confusion with other
+   definitions.
 
 2.1.  Abbreviations
 
    *  ZKP: Zero-Knowledge Proof
-
    *  JWP: JSON Web Proof (this specification)
-
    *  JPA: JSON Proof Algorithms [I-D.ietf-jose-json-proof-algorithms]
-
    *  JPT: JSON Proof Token [I-D.ietf-jose-json-proof-token]
 
 3.  Background
 
    A _JSON Web Proof (JWP)_ is very similar to a JWS [RFC7515], with the
    addition that it can contain multiple individual secured payloads
-   instead of a singular one.  JWP-supporting algorithms are then able
-   to separate and act on the individual payloads contained within.
+   instead of a single one.  JWP-supporting algorithms are then able to
+   separate and act on the individual payloads contained within.
 
    The intent of JSON Web Proofs is to establish a common container
    format for multiple payloads that can be integrity-verified against a
@@ -182,36 +169,38 @@ Table of Contents
    or specify any cryptographic protocols, multi-party protocols, or
    detail any algorithm-specific capabilities.
 
-   In order to fully support the newer privacy primitives, JWP
-   introduces the three roles of issuer, holder, and verifier as defined
-   by the VC Data Model.  There are also two forms of a JWP: the issued
-   form created by an issuer for a holder, and the presented form
+   To fully support the newer privacy primitives, JWP utilizes the three
+   roles of issuer, holder, and verifier, as defined by the VC Data
+   Model [VC-DATA-MODEL-2.0].  There are also two forms of a JWP: the
+   issued form created by an issuer for a holder, and the presented form
    created by a holder for a verifier.
 
-   A JWP is initially created by the issuer using the issue interaction
-   with an implementation.  A successful result is an issued JWP that
-   has a single issuer-protected header, one or more payloads, and an
-   initial proof value that contains the issuing algorithm output.  The
-   holder, upon receiving an issued JWP, then uses confirm to check the
-   integrity protection of the header and all payloads using the given
+   The four principal interactions used by JWP are issue, confirm,
+   present, and verify.
+
+   A JWP is initially created by the issuer using the issue interaction.
+   A successful result is an issued JWP that has a single issuer-
+   protected header, one or more payloads, and an initial proof value
+   that contains the issuing algorithm output.  The holder, upon
+   receiving an issued JWP, then uses the confirm interaction to check
+   the integrity protection of the header and all payloads using the
    proof value.
 
-   After validation, the holder uses present to apply any selective
-   disclosure choices, perform privacy-preserving transformations for
-   unlinkability, and add a presentation-protected header that ensures
-   the resulting presented JWP cannot be replayed.  The verifier then
-   uses verify to ensure the integrity protection of the protected
-   headers and any disclosed payloads, along with verifying any
-   additional ZKPs covering non-disclosed payloads.
+   After validation, the holder uses the present interaction to apply
+   any selective disclosure choices, perform privacy-preserving
+   transformations for unlinkability, and add a presentation-protected
+   header that ensures the resulting presented JWP cannot be replayed.
+   The verifier then uses the verify interaction to ensure the integrity
+   protection of the protected headers and any disclosed payloads, along
+   with verifying any additional ZKPs covering non-disclosed payloads.
 
    While issue and confirm only occur when a JWP is initially created by
    the issuer, the present and verify steps may be safely repeated by a
-   holder on an issued JWP.  The unlinkability of the resulting
-   presented JWP is only provided when supported by the underlying
-   algorithm.
+   holder on an issued JWP.  He resulting presented JWP is only
+   unlinkable when supported by the underlying algorithm.
 
-   Algorithm definitions that support JWPs are being done in separate
-   companion specifications - just as the JSON Web Algorithms [RFC7518]
+   Algorithm definitions that support JWPs are in separate companion
+   specifications - just as the JSON Web Algorithms [RFC7518]
    specification does for JWS and JWE [RFC7516].  The JSON Proof
    Algorithms (JPA) [I-D.ietf-jose-json-proof-algorithms] specification
    defines how an initial set of algorithms are used with JWP.
@@ -219,8 +208,8 @@ Table of Contents
 4.  JWP Forms
 
    A JWP is always in one of two forms: the issued form or the presented
-   form.  The significant difference between the two forms is the number
-   of protected headers.  An issued JWP has only one issuer protected
+   form.  A structural difference between the two forms is the number of
+   protected headers.  An issued JWP has only one issuer protected
    header, while a presented JWP will have both the issuer protected
    header and an additional presentation protected header.  Each
    protected header is a JSON object that is serialized as a UTF-8
@@ -245,7 +234,7 @@ Table of Contents
    payloads.
 
    The issued form can only be confirmed by a holder as being correctly
-   formed and protected, it is NOT to be verified directly or presented
+   formed and protected.  It is NOT to be verified directly or presented
    as-is to a verifier.  The holder SHOULD treat an issued JWP as
    private and use appropriately protected storage.
 
@@ -258,8 +247,8 @@ Table of Contents
    in the metadata, to reduce a verifier's ability to group different
    presentations based on small header variations from the same issuer.
 
-   Every issuer protected header MUST have, at minimum, an alg value
-   that identifies a valid JPA.
+   Every issuer protected header MUST have an alg value that identifies
+   a valid JSON Proof Algorithm (JPA).
 
    For example:
 
@@ -308,10 +297,10 @@ Table of Contents
    correlatable.
 
    A JWP may also be single use, where an issued JWP can only be used
-   once to generate a presented form, any additional presentations would
-   be inherently correlatable.  These are still useful for applications
-   needing only selective disclosure or where new unique issued JWPs can
-   be retrieved easily.
+   once to generate a presented form.  In this case, any additional
+   presentations would be inherently correlatable.  These are still
+   useful for applications needing only selective disclosure or where
+   new unique issued JWPs can be retrieved easily.
 
 4.2.1.  Presentation Protected Header
 
@@ -347,16 +336,16 @@ Table of Contents
 4.2.3.  Presentation Proof
 
    The proof value of a presented JWP will always be different than the
-   issued proof.  At a minimum it MUST be updated to include protection
+   issued proof.  At a minimum, it MUST be updated to include protection
    of the added presentation header.
 
    Algorithms SHOULD generate an un-correlatable presentation proof in
    order to support multiple presentations from a single issued JWP.
 
    Any payload specific proofs are included in the single proof value
-   for the presented JWP, the JPA is responsible for internally encoding
-   multiple proof values into one and cryptographically binding them to
-   a specific payload from the issuer.
+   for the presented JWP.  The JPA is responsible for internally
+   encoding multiple proof values into one and cryptographically binding
+   them to a specific payload from the issuer.
 
 5.  Serializations
 
@@ -386,9 +375,9 @@ Table of Contents
    Non-disclosed payloads in the JSON serialization are represented with
    a null value in the payloads array.
 
-   Example flattened JSON serialization showing the presentation form
-   with both the issuer and presentation headers along with the first
-   and third payloads hidden.
+   This example flattened JSON serialization shows the presentation form
+   with both the issuer and presentation headers, and with the first and
+   third payloads hidden.
 
    {
      "payloads": [
@@ -423,45 +412,44 @@ Table of Contents
    Notes to be expanded:
 
    *  Requirements for supporting algorithms, see JPA
-
    *  Application interface for verification
-
    *  Data minimization of the protected header
-
-   *  In order to prevent accidentally introducing linkability, when an
-      issuer uses the same key with the same grouping of payload types,
-      they SHOULD also use the same issuer protected header.  Each of
-      these headers SHOULD have the same base64url-serialized value to
-      avoid any non-deterministic JSON serialization.
+   *  To prevent accidentally introducing linkability, when an issuer
+      uses the same key with the same grouping of payload types, they
+      SHOULD also use the same issuer protected header.  Each of these
+      headers SHOULD have the same base64url-serialized value to avoid
+      any non-deterministic JSON serialization.
 
 7.  IANA Considerations
 
    This document has no IANA actions.
 
-8.  Normative References
+8.  References
+
+8.1.  Normative References
 
    [I-D.ietf-jose-json-proof-algorithms]
               Miller, J., Jones, M. B., and D. Waite, "JSON Proof
               Algorithms", Work in Progress, Internet-Draft, draft-ietf-
-              jose-json-proof-algorithms-01, 10 July 2023,
+              jose-json-proof-algorithms-02, 21 October 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              json-proof-algorithms-01>.
+              json-proof-algorithms-02>.
 
    [I-D.ietf-jose-json-proof-token]
               Miller, J., Jones, M. B., and D. Waite, "JSON Proof
               Token", Work in Progress, Internet-Draft, draft-ietf-jose-
-              json-proof-token-01, 10 July 2023,
+              json-proof-token-02, 21 October 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              json-proof-token-01>.
+              json-proof-token-02>.
 
-9.  Informative References
+8.2.  Informative References
 
    [I-D.irtf-cfrg-bbs-signatures]
               Looker, T., Kalos, V., Whitehead, A., and M. Lodder, "The
               BBS Signature Scheme", Work in Progress, Internet-Draft,
-              draft-irtf-cfrg-bbs-signatures-03, 10 July 2023,
+              draft-irtf-cfrg-bbs-signatures-05, 21 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
-              bbs-signatures-03>.
+              bbs-signatures-05>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -487,6 +475,11 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [VC-DATA-MODEL-2.0]
+              Sporny, M., Jr, T. T., Herman, I., Jones, M. B., and G.
+              Cohen, "Verifiable Credentials Data Model 2.0", 27
+              December 2023, <https://www.w3.org/TR/vc-data-model-2.0>.
 
 Appendix A.  Example JWPs
 
@@ -641,7 +634,7 @@ A.1.  Example Single-Use JWP
 
    The Single Use algorithm utilizes multiple individual JWS Signatures.
    Each signature value is generated by creating a JWS with a single
-   Protected Header with the associated alg value, in this example the
+   Protected Header with the associated alg value.  In this example, the
    fixed header used for each JWS is the serialized JSON Object
    {"alg":"ES256"}.  The JWS payload for each varies and the resulting
    signature value is used in its unencoded form (the octet string, not
@@ -709,7 +702,8 @@ A.1.  Example Single-Use JWP
    signature (64 octets for ES256) multiplied by the number of payloads
    (4 for this example).  These payload ephemeral signatures are then
    appended to the initial protected header stable signature.  Using the
-   above examples, the resulting octet string is 320 in length (5 * 64):
+   above examples, the resulting octet string is 320 bytes in length (5
+   * 64):
 
    [44, 147, 34, 55, 167, 26, 18, 164, 161, 48, 158, 99, 60, 219, 108,
     240, 231, 172, 114, 163, 106, 230, 242, 146, 170, 71, 192, 117, 43,
@@ -907,18 +901,24 @@ A.2.  Example Multi-Use JWP
 
 Appendix B.  Acknowledgements
 
+   This work was incubated in the DIF Applied Cryptography Working Group
+   (https://identity.foundation/working-groups/crypto.html).
+
    We would like to thank Brent Zundel for his valuable contributions to
    this specification.
 
 Appendix C.  Registries
 
    *  Issuer Protected Header
-
    *  Presentation Protected Header
 
 Appendix D.  Document History
 
    [[ To be removed from the final specification ]]
+
+   -03
+
+   *  Improvements resulting from a full proofreading.
 
    -02
 
