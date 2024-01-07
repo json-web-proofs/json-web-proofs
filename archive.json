@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-04T00:38:08.973844+00:00",
+  "timestamp": "2024-01-07T00:42:02.001880+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -1683,15 +1683,25 @@
       "state": "OPEN",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "selfissued"
+      ],
       "labels": [
         "JPA"
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> It would be nice to see an initial table for the requested registry similar to how HPKE established registries:\r\n>\r\n>   * https://www.rfc-editor.org/rfc/rfc9180.html#name-algorithm-identifiers\r\n>   * https://www.rfc-editor.org/rfc/rfc9180.html#name-kem-identifiers\r\n>\r\n> Similarly for any new reserved claims ( such as `pjwk` ), it would be nice to see them all in one place.",
       "createdAt": "2023-07-12T17:04:01Z",
-      "updatedAt": "2023-07-12T17:08:30Z",
+      "updatedAt": "2024-01-05T22:56:00Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'll take a stab at creating a table for the header parameters we need.\r\n\r\nWe also need an algorithms registry.",
+          "createdAt": "2024-01-05T22:55:59Z",
+          "updatedAt": "2024-01-05T22:55:59Z"
+        }
+      ]
     },
     {
       "number": 77,
@@ -1701,15 +1711,32 @@
       "state": "OPEN",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [
         "JPA"
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> Assume the reader has some awareness of JOSE, and introduce terms like `issuer_header` and `presentation_header` so that they defined in their sections, for example:\r\n>\r\n> https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-00#name-presentation-protected-header-2\r\n>\r\n> does not include \"presentation_header\" header.",
       "createdAt": "2023-07-12T17:06:35Z",
-      "updatedAt": "2023-07-12T17:08:12Z",
+      "updatedAt": "2024-01-05T22:49:35Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Typographically, we should use names like \"Issuer Header\" rather than `issuer_header` for things that are not parameter or field names.",
+          "createdAt": "2024-01-05T22:48:18Z",
+          "updatedAt": "2024-01-05T22:48:18Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "While this particular example seems solved, we have two general issues:\r\n\r\n1. algorithmic values and JSON parameters may have the same choice in snake vs camel vs upper case - we may wish to have two styles here for clarity\r\n2. we have definitions and processing steps in single use algorithm that should be raised to be generalized.",
+          "createdAt": "2024-01-05T22:49:34Z",
+          "updatedAt": "2024-01-05T22:49:34Z"
+        }
+      ]
     },
     {
       "number": 78,
@@ -1719,13 +1746,15 @@
       "state": "OPEN",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [
         "JPA"
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> An example with a mixed algorithm for issue and holder would be nice here,\r\nor a comment about it being forbidden... for example issuer signing with\r\nES256 and holder presenting with EdDSA.",
       "createdAt": "2023-07-13T06:15:20Z",
-      "updatedAt": "2024-01-01T02:46:23Z",
+      "updatedAt": "2024-01-05T22:39:21Z",
       "closedAt": null,
       "comments": [
         {
@@ -1745,11 +1774,13 @@
       "state": "OPEN",
       "author": "brentzundel",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [],
       "body": "What, if any, should the relationship be between JWP and JWE?\r\n\r\nThis Issue is to track the question that was brought up during IETF 117.",
       "createdAt": "2023-07-25T22:27:38Z",
-      "updatedAt": "2024-01-01T02:48:08Z",
+      "updatedAt": "2024-01-05T22:35:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -1758,6 +1789,13 @@
           "body": "My initial gut reaction to this is that ZKPs are more like signatures than encryption.  I *think* that encryption is out of scope.\r\n\r\nThat said, we may want to describe encrypting a JWP object with JWE.",
           "createdAt": "2024-01-01T02:48:07Z",
           "updatedAt": "2024-01-01T02:48:07Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I suspect that encryption with JWP are going to be part of storage protection or transport, e.g. wrapping a JWP in JWE.\r\n\r\n",
+          "createdAt": "2024-01-05T22:35:32Z",
+          "updatedAt": "2024-01-05T22:35:32Z"
         }
       ]
     },
@@ -1766,15 +1804,15 @@
       "id": "I_kwDOFsQObc52e934",
       "title": "Align terminology holder vs prover",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/89",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "There are a few cases where prover (e.g. prover key) is still used in the draft. Proposing these be changed to holder (e.g. holder key).",
       "createdAt": "2023-11-10T15:21:55Z",
-      "updatedAt": "2024-01-01T02:49:25Z",
-      "closedAt": null,
+      "updatedAt": "2024-01-05T18:11:15Z",
+      "closedAt": "2024-01-05T18:11:15Z",
       "comments": [
         {
           "author": "selfissued",
@@ -1793,11 +1831,13 @@
       "state": "OPEN",
       "author": "SamuelSchlesinger",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [],
       "body": "Currently, the algorithms provided naturally have a single issuer for the underlying information we are proving statements about. However, in trying to add support for more general-purpose ZKPs (R1CS, for instance), I don't think this is general enough. In particular, here is a natural proposal for a 2-issuer proof in the context of verifiable credentials: \"exists X. I have a birth certificate with social security number X, and a background check issued for citizen with social security number X\". By forcing all of the information required by the verifier to be provided by a single \"issued proof\", we are undermining the privacy properties of the protocols which more general zero-knowledge proofs enable.\r\n\r\nI propose we change the language in the web-proofs draft to allow for multiple \"issued proofs\". Because they are no longer 1-to-1 with proofs, I also propose to bikeshed the language here: Let's call them \"issued facts\" instead, or \"provable facts\".",
       "createdAt": "2023-11-12T15:09:53Z",
-      "updatedAt": "2023-11-12T15:09:53Z",
+      "updatedAt": "2024-01-05T22:32:20Z",
       "closedAt": null,
       "comments": []
     },
@@ -6417,24 +6457,26 @@
       "id": "PR_kwDOFsQObc5jBM11",
       "title": "Mike's New Years Eve 2023 Proofread",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/92",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Apply improvements identified during a full proofread.\r\n\r\nFixes #89 ",
       "createdAt": "2024-01-01T20:42:21Z",
-      "updatedAt": "2024-01-02T20:53:39Z",
+      "updatedAt": "2024-01-05T18:11:15Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "da9c0412b7b386fad173b4c9be41e2302c8f4985",
       "headRepository": "selfissued/json-web-proofs",
       "headRefName": "mbj-2023-proofread",
       "headRefOid": "3745e16303ba260a85a208f1104521e09f242eba",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-01-05T18:11:14Z",
+      "mergedAt": "2024-01-05T18:11:14Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "1ef3306e5cb8ff90ae2c40a85cbfdfb354716dce"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6448,6 +6490,19 @@
           "body": "",
           "createdAt": "2024-01-02T20:53:39Z",
           "updatedAt": "2024-01-02T20:53:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOFsQObc5rrgYc",
+          "commit": {
+            "abbreviatedOid": "3745e16"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "looks great!",
+          "createdAt": "2024-01-05T18:11:00Z",
+          "updatedAt": "2024-01-05T18:11:00Z",
           "comments": []
         }
       ]
