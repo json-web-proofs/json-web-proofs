@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-09T00:38:55.145127+00:00",
+  "timestamp": "2024-01-11T00:38:53.238926+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -1864,6 +1864,205 @@
           "updatedAt": "2024-01-01T07:22:34Z"
         }
       ]
+    },
+    {
+      "number": 94,
+      "id": "I_kwDOFsQObc57k3NV",
+      "title": "\"The holder's signature needs to also incorporate the presented proof\"",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/94",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "dwaite"
+      ],
+      "labels": [
+        "JPA"
+      ],
+      "body": "In review, we interpreted this old comment as the presentation proof needs to sign over the entire derived message (issuer header and presented payloads) rather than just the header. this changes the SU and MAC based algorithms.",
+      "createdAt": "2024-01-09T22:14:50Z",
+      "updatedAt": "2024-01-09T22:30:20Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 95,
+      "id": "I_kwDOFsQObc57k3aw",
+      "title": "Spec build issues around JPA section 6.2.5",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/95",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "dwaite"
+      ],
+      "labels": [
+        "JPA"
+      ],
+      "body": "There is a missing JSON serialization from the build - fix this.",
+      "createdAt": "2024-01-09T22:15:33Z",
+      "updatedAt": "2024-01-09T22:30:03Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 96,
+      "id": "I_kwDOFsQObc57k6IW",
+      "title": "Evaluate promoting parts of section 7 of JPT to the JWP spec",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/96",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "JPT",
+        "JWP"
+      ],
+      "body": "In evaluating rules described for JPT, it makes sense to describe these in the JWP spec for all applications.",
+      "createdAt": "2024-01-09T22:26:48Z",
+      "updatedAt": "2024-01-09T22:29:51Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 97,
+      "id": "I_kwDOFsQObc57k6jT",
+      "title": "Refactor JPT to share examples in JWP",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/97",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "dwaite"
+      ],
+      "labels": [
+        "JPT"
+      ],
+      "body": "JWP has an appendix showing an example JPT; propose to refactor both specs to include the same (potentially generated) example.",
+      "createdAt": "2024-01-09T22:28:38Z",
+      "updatedAt": "2024-01-09T22:29:36Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 98,
+      "id": "I_kwDOFsQObc57k6rz",
+      "title": "JPT should recommend using the IANA registry for JWT claim names",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/98",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "selfissued"
+      ],
+      "labels": [
+        "JPT"
+      ],
+      "body": "",
+      "createdAt": "2024-01-09T22:29:14Z",
+      "updatedAt": "2024-01-09T22:29:36Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 99,
+      "id": "I_kwDOFsQObc57k8Ii",
+      "title": "briefly discuss issued and presented forms in JPT",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/99",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "selfissued"
+      ],
+      "labels": [
+        "JPT"
+      ],
+      "body": "",
+      "createdAt": "2024-01-09T22:34:53Z",
+      "updatedAt": "2024-01-09T22:34:54Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 100,
+      "id": "I_kwDOFsQObc57k-oO",
+      "title": "Evaluate need for JSON serialization",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/100",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-01-09T22:45:03Z",
+      "updatedAt": "2024-01-09T22:45:03Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 101,
+      "id": "I_kwDOFsQObc57k-uU",
+      "title": "Represent serialization difference between zero-length payloads and non-disclosed payloads in compact representation",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/101",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-01-09T22:45:26Z",
+      "updatedAt": "2024-01-09T22:45:26Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 102,
+      "id": "I_kwDOFsQObc57lBB6",
+      "title": "Define audience header parameter",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/102",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Define the use of an `\"aud\"` presentation header parameter to be suggested alongside `\"nonce\"`",
+      "createdAt": "2024-01-09T22:54:59Z",
+      "updatedAt": "2024-01-09T22:55:00Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 103,
+      "id": "I_kwDOFsQObc57lCyk",
+      "title": "Should we keep non-ZKP algorithms",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/103",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Per discussion in IETF 118 microphone comments, should we keep algorithms which do not have a reasonably inexpensive nonsinkable presentation.",
+      "createdAt": "2024-01-09T23:01:58Z",
+      "updatedAt": "2024-01-09T23:01:59Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 104,
+      "id": "I_kwDOFsQObc57lC5X",
+      "title": "What additional ZKP algorithms should we add",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/104",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-01-09T23:02:20Z",
+      "updatedAt": "2024-01-09T23:02:20Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -6504,6 +6703,53 @@
           "createdAt": "2024-01-05T18:11:00Z",
           "updatedAt": "2024-01-05T18:11:00Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 93,
+      "id": "PR_kwDOFsQObc5jimyI",
+      "title": "Address some 2023 review questions",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/93",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Address some of the questions resulting from my end-of-year 2023 cover-to-cover review.",
+      "createdAt": "2024-01-09T05:45:28Z",
+      "updatedAt": "2024-01-09T22:08:33Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "1ef3306e5cb8ff90ae2c40a85cbfdfb354716dce",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-address-some-2023-review-questions",
+      "headRefOid": "a1a79d55460c278a616fdab4535f9ee9c224ee1f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5sAkWF",
+          "commit": {
+            "abbreviatedOid": "bb4ac5b"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "A significant improvement!",
+          "createdAt": "2024-01-09T21:59:54Z",
+          "updatedAt": "2024-01-09T22:04:00Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nIn addition, the `disclosed_indexes` vector value is calculated from the payloads. For each value present in payloads (e.g. all values not `null` in JSON serialization or a zero-length string in compact serialization), the index of that payload is added to this vector.\r\n```",
+              "createdAt": "2024-01-09T21:59:54Z",
+              "updatedAt": "2024-01-09T22:04:00Z"
+            }
+          ]
         }
       ]
     }
