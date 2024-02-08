@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-06T00:35:50.477369+00:00",
+  "timestamp": "2024-02-08T00:35:43.221450+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -1949,7 +1949,7 @@
       "id": "I_kwDOFsQObc57k6rz",
       "title": "JPT should recommend using the IANA registry for JWT claim names",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/98",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1960,8 +1960,8 @@
       ],
       "body": "",
       "createdAt": "2024-01-09T22:29:14Z",
-      "updatedAt": "2024-01-09T22:29:36Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-06T19:13:56Z",
+      "closedAt": "2024-02-06T19:13:56Z",
       "comments": []
     },
     {
@@ -6718,7 +6718,7 @@
       "labels": [],
       "body": "Address some of the questions resulting from my end-of-year 2023 cover-to-cover review.",
       "createdAt": "2024-01-09T05:45:28Z",
-      "updatedAt": "2024-01-09T22:08:33Z",
+      "updatedAt": "2024-02-06T19:07:08Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "1ef3306e5cb8ff90ae2c40a85cbfdfb354716dce",
@@ -6750,6 +6750,74 @@
               "updatedAt": "2024-01-09T22:04:00Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOFsQObc5vOqt4",
+          "commit": {
+            "abbreviatedOid": "a1a79d5"
+          },
+          "author": "quartzjer",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-06T19:07:08Z",
+          "updatedAt": "2024-02-06T19:07:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 105,
+      "id": "PR_kwDOFsQObc5mKZAL",
+      "title": "Add reference to IANA JWT Claims Registry",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/105",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #98 ",
+      "createdAt": "2024-02-06T15:58:37Z",
+      "updatedAt": "2024-02-06T19:13:55Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "1ef3306e5cb8ff90ae2c40a85cbfdfb354716dce",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-jwt-claims-registry",
+      "headRefOid": "6f8ab164b145d7ef4edbe529c9776f7c97dc0463",
+      "closedAt": "2024-02-06T19:13:55Z",
+      "mergedAt": "2024-02-06T19:13:55Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "df9397ef7c72b869307e1343c0fe3f564f3d016c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5vOq6F",
+          "commit": {
+            "abbreviatedOid": "6f8ab16"
+          },
+          "author": "quartzjer",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-06T19:07:29Z",
+          "updatedAt": "2024-02-06T19:07:29Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOFsQObc5vOte6",
+          "commit": {
+            "abbreviatedOid": "6f8ab16"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-06T19:13:46Z",
+          "updatedAt": "2024-02-06T19:13:46Z",
+          "comments": []
         }
       ]
     }
