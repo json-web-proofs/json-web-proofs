@@ -10,7 +10,7 @@
 <meta content="Michael B. Jones" name="author">
 <meta content="
        The JOSE set of standards established JSON-based container formats for Keys, Signatures, and Encryption.  They also established IANA registries to enable the algorithms and representations used for them to be extended.  Since those were created, newer cryptographic algorithms that support selective disclosure and unlinkability have matured and started seeing early market adoption. 
-       This document defines a new container format similar in purpose and design to JSON Web Signature (JWS) called a  JSON Web Proof (JWP) .  Unlike JWS, which integrity-protects only a single payload, JWP can integrity-protect multiple payloads in one message.  It also specifies a new presentation form that supports selective disclosure of individual payloads, enables additional proof computation, and adds a protected header to prevent replay and support binding mechanisms. 
+       This document defines a new container format similar in purpose and design to JSON Web Signature (JWS) called a  JSON Web Proof (JWP) .  Unlike JWS, which integrity-protects only a single payload, JWP can integrity-protect multiple payloads in one message.  It also specifies a new presentation form that supports selective disclosure of individual payloads, enables additional proof computation, and adds a protected header to prevent replay. 
     " name="description">
 <meta content="xml2rfc 3.19.2" name="generator">
 <meta content="jose" name="keyword">
@@ -1035,7 +1035,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Miller, et al.</td>
-<td class="center">Expires 9 August 2024</td>
+<td class="center">Expires 11 August 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1048,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-jose-json-web-proof-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-02-06" class="published">6 February 2024</time>
+<time datetime="2024-02-08" class="published">8 February 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-08-09">9 August 2024</time></dd>
+<dd class="expires"><time datetime="2024-08-11">11 August 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1075,7 +1075,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">The JOSE set of standards established JSON-based container formats for Keys, Signatures, and Encryption.  They also established IANA registries to enable the algorithms and representations used for them to be extended.  Since those were created, newer cryptographic algorithms that support selective disclosure and unlinkability have matured and started seeing early market adoption.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">This document defines a new container format similar in purpose and design to JSON Web Signature (JWS) called a <em>JSON Web Proof (JWP)</em>.  Unlike JWS, which integrity-protects only a single payload, JWP can integrity-protect multiple payloads in one message.  It also specifies a new presentation form that supports selective disclosure of individual payloads, enables additional proof computation, and adds a protected header to prevent replay and support binding mechanisms.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document defines a new container format similar in purpose and design to JSON Web Signature (JWS) called a <em>JSON Web Proof (JWP)</em>.  Unlike JWS, which integrity-protects only a single payload, JWP can integrity-protect multiple payloads in one message.  It also specifies a new presentation form that supports selective disclosure of individual payloads, enables additional proof computation, and adds a protected header to prevent replay.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1096,7 +1096,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1325,7 +1325,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <h4 id="name-issuer-protected-header">
 <a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-issuer-protected-header" class="section-name selfRef">Issuer Protected Header</a>
           </h4>
-<p id="section-4.1.1-1">The issuer protected header applies to all of the payloads equally.  It is recommended that any payload-specific information not be included in this header and instead be handled outside of the cryptographic envelope.  This is to minimize any correlatable signals in the metadata, to reduce a verifier's ability to group different presentations based on small header variations from the same issuer.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-1">The issuer protected header applies to all of the payloads equally.  It is recommended that any payload-specific information not be included in this header and instead be handled outside of the cryptographic envelope.  This is to minimize any correlatable signals in the metadata, to reduce a verifier's ability to group different presentations based on small header variations from the same issuer.
+The protected header is always disclosed, whereas payloads can be selectively disclosed.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-2">Every issuer protected header MUST have an <code>alg</code> value that identifies a valid JSON Proof Algorithm (JPA).<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-3">For example:<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-4.1.1-4">
@@ -1382,7 +1383,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
           </h4>
 <p id="section-4.2.2-1">Any one or more payloads may be non-disclosed in a presented JWP.  When a payload is not disclosed, the position of other payloads does not change; the resulting array will simply be sparse and only contain the disclosed payloads.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2.2-2">The disclosed payloads will always be in the same array positions to preserve any index-based references by the application between the issued and presented forms of the JWP.  How the sparse array is represented is specific to the serialization used.<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2.2-3">Algorithms MAY support including a proof about a payload in the presentation.  Applications then treat that proven payload the same as any other non-disclosed payload and do not include it in the presented array of payloads.<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2.2-3">Algorithms MAY support including a proof about a payload in the presentation.  Applications then treat that proven payload the same as any other non-disclosed payload and do not include it in the presented array of payloads.
+Rather, proofs about payloads, such as "age &gt;= 21", are included in the presentation proof.<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="presentation-proof">
@@ -1688,10 +1690,10 @@ PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
 <a href="#name-jwp-issuer-header-base64" class="selfRef">jwp-issuer-header-base64</a>
           </figcaption></figure>
 <p id="appendix-A.1-15">Each payload must also be individually encoded:<a href="#appendix-A.1-15" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-16">The first payload is the string <code>"Doe"</code> with the octet sequence of <code>[ 34, 68, 111, 101, 34 ]</code> and base64url-encoded as <code>IkRvZSI</code>.<a href="#appendix-A.1-16" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-17">The second payload is the string <code>"Jay"</code> with the octet sequence of <code>[ 34, 74, 97, 121, 34 ]</code> and base64url-encoded as <code>IkpheSI</code>.<a href="#appendix-A.1-17" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-18">The third payload is the string <code>"jaydoe@example.org"</code> with the octet sequence of <code>[ 34, 106, 97, 121, 100, 111, 101, 64, 101, 120, 97, 109, 112, 108, 101, 46, 111, 114, 103, 34 ]</code> and base64url-encoded as <code>ImpheWRvZUBleGFtcGxlLm9yZyI</code>.<a href="#appendix-A.1-18" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-19">The fourth payload is the string <code>42</code> with the octet sequence of <code>[52, 50]</code> and base64url-encoded as <code>NDI</code>.<a href="#appendix-A.1-19" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-16">The first payload is the JSON string <code>"Doe"</code> with the octet sequence of <code>[ 34, 68, 111, 101, 34 ]</code> and base64url-encoded as <code>IkRvZSI</code>.<a href="#appendix-A.1-16" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-17">The second payload is the JSON string <code>"Jay"</code> with the octet sequence of <code>[ 34, 74, 97, 121, 34 ]</code> and base64url-encoded as <code>IkpheSI</code>.<a href="#appendix-A.1-17" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-18">The third payload is the JSON string <code>"jaydoe@example.org"</code> with the octet sequence of <code>[ 34, 106, 97, 121, 100, 111, 101, 64, 101, 120, 97, 109, 112, 108, 101, 46, 111, 114, 103, 34 ]</code> and base64url-encoded as <code>ImpheWRvZUBleGFtcGxlLm9yZyI</code>.<a href="#appendix-A.1-18" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-19">The fourth payload is the JSON number <code>42</code> with the octet sequence of <code>[52, 50]</code> and base64url-encoded as <code>NDI</code>.<a href="#appendix-A.1-19" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-20">The Single Use algorithm utilizes multiple individual JWS Signatures.  Each signature value is generated by creating a JWS with a single Protected Header with the associated <code>alg</code> value. In this example, the fixed header used for each JWS is the serialized JSON Object <code>{"alg":"ES256"}</code>.  The JWS payload for each varies and the resulting signature value is used in its unencoded form (the octet string, not the base64url-encoded form).<a href="#appendix-A.1-20" class="pilcrow">¶</a></p>
 <p id="appendix-A.1-21">The first signature is generated by creating a JWS using the fixed header with the payload set to the octet string of the JPT protected header from earlier.  The resulting JWS signature using the Signer's <em>stable key</em> is the octet string of:<a href="#appendix-A.1-21" class="pilcrow">¶</a></p>
 <span id="name-jwp-issuer-header-signature"></span><figure id="figure-8">
