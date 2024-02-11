@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-08T00:35:43.221450+00:00",
+  "timestamp": "2024-02-11T00:39:14.970170+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -6711,24 +6711,26 @@
       "id": "PR_kwDOFsQObc5jimyI",
       "title": "Address some 2023 review questions",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/93",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Address some of the questions resulting from my end-of-year 2023 cover-to-cover review.",
       "createdAt": "2024-01-09T05:45:28Z",
-      "updatedAt": "2024-02-06T19:07:08Z",
+      "updatedAt": "2024-02-08T14:53:51Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "1ef3306e5cb8ff90ae2c40a85cbfdfb354716dce",
       "headRepository": "selfissued/json-web-proofs",
       "headRefName": "mbj-address-some-2023-review-questions",
       "headRefOid": "a1a79d55460c278a616fdab4535f9ee9c224ee1f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-02-08T14:53:51Z",
+      "mergedAt": "2024-02-08T14:53:51Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "63f019875a5dac2e8c98d598c45c37f01d81c36a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6762,6 +6764,19 @@
           "body": "",
           "createdAt": "2024-02-06T19:07:08Z",
           "updatedAt": "2024-02-06T19:07:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOFsQObc5vfJ4H",
+          "commit": {
+            "abbreviatedOid": "a1a79d5"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-08T14:53:42Z",
+          "updatedAt": "2024-02-08T14:53:42Z",
           "comments": []
         }
       ]
