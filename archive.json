@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-11T00:39:14.970170+00:00",
+  "timestamp": "2024-02-13T00:36:32.668564+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -281,7 +281,7 @@
       ],
       "body": "Similar to adapting JWP for JOSE by creating a new top-level type, COSE will also need the same treatment.\r\n\r\nCOSE currently has three major types for Sign, Encrypt, and Mac, each with their own variant for the common use cases of single signer/recipient of Sign1, Encrypt0, and Mac0.\r\n\r\nPlan is to introduce a fourth major type of Proof and Proof1, who's definition is very similar to Sign/Sign1 but instead of a bstr payload it would be:\r\n```cddl\r\nCOSE_Proof1 = [\r\n       Headers,\r\n       payloads : [+ bstr / nil],\r\n       proof : bstr\r\n]\r\n```\r\n",
       "createdAt": "2021-08-18T00:11:59Z",
-      "updatedAt": "2022-07-28T18:41:08Z",
+      "updatedAt": "2024-02-12T23:49:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -304,6 +304,20 @@
           "body": "In case you find that you need to make considerable modifications to JWT, creating a CBOR package from scratch may be an option: https://test.webpki.org/csf-lab/home\r\nCBOR deterministic serialization eliminates dressing headers, claims, etc. in Base64Url.  In diagnostic notation:\r\n\r\n```code\r\n{\r\n  \"Over 18\": true,\r\n  \"US citizen\": false,\r\n  \"SignatureValue\": {\r\n    1: -8,\r\n    4: {\r\n      1: 1,\r\n      -1: 6,\r\n      -2: h'fe49acf5b92b6e923594f2e83368f680ac924be93cf533aecaf802e37757f8c9'\r\n    },\r\n    6: h'3aa724ea90b0056d79c7e993f6f96ce16643d600e90ebf40b434461ac3aa6db6e6934ba61ed5d6cec51618b36b89c94f523d3851b9c9d7548f42fb582b257c0a'\r\n  }\r\n}\r\n```",
           "createdAt": "2022-07-28T18:41:08Z",
           "updatedAt": "2022-07-28T18:41:08Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Assigning to draft 6. We should create an up-to-date proposal and take it to the COSE WG.",
+          "createdAt": "2024-02-12T01:02:00Z",
+          "updatedAt": "2024-02-12T01:02:00Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We are chartered to do the CBOR/COSE/CWT version of JWPs in this working group.  I believe that spreading the work between working groups would only create unnecessary divergence in the representations.",
+          "createdAt": "2024-02-12T23:49:12Z",
+          "updatedAt": "2024-02-12T23:49:12Z"
         }
       ]
     },
@@ -1478,18 +1492,26 @@
       "id": "I_kwDOFsQObc5J2OT4",
       "title": "JWP Draft Publish TODO list",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/53",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
         "quartzjer"
       ],
       "labels": [],
-      "body": "This is tracking items to be done on the main JWP draft before being published as an IETF ID\r\n\r\n- [x] Decide on example (BBS vs. SU)\r\n- [x] Update SU-JWS alg naming (s/SU/JWS/)\r\n- [x] Finish MAC alg #48 \r\n- [ ] Add language for #27 \r\n- [ ] Formalize language\r\n- [ ] Verify/add all references\r\n- [ ] Decide on #50 \r\n- [ ] Introduce JPA/JPT #20 \r\n- [ ] #19 \r\n- [ ] #7 \r\n- [x] #8 \r\n- [x] #11 ",
+      "body": "This is tracking items to be done on the main JWP draft before being published as an IETF ID\r\n\r\n- [x] Decide on example (BBS vs. SU)\r\n- [x] Update SU-JWS alg naming (s/SU/JWS/)\r\n- [x] Finish MAC alg #48 \r\n- [x] Add language for #27 \r\n- [x] Formalize language\r\n- [x] Verify/add all references\r\n- [ ] Decide on #50 \r\n- [x] Introduce JPA/JPT #20 \r\n- [x] #19 \r\n- [ ] #7 \r\n- [x] #8 \r\n- [x] #11 ",
       "createdAt": "2022-05-17T17:28:09Z",
-      "updatedAt": "2023-11-10T15:23:03Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-02-12T01:00:49Z",
+      "closedAt": "2024-02-12T01:00:04Z",
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "aged pre-publication list. Closing in lieu of milestones",
+          "createdAt": "2024-02-12T01:00:05Z",
+          "updatedAt": "2024-02-12T01:00:05Z"
+        }
+      ]
     },
     {
       "number": 54,
@@ -6835,6 +6857,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 106,
+      "id": "PR_kwDOFsQObc5mlSOD",
+      "title": "Populate IANA Considerations Sections",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/106",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #76 ",
+      "createdAt": "2024-02-11T18:52:30Z",
+      "updatedAt": "2024-02-11T18:58:03Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "63f019875a5dac2e8c98d598c45c37f01d81c36a",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-iana-considerations",
+      "headRefOid": "7aba3dd52d49006e5884d672dccb5d8b8f3b4583",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
