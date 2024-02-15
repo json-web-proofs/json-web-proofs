@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-13T00:36:32.668564+00:00",
+  "timestamp": "2024-02-15T00:36:29.488102+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -1702,7 +1702,7 @@
       "id": "I_kwDOFsQObc5rXyL_",
       "title": "Need IANA considerations",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/76",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1713,8 +1713,8 @@
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> It would be nice to see an initial table for the requested registry similar to how HPKE established registries:\r\n>\r\n>   * https://www.rfc-editor.org/rfc/rfc9180.html#name-algorithm-identifiers\r\n>   * https://www.rfc-editor.org/rfc/rfc9180.html#name-kem-identifiers\r\n>\r\n> Similarly for any new reserved claims ( such as `pjwk` ), it would be nice to see them all in one place.",
       "createdAt": "2023-07-12T17:04:01Z",
-      "updatedAt": "2024-01-05T22:56:00Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-14T01:08:07Z",
+      "closedAt": "2024-02-14T01:08:07Z",
       "comments": [
         {
           "author": "selfissued",
@@ -6863,26 +6863,82 @@
       "id": "PR_kwDOFsQObc5mlSOD",
       "title": "Populate IANA Considerations Sections",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/106",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #76 ",
       "createdAt": "2024-02-11T18:52:30Z",
-      "updatedAt": "2024-02-11T18:58:03Z",
+      "updatedAt": "2024-02-14T01:08:06Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "63f019875a5dac2e8c98d598c45c37f01d81c36a",
       "headRepository": "selfissued/json-web-proofs",
       "headRefName": "mbj-iana-considerations",
-      "headRefOid": "7aba3dd52d49006e5884d672dccb5d8b8f3b4583",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "7a0d27d19eb19b5dc8aedb16ac86f2b55f353cab",
+      "closedAt": "2024-02-14T01:08:06Z",
+      "mergedAt": "2024-02-14T01:08:06Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "65f2568ce9b4a7ce99f693eb0ee2fe7669f84dae"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5v26MG",
+          "commit": {
+            "abbreviatedOid": "7aba3dd"
+          },
+          "author": "quartzjer",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Excellent!",
+          "createdAt": "2024-02-13T00:53:27Z",
+          "updatedAt": "2024-02-13T00:53:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOFsQObc5v9yY5",
+          "commit": {
+            "abbreviatedOid": "7aba3dd"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-13T16:41:44Z",
+          "updatedAt": "2024-02-13T16:44:08Z",
+          "comments": [
+            {
+              "originalPosition": 156,
+              "body": "We can go ahead and remove `cty`; we instead would establish a 'layout' that describes each payload slot's meaning. ",
+              "createdAt": "2024-02-13T16:41:44Z",
+              "updatedAt": "2024-02-13T16:44:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFsQObc5v9z7X",
+          "commit": {
+            "abbreviatedOid": "7aba3dd"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-13T16:44:41Z",
+          "updatedAt": "2024-02-13T16:44:42Z",
+          "comments": [
+            {
+              "originalPosition": 156,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-02-13T16:44:42Z",
+              "updatedAt": "2024-02-13T16:44:42Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
