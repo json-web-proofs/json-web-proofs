@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-15T00:36:29.488102+00:00",
+  "timestamp": "2024-02-18T00:38:33.131355+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -281,7 +281,7 @@
       ],
       "body": "Similar to adapting JWP for JOSE by creating a new top-level type, COSE will also need the same treatment.\r\n\r\nCOSE currently has three major types for Sign, Encrypt, and Mac, each with their own variant for the common use cases of single signer/recipient of Sign1, Encrypt0, and Mac0.\r\n\r\nPlan is to introduce a fourth major type of Proof and Proof1, who's definition is very similar to Sign/Sign1 but instead of a bstr payload it would be:\r\n```cddl\r\nCOSE_Proof1 = [\r\n       Headers,\r\n       payloads : [+ bstr / nil],\r\n       proof : bstr\r\n]\r\n```\r\n",
       "createdAt": "2021-08-18T00:11:59Z",
-      "updatedAt": "2024-02-12T23:49:12Z",
+      "updatedAt": "2024-02-15T19:08:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -318,6 +318,13 @@
           "body": "We are chartered to do the CBOR/COSE/CWT version of JWPs in this working group.  I believe that spreading the work between working groups would only create unnecessary divergence in the representations.",
           "createdAt": "2024-02-12T23:49:12Z",
           "updatedAt": "2024-02-12T23:49:12Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "If you want SPICE to look at it, we would be happy to help, but I feel it would make alignment more difficult.",
+          "createdAt": "2024-02-15T19:08:52Z",
+          "updatedAt": "2024-02-15T19:08:52Z"
         }
       ]
     },
@@ -811,17 +818,20 @@
       "id": "I_kwDOFsQObc4-mpxK",
       "title": "Define how JOSE registered header parameters apply to a JWP",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "dwaite",
+        "selfissued"
+      ],
       "labels": [
         "JWP"
       ],
       "body": "For example, all of the ones defined in [JWS](https://datatracker.ietf.org/doc/html/rfc7515) apply the same, except `cty` should be documented as not recommended.",
       "createdAt": "2021-11-10T21:20:36Z",
-      "updatedAt": "2021-11-11T19:55:09Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-17T22:27:51Z",
+      "closedAt": "2024-02-17T22:27:51Z",
       "comments": [
         {
           "author": "selfissued",
@@ -829,6 +839,20 @@
           "body": "I agree that we need to do this analysis.",
           "createdAt": "2021-11-11T19:55:09Z",
           "updatedAt": "2021-11-11T19:55:09Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Has this been completed by the recent IANA section work?",
+          "createdAt": "2024-02-16T22:34:13Z",
+          "updatedAt": "2024-02-16T22:34:13Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by PR #106",
+          "createdAt": "2024-02-17T22:27:51Z",
+          "updatedAt": "2024-02-17T22:27:51Z"
         }
       ]
     },
@@ -874,7 +898,7 @@
       ],
       "body": "Also add recommendation that algorithms support a single octet string serialization for higher level protocols.",
       "createdAt": "2021-11-10T22:36:05Z",
-      "updatedAt": "2021-12-14T18:52:21Z",
+      "updatedAt": "2024-02-16T22:36:25Z",
       "closedAt": null,
       "comments": [
         {
@@ -883,6 +907,13 @@
           "body": "yes, please times 1,000.... never again with EC point compression patent work arounds...",
           "createdAt": "2021-12-04T17:21:39Z",
           "updatedAt": "2021-12-04T17:21:39Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We need clarification on what change is pending for this issue, or if it has been resolved",
+          "createdAt": "2024-02-16T22:36:24Z",
+          "updatedAt": "2024-02-16T22:36:24Z"
         }
       ]
     },
@@ -891,17 +922,20 @@
       "id": "I_kwDOFsQObc4-m3hk",
       "title": "Document known algorithm features & predicate proof support",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/22",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "quartzjer",
+        "selfissued"
+      ],
       "labels": [
         "JPA"
       ],
       "body": "* range proof\r\n* equivalence\r\n* blind signatures\r\n* PoK\r\n* set (non-)membership\r\n\r\netc...",
       "createdAt": "2021-11-10T22:37:04Z",
-      "updatedAt": "2022-02-08T17:34:19Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-17T22:29:43Z",
+      "closedAt": "2024-02-17T22:29:42Z",
       "comments": [
         {
           "author": "quartzjer",
@@ -923,6 +957,20 @@
           "body": "\ud83e\udd14, a registry is an intriguing thought.  It would be established in the JPA draft as a place to identify different proof types.  While the details are always part of a specific JPA, I can see the benefit of unique identifiers of proof types supported by each.\r\n\r\nThis isn't quite PR-ready, but it's definitely something to re-evaluate in the near future.",
           "createdAt": "2022-02-08T17:34:19Z",
           "updatedAt": "2022-02-08T17:34:19Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Has this been resolved by the recent IANA considerations section?",
+          "createdAt": "2024-02-16T22:37:18Z",
+          "updatedAt": "2024-02-16T22:37:18Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe this was addressed by PR #106 ",
+          "createdAt": "2024-02-17T22:29:43Z",
+          "updatedAt": "2024-02-17T22:29:43Z"
         }
       ]
     },
@@ -1067,7 +1115,7 @@
       ],
       "body": "As we already know, the existing set of Json Web Algorithms (JWA) only really support proof of authenticity (I.e., that a message was signed by a certain key, and that it was not modified). I propose extending some of the existing JWAs, enabling them to support more extensive proof types such as selective-disclosure, compound proofs, and predicate proofs. \r\n\r\n \r\n\r\nI believe this could be achieved with the following approach. \r\n\r\n \r\n\r\nGenerating a digital signature. \r\n\r\n1. Create a vector Pedersen commitment on the messages (m1...mi). \r\n    * COMMITMENT = g<sub>1</sub><sup>m1</sup> * g<sub>2</sub><sup>m2</sup> * g<sub>i</sub><sup>mi</sup> * g<sub>n</sub><sup>nonce</sup> . \r\n2. Sign the commitment using an existing digital signature algorithm (e.g., [ECDSA](https://datatracker.ietf.org/doc/html/rfc7518#section-3.4)). \r\n    * SIGNING_INPUT = HASH (COMMITMENT) \r\n    * SIGNATURE = GENERATE_SIGNATURE (SIGNING_INPUT) \r\n\r\nGenerating a proof. \r\n\r\n1. Generate the required message proofs (MESSAGE_PROOFS), e.g., [selective-disclosure/proof-of-knowledge](https://github.com/hyperledger/ursa/blob/main/libzmix/bbs/src/pok_vc.rs) \r\n2. PROOF = (COMMITMENT, MESSAGE_PROOFS, SIGNATURE) \r\n\r\n \r\n\r\nVerifying a proof. \r\n\r\n1. VERIFICATION_INPUT = HASH (COMMITMENT) \r\n2. VERIFY_SIGNATURE (VERIFICATION_INPUT, SIGNATURE) \r\n3. VERIFY_MESSAGE_PROOFS (MESSAGE_PROOFS, COMMITMENT) \r\n\r\n \r\n\r\nThe homomorphic encryption property of a Pedersen Commitment would enable a prover to create a larger set of proof types on hidden messages. In fact, this is how the Ursa [BBS+](https://github.com/hyperledger/ursa/blob/d83240bea7e9c3fa48bb3bec208255e24c72423d/libzmix/bbs/src/lib.rs#L202) and [PS signatures](https://github.com/hyperledger/ursa/tree/main/libzmix/src/signatures/ps) implementations support it. \r\n\r\n \r\n\r\n### Some Pros and Cons of this approach \r\n\r\nPros: \r\n\r\n* A small component to implement on top of existing digital signature libraries \r\n* Allows for  multiple messages to be signed instead of one\r\n* Could enable predicate proofs\r\n* Could enable compound proofs, even between unlinkable proof algorithms such as BBS+ (needs some investigating) \r\n\r\nCons: \r\n* Proofs are still linkable \r\n\r\n### Jpa Identifier \r\n\r\nA JPA identifier for ES256 plus the described approach could be `ES256+C`, where `C` stands for commitment. \r\n\r\n \r\n### Pedersen Commitment Building Block\r\n\r\nAnother aspect to take into consideration is that the Pedersen Commitment is a building block for many of the ZKP proof algorithms. With this into consideration, I am wondering if we should create a section in the JPA draft spec to document the different proof algorithms that could be applied to Pedersen Commitments. JPAs can then refer to those algorithms.  \r\n\r\n \r\n\r\nUseful Links \r\n\r\n* https://asecuritysite.com/encryption/ped \r\n* [Vector Pedersen Commitment Proof of Knowledge URSA RFC (this is how selective disclosure is done for BBS+ and PS Signatures)](https://github.com/hyperledger/ursa-rfcs/tree/main/text/pok-vpc)\r\n\r\n \r\n\r\nNoah ",
       "createdAt": "2021-11-17T16:35:37Z",
-      "updatedAt": "2022-02-16T14:19:43Z",
+      "updatedAt": "2024-02-16T22:52:17Z",
       "closedAt": null,
       "comments": [
         {
@@ -1118,6 +1166,20 @@
           "body": "Hi @quartzjer,\r\n\r\nThat proposition interests me.\r\n\r\nCount me in for a chat before the next call.\r\n\r\nRegarding proof linkability, you are correct.\r\n\r\nA commitment that is signed using a traditional ECDSA algorithm is linkable because the value of `s` will not change. That said, the vector-commitment building block could be combined with a ZKP signature/proof algorithm (e.g., BBS+, PS Signatures, blind signatures) to support unlinkable proofs.\r\n\r\n",
           "createdAt": "2022-02-16T14:18:08Z",
           "updatedAt": "2022-02-16T14:19:43Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "FWIW, @OR13 's verkle reference is on a server which does not appear to currently be running, see instead https://web.archive.org/web/20231115115627/https://vitalik.ca/general/2021/06/18/verkle.html\r\n\r\n",
+          "createdAt": "2024-02-16T22:47:59Z",
+          "updatedAt": "2024-02-16T22:47:59Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This is a bit of a call-out to see if there is still interest in this family of algorithms.",
+          "createdAt": "2024-02-16T22:52:17Z",
+          "updatedAt": "2024-02-16T22:52:17Z"
         }
       ]
     },
@@ -1163,14 +1225,16 @@
       "state": "OPEN",
       "author": "OR13",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [
         "JPT",
         "PR-ready"
       ],
       "body": "Trivial claims, like these can easily be mapped to a payload array.\r\n\r\n```\r\n \"claims\": [\r\n    \"iat\",\r\n    \"exp\",\r\n    \"family_name\",\r\n    \"given_name\",\r\n    \"email\"\r\n  ]\r\n```\r\n\r\nOur use cases involve complex object usually of specific types... \r\n\r\nHow are objects supported by this spec?",
       "createdAt": "2021-12-10T15:43:41Z",
-      "updatedAt": "2022-02-08T17:24:18Z",
+      "updatedAt": "2024-02-17T22:58:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -1186,6 +1250,20 @@
           "body": "I'm going to mark this as a TODO for the next revision of JPT, to add an example claim that is a JSON object.",
           "createdAt": "2022-02-08T17:23:59Z",
           "updatedAt": "2022-02-08T17:23:59Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes, we certainly want to be able to have claims like \"address\" that are structured.  However, I don't think we want to go down the road that SD-JWT did to enable disclosure of parts of structured claims.  Like others, they should be all-or-nothing.",
+          "createdAt": "2024-02-17T22:56:02Z",
+          "updatedAt": "2024-02-17T22:56:02Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "yes, I'll just add a single `address` claim as a JSON object to the examples.",
+          "createdAt": "2024-02-17T22:58:23Z",
+          "updatedAt": "2024-02-17T22:58:23Z"
         }
       ]
     },
@@ -1235,13 +1313,15 @@
       "state": "OPEN",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [
         "JPT"
       ],
       "body": "Placeholder to track adding a full example of a JPT using the VC Data Model into the draft.",
       "createdAt": "2022-01-10T20:37:39Z",
-      "updatedAt": "2022-02-16T03:43:24Z",
+      "updatedAt": "2024-02-16T22:57:35Z",
       "closedAt": null,
       "comments": [
         {
@@ -1257,6 +1337,13 @@
           "body": "The example header would look more like:\r\n```json\r\n{\r\n  \"iss\": \"did:example:1234\",\r\n  \"vc\": { \r\n    \"type\": [\"VerifiableCredential\", \"BasicCredential\"],\r\n  },  \r\n  \"claims\": [\r\n    \"sub\",\r\n    \"nbf\",\r\n    \"exp\",\r\n    \"jti\",\r\n    \"family_name\",\r\n    \"given_name\",\r\n    \"email\",\r\n    \"age\"\r\n  ],\r\n  \"typ\": \"JPT\",\r\n  \"alg\": \"BBS-X\"\r\n}\r\n```\r\n\r\nThe header can only contain parameters/values that are a constant, if they are unique they become something that can be correlated.  All per-issuance values MUST be in a payload so that they can be selectively disclosed and unlinkable (when supported by the JPA).",
           "createdAt": "2022-02-16T03:43:23Z",
           "updatedAt": "2022-02-16T03:43:23Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "For draft 5: add comparable example based on current SD-JWT work, e.g. https://drafts.oauth.net/oauth-selective-disclosure-jwt/draft-ietf-oauth-selective-disclosure-jwt.html#name-example-4a-sd-jwt-based-ver",
+          "createdAt": "2024-02-16T22:57:31Z",
+          "updatedAt": "2024-02-16T22:57:31Z"
         }
       ]
     },
@@ -1340,7 +1427,7 @@
       "labels": [],
       "body": "When supporting unlinkability, a JPA can also support a form of \"binding\" that ensures any honest Prover is the only entity that can generate a valid proof when given a challenge from a Verifier.\r\n\r\nThis algorithmic-level binding primitive is different and separate from any higher level types of binding such as using a DID in a payload, a protocol-based Proof of Posession, keychain signatures, or ephemeral keys.  All of those types of higher level bindings are not able to provide unlinkability for a Prover when presenting the same JWP to multiple Verifiers.\r\n\r\nTODO: \r\n- [ ] Define Unlinkability (JWP)\r\n- [ ] Define Unlinkable Binding (JPA)\r\n- [ ] Define Linkable Binding (JPT)",
       "createdAt": "2022-01-25T20:13:02Z",
-      "updatedAt": "2022-01-25T20:13:02Z",
+      "updatedAt": "2024-02-16T22:58:07Z",
       "closedAt": null,
       "comments": []
     },
@@ -1349,15 +1436,17 @@
       "id": "I_kwDOFsQObc5DiA_D",
       "title": "Using registered JWT claim names",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/43",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Sakurann",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [],
       "body": "Can registered JWT claim names be used? if so, how? \r\nFor example, if I want to include issuance date and expiration date in JWP, should I use a header to do so?",
       "createdAt": "2022-02-11T19:15:11Z",
-      "updatedAt": "2022-02-16T03:30:39Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-17T01:31:35Z",
+      "closedAt": "2024-02-17T01:31:35Z",
       "comments": [
         {
           "author": "Sakurann",
@@ -1379,6 +1468,13 @@
           "body": "I think we'll likely need a separate registry where we re-register all the existing JWT claims and explain any capabilities added by JWP (such as using predicate proofs).\r\n\r\nThe one exception from this that I can think of is the `iss` claim.  That one should be in the protected header and not a payload.",
           "createdAt": "2022-02-16T03:30:39Z",
           "updatedAt": "2022-02-16T03:30:39Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The current JPT spec references that JWT claim names should come from the JWT IANA registry, and does not define any additional IANA registry for extending those claim values (such as providing for indicating capabilities like predicate proofs).\r\n\r\nCurrent JWP guidance is that things like predicate proofs would not be claims, but rather be part of the proof value itself.\r\n\r\nThe `iss` issuer protected header value is now listed in an initial registry section under JWP IANA considerations.\r\n\r\nI believe this can be closed.",
+          "createdAt": "2024-02-16T23:03:47Z",
+          "updatedAt": "2024-02-16T23:03:47Z"
         }
       ]
     },
@@ -1396,9 +1492,17 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-04-19T18:56:39Z",
-      "updatedAt": "2022-04-19T18:56:39Z",
+      "updatedAt": "2024-02-16T23:04:27Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Adding to the COSE/CBOR work planned for draft 6",
+          "createdAt": "2024-02-16T23:04:25Z",
+          "updatedAt": "2024-02-16T23:04:25Z"
+        }
+      ]
     },
     {
       "number": 50,
@@ -1412,7 +1516,7 @@
       "labels": [],
       "body": "H/T @OR13 on looping me into a thread about the difficulty (complete lack-of) of supporting multiple signatures in JWTs,  this is definitely a use case we should try to directly support for JWPs.\r\n\r\nMy initial take would be to extend the use of ~ to support compound issuer headers and proofs:\r\n`issuer_header_alice~issuer_header_bob.payload_1~payload_2~payload_3.issuer_proof_alice~issuer_proof_bob`\r\nand the presentation\r\n`issuer_header_alice~issuer_header_bob.payload_1~~payload_3.presentation_proof_alice~presentation_proof_bob`\r\n\r\nThe multiple issuer headers/proofs wouldn't have any intrinsic linking/relationship (unless they encoded such internally in their headers), so the presenter would be free to include/exclude whatever ones they choose to.  The verifier would be required to verify _all_ of them (that are included).",
       "createdAt": "2022-05-02T16:49:39Z",
-      "updatedAt": "2022-06-13T18:18:35Z",
+      "updatedAt": "2024-02-17T22:34:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -1484,6 +1588,20 @@
           "body": "I believe the flexibility will be there to do this within an algorithm definition. For example, use an `alg=\"BBS-MULTI\"` that is just an extension of the BBS alg that supports multiple signatures and has specific semantics around how they are validated.\r\n\r\nIf we adopt #59 then the algorithm can use the `~` to assist with this.",
           "createdAt": "2022-06-13T18:18:35Z",
           "updatedAt": "2022-06-13T18:18:35Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Is there interest in resurrecting this topic?",
+          "createdAt": "2024-02-16T23:12:54Z",
+          "updatedAt": "2024-02-16T23:12:54Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm skeptical of adding multiple signatures/proofs over the same payloads.  It seems like a lot of complexity to add to support an infrequent scenario.  That said, I'd be willing to be convinced if there are compelling use cases needing this functionality to support.\r\n\r\nMaybe we should discuss this possibility at IETF 119 in Brisbane.",
+          "createdAt": "2024-02-17T22:34:34Z",
+          "updatedAt": "2024-02-17T22:34:34Z"
         }
       ]
     },
@@ -1518,15 +1636,15 @@
       "id": "I_kwDOFsQObc5KwYxr",
       "title": "Consider renaming \"Json Proof Algorithm\" and \"JPA\"",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/54",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gabrielbauman",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "JPAs should probably be renamed.\r\n\r\n- There's an initialism [clash](https://duckduckgo.com/?q=jpa&kp=1&t=newext&atb=v316-1&ia=web) with Java Persistence API (JPA), making it hard to search for\r\n- Things like the Single Use JPA support multiple crypto \"algorithms\", which rapidly gets confusing: \"which algorithm does this JSON Proof Algorithm use?\"\r\n- Using the JOSE \"alg\" key to point to something other than a cryptographic algorithm seems like a stretch and doesn't follow the principle of least surprise\r\n\r\nI'd suggest \"JSON Proof Method\" or \"JSON Proof Strategy\".",
       "createdAt": "2022-05-31T17:53:46Z",
-      "updatedAt": "2024-01-01T02:38:21Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-16T23:13:34Z",
+      "closedAt": "2024-02-16T23:13:34Z",
       "comments": [
         {
           "author": "selfissued",
@@ -1534,6 +1652,13 @@
           "body": "This name is intentionally parallel to JSON Web Algorithms (JWA) [RFC 7518].\r\n\r\nConflicts among short acronyms are inevitable.  I was upset when IBM introduced the IBM PC, because up until that point in computer circles, PC stood for Program Counter.  I got over it. ;-)\r\n\r\nI don't see a compelling case for a name change.",
           "createdAt": "2024-01-01T02:38:20Z",
           "updatedAt": "2024-01-01T02:38:20Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "closing",
+          "createdAt": "2024-02-16T23:13:34Z",
+          "updatedAt": "2024-02-16T23:13:34Z"
         }
       ]
     },
@@ -1542,15 +1667,15 @@
       "id": "I_kwDOFsQObc5K50kT",
       "title": "Define and register media types for JWPs",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/55",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gabrielbauman",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "[Media type(s)](https://datatracker.ietf.org/doc/html/rfc6838) for JWPs will need to be defined and registered.\r\n\r\nFor comparison, JWTs use `application/jwt+json`.\r\n\r\nWe could similarly use `application/jwp+json` and leave it to applications to determine which form is being parsed. We could also consider registering multiple media types, one for each form. I'm not sure what the best practice is in this case.",
       "createdAt": "2022-06-01T18:04:14Z",
-      "updatedAt": "2024-01-01T02:39:00Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-16T23:14:20Z",
+      "closedAt": "2024-02-16T23:14:20Z",
       "comments": [
         {
           "author": "selfissued",
@@ -1558,6 +1683,13 @@
           "body": "Agreed, this is needed.",
           "createdAt": "2024-01-01T02:38:59Z",
           "updatedAt": "2024-01-01T02:38:59Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Types are now registered within the JSON Web Proof IANA considerations",
+          "createdAt": "2024-02-16T23:14:20Z",
+          "updatedAt": "2024-02-16T23:14:20Z"
         }
       ]
     },
@@ -1566,16 +1698,24 @@
       "id": "I_kwDOFsQObc5K58M4",
       "title": "Define requirements for JPAs",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/56",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gabrielbauman",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Implementations need to know which JPAs MUST and/or SHOULD be implemented, and which are OPTIONAL.",
       "createdAt": "2022-06-01T18:19:40Z",
-      "updatedAt": "2022-06-01T18:19:40Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-02-16T23:14:56Z",
+      "closedAt": "2024-02-16T23:14:56Z",
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This is part of the algorithm registry now defined by the JPA IANA Considerations.",
+          "createdAt": "2024-02-16T23:14:56Z",
+          "updatedAt": "2024-02-16T23:14:56Z"
+        }
+      ]
     },
     {
       "number": 57,
@@ -1592,9 +1732,24 @@
       ],
       "body": "I'd like to add another presentation form with five sections:\r\n`<presentation_header>.<issuer_header>.<payload_1>~<payload_2>.<presentation_proof>.<presentation_signature>`\r\n\r\nRight now, the SU/MAC algs incorporate the presentation signature into the proof and it doesn't feel right.  The holder should be able to choose their own presentation algorithm independently from the issuer, and it should be able to be any normal JWS one.  \r\n\r\nFor algorithms such as BBS that internally incorporate replay protection and presentation header support, they would remain four-part but also re-order to be consistent:\r\n`<presentation_header>.<issuer_header>.<payload_1>~<payload_2>.<presentation_proof>`\r\n",
       "createdAt": "2022-06-12T22:26:47Z",
-      "updatedAt": "2022-06-12T22:26:47Z",
+      "updatedAt": "2024-02-17T22:37:54Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I suspect this is part of a larger conversation about multi-signature/multi-proof structuring and whether that influences compact serialization/JSON serialization. See #50 ",
+          "createdAt": "2024-02-16T23:16:41Z",
+          "updatedAt": "2024-02-16T23:16:41Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe that we need make presentation signatures/proofs independent of the issuer, as @quartzjer suggests.",
+          "createdAt": "2024-02-17T22:37:53Z",
+          "updatedAt": "2024-02-17T22:37:53Z"
+        }
+      ]
     },
     {
       "number": 59,
@@ -1611,9 +1766,24 @@
       ],
       "body": "Having worked on the SU and MAC algo drafts which both make use of proof values that are actually arrays, I would like to update the JPT core definition to treat all proof values as an array natively.\r\n\r\nThe array would be identical to how payloads are encoded, in compact it would use `~` separator, and in JSON it would simply be an array of base64url-encoded strings.\r\n\r\nThe JWP implementation would be required to always decode it into an array of individual variable-length octet strings and then pass that array into the algorithm, even if there is only one item.\r\n\r\nThis provides notable cryptographic simplification benefit to algorithm definitions, such that they don't have to internally define their own separators, padding, etc.",
       "createdAt": "2022-06-12T23:00:44Z",
-      "updatedAt": "2022-06-12T23:00:44Z",
+      "updatedAt": "2024-02-17T22:39:18Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I would be in favor of this. We do have signatures formed from combining binary data in JWA (such as ECDSA), but these have a fixed binary format. The addition of multiple payloads and of additional proof elements like predicate proofs would appear to create a need for dynamically sized binary data however, which means we are both putting on a burden for algorithms to create a scheme and a risk of additional out-of-bounds conditions in implementations.\r\n\r\nThis would mean we should probably make the JPA proof representation consistently into an array of binary values.",
+          "createdAt": "2024-02-16T23:21:03Z",
+          "updatedAt": "2024-02-16T23:21:03Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Doing this makes sense to me.",
+          "createdAt": "2024-02-17T22:39:17Z",
+          "updatedAt": "2024-02-17T22:39:17Z"
+        }
+      ]
     },
     {
       "number": 65,
@@ -1776,7 +1946,7 @@
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> An example with a mixed algorithm for issue and holder would be nice here,\r\nor a comment about it being forbidden... for example issuer signing with\r\nES256 and holder presenting with EdDSA.",
       "createdAt": "2023-07-13T06:15:20Z",
-      "updatedAt": "2024-01-05T22:39:21Z",
+      "updatedAt": "2024-02-17T22:42:06Z",
       "closedAt": null,
       "comments": [
         {
@@ -1785,6 +1955,20 @@
           "body": "Clearly the issuer and holder algorithms have to be able to be different.  I'll review the specs with this in mind.",
           "createdAt": "2024-01-01T02:46:22Z",
           "updatedAt": "2024-01-01T02:46:22Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I believe this work has been done, @selfissued are you ok with this being closed?",
+          "createdAt": "2024-02-17T00:07:10Z",
+          "updatedAt": "2024-02-17T00:07:10Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Let's consider this together with #57.  On the surface of it, it seems that we have to to address that one to address this one.",
+          "createdAt": "2024-02-17T22:42:05Z",
+          "updatedAt": "2024-02-17T22:42:05Z"
         }
       ]
     },
@@ -1802,7 +1986,7 @@
       "labels": [],
       "body": "What, if any, should the relationship be between JWP and JWE?\r\n\r\nThis Issue is to track the question that was brought up during IETF 117.",
       "createdAt": "2023-07-25T22:27:38Z",
-      "updatedAt": "2024-01-05T22:35:33Z",
+      "updatedAt": "2024-02-17T00:08:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -1818,6 +2002,13 @@
           "body": "I suspect that encryption with JWP are going to be part of storage protection or transport, e.g. wrapping a JWP in JWE.\r\n\r\n",
           "createdAt": "2024-01-05T22:35:32Z",
           "updatedAt": "2024-01-05T22:35:32Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Setting a reminder for draft 6 to potentially describe JWE wrapping a JWP for issuance/presentation. ",
+          "createdAt": "2024-02-17T00:08:18Z",
+          "updatedAt": "2024-02-17T00:08:18Z"
         }
       ]
     },
@@ -1859,9 +2050,24 @@
       "labels": [],
       "body": "Currently, the algorithms provided naturally have a single issuer for the underlying information we are proving statements about. However, in trying to add support for more general-purpose ZKPs (R1CS, for instance), I don't think this is general enough. In particular, here is a natural proposal for a 2-issuer proof in the context of verifiable credentials: \"exists X. I have a birth certificate with social security number X, and a background check issued for citizen with social security number X\". By forcing all of the information required by the verifier to be provided by a single \"issued proof\", we are undermining the privacy properties of the protocols which more general zero-knowledge proofs enable.\r\n\r\nI propose we change the language in the web-proofs draft to allow for multiple \"issued proofs\". Because they are no longer 1-to-1 with proofs, I also propose to bikeshed the language here: Let's call them \"issued facts\" instead, or \"provable facts\".",
       "createdAt": "2023-11-12T15:09:53Z",
-      "updatedAt": "2024-01-05T22:32:20Z",
+      "updatedAt": "2024-02-17T22:43:39Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Related to #57 ",
+          "createdAt": "2024-02-17T00:08:51Z",
+          "updatedAt": "2024-02-17T00:08:51Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think it's even more closely related to #50.",
+          "createdAt": "2024-02-17T22:43:38Z",
+          "updatedAt": "2024-02-17T22:43:38Z"
+        }
+      ]
     },
     {
       "number": 91,
@@ -1875,7 +2081,7 @@
       "labels": [],
       "body": "I would like to contribute to the official JS implementation of your spec, and to make it super easy for anyone to integrate JWP in their apps. I could take care of developing a clean architecture for the lib, implementing the spec, writing tests, publishing the lib, writing examples for different use-cases / platforms (browser, mobile, server). I've been working with VCs/DIDs/DWNs for the past year and have experience in building isomorphic JS libs.\r\nIs this something you have on your roadmap?",
       "createdAt": "2023-12-03T10:46:12Z",
-      "updatedAt": "2024-01-01T07:22:36Z",
+      "updatedAt": "2024-02-17T00:25:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -1884,6 +2090,13 @@
           "body": "I'm curious - which of the algorithms did you build?  All of Single-Use, BBS, and MAC?",
           "createdAt": "2024-01-01T07:22:34Z",
           "updatedAt": "2024-01-01T07:22:34Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@pax-k We would love more implementations!\r\n\r\nSince our goal is to describe interoperability in specifications rather than to say that a particular implementation is authoritatively \"correct\", we don't really encourage one implementation over others. That said, we do use Node to generate examples and the like today, and could certainly use something a bit better than our barebones scripts to do things like generate examples and even maintain test vectors.",
+          "createdAt": "2024-02-17T00:25:06Z",
+          "updatedAt": "2024-02-17T00:25:06Z"
         }
       ]
     },
@@ -2034,9 +2247,17 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-01-09T22:45:26Z",
-      "updatedAt": "2024-01-09T22:45:26Z",
+      "updatedAt": "2024-02-17T23:03:43Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is important.",
+          "createdAt": "2024-02-17T23:03:42Z",
+          "updatedAt": "2024-02-17T23:03:42Z"
+        }
+      ]
     },
     {
       "number": 102,
@@ -2050,9 +2271,17 @@
       "labels": [],
       "body": "Define the use of an `\"aud\"` presentation header parameter to be suggested alongside `\"nonce\"`",
       "createdAt": "2024-01-09T22:54:59Z",
-      "updatedAt": "2024-01-09T22:55:00Z",
+      "updatedAt": "2024-02-17T23:06:39Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe that `aud` should be a claim rather than a header parameter.  Same with `nonce`.\r\n\r\nBut I agree that we should discuss this.",
+          "createdAt": "2024-02-17T23:06:37Z",
+          "updatedAt": "2024-02-17T23:06:37Z"
+        }
+      ]
     },
     {
       "number": 103,
@@ -2066,9 +2295,17 @@
       "labels": [],
       "body": "Per discussion in IETF 118 microphone comments, should we keep algorithms which do not have a reasonably inexpensive nonsinkable presentation.",
       "createdAt": "2024-01-09T23:01:58Z",
-      "updatedAt": "2024-01-09T23:01:59Z",
+      "updatedAt": "2024-02-17T23:09:35Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Being able to represent and use non-ZKP algorithms is a forcing function that we're writing the specifications in widely-applicable manner.  That doesn't mean that, in the end, we need to have the single-use algorithms be REQUIRED or even RECOMMENDED.  But I'm loathe to rip them out now, because having multiple algorithms and multiple kinds of algorithms will help keep us honest.",
+          "createdAt": "2024-02-17T23:09:34Z",
+          "updatedAt": "2024-02-17T23:09:34Z"
+        }
+      ]
     },
     {
       "number": 104,
@@ -6937,6 +7174,46 @@
               "updatedAt": "2024-02-13T16:44:42Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 107,
+      "id": "PR_kwDOFsQObc5nI8pB",
+      "title": "Update draft-ietf-jose-json-proof-token.md to add more language about\u2026",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/107",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026 semantic understanding of claims\r\n\r\nFixes #17",
+      "createdAt": "2024-02-16T22:32:38Z",
+      "updatedAt": "2024-02-17T22:25:51Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "65f2568ce9b4a7ce99f693eb0ee2fe7669f84dae",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "issue-17",
+      "headRefOid": "a67cf864841279853c04502663770b2e1351e6ea",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5wee0j",
+          "commit": {
+            "abbreviatedOid": "a67cf86"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "What does this statement enable?\r\n> Holders SHOULD understand the semantics of all disclosed claims.\r\n\r\nPut another way, is there any downside to having holders disclose claims syntactically, without having any deep semantic understanding of their meaning?  If there's no downside, we should delete or modify this sentence.",
+          "createdAt": "2024-02-17T22:25:26Z",
+          "updatedAt": "2024-02-17T22:25:51Z",
+          "comments": []
         }
       ]
     }
