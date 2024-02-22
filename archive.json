@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-20T00:35:35.037484+00:00",
+  "timestamp": "2024-02-22T00:35:51.352820+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -1427,9 +1427,17 @@
       "labels": [],
       "body": "When supporting unlinkability, a JPA can also support a form of \"binding\" that ensures any honest Prover is the only entity that can generate a valid proof when given a challenge from a Verifier.\r\n\r\nThis algorithmic-level binding primitive is different and separate from any higher level types of binding such as using a DID in a payload, a protocol-based Proof of Posession, keychain signatures, or ephemeral keys.  All of those types of higher level bindings are not able to provide unlinkability for a Prover when presenting the same JWP to multiple Verifiers.\r\n\r\nTODO: \r\n- [ ] Define Unlinkability (JWP)\r\n- [ ] Define Unlinkable Binding (JPA)\r\n- [ ] Define Linkable Binding (JPT)",
       "createdAt": "2022-01-25T20:13:02Z",
-      "updatedAt": "2024-02-16T22:58:07Z",
+      "updatedAt": "2024-02-20T22:48:24Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Per discussion with @dwaite on the JWP editors' call, we think that these should be defined in JWP.",
+          "createdAt": "2024-02-20T22:48:22Z",
+          "updatedAt": "2024-02-20T22:48:22Z"
+        }
+      ]
     },
     {
       "number": 43,
@@ -1516,7 +1524,7 @@
       "labels": [],
       "body": "H/T @OR13 on looping me into a thread about the difficulty (complete lack-of) of supporting multiple signatures in JWTs,  this is definitely a use case we should try to directly support for JWPs.\r\n\r\nMy initial take would be to extend the use of ~ to support compound issuer headers and proofs:\r\n`issuer_header_alice~issuer_header_bob.payload_1~payload_2~payload_3.issuer_proof_alice~issuer_proof_bob`\r\nand the presentation\r\n`issuer_header_alice~issuer_header_bob.payload_1~~payload_3.presentation_proof_alice~presentation_proof_bob`\r\n\r\nThe multiple issuer headers/proofs wouldn't have any intrinsic linking/relationship (unless they encoded such internally in their headers), so the presenter would be free to include/exclude whatever ones they choose to.  The verifier would be required to verify _all_ of them (that are included).",
       "createdAt": "2022-05-02T16:49:39Z",
-      "updatedAt": "2024-02-17T22:34:36Z",
+      "updatedAt": "2024-02-20T22:14:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -1602,6 +1610,13 @@
           "body": "I'm skeptical of adding multiple signatures/proofs over the same payloads.  It seems like a lot of complexity to add to support an infrequent scenario.  That said, I'd be willing to be convinced if there are compelling use cases needing this functionality to support.\r\n\r\nMaybe we should discuss this possibility at IETF 119 in Brisbane.",
           "createdAt": "2024-02-17T22:34:34Z",
           "updatedAt": "2024-02-17T22:34:34Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@dwaite and I propose to close this unless concrete use cases necessitating multiple is endorsed by the working group.",
+          "createdAt": "2024-02-20T22:14:55Z",
+          "updatedAt": "2024-02-20T22:14:55Z"
         }
       ]
     },
@@ -1725,14 +1740,16 @@
       "state": "OPEN",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "quartzjer"
+      ],
       "labels": [
         "JPA",
         "JWP"
       ],
       "body": "I'd like to add another presentation form with five sections:\r\n`<presentation_header>.<issuer_header>.<payload_1>~<payload_2>.<presentation_proof>.<presentation_signature>`\r\n\r\nRight now, the SU/MAC algs incorporate the presentation signature into the proof and it doesn't feel right.  The holder should be able to choose their own presentation algorithm independently from the issuer, and it should be able to be any normal JWS one.  \r\n\r\nFor algorithms such as BBS that internally incorporate replay protection and presentation header support, they would remain four-part but also re-order to be consistent:\r\n`<presentation_header>.<issuer_header>.<payload_1>~<payload_2>.<presentation_proof>`\r\n",
       "createdAt": "2022-06-12T22:26:47Z",
-      "updatedAt": "2024-02-17T22:37:54Z",
+      "updatedAt": "2024-02-20T22:17:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -1748,6 +1765,13 @@
           "body": "I believe that we need make presentation signatures/proofs independent of the issuer, as @quartzjer suggests.",
           "createdAt": "2024-02-17T22:37:53Z",
           "updatedAt": "2024-02-17T22:37:53Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Could use clarity around examples",
+          "createdAt": "2024-02-20T22:17:35Z",
+          "updatedAt": "2024-02-20T22:17:35Z"
         }
       ]
     },
@@ -1759,14 +1783,16 @@
       "state": "OPEN",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [
         "JPT",
         "JPA"
       ],
       "body": "Having worked on the SU and MAC algo drafts which both make use of proof values that are actually arrays, I would like to update the JPT core definition to treat all proof values as an array natively.\r\n\r\nThe array would be identical to how payloads are encoded, in compact it would use `~` separator, and in JSON it would simply be an array of base64url-encoded strings.\r\n\r\nThe JWP implementation would be required to always decode it into an array of individual variable-length octet strings and then pass that array into the algorithm, even if there is only one item.\r\n\r\nThis provides notable cryptographic simplification benefit to algorithm definitions, such that they don't have to internally define their own separators, padding, etc.",
       "createdAt": "2022-06-12T23:00:44Z",
-      "updatedAt": "2024-02-17T22:39:18Z",
+      "updatedAt": "2024-02-20T22:24:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -1782,6 +1808,13 @@
           "body": "Doing this makes sense to me.",
           "createdAt": "2024-02-17T22:39:17Z",
           "updatedAt": "2024-02-17T22:39:17Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Will do a prototype to evaluate for draft 3",
+          "createdAt": "2024-02-20T22:24:01Z",
+          "updatedAt": "2024-02-20T22:24:01Z"
         }
       ]
     },
@@ -2041,7 +2074,7 @@
       "id": "I_kwDOFsQObc52lIJC",
       "title": "Multiple Issuers",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/90",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SamuelSchlesinger",
       "authorAssociation": "NONE",
       "assignees": [
@@ -2050,8 +2083,8 @@
       "labels": [],
       "body": "Currently, the algorithms provided naturally have a single issuer for the underlying information we are proving statements about. However, in trying to add support for more general-purpose ZKPs (R1CS, for instance), I don't think this is general enough. In particular, here is a natural proposal for a 2-issuer proof in the context of verifiable credentials: \"exists X. I have a birth certificate with social security number X, and a background check issued for citizen with social security number X\". By forcing all of the information required by the verifier to be provided by a single \"issued proof\", we are undermining the privacy properties of the protocols which more general zero-knowledge proofs enable.\r\n\r\nI propose we change the language in the web-proofs draft to allow for multiple \"issued proofs\". Because they are no longer 1-to-1 with proofs, I also propose to bikeshed the language here: Let's call them \"issued facts\" instead, or \"provable facts\".",
       "createdAt": "2023-11-12T15:09:53Z",
-      "updatedAt": "2024-02-17T22:43:39Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-20T22:15:47Z",
+      "closedAt": "2024-02-20T22:15:46Z",
       "comments": [
         {
           "author": "dwaite",
@@ -2066,6 +2099,13 @@
           "body": "I think it's even more closely related to #50.",
           "createdAt": "2024-02-17T22:43:38Z",
           "updatedAt": "2024-02-17T22:43:38Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing since this is a duplicate of #50.",
+          "createdAt": "2024-02-20T22:15:46Z",
+          "updatedAt": "2024-02-20T22:15:46Z"
         }
       ]
     },
@@ -2116,9 +2156,17 @@
       ],
       "body": "In review, we interpreted this old comment as the presentation proof needs to sign over the entire derived message (issuer header and presented payloads) rather than just the header. this changes the SU and MAC based algorithms.",
       "createdAt": "2024-01-09T22:14:50Z",
-      "updatedAt": "2024-01-09T22:30:20Z",
+      "updatedAt": "2024-02-20T22:24:47Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I will evaluate as part of my work on resolving #59 ",
+          "createdAt": "2024-02-20T22:24:46Z",
+          "updatedAt": "2024-02-20T22:24:46Z"
+        }
+      ]
     },
     {
       "number": 95,
@@ -2243,11 +2291,13 @@
       "state": "OPEN",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [],
       "body": "",
       "createdAt": "2024-01-09T22:45:26Z",
-      "updatedAt": "2024-02-17T23:03:43Z",
+      "updatedAt": "2024-02-20T22:30:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -2256,6 +2306,13 @@
           "body": "This is important.",
           "createdAt": "2024-02-17T23:03:42Z",
           "updatedAt": "2024-02-17T23:03:42Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Will add special case for compact encoding that an underscore (`_`) represents a zero length payload.",
+          "createdAt": "2024-02-20T22:30:42Z",
+          "updatedAt": "2024-02-20T22:30:42Z"
         }
       ]
     },
@@ -2320,6 +2377,24 @@
       "body": "",
       "createdAt": "2024-01-09T23:02:20Z",
       "updatedAt": "2024-01-09T23:02:20Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 108,
+      "id": "I_kwDOFsQObc5_4FT1",
+      "title": "Update BBS to latest draft",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/108",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "dwaite"
+      ],
+      "labels": [],
+      "body": "Currently draft 5",
+      "createdAt": "2024-02-20T22:35:37Z",
+      "updatedAt": "2024-02-20T22:35:37Z",
       "closedAt": null,
       "comments": []
     }
@@ -7189,7 +7264,7 @@
       "labels": [],
       "body": "\u2026 semantic understanding of claims\r\n\r\nFixes #17",
       "createdAt": "2024-02-16T22:32:38Z",
-      "updatedAt": "2024-02-17T22:25:51Z",
+      "updatedAt": "2024-02-20T22:41:29Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "65f2568ce9b4a7ce99f693eb0ee2fe7669f84dae",
@@ -7214,6 +7289,26 @@
           "createdAt": "2024-02-17T22:25:26Z",
           "updatedAt": "2024-02-17T22:25:51Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOFsQObc5wwWXZ",
+          "commit": {
+            "abbreviatedOid": "a67cf86"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T22:41:29Z",
+          "updatedAt": "2024-02-20T22:41:29Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nWhile JWPs provide the underling structure for easily supporting selective disclosure, JPTs must go a step further to ensure that holders can effectively provide choice and consent on exactly what is being disclosed.  Software using JWPs MUST know the mappings from payloads to claims. All disclosed payloads MUST be mapped to claims and made accessible to the application.  Holders SHOULD understand the semantics of all potentially disclosed claims to the extent needed to decide whether to disclose them. JPTs SHOULD NOT contain claims that are intended only for a specific verifier.\r\n```",
+              "createdAt": "2024-02-20T22:41:29Z",
+              "updatedAt": "2024-02-20T22:41:29Z"
+            }
+          ]
         }
       ]
     }
