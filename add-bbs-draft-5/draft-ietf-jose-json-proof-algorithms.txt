@@ -448,11 +448,11 @@ Table of Contents
    The key used for the BBS-DRAFT-5 algorithm is an elliptic curve-based
    key pair, specifically against the G_2 subgroup of a pairing friendly
    curve.  Additional details on key generation can be found in
-   Section 3.3
+   Section 3.4
 
    The JWK form of this key is an OKP type with a curve of BLs12381G2,
    with x being the BASE64URL-encoded form of the output of
-   point_to_octets_g2.  The use of this curve is described in
+   point_to_octets_E2.  The use of this curve is described in
    [I-D.looker-cose-bls-key-representations].
 
    {
@@ -460,10 +460,10 @@ Table of Contents
      "alg": "BBS-DRAFT-3",
      "use": "proof",
      "crv": "BLs12381G2",
-     "x": "uCvsxMyG5dY0zx_xFHywDLjRI-bagGjb-97QIS9k9XQbPJJ5H7d_uhVB5Xbs6
-          v46CJeFzfZ61O6Ds6c0PmYu-_NUoH51rW--Wdl6RehqD0RyAsADDehduRy90vD
-          7MQn2",
-     "d": "ZPUUsHSawxy-6rk5NP8hh9XD1djGB9jLSD9tVGwg4dA"
+     "x": "tReOQjuJ_cOxj4IfpsXZVMiH52t1NTEnXDAtrjYpvQxrBfo6LTLAwCb6-Z_rh
+          ZOZDOiTaZp_UmkdG-dEIgGhAUDNL3e-Bgwily-eCPX0cA15qIe24XzAbwWNO4A
+          DxGUK",
+     "d": "F91NBtSsjtRhYxpvdwIkHTRRflBIkdvo24TMYi8K6KM"
    }
 
                   Figure 1: BBS private key in JWK format
@@ -472,7 +472,7 @@ Table of Contents
 
 6.2.3.  Issuance
 
-   Issuance is performed using the Sign operation from Section 3.4.1 of
+   Issuance is performed using the Sign operation from Section 3.5.1 of
    [I-D.irtf-cfrg-bbs-signatures].  This operation utilizes the issuer's
    BLS12-381 G2 key pair as SK and PK, along with desired protected
    header and payloads as the octets header and the octets array
@@ -521,24 +521,24 @@ Table of Contents
        "ImpheWRvZUBleGFtcGxlLm9yZyI",
        "NDI"
      ],
-     "proof": "hULn4ItGheohZ7hdr8tywoTW_U8WiepimQ1fFYbxV_jJFFAIjpRa6g32b
-          6spptJ4Pv5VJMq4E2PZ5gJZKgxN-AegGs2wNrisAbdOitQk7s0"
+     "proof": "rDDqO-A5SLoq8PUxKb1ic4QiPfWGuF5myE5rpqbcSR2eaQmCeH_elOC6S
+          J7U0oEBItqdJhvEgyeX4MV42x9PuS8rBL4gw5sZpIhNxvlbCJA"
    }
 
                  Figure 4: Issued JWP (JSON serialization)
 
    eyJhbGciOiJCQlMtRFJBRlQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
    WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
-   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.hUL
-   n4ItGheohZ7hdr8tywoTW_U8WiepimQ1fFYbxV_jJFFAIjpRa6g32b6spptJ4Pv5VJMq4
-   E2PZ5gJZKgxN-AegGs2wNrisAbdOitQk7s0
+   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.rDD
+   qO-A5SLoq8PUxKb1ic4QiPfWGuF5myE5rpqbcSR2eaQmCeH_elOC6SJ7U0oEBItqdJhvE
+   gyeX4MV42x9PuS8rBL4gw5sZpIhNxvlbCJA
 
                 Figure 5: Issued JWP (compact serialization)
 
 6.2.4.  Issuance Proof Verification
 
    Holder verification of the signature on issuance form is performed
-   using the Verify operation from Section 3.4.2 of
+   using the Verify operation from Section 3.5.2 of
    [I-D.irtf-cfrg-bbs-signatures].
 
    This operation utilizes the issuer's public key as PK, the proof as
@@ -548,7 +548,7 @@ Table of Contents
 6.2.5.  Presentation
 
    Derivation of a presentation is done by the holder using the ProofGen
-   operation from Section 3.4.3 of [I-D.irtf-cfrg-bbs-signatures].
+   operation from Section 3.5.3 of [I-D.irtf-cfrg-bbs-signatures].
 
    This operation utilizes the issuer's public key as PK, the issuer
    protected header as header, the issuance proof as signature, the
@@ -588,28 +588,27 @@ Table of Contents
    mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
    lQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
    FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
-   vZSI~IkpheSI~~NDI.tv_xMlQ-yv64cKJQfFjIIYLKbiGdmHX8TG5nvR18oZbfdto0vbW
-   5az-Okh2WfTvHuboU-UjAZQ2T5yuF04kEvrD5nNUXZrWVhi-q4jhzYeiO8EU6KBu_UWfa
-   sVRHddrJb2SrCoEBNvayrc5K7novwD0NXBz1IV5vxiDc4rQFv8YhbL8XMaK9hvlrhA_jB
-   mMDJcnjPVRCKu4tW5XzHhrJuD-c4AdRtkiWzN1yo9uUoWCt4uwSXjpdKPGGwfx7jgAhE-
-   Oq3B1QVORnK8Jp1VbHq3UrHkFdN5snsF3GAO0OyuA
+   vZSI~IkpheSI~~NDI.pIJba6IK7KwbMtRotWtvC29UYLIip1l_3BqxX7Ew1YiKBcVZbrK
+   _mnBLueQfRao5p9KphnGmTLhQbJoDWsvchUC2i3JFSnhAvpoBHiJx9AruHXk2UCZ0Wl3D
+   gO8nmrCOPmKKPqKRhF8V-MsNYbITcxnvHxVSsgivC0x4Yw_ABJA0pK8MGQk3yHVng7pOE
+   7_ZWIob4H-tFipAFk_V2IkphTyVjyGWZqT5vQEU5wKy_swdeS2XYaeDDmfAW-06r5ERN6
+   Vd7xMjGD80crsJOe7-h2yhr10U27gz6dWjIg-jsfQ
 
              Figure 7: Presentation JWP (compact serialization)
 
 6.2.6.  Presentation Verification
 
    Verification of a presentation is done by the verifier using the
-   ProofVerify operation from Section 3.4.4.
+   ProofVerify operation from Section 3.5.4.
 
    This operation utilizes the issuer's public key as PK, the issuer
    protected header as header, the issuance proof as signature, the
    holder's presentation protected header as ph, and the payloads as
    disclosed_messages.
 
-   In addition, the disclosed_indexes vector value is calculated from
-   the payloads.  For each absent value in payloads (null in JSON
-   serialization or a zero-length string in compact serialization), the
-   index of that payload is added to this vector.
+   In addition, the disclosed_indexes scalar array is calculated from
+   the payloads provided.  For each absent value in the presented
+   payloads, the index of that payload is added to this vector.
 
 6.3.  Message Authentication Code
 
