@@ -5,10 +5,10 @@
 jose                                                           J. Miller
 Internet-Draft                                             Ping Identity
 Intended status: Standards Track                                M. Jones
-Expires: 19 August 2024                           Self-Issued Consulting
+Expires: 30 August 2024                           Self-Issued Consulting
                                                                 D. Waite
                                                            Ping Identity
-                                                        16 February 2024
+                                                        27 February 2024
 
 
                             JSON Proof Token
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 August 2024.
+   This Internet-Draft will expire on 30 August 2024.
 
 Copyright Notice
 
@@ -149,7 +149,8 @@ Table of Contents
    being disclosed.  Software using JWPs MUST know the mappings from
    payloads to claims.  All disclosed payloads MUST be mapped to claims
    and made accessible to the application.  Holders SHOULD understand
-   the semantics of all disclosed claims.  JPTs SHOULD NOT contain
+   the semantics of all potentially disclosed claims to the extent
+   needed to decide whether to disclose them.  JPTs SHOULD NOT contain
    claims that are intended only for a specific verifier.
 
 4.3.  Familiarity
