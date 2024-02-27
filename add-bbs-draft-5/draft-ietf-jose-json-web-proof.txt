@@ -255,7 +255,7 @@ Table of Contents
    For example:
 
    {
-       "alg":"BBS-DRAFT-3"
+       "alg":"BBS-DRAFT-5"
    }
 
 4.1.2.  Issuer Payloads
@@ -893,7 +893,7 @@ A.1.  Example Single-Use JWP
 
 A.2.  Example Multi-Use JWP
 
-   See JPA BBS-DRAFT-3 example.
+   See JPA BBS-DRAFT-5 example.
 
 Appendix B.  Acknowledgements
 

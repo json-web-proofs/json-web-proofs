@@ -1537,13 +1537,13 @@ It MAY support additional options such as those sent to the holder to generate t
             <div class="lang-wrapped sourcecode" id="section-6.2.2-3.1">
 <pre>{
   "kty": "OKP",
-  "alg": "BBS-DRAFT-3",
+  "alg": "BBS-DRAFT-5",
   "use": "proof",
   "crv": "BLs12381G2",
-  "x": "mIX9UqRsogCPXk3Mlz_AKEclvqefLu3COq5hBa-QffNY2oI4HUxPFoyO31Q50
-       gT3FgH1EmCB_qu6EFf6JECKfumT1lfq3bbuQ_M05zcI0i_8Nz50JC_Cu-AfDA2
-       NxYpd",
-  "d": "EoPfuA8JEtz-oRrgLQCzINweh1RscnqIPf6vvT4Kmiw"
+  "x": "phVdRq1XbNGoYXdrr6BJKKh-gxqJyEiTBeTKj5IMmGE1po1kk6gpckjbS-VKa
+       4aNDWMKq8ODdtfXNuUstJAw38lSeACOvld0rfKnbJ5LBENIOIlhxIYOqPCDiF-
+       48EAt",
+  "d": "DRxPD8nkwp_H3Xtgibo4IY820m9xDmuVU9Yhas_AxVs"
 }
 
 </pre>
@@ -1565,7 +1565,7 @@ It MAY support additional options such as those sent to the holder to generate t
 <span id="name-example-issuer-protected-he"></span><figure id="figure-2">
             <div class="lang-json sourcecode" id="section-6.2.3-4.1">
 <pre>{
-    "alg": "BBS-DRAFT-3",
+    "alg": "BBS-DRAFT-5",
     "typ": "JPT",
     "iss": "https://issuer.example",
     "claims": [
@@ -1599,7 +1599,7 @@ It MAY support additional options such as those sent to the holder to generate t
 <span id="name-issued-jwp-json-serializati"></span><figure id="figure-4">
             <div class="lang-wrapped sourcecode" id="section-6.2.3-7.1">
 <pre>{
-  "issuer": "eyJhbGciOiJCQlMtRFJBRlQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0
+  "issuer": "eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0
        dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLC
        JnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0",
   "payloads": [
@@ -1608,8 +1608,8 @@ It MAY support additional options such as those sent to the holder to generate t
     "ImpheWRvZUBleGFtcGxlLm9yZyI",
     "NDI"
   ],
-  "proof": "khoytopPEYcVMOZJFGrNQcM0O3XbCxS7r87u4PQ_IklXrDKJR5_6xZwYf
-       JOa41ZkVJ5w-t09D1tvx5OqUv_rRmm_OEBcV1G6ihmHCqQHE7E"
+  "proof": "te4LXiP8UyWdYnuDEK0aFzUQhJ1tjKNAb44ygkyxhCGChdhKyFKvIcswr
+       GZ8d93KPqgcZOjBl9b7CyB6V1UqB-4WUUr8qpKyGVL8T9ji-DQ"
 }
 
 </pre>
@@ -1619,11 +1619,11 @@ It MAY support additional options such as those sent to the holder to generate t
             </figcaption></figure>
 <span id="name-issued-jwp-compact-serializ"></span><figure id="figure-5">
             <div class="lang-wrapped sourcecode" id="section-6.2.3-8.1">
-<pre>eyJhbGciOiJCQlMtRFJBRlQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
+<pre>eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
 WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
-1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.kho
-ytopPEYcVMOZJFGrNQcM0O3XbCxS7r87u4PQ_IklXrDKJR5_6xZwYfJOa41ZkVJ5w-t09
-D1tvx5OqUv_rRmm_OEBcV1G6ihmHCqQHE7E
+1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.te4
+LXiP8UyWdYnuDEK0aFzUQhJ1tjKNAb44ygkyxhCGChdhKyFKvIcswrGZ8d93KPqgcZOjB
+l9b7CyB6V1UqB-4WUUr8qpKyGVL8T9ji-DQ
 
 </pre>
 </div>
@@ -1655,7 +1655,7 @@ D1tvx5OqUv_rRmm_OEBcV1G6ihmHCqQHE7E
 <span id="name-holder-presentation-header"></span><figure id="figure-6">
             <div class="lang-json sourcecode" id="section-6.2.5-7.1">
 <pre>{
-    "alg": "BBS-PROOF-DRAFT-3",
+    "alg": "BBS-PROOF-DRAFT-5",
     "aud": "https://recipient.example.com",
     "nonce": "wrmBRkKtXjQ"
 }
@@ -1669,15 +1669,15 @@ D1tvx5OqUv_rRmm_OEBcV1G6ihmHCqQHE7E
 <p id="section-6.2.5-9">Figure: Presentation JWP (JSON serialization)<a href="#section-6.2.5-9" class="pilcrow">¶</a></p>
 <span id="name-presentation-jwp-compact-se"></span><figure id="figure-7">
             <div class="lang-wrapped sourcecode" id="section-6.2.5-10.1">
-<pre>eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtMyIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
+<pre>eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
 mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
-lQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
+lQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
 FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
-vZSI~IkpheSI~~NDI.lHZZXOrS55rFdLPSWjtPwVMI6FgW_1qTkdXRCTfaOcrt4338XXU
-7CZMA5wKgM54kqSqPPEsPnKKcTdw8QOCzDU1aqvTp3uBwZQKmgEsTCATU2Ty5YuJkci4r
-6B4ckEk0cmWHKqP9CuPA1tI3yShsccYNKaVrowFUXizFM6XxDBQBpkRwYXgHGghg7MKHB
-TCjauMVLB9ErBC490sBgOIkbGbcWu-VlDfqjKMHs8wA0W5xF-Ecobj4s_GgM-Jy1ctGA6
-Wyp0tqtpti5bTdCInvruh3j6PjIecsMf7rj89zLSM
+vZSI~IkpheSI~~NDI.qkVORWlEzjgjpGGiI6FYbGl_mIfXYEeUPTOK2Y3ooKGkyyoJcLp
+gPl2MSRnSRVuuo9ZXd1RSmtsKH07hyRUoE_XBIyazungGvQiDwSU3c63tw5V6mwRFDb_q
+-j8kBti_IcyG5xDfe7AelBFzRaBqZ10abYFSlIu35ZKnr_02t3ZaS1p1v0_GReHPDPPGm
+4ECjoEgAaV5ixX0FTvQfYZvSjH5YBnAhQWwNseAtBkdApYnoa0ujFEI-lHE7G1s9h3tOK
+7v1iHD8IzRzN0rZXdHjsDEN6fABqvQDTWMfhI63ag
 
 </pre>
 </div>
