@@ -5,10 +5,10 @@
 jose                                                           J. Miller
 Internet-Draft                                             Ping Identity
 Intended status: Standards Track                                M. Jones
-Expires: 17 August 2024                           Self-Issued Consulting
+Expires: 30 August 2024                           Self-Issued Consulting
                                                                 D. Waite
                                                            Ping Identity
-                                                        14 February 2024
+                                                        27 February 2024
 
 
                             JSON Proof Token
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 August 2024.
+   This Internet-Draft will expire on 30 August 2024.
 
 Copyright Notice
 
@@ -146,11 +146,12 @@ Table of Contents
    While JWPs provide the underling structure for easily supporting
    selective disclosure, JPTs must go a step further to ensure that
    holders can effectively provide choice and consent on exactly what is
-   being disclosed.  Software using JWPs must know the mappings from
-   payloads to claims.  JPTs do not support disclosing claims from the
-   issuer that are intended only for a specific verifier.  All disclosed
-   payloads MUST be mapped to claims and made accessible to the
-   application.
+   being disclosed.  Software using JWPs MUST know the mappings from
+   payloads to claims.  All disclosed payloads MUST be mapped to claims
+   and made accessible to the application.  Holders SHOULD understand
+   the semantics of all potentially disclosed claims to the extent
+   needed to decide whether to disclose them.  JPTs SHOULD NOT contain
+   claims that are intended only for a specific verifier.
 
 4.3.  Familiarity
 
@@ -188,18 +189,19 @@ Table of Contents
 
 6.  Claims
 
-   Using a JSON Proof Token requires combining information from two
-   sources: the claim names and the payloads.  The simplest solution is
-   to list the claim names in an ordered array that aligns with the
-   included payloads.  This claims array can be conveniently included in
-   the JWP Protected Header using the claims key.
+   A JSON Proof Token assigns each playload a claim name.  Payloads MUST
+   each have a negotiated and understood claim name within the
+   application context.  The simplest solution to establish payload
+   claim names is as an ordered array that aligns with the included
+   payloads.  This claims array can be conveniently included in the
+   Issuer Protected Header using the claims key.
 
-   When the claims array is stored in the header, any variations of it
-   are disclosed to the verifier and can be used to correlate and link
-   usages.  Given the privacy design considerations around linkability
-   it is recommended that the claims are defined external to an
-   individual JPT and either referenced or known by the application
-   context.
+   When the claims array is stored in the header, any variations of that
+   array between JWP are visible to the verifier, and can indirectly
+   leak user information or provide linkability.  Given the privacy
+   design considerations around linkability it is RECOMMENDED that the
+   claims are defined external to an individual JPT and either
+   referenced or known by the application context.
 
    To facilitate this external definition of the claim names, an
    additional cid key is defined with a required digest value calculated
