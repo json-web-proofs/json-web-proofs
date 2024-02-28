@@ -9,7 +9,7 @@
 <meta content="Michael B. Jones" name="author">
 <meta content="David Waite" name="author">
 <meta content="
-       The JSON Proof Algorithms (JPA) specification registers cryptographic algorithms and identifiers to be used with the JSON Web Proof and JSON Web Key (JWK) specifications. It defines several IANA registries for these identifiers. 
+       The JSON Proof Algorithms (JPA) specification registers cryptographic algorithms and identifiers to be used with the JSON Web Proof and JSON Web Key (JWK) specifications. It defines IANA registries for these identifiers. 
     " name="description">
 <meta content="xml2rfc 3.19.4" name="generator">
 <meta content="jose" name="keyword">
@@ -1035,7 +1035,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Miller, et al.</td>
-<td class="center">Expires 30 August 2024</td>
+<td class="center">Expires 31 August 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1048,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-jose-json-proof-algorithms-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-02-27" class="published">27 February 2024</time>
+<time datetime="2024-02-28" class="published">28 February 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-08-30">30 August 2024</time></dd>
+<dd class="expires"><time datetime="2024-08-31">31 August 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1074,7 +1074,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">JSON Proof Algorithms</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">The JSON Proof Algorithms (JPA) specification registers cryptographic algorithms and identifiers to be used with the JSON Web Proof and JSON Web Key (JWK) specifications. It defines several IANA registries for these identifiers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The JSON Proof Algorithms (JPA) specification registers cryptographic algorithms and identifiers to be used with the JSON Web Proof and JSON Web Key (JWK) specifications. It defines IANA registries for these identifiers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1095,7 +1095,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1198,7 +1198,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-bbs" class="internal xref">BBS</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
-                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-algorithms" class="internal xref">Algorithms</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-jpa-algorithms" class="internal xref">JPA Algorithms</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
                     <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="auto internal xref">6.2.2</a>.  <a href="#name-key-format" class="internal xref">Key Format</a></p>
@@ -1261,7 +1261,23 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-jwp-algorithms-registry" class="internal xref">JWP Algorithms Registry</a></p>
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-json-web-proof-algorithms-r" class="internal xref">JSON Web Proof Algorithms Registry</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.1">
+                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#section-8.1.1" class="auto internal xref">8.1.1</a>.  <a href="#name-registration-template" class="internal xref">Registration Template</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.2">
+                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#section-8.1.2" class="auto internal xref">8.1.2</a>.  <a href="#name-initial-registry-contents" class="internal xref">Initial Registry Contents</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-header-parameter-names-regi" class="internal xref">Header Parameter Names Registration</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2.2.1">
+                    <p id="section-toc.1-1.8.2.2.2.1.1"><a href="#section-8.2.1" class="auto internal xref">8.2.1</a>.  <a href="#name-registry-contents" class="internal xref">Registry Contents</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
@@ -1296,7 +1312,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-1-1">The JSON Web Proof (JWP) <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span> draft establishes a new secure container format that supports selective disclosure and unlinkability using Zero-Knowledge Proofs (ZKPs) or other cryptographic algorithms.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <blockquote id="section-1-2">
-        <p id="section-1-2.1">Editor's Note: This draft is still early and incomplete, there will be significant changes to the algorithms as currently defined here.  Please do not use any of these definitions or examples for anything except personal experimentation and learning.  Contributions and feedback are welcome at <a href="https://github.com/json-web-proofs/json-web-proofs">https://github.com/json-web-proofs/json-web-proofs</a>.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
+        <p id="section-1-2.1">Editor's Note: This draft is still early and incomplete. There will be significant changes to the algorithms as currently defined here.  Please do not use any of these definitions or examples for anything except personal experimentation and learning.  Contributions and feedback are welcomed at <a href="https://github.com/json-web-proofs/json-web-proofs">https://github.com/json-web-proofs/json-web-proofs</a>.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
 </blockquote>
 </section>
 </div>
@@ -1307,7 +1323,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-2-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">The roles of "issuer", "holder", and "verifier" are used as defined by the <a href="https://www.w3.org/TR/2021/REC-vc-data-model-20211109/">Verifiable Credentials Data Model v1.1</a>.  The term "presentation" is also used as defined by this source, but the term "credential" is avoided in this specification in order to minimize confusion with other definitions.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-2">The roles of "issuer", "holder", and "verifier" are used as defined by the VC Data Model <span>[<a href="#VC-DATA-MODEL-2.0" class="cite xref">VC-DATA-MODEL-2.0</a>]</span>.  The term "presentation" is also used as defined by this source, but the term "credential" is avoided in this specification to minimize confusion with other definitions.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology">
@@ -1316,14 +1332,22 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
       </h2>
 <p id="section-3-1">The terms "JSON Web Signature (JWS)", "Base64url Encoding", "Header Parameter", "JOSE Header", "JWS Payload", "JWS Signature", and "JWS Protected Header" are defined by <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">The terms "JSON Web Proof (JWP)", "JWP Payload", "JWP Proof", and "JWP Protected Header" are defined by the JWP draft.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-2">The terms "JSON Web Proof (JWP)", "JWP Payload", "JWP Proof", and "JWP Protected Header" are defined by <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">These terms are defined by this specification:<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">Stable Key
-  An asymmetric key-pair used by an issuer that is also shared via an out-of-band mechanism to a verifier in order to validate the signature.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">Ephemeral Key
-  An asymmetric key-pair that is generated for one-time use by an issuer and never stored or used again outside of the creation of a single JWP.<a href="#section-3-5" class="pilcrow">¶</a></p>
-<p id="section-3-6">Presentation Key
-  An asymmetric key-pair that is generated by a holder and used to ensure that a presentation is not able to be replayed by any other party.<a href="#section-3-6" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-3-4">
+        <dt id="section-3-4.1">Stable Key:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-4.2">An asymmetric key-pair used by an issuer that is also shared via an out-of-band mechanism to a verifier to validate the signature.<a href="#section-3-4.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-4.3">Ephemeral Key:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-4.4">An asymmetric key-pair that is generated for one-time use by an issuer and never stored or used again outside of the creation of a single JWP.<a href="#section-3-4.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-4.5">Presentation Key:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-4.6">An asymmetric key-pair that is generated by a holder and used to ensure that a presentation is not able to be replayed by any other party.<a href="#section-3-4.6" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <div id="background">
@@ -1356,9 +1380,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-confirm">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-confirm" class="section-name selfRef">Confirm</a>
         </h3>
-<p id="section-5.2-1">Performed by the holder to validate the issued JWP is correctly formed and protected.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">Each algorithm MAY support using additional input items options such as those sent to the issuer for issuance. After confirmation, an algorithm MAY return a modified JWP for serialized storage without the local state (such as with blinded payloads now unblinded).<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">The algorithm MUST fully verify the issued proof value against the issuer protected header and all payloads.  If given a presented JWP instead of an issued one the confirm process MUST return an error.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">Performed by the holder to validate that the issued JWP is correctly formed and protected.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">Each algorithm MAY support using additional input items options, such as those sent to the issuer for issuance. After confirmation, an algorithm MAY return a modified JWP for serialized storage without the local state (such as with blinded payloads now unblinded).<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">The algorithm MUST fully verify the issued proof value against the issuer protected header and all payloads.  If given a presented JWP instead of an issued one, the confirm process MUST return an error.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="present">
@@ -1367,7 +1391,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-present" class="section-name selfRef">Present</a>
         </h3>
 <p id="section-5.3-1">Used to apply any selective disclosure choices and perform any unlinkability transformations.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">An algorithm MAY support additional input options from the requesting party such as for predicate proofs and verifiable computation requests.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">An algorithm MAY support additional input options from the requesting party, such as for predicate proofs and verifiable computation requests.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.3-3">Every algorithm MUST support the ability to hide any or all payloads.  It MUST always include the issuer protected header unmodified in the presentation.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <p id="section-5.3-4">The algorithm MUST replace the issued proof value and generate a new presented proof value.  It also MUST include a new presentation protected header that provides replay protection.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 </section>
@@ -1380,7 +1404,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-5.4-1">Performed by the verifier to verify the protected headers along with any disclosed payloads and/or assertions about them from the proving party, while also verifying they are the same payloads and ordering as witnessed by the issuer.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.4-2">The algorithm MUST verify the integrity of all disclosed payloads and MUST also verify the integrity of both the issuer and presentation protected headers.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
 <p id="section-5.4-3">If the presented proof contains any assertions about the hidden payloads, the algorithm MUST also verify all of those assertions.
-It MAY support additional options such as those sent to the holder to generate the presentation.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+It MAY support additional options, such as those sent to the holder to generate the presentation.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 <p id="section-5.4-4">If given an issued JWP for verification, the algorithm MUST return an error.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1398,7 +1422,7 @@ It MAY support additional options such as those sent to the holder to generate t
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-single-use" class="section-name selfRef">Single Use</a>
         </h3>
 <blockquote id="section-6.1-1">
-          <p id="section-6.1-1.1">Editor's Note: This algorithm is going to be renamed and slightly refactored; the new name is still TBD.<a href="#section-6.1-1.1" class="pilcrow">¶</a></p>
+          <p id="section-6.1-1.1">Editor's Note: This algorithm may be renamed and slightly refactored.<a href="#section-6.1-1.1" class="pilcrow">¶</a></p>
 </blockquote>
 <p id="section-6.1-2">The Single Use (SU) algorithm is based on composing multiple traditional JWS values into a single JWP proof value.  It enables a very simple form of selective disclosure without requiring any advanced cryptographic techniques.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.1-3">It does not support unlinkability if the same JWP is presented multiple times, therefore when privacy is required the holder will need to interact with the issuer again to receive new single-use JWPs (dynamically or in batches).<a href="#section-6.1-3" class="pilcrow">¶</a></p>
@@ -1425,7 +1449,7 @@ It MAY support additional options such as those sent to the holder to generate t
           <h4 id="name-issuer-setup">
 <a href="#section-6.1.3" class="section-number selfRef">6.1.3. </a><a href="#name-issuer-setup" class="section-name selfRef">Issuer Setup</a>
           </h4>
-<p id="section-6.1.3-1">To create a Single Use JWP the issuer first generates a unique Ephemeral Key using the selected JWS algorithm.  This key-pair will be used to sign each of the payloads of a single JWP and then discarded.<a href="#section-6.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.3-1">To create a Single Use JWP, the issuer first generates a unique Ephemeral Key using the selected JWS algorithm.  This key-pair will be used to sign each of the payloads of a single JWP and then discarded.<a href="#section-6.1.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="using-jws">
@@ -1446,7 +1470,7 @@ It MAY support additional options such as those sent to the holder to generate t
 <p id="section-6.1.5-1">The JWK of the issuer's Ephemeral Key MUST be included in the issuer protected header with the property name of <code>proof_jwk</code> and contain only the REQUIRED values to represent the public key.<a href="#section-6.1.5-1" class="pilcrow">¶</a></p>
 <p id="section-6.1.5-2">The holder's Presentation Key JWK MUST be included in issuer protected header using the <code>presentation_jwk</code> claim.<a href="#section-6.1.5-2" class="pilcrow">¶</a></p>
 <p id="section-6.1.5-3">The final issuer protected header is then used directly as the body of a JWS and signed using the issuer's Stable Key.  The resulting JWS signature value unencoded octet string is the first value in the JWP proof.<a href="#section-6.1.5-3" class="pilcrow">¶</a></p>
-<p id="section-6.1.5-4">In various examples in this specification the octet string serialized issuer header is referenced as <code>issuer_header</code>.<a href="#section-6.1.5-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.5-4">In various examples in this specification, the octet string serialized issuer header is referenced as <code>issuer_header</code>.<a href="#section-6.1.5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="payloads">
@@ -1463,10 +1487,11 @@ It MAY support additional options such as those sent to the holder to generate t
           <h4 id="name-presentation-protected-head">
 <a href="#section-6.1.7" class="section-number selfRef">6.1.7. </a><a href="#name-presentation-protected-head" class="section-name selfRef">Presentation Protected Header</a>
           </h4>
-<p id="section-6.1.7-1">In order to generate a new presentation, the holder first creates a presentation protected header that is specific to the verifier being presented to.  This header MUST contain a claim that both the holder and verifier trust as being unique and non-replayable.<a href="#section-6.1.7-1" class="pilcrow">¶</a></p>
-<p id="section-6.1.7-2">This specification registers a <code>nonce</code> claim for the presentation protected header that contains a string value either generated by the verifier or derived from values provided by the verifier.  When present, the verifier MUST ensure the nonce value matches during verification.<a href="#section-6.1.7-2" class="pilcrow">¶</a></p>
-<p id="section-6.1.7-3">The presentation protected header MAY contain other claims that are either provided by the verifier or by the holder.  These presentation claims SHOULD NOT contain values that are common across multiple presentations and SHOULD be unique to a single presentation and verifier.<a href="#section-6.1.7-3" class="pilcrow">¶</a></p>
-<p id="section-6.1.7-4">In various examples in this specification the octet string serialized presentation header is referenced as <code>presentation_header</code>.<a href="#section-6.1.7-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.7-1">To generate a new presentation, the holder first creates a presentation protected header that is specific to the verifier being presented to.  This header MUST contain a claim that both the holder and verifier trust as being unique and non-replayable.
+Use of the <code>nonce</code> header parameter is RECOMMENDED for this purpose.<a href="#section-6.1.7-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.7-2">This specification registers the <code>nonce</code> header parameter for the presentation protected header that contains a string value either generated by the verifier or derived from values provided by the verifier.  When present, the verifier MUST ensure the nonce value matches during verification.<a href="#section-6.1.7-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.7-3">The presentation protected header MAY contain other header parameters that are either provided by the verifier or by the holder.  These presentation claims SHOULD NOT contain values that are common across multiple presentations and SHOULD be unique to a single presentation and verifier.<a href="#section-6.1.7-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.7-4">In various examples in this specification, the octet string serialized presentation header is referenced as <code>presentation_header</code>.<a href="#section-6.1.7-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="presentation">
@@ -1492,12 +1517,12 @@ It MAY support additional options such as those sent to the holder to generate t
 <p id="section-6.1.9-2">With the headers verified, the issuer's Ephemeral Key as given in the issuer protected header <code>proof_jwk</code> claim can then be used to verify each of the disclosed payload signatures.<a href="#section-6.1.9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="jpa-registration">
+<div id="SU-registration">
 <section id="section-6.1.10">
           <h4 id="name-jpa-registration">
 <a href="#section-6.1.10" class="section-number selfRef">6.1.10. </a><a href="#name-jpa-registration" class="section-name selfRef">JPA Registration</a>
           </h4>
-<p id="section-6.1.10-1">Proposed JWP <code>alg</code> value is of the format "SU-" appended with the relevant JWS <code>alg</code> value for the chosen public and ephemeral key-pair algorithm, for example "SU-ES256".<a href="#section-6.1.10-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.10-1">The proposed JWP <code>alg</code> value is of the format "SU-" appended with the relevant JWS <code>alg</code> value for the chosen public and ephemeral key-pair algorithm, for example "SU-ES256".<a href="#section-6.1.10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="example">
@@ -1505,7 +1530,7 @@ It MAY support additional options such as those sent to the holder to generate t
           <h4 id="name-example">
 <a href="#section-6.1.11" class="section-number selfRef">6.1.11. </a><a href="#name-example" class="section-name selfRef">Example</a>
           </h4>
-<p id="section-6.1.11-1">See the example in the appendix of the JSON Web Proof draft.<a href="#section-6.1.11-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.11-1">See the example in the appendix of <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span>.<a href="#section-6.1.11-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1515,12 +1540,12 @@ It MAY support additional options such as those sent to the holder to generate t
         <h3 id="name-bbs">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-bbs" class="section-name selfRef">BBS</a>
         </h3>
-<p id="section-6.2-1">The BBS Signature Scheme <span>[<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span> is under active development within the CRFG. Prior to this effort work was done under the DIF <a href="https://identity.foundation/working-groups/crypto.html">Applied Cryptography Working Group</a>, an effort to clarify and bring best practices to early prototypes leveraged by multiple early stage decentralized identity projects.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">The BBS Signature Scheme <span>[<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span> is under active development within the CRFG.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">This algorithm supports both selective disclosure and unlinkability, enabling the holder to generate multiple presentations from one issued JWP without a verifier being able to correlate those presentations together based on the proof.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
-<div id="algorithms">
+<div id="BBS-registration">
 <section id="section-6.2.1">
-          <h4 id="name-algorithms">
-<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-algorithms" class="section-name selfRef">Algorithms</a>
+          <h4 id="name-jpa-algorithms">
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-jpa-algorithms" class="section-name selfRef">JPA Algorithms</a>
           </h4>
 <p id="section-6.2.1-1">The <code>BBS-DRAFT-5</code> <code>alg</code> parameter value in the issuance protected header corresponds to a ciphersuite identifier of <code>BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_H2G_HM2S_</code>.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.1-2">The <code>BBS-PROOF-DRAFT-5</code> <code>alg</code> parameter value in the presentation protected header corresponds to the same ciphersuite, but used in presentation form.<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
@@ -1532,7 +1557,7 @@ It MAY support additional options such as those sent to the holder to generate t
 <a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-key-format" class="section-name selfRef">Key Format</a>
           </h4>
 <p id="section-6.2.2-1">The key used for the <code>BBS-DRAFT-5</code> algorithm is an elliptic curve-based key pair, specifically against the G_2 subgroup of a pairing friendly curve. Additional details on key generation can be found in <a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05#appendix-Section%203.4" class="relref">Section 3.4</a><a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.2-2">The JWK form of this key is an <code>OKP</code> type with a curve of <code>BLs12381G2</code>, with <code>x</code> being the BASE64URL-encoded form of the output of <code>point_to_octets_E2</code>. The use of this curve is described in <span>[<a href="#I-D.looker-cose-bls-key-representations" class="cite xref">I-D.looker-cose-bls-key-representations</a>]</span>.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-2">The JWK form of this key is an <code>OKP</code> type with a curve of <code>BLs12381G2</code>, with <code>x</code> being the BASE64URL-encoded form of the output of <code>point_to_octets_E2</code>. The use of this curve is described in <span>[<a href="#I-D.ietf-cose-bls-key-representations" class="cite xref">I-D.ietf-cose-bls-key-representations</a>]</span>.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
 <span id="name-bbs-private-key-in-jwk-form"></span><figure id="figure-1">
             <div class="lang-wrapped sourcecode" id="section-6.2.2-3.1">
 <pre>{
@@ -1540,10 +1565,10 @@ It MAY support additional options such as those sent to the holder to generate t
   "alg": "BBS-DRAFT-5",
   "use": "proof",
   "crv": "BLs12381G2",
-  "x": "phVdRq1XbNGoYXdrr6BJKKh-gxqJyEiTBeTKj5IMmGE1po1kk6gpckjbS-VKa
-       4aNDWMKq8ODdtfXNuUstJAw38lSeACOvld0rfKnbJ5LBENIOIlhxIYOqPCDiF-
-       48EAt",
-  "d": "DRxPD8nkwp_H3Xtgibo4IY820m9xDmuVU9Yhas_AxVs"
+  "x": "l5BYkQCY7A185jpVnkAlsUfbqpmPdfTQKKjm2WhxwR5vyN8e3gq0HzBkTQS0-
+       892CFOMLpSw5SQU1OcohpZQDWAtHCKMOM_3gfvvlSquORGzZVeQYFTP_r-FajQ
+       4V_mI",
+  "d": "YAKFr3ITlZct9WRzEjVu2QyX1DMBYDaCqbpYEK3BewM"
 }
 
 </pre>
@@ -1551,7 +1576,7 @@ It MAY support additional options such as those sent to the holder to generate t
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-bbs-private-key-in-jwk-form" class="selfRef">BBS private key in JWK format</a>
             </figcaption></figure>
-<p id="section-6.2.2-4">There is no additional prover key necessary for presentation proofs.<a href="#section-6.2.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-4">There is no additional holder key necessary for presentation proofs.<a href="#section-6.2.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="issuance">
@@ -1560,7 +1585,7 @@ It MAY support additional options such as those sent to the holder to generate t
 <a href="#section-6.2.3" class="section-number selfRef">6.2.3. </a><a href="#name-issuance" class="section-name selfRef">Issuance</a>
           </h4>
 <p id="section-6.2.3-1">Issuance is performed using the <code>Sign</code> operation from <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05#section-3.5.1" class="relref">Section 3.5.1</a> of [<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span>. This operation utilizes the issuer's BLS12-381 G2 key pair as <code>SK</code> and <code>PK</code>, along with desired protected header and payloads as the octets <code>header</code> and the octets array <code>messages</code>.<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.3-2">The octets result of this operation forms the issuance proof, to be used along with the protected header and payloads to serialize the JWP.<a href="#section-6.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.3-2">The octets resulting from this operation form the issuance proof, to be used along with the protected header and payloads to serialize the JWP.<a href="#section-6.2.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.2.3-3">As an example, consider following protected header and array of payloads:<a href="#section-6.2.3-3" class="pilcrow">¶</a></p>
 <span id="name-example-issuer-protected-he"></span><figure id="figure-2">
             <div class="lang-json sourcecode" id="section-6.2.3-4.1">
@@ -1608,8 +1633,8 @@ It MAY support additional options such as those sent to the holder to generate t
     "ImpheWRvZUBleGFtcGxlLm9yZyI",
     "NDI"
   ],
-  "proof": "te4LXiP8UyWdYnuDEK0aFzUQhJ1tjKNAb44ygkyxhCGChdhKyFKvIcswr
-       GZ8d93KPqgcZOjBl9b7CyB6V1UqB-4WUUr8qpKyGVL8T9ji-DQ"
+  "proof": "pYZxtbRk1N6rSlo-DUQu3phbnajkKOdDIbMIOZzk7EqwBv16WcqXSmcdf
+       EbSk6QkMAYJptpOk2HlVJQghoe5l6P5joNq6PHMfVFx46OHI3Y"
 }
 
 </pre>
@@ -1621,9 +1646,9 @@ It MAY support additional options such as those sent to the holder to generate t
             <div class="lang-wrapped sourcecode" id="section-6.2.3-8.1">
 <pre>eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
 WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
-1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.te4
-LXiP8UyWdYnuDEK0aFzUQhJ1tjKNAb44ygkyxhCGChdhKyFKvIcswrGZ8d93KPqgcZOjB
-l9b7CyB6V1UqB-4WUUr8qpKyGVL8T9ji-DQ
+1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.pYZ
+xtbRk1N6rSlo-DUQu3phbnajkKOdDIbMIOZzk7EqwBv16WcqXSmcdfEbSk6QkMAYJptpO
+k2HlVJQghoe5l6P5joNq6PHMfVFx46OHI3Y
 
 </pre>
 </div>
@@ -1665,7 +1690,7 @@ l9b7CyB6V1UqB-4WUUr8qpKyGVL8T9ji-DQ
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
 <a href="#name-holder-presentation-header" class="selfRef">Holder Presentation Header</a>
             </figcaption></figure>
-<p id="section-6.2.5-8">The prover decides to share all information other than the email address, and generates a proof. That proof is represented in the following serializations:<a href="#section-6.2.5-8" class="pilcrow">¶</a></p>
+<p id="section-6.2.5-8">The holder decides to share all information other than the email address, and generates a proof. That proof is represented in the following serializations:<a href="#section-6.2.5-8" class="pilcrow">¶</a></p>
 <p id="section-6.2.5-9">Figure: Presentation JWP (JSON serialization)<a href="#section-6.2.5-9" class="pilcrow">¶</a></p>
 <span id="name-presentation-jwp-compact-se"></span><figure id="figure-7">
             <div class="lang-wrapped sourcecode" id="section-6.2.5-10.1">
@@ -1673,11 +1698,11 @@ l9b7CyB6V1UqB-4WUUr8qpKyGVL8T9ji-DQ
 mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
 lQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
 FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
-vZSI~IkpheSI~~NDI.qkVORWlEzjgjpGGiI6FYbGl_mIfXYEeUPTOK2Y3ooKGkyyoJcLp
-gPl2MSRnSRVuuo9ZXd1RSmtsKH07hyRUoE_XBIyazungGvQiDwSU3c63tw5V6mwRFDb_q
--j8kBti_IcyG5xDfe7AelBFzRaBqZ10abYFSlIu35ZKnr_02t3ZaS1p1v0_GReHPDPPGm
-4ECjoEgAaV5ixX0FTvQfYZvSjH5YBnAhQWwNseAtBkdApYnoa0ujFEI-lHE7G1s9h3tOK
-7v1iHD8IzRzN0rZXdHjsDEN6fABqvQDTWMfhI63ag
+vZSI~IkpheSI~~NDI.j6VnD4ETDh-l-ZjY02FRDWJ4Q_Bbi4LpvM4MHMNwPIXGQ_flAB6
+E2_yrXiQBrJwGi2l4a68gQ30t4Ymw2GSw0l2o30ogPM0SVCvosB-LIZCBAnSOAz-rgdlk
+UT2kUYnOFeXGpSVdBKu5PajP_-0gVaIwhkUhtT7yIyF0PBwxKoUWM4vtf-2haASGhDEn5
+A4V-yhslr0A5_cTrbAiU9hQPiJZFj_z0bPkXxiXopKQFhDFNnwTQ_4EGZS5Dy-sczWja4
+v8GK5XZ_1SzF8VCiLuBgTRJckZAyHtzYGeYqThaio
 
 </pre>
 </div>
@@ -1711,9 +1736,9 @@ gPl2MSRnSRVuuo9ZXd1RSmtsKH07hyRUoE_XBIyazungGvQiDwSU3c63tw5V6mwRFDb_q
           <h4 id="name-holder-setup-2">
 <a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-holder-setup-2" class="section-name selfRef">Holder Setup</a>
           </h4>
-<p id="section-6.3.1-1">Prior to the issuer creating a new JWP it must have presentation binding information provided by the holder.  This enables the holder to perform replay prevention while presenting the JWP.<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.3.1-2">The presentation key used by the holder must be transferred to the issuer and verified, likely through a challenge and self-signing mechanism.  If the holder requires unlinkability it must also generate a new key that is verified and bound to each new JWP.<a href="#section-6.3.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.3.1-3">How these holder presentation keys are transferred and verified is out of scope of this specification, protocols such as OpenID Connect can be used to accomplish this.  What is required by this definition is that the holder's presentation key MUST be included in the issuer's protected header using the <code>pjwk</code> claim with a JWK as the value.<a href="#section-6.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.3.1-1">Prior to the issuer creating a new JWP, it must have presentation binding information provided by the holder.  This enables the holder to perform replay prevention while presenting the JWP.<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.1-2">The presentation key used by the holder must be transferred to the issuer and verified, likely through a challenge and self-signing mechanism.  If the holder requires unlinkability, it must also generate a new key that is verified and bound to each new JWP.<a href="#section-6.3.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.3.1-3">How these holder presentation keys are transferred and verified is out of scope of this specification. Protocols such as OpenID Connect can be used to accomplish this.  What is required by this definition is that the holder's presentation key MUST be included in the issuer's protected header using the <code>pjwk</code> claim with a JWK as the value.<a href="#section-6.3.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="issuer-setup-1">
@@ -1721,7 +1746,7 @@ gPl2MSRnSRVuuo9ZXd1RSmtsKH07hyRUoE_XBIyazungGvQiDwSU3c63tw5V6mwRFDb_q
           <h4 id="name-issuer-setup-2">
 <a href="#section-6.3.2" class="section-number selfRef">6.3.2. </a><a href="#name-issuer-setup-2" class="section-name selfRef">Issuer Setup</a>
           </h4>
-<p id="section-6.3.2-1">To use the MAC algorithm the issuer must have a stable public key pair to perform signing.  To start the issuance process, a single 32-byte random Shared Secret must first be generated.  This value will be shared privately to the holder as part of the issuer's JWP proof value.<a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.2-1">To use the MAC algorithm, the issuer must have a stable public key pair to perform signing.  To start the issuance process, a single 32-byte random Shared Secret must first be generated.  This value will be shared privately to the holder as part of the issuer's JWP proof value.<a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.3.2-2">The Shared Secret is used by both the issuer and holder as the MAC method's key to generate a new set of unique ephemeral keys.  These keys are then used as the input to generate a MAC that protects each payload.<a href="#section-6.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1748,7 +1773,7 @@ gPl2MSRnSRVuuo9ZXd1RSmtsKH07hyRUoE_XBIyazungGvQiDwSU3c63tw5V6mwRFDb_q
           <h4 id="name-issuer-proof">
 <a href="#section-6.3.5" class="section-number selfRef">6.3.5. </a><a href="#name-issuer-proof" class="section-name selfRef">Issuer Proof</a>
           </h4>
-<p id="section-6.3.5-1">The issuer proof consists of two items appended together, the issuer's signature of the appended array of MACs, and the Shared Secret used to generate the set of payload keys.<a href="#section-6.3.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.5-1">The issuer proof consists of two items appended together: the issuer's signature of the appended array of MACs and the Shared Secret used to generate the set of payload keys.<a href="#section-6.3.5-1" class="pilcrow">¶</a></p>
 <p id="section-6.3.5-2">To generate the signature, the array containing the final MAC of the issuer protected header followed by all of the payload MACs appended in order is used as the input to a new JWS.<a href="#section-6.3.5-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.3.5-3">
 <pre>jws_payload = [issuer_header_mac, payload_mac_1, ... payload_mac_n]
@@ -1778,7 +1803,7 @@ gPl2MSRnSRVuuo9ZXd1RSmtsKH07hyRUoE_XBIyazungGvQiDwSU3c63tw5V6mwRFDb_q
             <p id="section-6.3.7-1.1">Editor's Note: The current definition here is incomplete, the holder's signature needs to also incorporate the presented proof.<a href="#section-6.3.7-1.1" class="pilcrow">¶</a></p>
 </blockquote>
 <p id="section-6.3.7-2">The presentation proof is constructed as a large octet array containing multiple appended items similar to the issuer proof value.  The first item is the JWS decoded signature value generated when the holder uses the presentation key to sign the presentation header.  The second item is the issuer signature from the issuer's proof value.<a href="#section-6.3.7-2" class="pilcrow">¶</a></p>
-<p id="section-6.3.7-3">These two signatures are then followed by a MAC value for each payload.  The MAC values used will depend on if that payload has been disclosed or is hidden.  Disclosed payloads will include the MAC key input, and hidden payloads will include only their final MAC value.<a href="#section-6.3.7-3" class="pilcrow">¶</a></p>
+<p id="section-6.3.7-3">These two signatures are then followed by a MAC value for each payload.  The MAC values used will depend on whether that payload has been disclosed or is hidden.  Disclosed payloads will include the MAC key input, and hidden payloads will include only their final MAC value.<a href="#section-6.3.7-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.3.7-4">
 <pre>presentation_proof = [presentation_signature, issuer_signature,
                       disclosed_key_0, hidden_mac_1, hidden_mac_2,
@@ -1794,7 +1819,7 @@ gPl2MSRnSRVuuo9ZXd1RSmtsKH07hyRUoE_XBIyazungGvQiDwSU3c63tw5V6mwRFDb_q
           <h4 id="name-verifier-setup">
 <a href="#section-6.3.8" class="section-number selfRef">6.3.8. </a><a href="#name-verifier-setup" class="section-name selfRef">Verifier Setup</a>
           </h4>
-<p id="section-6.3.8-1">In order to verify that the presentation was protected from replay attacks, the verifier must be able to validate the presentation protected header.  This involves the following steps:<a href="#section-6.3.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.8-1">To verify that the presentation was protected from replay attacks, the verifier must be able to validate the presentation protected header.  This involves the following steps:<a href="#section-6.3.8-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="compact type-1" id="section-6.3.8-2">
 <li id="section-6.3.8-2.1">JSON parse the presentation header<a href="#section-6.3.8-2.1" class="pilcrow">¶</a>
 </li>
@@ -1841,7 +1866,7 @@ gPl2MSRnSRVuuo9ZXd1RSmtsKH07hyRUoE_XBIyazungGvQiDwSU3c63tw5V6mwRFDb_q
           </ol>
 </section>
 </div>
-<div id="jpa-registration-1">
+<div id="MAC-registration">
 <section id="section-6.3.9">
           <h4 id="name-jpa-registration-2">
 <a href="#section-6.3.9" class="section-number selfRef">6.3.9. </a><a href="#name-jpa-registration-2" class="section-name selfRef">JPA Registration</a>
@@ -2195,13 +2220,373 @@ GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m
       <h2 id="name-iana-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<div id="jwp-algorithms-registry">
+<p id="section-8-1">The following registration procedure is used for all the
+registries established by this specification.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">Values are registered on a Specification Required <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span> basis
+after a three-week review period on the jose-reg-review@ietf.org
+mailing list, on the advice of one or more Designated Experts.
+However, to allow for the allocation of values prior to publication,
+the Designated Experts may approve registration once they are
+satisfied that such a specification will be published.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">Registration requests sent to the mailing list for review should use
+an appropriate subject (e.g., "Request to register JWP algorithm: example").<a href="#section-8-3" class="pilcrow">¶</a></p>
+<p id="section-8-4">Within the review period, the Designated Experts will either approve or deny
+the registration request, communicating this decision to the review list and IANA.
+Denials should include an explanation and, if applicable,
+suggestions as to how to make the request successful.
+Registration requests that are undetermined for
+a period longer than 21 days can be brought to the IESG's attention
+(using the iesg@ietf.org mailing list) for resolution.<a href="#section-8-4" class="pilcrow">¶</a></p>
+<p id="section-8-5">Criteria that should be applied by the Designated Experts include
+determining whether the proposed registration duplicates existing functionality,
+whether it is likely to be of general applicability
+or useful only for a single application,
+and whether the registration description is clear.<a href="#section-8-5" class="pilcrow">¶</a></p>
+<p id="section-8-6">IANA must only accept registry updates from the Designated Experts and should direct
+all requests for registration to the review mailing list.<a href="#section-8-6" class="pilcrow">¶</a></p>
+<p id="section-8-7">It is suggested that multiple Designated Experts be appointed who are able to
+represent the perspectives of different applications using this specification,
+in order to enable broadly informed review of registration decisions.
+In cases where a registration decision could be perceived as
+creating a conflict of interest for a particular Expert,
+that Expert should defer to the judgment of the other Experts.<a href="#section-8-7" class="pilcrow">¶</a></p>
+<div id="AlgsReg">
 <section id="section-8.1">
-        <h3 id="name-jwp-algorithms-registry">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-jwp-algorithms-registry" class="section-name selfRef">JWP Algorithms Registry</a>
+        <h3 id="name-json-web-proof-algorithms-r">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-json-web-proof-algorithms-r" class="section-name selfRef">JSON Web Proof Algorithms Registry</a>
         </h3>
-<p id="section-8.1-1">This section establishes the IANA JWP Algorithms Registry.  It also registers the following algorithms.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">TBD<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">This specification establishes the
+IANA "JSON Web Proof Algorithms" registry
+for values of the JWP <code>alg</code> (algorithm) parameter in JWP Header Parameters.
+The registry records the algorithm name, the algorithm description,
+the algorithm usage locations,
+the implementation requirements, the change controller,
+and a reference to the specification that defines it.
+The same algorithm name can be registered multiple times,
+provided that the sets of usage locations are disjoint.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">It is suggested that the length of the key be included in the algorithm
+name when multiple variations of algorithms are being
+registered that use keys of different lengths and the key lengths for
+each need to be fixed (for instance, because they will be created by
+key derivation functions).
+This allows readers of the JSON text to more easily make security decisions.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-3">The Designated Experts should perform reasonable due diligence
+that algorithms being registered either are currently considered
+cryptographically credible or are being registered as Deprecated
+or Prohibited.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1-4">The implementation requirements of an algorithm may be changed
+over time as the
+cryptographic landscape evolves, for instance,
+to change the status of an algorithm to Deprecated or
+to change the status of an algorithm from Optional
+to Recommended+ or Required.
+Changes of implementation requirements are only permitted
+on a Specification Required basis after review by the Designated Experts,
+with the new specification
+defining the revised implementation requirements level.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+<div id="AlgsTemplate">
+<section id="section-8.1.1">
+          <h4 id="name-registration-template">
+<a href="#section-8.1.1" class="section-number selfRef">8.1.1. </a><a href="#name-registration-template" class="section-name selfRef">Registration Template</a>
+          </h4>
+<ul class="compact">
+<li class="compact" id="section-8.1.1-1.1">Algorithm Name: The name requested (e.g., "SU-ES256"). This name is a case-sensitive ASCII string. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.<a href="#section-8.1.1-1.1" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.2">Algorithm Description: Brief description of the algorithm (e.g., "Single-Use JWP using ES256").<a href="#section-8.1.1-1.2" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.3">Algorithm Usage Location(s): The algorithm usage locations, which should be one or more of the values <code>Issued</code> or <code>Presented</code>.  Other values may be used with the approval of a Designated Expert.<a href="#section-8.1.1-1.3" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.4">JWP Implementation Requirements: The algorithm implementation requirements for JWP, which must be one the words Required, Recommended, Optional, Deprecated, or Prohibited. Optionally, the word can be followed by a "+" or "-". The use of "+" indicates that the requirement strength is likely to be increased in a future version of the specification.  The use of "-" indicates that the requirement strength is likely to be decreased in a future version of the specification. Any identifiers registered for non-authenticated encryption algorithms or other algorithms that are otherwise unsuitable for direct use as JWP algorithms must be registered as "Prohibited".<a href="#section-8.1.1-1.4" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.5">Change Controller: For Standards Track RFCs, list the "IETF". For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.<a href="#section-8.1.1-1.5" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.6">Specification Document(s): Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.<a href="#section-8.1.1-1.6" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.7">Algorithm Analysis Documents(s): References to a publication or publications in well-known cryptographic conferences, by national standards bodies, or by other authoritative sources analyzing the cryptographic soundness of the algorithm to be registered. The Designated Experts may require convincing evidence of the cryptographic soundness of a new algorithm to be provided with the registration request unless the algorithm is being registered as Deprecated or Prohibited. Having gone through working group and IETF review, the initial registrations made by this document are exempt from the need to provide this information.<a href="#section-8.1.1-1.7" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+<div id="AlgsContents">
+<section id="section-8.1.2">
+          <h4 id="name-initial-registry-contents">
+<a href="#section-8.1.2" class="section-number selfRef">8.1.2. </a><a href="#name-initial-registry-contents" class="section-name selfRef">Initial Registry Contents</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-8.1.2-1.1">Algorithm Name: <code>SU-ES256</code><a href="#section-8.1.2-1.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.2">Algorithm Description: Single-Use JWP using ES256<a href="#section-8.1.2-1.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.3">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.4">JWP Implementation Requirements: Recommended<a href="#section-8.1.2-1.4" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.5">Change Controller: IETF<a href="#section-8.1.2-1.5" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.6">Specification Document(s): <a href="#SU-registration" class="auto internal xref">Section 6.1.10</a> of this specification<a href="#section-8.1.2-1.6" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.7">
+              <p id="section-8.1.2-1.7.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.7.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.8">
+              <p id="section-8.1.2-1.8.1">Algorithm Name: <code>SU-ES384</code><a href="#section-8.1.2-1.8.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.9">
+              <p id="section-8.1.2-1.9.1">Algorithm Description: Single-Use JWP using ES384<a href="#section-8.1.2-1.9.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.10">
+              <p id="section-8.1.2-1.10.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.10.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.11">
+              <p id="section-8.1.2-1.11.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.11.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.12">
+              <p id="section-8.1.2-1.12.1">Change Controller: IETF<a href="#section-8.1.2-1.12.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.13">
+              <p id="section-8.1.2-1.13.1">Specification Document(s): <a href="#SU-registration" class="auto internal xref">Section 6.1.10</a> of this specification<a href="#section-8.1.2-1.13.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.14">
+              <p id="section-8.1.2-1.14.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.14.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.15">
+              <p id="section-8.1.2-1.15.1">Algorithm Name: <code>SU-ES512</code><a href="#section-8.1.2-1.15.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.16">
+              <p id="section-8.1.2-1.16.1">Algorithm Description: Single-Use JWP using ES512<a href="#section-8.1.2-1.16.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.17">
+              <p id="section-8.1.2-1.17.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.17.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.18">
+              <p id="section-8.1.2-1.18.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.18.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.19">
+              <p id="section-8.1.2-1.19.1">Change Controller: IETF<a href="#section-8.1.2-1.19.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.20">
+              <p id="section-8.1.2-1.20.1">Specification Document(s): <a href="#SU-registration" class="auto internal xref">Section 6.1.10</a> of this specification<a href="#section-8.1.2-1.20.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.21">
+              <p id="section-8.1.2-1.21.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.21.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.22">
+              <p id="section-8.1.2-1.22.1">Algorithm Name: <code>BBS-DRAFT-3</code><a href="#section-8.1.2-1.22.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.23">
+              <p id="section-8.1.2-1.23.1">Algorithm Description: Corresponds to a ciphersuite identifier of <code>BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_H2G_HM2S_</code><a href="#section-8.1.2-1.23.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.24">
+              <p id="section-8.1.2-1.24.1">Algorithm Usage Location(s): Issued<a href="#section-8.1.2-1.24.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.25">
+              <p id="section-8.1.2-1.25.1">JWP Implementation Requirements: Required<a href="#section-8.1.2-1.25.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.26">
+              <p id="section-8.1.2-1.26.1">Change Controller: IETF<a href="#section-8.1.2-1.26.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.27">
+              <p id="section-8.1.2-1.27.1">Specification Document(s): <a href="#BBS-registration" class="auto internal xref">Section 6.2.1</a> of this specification<a href="#section-8.1.2-1.27.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.28">
+              <p id="section-8.1.2-1.28.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.28.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.29">
+              <p id="section-8.1.2-1.29.1">Algorithm Name: <code>BBS-PROOF-DRAFT-3</code><a href="#section-8.1.2-1.29.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.30">
+              <p id="section-8.1.2-1.30.1">Algorithm Description: Corresponds to a ciphersuite identifier of <code>BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_H2G_HM2S_</code><a href="#section-8.1.2-1.30.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.31">
+              <p id="section-8.1.2-1.31.1">Algorithm Usage Location(s): Presented<a href="#section-8.1.2-1.31.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.32">
+              <p id="section-8.1.2-1.32.1">JWP Implementation Requirements: Required<a href="#section-8.1.2-1.32.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.33">
+              <p id="section-8.1.2-1.33.1">Change Controller: IETF<a href="#section-8.1.2-1.33.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.34">
+              <p id="section-8.1.2-1.34.1">Specification Document(s): <a href="#BBS-registration" class="auto internal xref">Section 6.2.1</a> of this specification<a href="#section-8.1.2-1.34.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.35">
+              <p id="section-8.1.2-1.35.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.35.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.36">
+              <p id="section-8.1.2-1.36.1">Algorithm Name: <code>MAC-H256</code><a href="#section-8.1.2-1.36.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.37">
+              <p id="section-8.1.2-1.37.1">Algorithm Description: <code>MAC-H256</code> uses <code>HMAC SHA-256</code> as the MAC and <code>ECDSA using P-256 and SHA-256</code> for the signatures<a href="#section-8.1.2-1.37.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.38">
+              <p id="section-8.1.2-1.38.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.38.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.39">
+              <p id="section-8.1.2-1.39.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.39.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.40">
+              <p id="section-8.1.2-1.40.1">Change Controller: IETF<a href="#section-8.1.2-1.40.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.41">
+              <p id="section-8.1.2-1.41.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.41.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.42">
+              <p id="section-8.1.2-1.42.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.42.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.43">
+              <p id="section-8.1.2-1.43.1">Algorithm Name: <code>MAC-H384</code><a href="#section-8.1.2-1.43.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.44">
+              <p id="section-8.1.2-1.44.1">Algorithm Description: <code>MAC-H384</code> uses <code>HMAC SHA-384</code> as the MAC and <code>ECDSA using P-384 and SHA-384</code> for the signatures<a href="#section-8.1.2-1.44.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.45">
+              <p id="section-8.1.2-1.45.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.45.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.46">
+              <p id="section-8.1.2-1.46.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.46.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.47">
+              <p id="section-8.1.2-1.47.1">Change Controller: IETF<a href="#section-8.1.2-1.47.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.48">
+              <p id="section-8.1.2-1.48.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.48.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.49">
+              <p id="section-8.1.2-1.49.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.49.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.50">
+              <p id="section-8.1.2-1.50.1">Algorithm Name: <code>MAC-H512</code><a href="#section-8.1.2-1.50.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.51">
+              <p id="section-8.1.2-1.51.1">Algorithm Description: <code>MAC-H512</code> uses <code>HMAC SHA-512</code> as the MAC and <code>ECDSA using P-521 and SHA-512</code> for the signatures<a href="#section-8.1.2-1.51.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.52">
+              <p id="section-8.1.2-1.52.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.52.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.53">
+              <p id="section-8.1.2-1.53.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.53.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.54">
+              <p id="section-8.1.2-1.54.1">Change Controller: IETF<a href="#section-8.1.2-1.54.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.55">
+              <p id="section-8.1.2-1.55.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.55.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.56">
+              <p id="section-8.1.2-1.56.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.56.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.57">
+              <p id="section-8.1.2-1.57.1">Algorithm Name: <code>MAC-K25519</code><a href="#section-8.1.2-1.57.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.58">
+              <p id="section-8.1.2-1.58.1">Algorithm Description: <code>MAC-K25519</code> uses <code>KMAC SHAKE128</code> as the MAC and <code>EdDSA using Curve25519</code> for the signatures<a href="#section-8.1.2-1.58.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.59">
+              <p id="section-8.1.2-1.59.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.59.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.60">
+              <p id="section-8.1.2-1.60.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.60.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.61">
+              <p id="section-8.1.2-1.61.1">Change Controller: IETF<a href="#section-8.1.2-1.61.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.62">
+              <p id="section-8.1.2-1.62.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.62.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.63">
+              <p id="section-8.1.2-1.63.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.63.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.64">
+              <p id="section-8.1.2-1.64.1">Algorithm Name: <code>MAC-K448</code><a href="#section-8.1.2-1.64.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.65">
+              <p id="section-8.1.2-1.65.1">Algorithm Description: <code>MAC-K448</code> uses <code>KMAC SHAKE256</code> as the MAC and <code>EdDSA using Curve448</code> for the signatures<a href="#section-8.1.2-1.65.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.66">
+              <p id="section-8.1.2-1.66.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.66.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.67">
+              <p id="section-8.1.2-1.67.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.67.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.68">
+              <p id="section-8.1.2-1.68.1">Change Controller: IETF<a href="#section-8.1.2-1.68.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.69">
+              <p id="section-8.1.2-1.69.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.69.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.70">
+              <p id="section-8.1.2-1.70.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.70.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.71">
+              <p id="section-8.1.2-1.71.1">Algorithm Name: <code>MAC-H256K</code><a href="#section-8.1.2-1.71.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.72">
+              <p id="section-8.1.2-1.72.1">Algorithm Description: <code>MAC-H256K</code> uses <code>HMAC SHA-256</code> as the MAC and <code>ECDSA using secp256k1 and SHA-256</code> for the signatures<a href="#section-8.1.2-1.72.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.73">
+              <p id="section-8.1.2-1.73.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.73.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.74">
+              <p id="section-8.1.2-1.74.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.74.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.75">
+              <p id="section-8.1.2-1.75.1">Change Controller: IETF<a href="#section-8.1.2-1.75.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.76">
+              <p id="section-8.1.2-1.76.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.76.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.77">
+              <p id="section-8.1.2-1.77.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.77.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="HdrReg">
+<section id="section-8.2">
+        <h3 id="name-header-parameter-names-regi">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-header-parameter-names-regi" class="section-name selfRef">Header Parameter Names Registration</a>
+        </h3>
+<p id="section-8.2-1">This section registers the following Header Parameter names
+defined by this specification in the IANA
+"JSON Web Proof Header Parameters" registry
+established by <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span>.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<div id="HdrContents">
+<section id="section-8.2.1">
+          <h4 id="name-registry-contents">
+<a href="#section-8.2.1" class="section-number selfRef">8.2.1. </a><a href="#name-registry-contents" class="section-name selfRef">Registry Contents</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-8.2.1-1.1">Header Parameter Name: <code>proof_jwk</code><a href="#section-8.2.1-1.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.2.1-1.2">Header Parameter Description: Issuer's Ephemeral Key<a href="#section-8.2.1-1.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.2.1-1.3">Header Parameter Usage Location(s): Issued<a href="#section-8.2.1-1.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.2.1-1.4">Change Controller: IETF<a href="#section-8.2.1-1.4" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.2.1-1.5">
+              <p id="section-8.2.1-1.5.1">Specification Document(s): <a href="#issuer-protected-header" class="auto internal xref">Section 6.1.5</a> of this specification<a href="#section-8.2.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.6">
+              <p id="section-8.2.1-1.6.1">Header Parameter Name: <code>presentation_jwk</code><a href="#section-8.2.1-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.7">
+              <p id="section-8.2.1-1.7.1">Header Parameter Description: Holder's Presentation Key<a href="#section-8.2.1-1.7.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.8">
+              <p id="section-8.2.1-1.8.1">Header Parameter Usage Location(s): Issued<a href="#section-8.2.1-1.8.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.9">
+              <p id="section-8.2.1-1.9.1">Change Controller: IETF<a href="#section-8.2.1-1.9.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.10">
+              <p id="section-8.2.1-1.10.1">Specification Document(s): <a href="#issuer-protected-header" class="auto internal xref">Section 6.1.5</a> of this specification<a href="#section-8.2.1-1.10.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
 </section>
 </div>
 </section>
@@ -2215,17 +2600,17 @@ GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.ietf-cose-bls-key-representations">[I-D.ietf-cose-bls-key-representations]</dt>
+        <dd>
+<span class="refAuthor">Looker, T.</span> and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"Barreto-Lynn-Scott Elliptic Curve Key Representations for JOSE and COSE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-bls-key-representations-03</span>, <time datetime="2023-10-22" class="refDate">22 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-bls-key-representations-03">https://datatracker.ietf.org/doc/html/draft-ietf-cose-bls-key-representations-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-jose-json-web-proof">[I-D.ietf-jose-json-web-proof]</dt>
         <dd>
 <span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Waite, D.</span>, and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"JSON Web Proof"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-web-proof-02</span>, <time datetime="2023-10-21" class="refDate">21 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-proof-02">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-proof-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-bbs-signatures">[I-D.irtf-cfrg-bbs-signatures]</dt>
-        <dd>
-<span class="refAuthor">Looker, T.</span>, <span class="refAuthor">Kalos, V.</span>, <span class="refAuthor">Whitehead, A.</span>, and <span class="refAuthor">M. Lodder</span>, <span class="refTitle">"The BBS Signature Scheme"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bbs-signatures-05</span>, <time datetime="2023-12-21" class="refDate">21 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.looker-cose-bls-key-representations">[I-D.looker-cose-bls-key-representations]</dt>
       <dd>
-<span class="refAuthor">Looker, T.</span> and <span class="refAuthor">M. Jones</span>, <span class="refTitle">"Barreto-Lynn-Scott Elliptic Curve Key Representations for JOSE and COSE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-looker-cose-bls-key-representations-00</span>, <time datetime="2022-03-01" class="refDate">1 March 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-looker-cose-bls-key-representations-00">https://datatracker.ietf.org/doc/html/draft-looker-cose-bls-key-representations-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Looker, T.</span>, <span class="refAuthor">Kalos, V.</span>, <span class="refAuthor">Whitehead, A.</span>, and <span class="refAuthor">M. Lodder</span>, <span class="refTitle">"The BBS Signature Scheme"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bbs-signatures-05</span>, <time datetime="2023-12-21" class="refDate">21 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2242,6 +2627,10 @@ GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC5226">[RFC5226]</dt>
+        <dd>
+<span class="refAuthor">Narten, T.</span> and <span class="refAuthor">H. Alvestrand</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">RFC 5226</span>, <span class="seriesInfo">DOI 10.17487/RFC5226</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5226">https://www.rfc-editor.org/info/rfc5226</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC7515">[RFC7515]</dt>
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Signature (JWS)"</span>, <span class="seriesInfo">RFC 7515</span>, <span class="seriesInfo">DOI 10.17487/RFC7515</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7515">https://www.rfc-editor.org/info/rfc7515</a>&gt;</span>. </dd>
@@ -2251,8 +2640,12 @@ GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m
 <span class="refAuthor">Jones, M.</span>, <span class="refTitle">"JSON Web Algorithms (JWA)"</span>, <span class="seriesInfo">RFC 7518</span>, <span class="seriesInfo">DOI 10.17487/RFC7518</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7518">https://www.rfc-editor.org/info/rfc7518</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="VC-DATA-MODEL-2.0">[VC-DATA-MODEL-2.0]</dt>
+      <dd>
+<span class="refAuthor">Sporny, M.</span>, <span class="refAuthor">Jr, T. T.</span>, <span class="refAuthor">Herman, I.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">G. Cohen</span>, <span class="refTitle">"Verifiable Credentials Data Model 2.0"</span>, <time datetime="2023-12-27" class="refDate">27 December 2023</time>, <span>&lt;<a href="https://www.w3.org/TR/vc-data-model-2.0">https://www.w3.org/TR/vc-data-model-2.0</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2262,10 +2655,11 @@ GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m
       <h2 id="name-acknowledgements">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-A-1">We would like to thank
+<p id="appendix-A-1">This work was incubated in the DIF <a href="https://identity.foundation/working-groups/crypto.html">Applied Cryptography Working Group</a>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">We would like to thank
 Alberto Solavagione
-for his valuable contributions to this specification.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">The BBS examples were generated using the library at <a href="https://github.com/mattrglobal/pairing_crypto">https://github.com/mattrglobal/pairing_crypto</a> .<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+for his valuable contributions to this specification.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">The BBS examples were generated using the library at <a href="https://github.com/mattrglobal/pairing_crypto">https://github.com/mattrglobal/pairing_crypto</a> .<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="document-history">
@@ -2279,29 +2673,34 @@ for his valuable contributions to this specification.<a href="#appendix-A-1" cla
 <li class="compact" id="appendix-B-2.1">Removed <code>BBS-DRAFT-3</code> and <code>BBS-PROOF-DRAFT-3</code> in lieu of <code>BBS-DRAFT-5</code> and <code>BBS-PROOF-DRAFT-5</code>, with signature/proof/verification referencing the revised mechanisms in <span>[<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span>.<a href="#appendix-B-2.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<p id="appendix-B-3">-03<a href="#appendix-B-3" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-B-4.1">Add new <code>BBS-DRAFT-3</code> and <code>BBS-PROOF-DRAFT-3</code> algorithms based on draft-irtf-cfrg-bbs-signatures-03.<a href="#appendix-B-4.1" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-B-4.2">Remove prior <code>BBS-X</code> algorithm based on a particular implementation of earlier drafts.<a href="#appendix-B-4.2" class="pilcrow">¶</a>
+<li class="compact" id="appendix-B-4.1">Improvements resulting from a full proofreading.<a href="#appendix-B-4.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-B-5">-01<a href="#appendix-B-5" class="pilcrow">¶</a></p>
+<p id="appendix-B-5">-02<a href="#appendix-B-5" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-B-6.1">Correct cross-references within group<a href="#appendix-B-6.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-B-6.1">Add new <code>BBS-DRAFT-3</code> and <code>BBS-PROOF-DRAFT-3</code> algorithms based on draft-irtf-cfrg-bbs-signatures-03.<a href="#appendix-B-6.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-B-6.2">Describe <code>issuer_header</code> and <code>presentation_header</code><a href="#appendix-B-6.2" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-B-6.3">Update BBS references to CFRG drafts<a href="#appendix-B-6.3" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-B-6.4">Rework reference to HMAC ( RFC2104 )<a href="#appendix-B-6.4" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-B-6.5">Remove ZKSnark placeholder<a href="#appendix-B-6.5" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-B-6.2">Remove prior <code>BBS-X</code> algorithm based on a particular implementation of earlier drafts.<a href="#appendix-B-6.2" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-B-7">-00<a href="#appendix-B-7" class="pilcrow">¶</a></p>
+<p id="appendix-B-7">-01<a href="#appendix-B-7" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-B-8.1">Created initial working group draft based on draft-jmiller-jose-json-proof-algorithms-01<a href="#appendix-B-8.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-B-8.1">Correct cross-references within group<a href="#appendix-B-8.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-8.2">Describe <code>issuer_header</code> and <code>presentation_header</code><a href="#appendix-B-8.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-8.3">Update BBS references to CFRG drafts<a href="#appendix-B-8.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-8.4">Rework reference to HMAC ( RFC2104 )<a href="#appendix-B-8.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-8.5">Remove ZKSnark placeholder<a href="#appendix-B-8.5" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-B-9">-00<a href="#appendix-B-9" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-B-10.1">Created initial working group draft based on draft-jmiller-jose-json-proof-algorithms-01<a href="#appendix-B-10.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>

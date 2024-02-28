@@ -1035,7 +1035,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Miller, et al.</td>
-<td class="center">Expires 30 August 2024</td>
+<td class="center">Expires 31 August 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1048,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-jose-json-proof-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-02-27" class="published">27 February 2024</time>
+<time datetime="2024-02-28" class="published">28 February 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-08-30">30 August 2024</time></dd>
+<dd class="expires"><time datetime="2024-08-31">31 August 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1095,7 +1095,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1207,7 +1207,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       </h2>
 <p id="section-1-1">JSON Proof Token (JPT) is a compact claims representation format intended to be used in the same ways as a JSON Web Token (JWT), but with additional support for selective disclosure and unlinkability.  JPTs encode claim values to be transmitted as payloads of a JSON Web Proof (JWP) <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span>.  JPTs are always represented using the JWP Compact Serialization.  The corresponding claim names are not transmitted in the payloads and are stored in a separate structure that can be externalized and shared across multiple JPTs.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <blockquote id="section-1-2">
-        <p id="section-1-2.1">Editor's Note: This draft is still early and incomplete, there will be significant changes to the algorithms as currently defined here.  Please do not use any of these definitions or examples for anything except personal experimentation and learning.  Contributions and feedback are welcome at <a href="https://github.com/json-web-proofs/json-web-proofs">https://github.com/json-web-proofs/json-web-proofs</a>.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
+        <p id="section-1-2.1">Editor's Note: This draft is still early and incomplete. There will be significant changes to the algorithms as currently defined here.  Please do not use any of these definitions or examples for anything except personal experimentation and learning.  Contributions and feedback are welcomed at <a href="https://github.com/json-web-proofs/json-web-proofs">https://github.com/json-web-proofs/json-web-proofs</a>.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
 </blockquote>
 </section>
 </div>
@@ -1233,7 +1233,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-design-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-design-considerations" class="section-name selfRef">Design Considerations</a>
       </h2>
-<p id="section-4-1">The rationale behind the design for JSON Proof Tokens is important when considering how it is structured.  These sections detail the underlying reasoning for the approach defined by JPTs.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The rationale behind the design for JSON Proof Tokens is important when considering how it is structured.  These sections detail the underlying reasoning informing the JPT design.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="unlinkability">
 <section id="section-4.1">
         <h3 id="name-unlinkability">
@@ -1249,7 +1249,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-selective-disclosure">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-selective-disclosure" class="section-name selfRef">Selective Disclosure</a>
         </h3>
-<p id="section-4.2-1">While JWPs provide the underling structure for easily supporting selective disclosure, JPTs must go a step further to ensure that applications can effectively provide choice and consent on exactly what is being disclosed.  Software using JWPs must know the mappings from payloads to claims.  JPTs do not support disclosing claims that are intended to be private from the issuer to the relying party.  All disclosed payloads MUST be mapped to claims and made accessible to the application.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">While JWPs provide the underling structure for easily supporting selective disclosure, JPTs must go a step further to ensure that holders can effectively provide choice and consent on exactly what is being disclosed.  Software using JWPs MUST know the mappings from payloads to claims. All disclosed payloads MUST be mapped to claims and made accessible to the application.  Holders SHOULD understand the semantics of all potentially disclosed claims to the extent needed to decide whether to disclose them. JPTs SHOULD NOT contain claims that are intended only for a specific verifier.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="familiarity">
@@ -1257,7 +1257,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-familiarity">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-familiarity" class="section-name selfRef">Familiarity</a>
         </h3>
-<p id="section-4.3-1">JPTs are intended to be as close to a JWT as possible in order to provide the simplest transition for any JWT-based system to add support for a JPT.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">JPTs are intended to be as close to a JWT as possible in order to provide the simplest transition for any JWT-based system to add support for JPTs.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3-2">Although there are some stark differences in the lifecycle of a JPT, from the application's perspective, the interface to a JPT can be made fairly similar: a JSON object containing a mix of required and optional claims with well-understood values.<a href="#section-4.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.3-3">The most significant divergence required by JPTs is that of supporting values that may be disclosed or may instead only be a proof about the value.  Applications are required to interact with the JPT on a payload-by-payload basis instead of just verifying a JWT and then being able to interact with the JSON body directly.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 </section>
@@ -1267,7 +1267,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-proofs">
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-proofs" class="section-name selfRef">Proofs</a>
         </h3>
-<p id="section-4.4-1">In order to generate a variety of efficient ZKPs of knowledge, range, membership, or other predicates, it is essential that each individual payload is only a single claim value.  This greatly simplifies the task of linking a derived proof of a given claim to the specific payload that was also signed by the issuer.  While JPTs support claims that have complex object or array compound values, they also allow for simple claim values such as JSON strings, numbers, and booleans that can be used directly in generating predicate proofs.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">To generate a variety of efficient ZKPs of knowledge, range, membership, or other predicates, it is essential that each individual payload is only a single claim value.  This greatly simplifies the task of linking a derived proof of a given claim to the specific payload that was also signed by the issuer.  While JPTs support claims that have complex object or array compound values, they also allow for simple claim values such as JSON strings, numbers, and booleans that can be used directly in generating predicate proofs.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1277,7 +1277,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-claim-names">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-claim-names" class="section-name selfRef">Claim Names</a>
       </h2>
-<p id="section-5-1">It is suggested that the claim names used with JPTs come from those in the IANA JSON Web Token Claims Registry, when those fit the application's needs.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">It is RECOMMENDED that the claim names used with JPTs come from those in the IANA JSON Web Token Claims Registry <span>[<a href="#IANA.JWT.Claims" class="cite xref">IANA.JWT.Claims</a>]</span> established by <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, when those fit the application's needs.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="claims">
@@ -1285,11 +1285,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-claims">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-claims" class="section-name selfRef">Claims</a>
       </h2>
-<p id="section-6-1">Using a JSON Proof Token requires combining information from two sources: the claim names and the payloads.  The simplest solution is to list the claim names in an ordered array that aligns with the included payloads.  This claims array can be conveniently included in the JWP Protected Header using the <code>claims</code> key.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">When the claims array is stored in the header, any variations of it are disclosed to the verifier and can be used to correlate and link usages.  Given the privacy design considerations around linkability it is recommended that the claims are defined external to an individual JPT and either referenced or known by the application context.<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">In order to facilitate this external definition of the claim names, an additional <code>cid</code> key is defined with a required digest value calculated as defined here.  This <code>cid</code> can be used similar to a <code>kid</code> in order to ensure that is it possible to externally resolve and then verify that the correct list of claim names is being used when processing the payloads containing the claim values.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-1">A JSON Proof Token assigns each playload a claim name. Payloads MUST each have a negotiated and understood claim name within the application context. The simplest solution to establish payload claim names is as an ordered array that aligns with the included payloads.  This claims array can be conveniently included in the Issuer Protected Header using the <code>claims</code> key.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">When the claims array is stored in the header, any variations of that array between JWP are visible to the verifier, and can indirectly leak user information or provide linkability.  Given the privacy design considerations around linkability it is RECOMMENDED that the claims are defined external to an individual JPT and either referenced or known by the application context.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">To facilitate this external definition of the claim names, an additional <code>cid</code> key is defined with a required digest value calculated as defined here.  This <code>cid</code> can be used similar to a <code>kid</code> in order to ensure that is it possible to externally resolve and then verify that the correct list of claim names is being used when processing the payloads containing the claim values.<a href="#section-6-3" class="pilcrow">¶</a></p>
 <p id="section-6-4">If there is an associated JWK containing the signing key information, the <code>claims</code> key is also registered there as a convenient location for the claim names.<a href="#section-6-4" class="pilcrow">¶</a></p>
-<p id="section-6-5">All payloads are claim values and MUST be the base64url encoding of the UTF-8 representation of a JSON value.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<p id="section-6-5">All payloads are claim values and MUST be the base64url encoding of the UTF-8 representation of a JSON value.
+That said, predicate proofs derived from payload values are not represented as claims;
+they are contained in the presentation proof using algorithm-specific representations.<a href="#section-6-5" class="pilcrow">¶</a></p>
 <p id="section-6-6">The following is an example JWP Protected Header that includes a claims array:<a href="#section-6-6" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-6-7">
 <pre>{
@@ -1324,7 +1326,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-payloads" class="section-name selfRef">Payloads</a>
       </h2>
 <blockquote id="section-7-1">
-        <p id="section-7-1.1">Editor's Note: This section is significantly incomplete, use it only as an indicator of the intended direction.<a href="#section-7-1.1" class="pilcrow">¶</a></p>
+        <p id="section-7-1.1">Editor's Note: This section is incomplete. Use it only as an indicator of the intended direction.<a href="#section-7-1.1" class="pilcrow">¶</a></p>
 </blockquote>
 <p id="section-7-2">Application resolves each claim as required when processing the JPT.  Resolution can result in one of three things:
 1. A disclosed JSON value
@@ -1375,7 +1377,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-example-jpt">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-example-jpt" class="section-name selfRef">Example JPT</a>
       </h2>
-<p id="section-8-1">See the JSON Web Proof draft appendix.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">See the <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span> appendix.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -1407,8 +1409,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </h3>
 <dl class="references">
 <dt id="I-D.ietf-jose-json-web-proof">[I-D.ietf-jose-json-web-proof]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Waite, D.</span>, and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"JSON Web Proof"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-web-proof-02</span>, <time datetime="2023-10-21" class="refDate">21 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-proof-02">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-proof-02</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7519">[RFC7519]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1417,6 +1423,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="IANA.JWT.Claims">[IANA.JWT.Claims]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"JSON Web Token Claims"</span>, <span>&lt;<a href="https://www.iana.org/assignments/jwt">https://www.iana.org/assignments/jwt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
@@ -1433,9 +1443,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-acknowledgements">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-A-1">We would like to thank
+<p id="appendix-A-1">This work was incubated in the DIF <a href="https://identity.foundation/working-groups/crypto.html">Applied Cryptography Working Group</a>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">We would like to thank
 Brent Zundel
-for his valuable contributions to this specification.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+for his valuable contributions to this specification.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="document-history">
@@ -1444,19 +1455,24 @@ for his valuable contributions to this specification.<a href="#appendix-A-1" cla
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-B-1">[[ To be removed from the final specification ]]<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">-02<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">-03<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-B-3.1">Update example to use the current BBS algorithm<a href="#appendix-B-3.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-B-3.1">Improvements resulting from a full proofreading.<a href="#appendix-B-3.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-B-4">-01<a href="#appendix-B-4" class="pilcrow">¶</a></p>
+<p id="appendix-B-4">-02<a href="#appendix-B-4" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-B-5.1">Correct cross-references within group.<a href="#appendix-B-5.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-B-5.1">Update example to use the current BBS algorithm<a href="#appendix-B-5.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-B-6">-00<a href="#appendix-B-6" class="pilcrow">¶</a></p>
+<p id="appendix-B-6">-01<a href="#appendix-B-6" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-B-7.1">Created initial working group draft based on draft-jmiller-jose-json-proof-token-01<a href="#appendix-B-7.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-B-7.1">Correct cross-references within group.<a href="#appendix-B-7.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-B-8">-00<a href="#appendix-B-8" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-B-9.1">Created initial working group draft based on draft-jmiller-jose-json-proof-token-01<a href="#appendix-B-9.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
