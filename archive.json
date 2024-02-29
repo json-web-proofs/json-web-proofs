@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-27T00:35:35.327649+00:00",
+  "timestamp": "2024-02-29T00:35:58.190320+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -728,7 +728,7 @@
       "id": "I_kwDOFsQObc4-iIVO",
       "title": "There's a distinction between knowing how to disclose a claim as a mechanical process and full understanding the semantics of a claim",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/17",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -740,8 +740,8 @@
       ],
       "body": "Per the discussion on the 2-Nov-21 DIF JWP call, we need clearer language than \"understood\".  \r\n\r\n_Originally posted by @selfissued in https://github.com/json-web-proofs/json-web-proofs/pull/16#discussion_r741375561_",
       "createdAt": "2021-11-09T21:22:49Z",
-      "updatedAt": "2022-02-07T20:20:24Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-27T23:18:08Z",
+      "closedAt": "2024-02-27T23:18:08Z",
       "comments": [
         {
           "author": "quartzjer",
@@ -887,7 +887,7 @@
       "id": "I_kwDOFsQObc4-m3ZS",
       "title": "Move JPA request parts to subsections",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/21",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -898,8 +898,8 @@
       ],
       "body": "Also add recommendation that algorithms support a single octet string serialization for higher level protocols.",
       "createdAt": "2021-11-10T22:36:05Z",
-      "updatedAt": "2024-02-16T22:36:25Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-27T23:26:23Z",
+      "closedAt": "2024-02-27T23:26:23Z",
       "comments": [
         {
           "author": "OR13",
@@ -914,6 +914,13 @@
           "body": "We need clarification on what change is pending for this issue, or if it has been resolved",
           "createdAt": "2024-02-16T22:36:24Z",
           "updatedAt": "2024-02-16T22:36:24Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe this was addressed by https://github.com/json-web-proofs/json-web-proofs/pull/106, which defined the `alg` header parameter.",
+          "createdAt": "2024-02-27T23:26:23Z",
+          "updatedAt": "2024-02-27T23:26:23Z"
         }
       ]
     },
@@ -1321,7 +1328,7 @@
       ],
       "body": "Placeholder to track adding a full example of a JPT using the VC Data Model into the draft.",
       "createdAt": "2022-01-10T20:37:39Z",
-      "updatedAt": "2024-02-16T22:57:35Z",
+      "updatedAt": "2024-02-27T23:31:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -1423,11 +1430,13 @@
       "state": "OPEN",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "dwaite"
+      ],
       "labels": [],
       "body": "When supporting unlinkability, a JPA can also support a form of \"binding\" that ensures any honest Prover is the only entity that can generate a valid proof when given a challenge from a Verifier.\r\n\r\nThis algorithmic-level binding primitive is different and separate from any higher level types of binding such as using a DID in a payload, a protocol-based Proof of Posession, keychain signatures, or ephemeral keys.  All of those types of higher level bindings are not able to provide unlinkability for a Prover when presenting the same JWP to multiple Verifiers.\r\n\r\nTODO: \r\n- [ ] Define Unlinkability (JWP)\r\n- [ ] Define Unlinkable Binding (JPA)\r\n- [ ] Define Linkable Binding (JPT)",
       "createdAt": "2022-01-25T20:13:02Z",
-      "updatedAt": "2024-02-20T22:48:24Z",
+      "updatedAt": "2024-02-27T23:31:57Z",
       "closedAt": null,
       "comments": [
         {
@@ -1524,7 +1533,7 @@
       "labels": [],
       "body": "H/T @OR13 on looping me into a thread about the difficulty (complete lack-of) of supporting multiple signatures in JWTs,  this is definitely a use case we should try to directly support for JWPs.\r\n\r\nMy initial take would be to extend the use of ~ to support compound issuer headers and proofs:\r\n`issuer_header_alice~issuer_header_bob.payload_1~payload_2~payload_3.issuer_proof_alice~issuer_proof_bob`\r\nand the presentation\r\n`issuer_header_alice~issuer_header_bob.payload_1~~payload_3.presentation_proof_alice~presentation_proof_bob`\r\n\r\nThe multiple issuer headers/proofs wouldn't have any intrinsic linking/relationship (unless they encoded such internally in their headers), so the presenter would be free to include/exclude whatever ones they choose to.  The verifier would be required to verify _all_ of them (that are included).",
       "createdAt": "2022-05-02T16:49:39Z",
-      "updatedAt": "2024-02-20T22:14:56Z",
+      "updatedAt": "2024-02-27T23:44:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -1614,9 +1623,9 @@
         {
           "author": "selfissued",
           "authorAssociation": "COLLABORATOR",
-          "body": "@dwaite and I propose to close this unless concrete use cases necessitating multiple is endorsed by the working group.",
+          "body": "@dwaite and I propose to close this unless concrete use cases necessitating multiple signatures is endorsed by the working group.",
           "createdAt": "2024-02-20T22:14:55Z",
-          "updatedAt": "2024-02-20T22:14:55Z"
+          "updatedAt": "2024-02-27T23:44:01Z"
         }
       ]
     },
@@ -1737,7 +1746,7 @@
       "id": "I_kwDOFsQObc5LnxrO",
       "title": "Proposal: expand presented form to support separate presentation signature",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/57",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1749,8 +1758,8 @@
       ],
       "body": "I'd like to add another presentation form with five sections:\r\n`<presentation_header>.<issuer_header>.<payload_1>~<payload_2>.<presentation_proof>.<presentation_signature>`\r\n\r\nRight now, the SU/MAC algs incorporate the presentation signature into the proof and it doesn't feel right.  The holder should be able to choose their own presentation algorithm independently from the issuer, and it should be able to be any normal JWS one.  \r\n\r\nFor algorithms such as BBS that internally incorporate replay protection and presentation header support, they would remain four-part but also re-order to be consistent:\r\n`<presentation_header>.<issuer_header>.<payload_1>~<payload_2>.<presentation_proof>`\r\n",
       "createdAt": "2022-06-12T22:26:47Z",
-      "updatedAt": "2024-02-20T22:17:36Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-27T23:45:37Z",
+      "closedAt": "2024-02-27T23:45:37Z",
       "comments": [
         {
           "author": "dwaite",
@@ -1772,6 +1781,13 @@
           "body": "Could use clarity around examples",
           "createdAt": "2024-02-20T22:17:35Z",
           "updatedAt": "2024-02-20T22:17:35Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm closing this out as a duplicate of #59 ",
+          "createdAt": "2024-02-27T23:45:32Z",
+          "updatedAt": "2024-02-27T23:45:32Z"
         }
       ]
     },
@@ -1792,7 +1808,7 @@
       ],
       "body": "Having worked on the SU and MAC algo drafts which both make use of proof values that are actually arrays, I would like to update the JPT core definition to treat all proof values as an array natively.\r\n\r\nThe array would be identical to how payloads are encoded, in compact it would use `~` separator, and in JSON it would simply be an array of base64url-encoded strings.\r\n\r\nThe JWP implementation would be required to always decode it into an array of individual variable-length octet strings and then pass that array into the algorithm, even if there is only one item.\r\n\r\nThis provides notable cryptographic simplification benefit to algorithm definitions, such that they don't have to internally define their own separators, padding, etc.",
       "createdAt": "2022-06-12T23:00:44Z",
-      "updatedAt": "2024-02-20T22:24:02Z",
+      "updatedAt": "2024-02-27T23:34:19Z",
       "closedAt": null,
       "comments": [
         {
@@ -1815,6 +1831,13 @@
           "body": "Will do a prototype to evaluate for draft 3",
           "createdAt": "2024-02-20T22:24:01Z",
           "updatedAt": "2024-02-20T22:24:01Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Planning to add text to this, but the changes to algorithms to use it will likely be draft-4 milestone",
+          "createdAt": "2024-02-27T23:34:18Z",
+          "updatedAt": "2024-02-27T23:34:18Z"
         }
       ]
     },
@@ -1937,14 +1960,14 @@
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
-        "dwaite"
+        "selfissued"
       ],
       "labels": [
         "JPA"
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> Assume the reader has some awareness of JOSE, and introduce terms like `issuer_header` and `presentation_header` so that they defined in their sections, for example:\r\n>\r\n> https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-00#name-presentation-protected-header-2\r\n>\r\n> does not include \"presentation_header\" header.",
       "createdAt": "2023-07-12T17:06:35Z",
-      "updatedAt": "2024-01-05T22:49:35Z",
+      "updatedAt": "2024-02-27T23:46:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -1979,7 +2002,7 @@
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> An example with a mixed algorithm for issue and holder would be nice here,\r\nor a comment about it being forbidden... for example issuer signing with\r\nES256 and holder presenting with EdDSA.",
       "createdAt": "2023-07-13T06:15:20Z",
-      "updatedAt": "2024-02-17T22:42:06Z",
+      "updatedAt": "2024-02-27T23:53:30Z",
       "closedAt": null,
       "comments": [
         {
@@ -2002,6 +2025,13 @@
           "body": "Let's consider this together with #57.  On the surface of it, it seems that we have to to address that one to address this one.",
           "createdAt": "2024-02-17T22:42:05Z",
           "updatedAt": "2024-02-17T22:42:05Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I do not think this is the same as #57 / #59 . We just need to make this clear for algorithms in general",
+          "createdAt": "2024-02-27T23:50:46Z",
+          "updatedAt": "2024-02-27T23:50:46Z"
         }
       ]
     },
@@ -2156,7 +2186,7 @@
       ],
       "body": "In review, we interpreted this old comment as the presentation proof needs to sign over the entire derived message (issuer header and presented payloads) rather than just the header. this changes the SU and MAC based algorithms.",
       "createdAt": "2024-01-09T22:14:50Z",
-      "updatedAt": "2024-02-20T22:24:47Z",
+      "updatedAt": "2024-02-27T23:34:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -2184,7 +2214,7 @@
       ],
       "body": "There is a missing JSON serialization from the build - fix this.",
       "createdAt": "2024-01-09T22:15:33Z",
-      "updatedAt": "2024-01-09T22:30:03Z",
+      "updatedAt": "2024-02-27T23:54:39Z",
       "closedAt": null,
       "comments": []
     },
@@ -2196,14 +2226,16 @@
       "state": "OPEN",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "selfissued"
+      ],
       "labels": [
         "JPT",
         "JWP"
       ],
       "body": "In evaluating rules described for JPT, it makes sense to describe these in the JWP spec for all applications.",
       "createdAt": "2024-01-09T22:26:48Z",
-      "updatedAt": "2024-01-09T22:29:51Z",
+      "updatedAt": "2024-02-27T23:55:38Z",
       "closedAt": null,
       "comments": []
     },
@@ -2223,7 +2255,7 @@
       ],
       "body": "JWP has an appendix showing an example JPT; propose to refactor both specs to include the same (potentially generated) example.",
       "createdAt": "2024-01-09T22:28:38Z",
-      "updatedAt": "2024-01-09T22:29:36Z",
+      "updatedAt": "2024-02-27T23:56:13Z",
       "closedAt": null,
       "comments": []
     },
@@ -2263,9 +2295,17 @@
       ],
       "body": "",
       "createdAt": "2024-01-09T22:34:53Z",
-      "updatedAt": "2024-01-09T22:34:54Z",
+      "updatedAt": "2024-02-27T23:40:57Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "needs to use consistent language with the other drafts",
+          "createdAt": "2024-02-27T23:19:02Z",
+          "updatedAt": "2024-02-27T23:19:02Z"
+        }
+      ]
     },
     {
       "number": 100,
@@ -2279,9 +2319,17 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-01-09T22:45:03Z",
-      "updatedAt": "2024-01-09T22:45:03Z",
+      "updatedAt": "2024-02-27T23:57:14Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I will talk to people about this at IETF 119 in Brisbane.",
+          "createdAt": "2024-02-27T23:56:54Z",
+          "updatedAt": "2024-02-27T23:56:54Z"
+        }
+      ]
     },
     {
       "number": 101,
@@ -2324,11 +2372,13 @@
       "state": "OPEN",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "selfissued"
+      ],
       "labels": [],
       "body": "Define the use of an `\"aud\"` presentation header parameter to be suggested alongside `\"nonce\"`",
       "createdAt": "2024-01-09T22:54:59Z",
-      "updatedAt": "2024-02-17T23:06:39Z",
+      "updatedAt": "2024-02-27T23:59:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -2337,6 +2387,13 @@
           "body": "I believe that `aud` should be a claim rather than a header parameter.  Same with `nonce`.\r\n\r\nBut I agree that we should discuss this.",
           "createdAt": "2024-02-17T23:06:37Z",
           "updatedAt": "2024-02-17T23:06:37Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Clarifying - `aud` makes sense as a presentation header parameter, for use of protocols which use this for holders to target a particular verifier.",
+          "createdAt": "2024-02-27T23:58:31Z",
+          "updatedAt": "2024-02-27T23:59:12Z"
         }
       ]
     },
@@ -5791,7 +5848,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-07-11T23:56:47Z",
-      "updatedAt": "2022-07-25T00:54:50Z",
+      "updatedAt": "2024-02-28T07:22:52Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "c7fc769a833065944d89c6c41dc05058a35019b0",
@@ -6090,7 +6147,7 @@
       "labels": [],
       "body": "This is a merger of the generated README from the (upgraded) internet draft tools bot, and the previous content.",
       "createdAt": "2023-04-23T07:35:18Z",
-      "updatedAt": "2023-04-26T20:49:23Z",
+      "updatedAt": "2024-02-28T07:22:35Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "d6502b8e58b29ab2186c030def655f9d198cd4d7",
@@ -6274,7 +6331,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2023-07-10T23:17:20Z",
-      "updatedAt": "2023-07-10T23:20:03Z",
+      "updatedAt": "2024-02-28T07:22:32Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "65bac90b0f9fb74f49ef9037f368cba986bcfdc6",
@@ -6556,7 +6613,7 @@
       "labels": [],
       "body": "Update BBS text to draft 3 operations as well as update code to generate examples.\r\n\r\nNote that I am still experimenting with the best approach for line wrapping the generated examples, so there may be subsequent changes in the generation code.",
       "createdAt": "2023-10-20T20:25:11Z",
-      "updatedAt": "2023-10-20T21:59:27Z",
+      "updatedAt": "2024-02-28T07:22:31Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "43eb204be581d59e6df8e387ba509f43280f83ed",
@@ -6818,7 +6875,7 @@
       "labels": [],
       "body": "Update references in the other two documents, as well as add entries to Changes section.",
       "createdAt": "2023-10-21T00:28:11Z",
-      "updatedAt": "2023-10-21T00:45:31Z",
+      "updatedAt": "2024-02-28T07:22:27Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "c3780b356efc2bd8ee345cae8674d12ea4c76b3d",
@@ -7257,24 +7314,26 @@
       "id": "PR_kwDOFsQObc5nI8pB",
       "title": "Update draft-ietf-jose-json-proof-token.md to add more language about\u2026",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/107",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "\u2026 semantic understanding of claims\r\n\r\nFixes #17",
       "createdAt": "2024-02-16T22:32:38Z",
-      "updatedAt": "2024-02-20T22:41:29Z",
+      "updatedAt": "2024-02-28T07:22:10Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "65f2568ce9b4a7ce99f693eb0ee2fe7669f84dae",
       "headRepository": "json-web-proofs/json-web-proofs",
       "headRefName": "issue-17",
-      "headRefOid": "a67cf864841279853c04502663770b2e1351e6ea",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "90adc2db850987a0f8b8314379e1f83d119de159",
+      "closedAt": "2024-02-27T23:18:07Z",
+      "mergedAt": "2024-02-27T23:18:07Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "6701d24c8c2f761ccfb2cd728e7e5def32e7cf05"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7309,6 +7368,103 @@
               "updatedAt": "2024-02-20T22:41:29Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 109,
+      "id": "PR_kwDOFsQObc5oGH9E",
+      "title": "BBS-DRAFT-5 and BBS-PROOF-DRAFT-5",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/109",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Leverage unreleased `mattrglobal/pairing_crypto` version for building examples, update references, and remove the previous workarounds for mmark tooling issues.",
+      "createdAt": "2024-02-27T20:11:40Z",
+      "updatedAt": "2024-02-28T07:21:22Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "6701d24c8c2f761ccfb2cd728e7e5def32e7cf05",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "add-bbs-draft-5",
+      "headRefOid": "cf1720f05f4d11996a94e19bd92843f4864e4e2f",
+      "closedAt": "2024-02-28T07:21:15Z",
+      "mergedAt": "2024-02-28T07:21:15Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "30a0248bf4b7b86a07f3921c6268445c62fd22f3"
+      },
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm still reading the delta between BBS draft 4 and 5 to make sure I don't have other updates.",
+          "createdAt": "2024-02-27T20:12:13Z",
+          "updatedAt": "2024-02-27T20:12:13Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Fixes #108 ",
+          "createdAt": "2024-02-27T22:39:51Z",
+          "updatedAt": "2024-02-27T22:39:51Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5xistA",
+          "commit": {
+            "abbreviatedOid": "7b3417d"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-27T22:16:21Z",
+          "updatedAt": "2024-02-27T22:16:22Z",
+          "comments": [
+            {
+              "originalPosition": 69,
+              "body": "```suggestion\r\n  * Add new `BBS-DRAFT-3` and `BBS-PROOF-DRAFT-3` algorithms based on draft-irtf-cfrg-bbs-signatures-03.\r\n```",
+              "createdAt": "2024-02-27T22:16:21Z",
+              "updatedAt": "2024-02-27T22:50:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFsQObc5xi2vf",
+          "commit": {
+            "abbreviatedOid": "7b3417d"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-27T22:49:06Z",
+          "updatedAt": "2024-02-27T22:49:06Z",
+          "comments": [
+            {
+              "originalPosition": 69,
+              "body": "The XML tooling will fail if I don't reference it as draft 5",
+              "createdAt": "2024-02-27T22:49:06Z",
+              "updatedAt": "2024-02-27T22:49:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFsQObc5xi_vj",
+          "commit": {
+            "abbreviatedOid": "f333a2c"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-27T23:20:28Z",
+          "updatedAt": "2024-02-27T23:20:28Z",
+          "comments": []
         }
       ]
     }
