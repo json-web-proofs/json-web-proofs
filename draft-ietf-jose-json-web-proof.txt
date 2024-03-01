@@ -5,9 +5,9 @@
 jose                                                           J. Miller
 Internet-Draft                                                  D. Waite
 Intended status: Standards Track                           Ping Identity
-Expires: 30 August 2024                                         M. Jones
+Expires: 2 September 2024                                       M. Jones
                                                   Self-Issued Consulting
-                                                        27 February 2024
+                                                            1 March 2024
 
 
                              JSON Web Proof
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2024.
+   This Internet-Draft will expire on 2 September 2024.
 
 Copyright Notice
 
@@ -461,7 +461,7 @@ Table of Contents
    For example:
 
    {
-       "alg":"BBS-DRAFT-3"
+       "alg":"BBS-DRAFT-5"
    }
 
 5.1.2.  Issuer Payloads
@@ -1372,7 +1372,7 @@ A.1.  Example Single-Use JWP
 
 A.2.  Example Multi-Use JWP
 
-   See JPA BBS-DRAFT-3 example.
+   See JPA BBS-DRAFT-5 example.
 
 Appendix B.  Acknowledgements
 

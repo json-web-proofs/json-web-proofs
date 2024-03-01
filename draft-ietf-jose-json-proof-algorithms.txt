@@ -5,10 +5,10 @@
 jose                                                           J. Miller
 Internet-Draft                                             Ping Identity
 Intended status: Standards Track                                M. Jones
-Expires: 30 August 2024                           Self-Issued Consulting
+Expires: 2 September 2024                         Self-Issued Consulting
                                                                 D. Waite
                                                            Ping Identity
-                                                        27 February 2024
+                                                            1 March 2024
 
 
                          JSON Proof Algorithms
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2024.
+   This Internet-Draft will expire on 2 September 2024.
 
 Copyright Notice
 
@@ -433,35 +433,35 @@ Table of Contents
 
 6.2.1.  JPA Algorithms
 
-   The BBS-DRAFT-3 alg parameter value in the issuance protected header
+   The BBS-DRAFT-5 alg parameter value in the issuance protected header
    corresponds to a ciphersuite identifier of BBS_BLS12381G1_XMD:SHA-
-   256_SSWU_RO_H2G_HM2S_ from [I-D.irtf-cfrg-bbs-signatures].
+   256_SSWU_RO_H2G_HM2S_.
 
-   The BBS-PROOF-DRAFT-3 alg parameter value in the presentation
+   The BBS-PROOF-DRAFT-5 alg parameter value in the presentation
    protected header corresponds to the same ciphersuite, but used in
    presentation form.
 
 6.2.2.  Key Format
 
-   The key used for the BBS-DRAFT-3 algorithm is an elliptic curve-based
+   The key used for the BBS-DRAFT-5 algorithm is an elliptic curve-based
    key pair, specifically against the G_2 subgroup of a pairing friendly
    curve.  Additional details on key generation can be found in
-   Section 3.3.
+   Section 3.4
 
    The JWK form of this key is an OKP type with a curve of BLs12381G2,
    with x being the BASE64URL-encoded form of the output of
-   point_to_octets_g2.  The use of this curve is described in
+   point_to_octets_E2.  The use of this curve is described in
    [I-D.ietf-cose-bls-key-representations].
 
    {
      "kty": "OKP",
-     "alg": "BBS-DRAFT-3",
+     "alg": "BBS-DRAFT-5",
      "use": "proof",
      "crv": "BLs12381G2",
-     "x": "hWX5wslwjIDGILXMNqWJSXXJgW7bR9SsoL0_4o4crLW6RPjDIze6is60V3hp8
-          dECE6fw8nwjKDPUdaZC-mNM12Vq7TDAKMjOlexSVTVgNycFhBZTts9KQy41eFG
-          vin3W",
-     "d": "ZrY1YTeMtdqXWLOE7YQQFQIok4Nq6WGMNrmGEGPb63U"
+     "x": "iR9LPpKbMEAwCnQsy4dzUJrqV_2IZbj1aSqGhVWVPAB-so_uWN0-je6lCT6VI
+          pm6AbaQdWacjnyZ9p9h5VLQTKC3XcnmLltuWFpOwKW92xOIfyvJjG98vDl01uo
+          zOfUB",
+     "d": "Udkjkcs3oVYQfC10kFv1Qh688hiLQjMFBwpWXE30DgQ"
    }
 
                   Figure 1: BBS private key in JWK format
@@ -470,7 +470,7 @@ Table of Contents
 
 6.2.3.  Issuance
 
-   Issuance is performed using the Sign operation from Section 3.4.1 of
+   Issuance is performed using the Sign operation from Section 3.5.1 of
    [I-D.irtf-cfrg-bbs-signatures].  This operation utilizes the issuer's
    BLS12-381 G2 key pair as SK and PK, along with desired protected
    header and payloads as the octets header and the octets array
@@ -484,7 +484,7 @@ Table of Contents
    payloads:
 
    {
-       "alg": "BBS-DRAFT-3",
+       "alg": "BBS-DRAFT-5",
        "typ": "JPT",
        "iss": "https://issuer.example",
        "claims": [
@@ -510,7 +510,7 @@ Table of Contents
    would be representable in the following serializations:
 
    {
-     "issuer": "eyJhbGciOiJCQlMtRFJBRlQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0
+     "issuer": "eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0
           dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLC
           JnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0",
      "payloads": [
@@ -519,24 +519,24 @@ Table of Contents
        "ImpheWRvZUBleGFtcGxlLm9yZyI",
        "NDI"
      ],
-     "proof": "riK-KHiMzJaD7-fpMRYRBYYTTDck0vfXeRVc34Y2ACAra8VCr5LGmRqWA
-          hKb73trcR3tPDUa28Siv2-UzQ5tB_BMs_6HIXJEctMh4Ut8R-4"
+     "proof": "jywciqDoUdhq-7cDYHWL1Ir3W0zIu1PbHavkPpYXjM2uJMzQqhCxWPoC2
+          wAxqPC-UkGpbp2uDgXognq0yJVmB1zNdDBvjtClaMCjBW9NMTw"
    }
 
                  Figure 4: Issued JWP (JSON serialization)
 
-   eyJhbGciOiJCQlMtRFJBRlQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
+   eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
    WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
-   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.riK
-   -KHiMzJaD7-fpMRYRBYYTTDck0vfXeRVc34Y2ACAra8VCr5LGmRqWAhKb73trcR3tPDUa
-   28Siv2-UzQ5tB_BMs_6HIXJEctMh4Ut8R-4
+   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.jyw
+   ciqDoUdhq-7cDYHWL1Ir3W0zIu1PbHavkPpYXjM2uJMzQqhCxWPoC2wAxqPC-UkGpbp2u
+   DgXognq0yJVmB1zNdDBvjtClaMCjBW9NMTw
 
                 Figure 5: Issued JWP (compact serialization)
 
 6.2.4.  Issuance Proof Verification
 
    Holder verification of the signature on issuance form is performed
-   using the Verify operation from Section 3.4.2 of
+   using the Verify operation from Section 3.5.2 of
    [I-D.irtf-cfrg-bbs-signatures].
 
    This operation utilizes the issuer's public key as PK, the proof as
@@ -546,7 +546,7 @@ Table of Contents
 6.2.5.  Presentation
 
    Derivation of a presentation is done by the holder using the ProofGen
-   operation from Section 3.4.3 of [I-D.irtf-cfrg-bbs-signatures].
+   operation from Section 3.5.3 of [I-D.irtf-cfrg-bbs-signatures].
 
    This operation utilizes the issuer's public key as PK, the issuer
    protected header as header, the issuance proof as signature, the
@@ -569,7 +569,7 @@ Table of Contents
    For example, given the following presentation header:
 
    {
-       "alg": "BBS-PROOF-DRAFT-3",
+       "alg": "BBS-PROOF-DRAFT-5",
        "aud": "https://recipient.example.com",
        "nonce": "wrmBRkKtXjQ"
    }
@@ -580,34 +580,54 @@ Table of Contents
    address, and generates a proof.  That proof is represented in the
    following serializations:
 
-   Figure: Presentation JWP (JSON serialization)
+   {
+     "presentation": "eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dH
+          BzOi8vcmVjaXBpZW50LmV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhq
+          USJ9",
+     "issuer": "eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0
+          dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLC
+          JnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0",
+     "payloads": [
+       "IkRvZSI",
+       "IkpheSI",
+       null,
+       "NDI"
+     ],
+     "proof": "rE70pxzvaDKuQqgxrMVRuPOpsIwTJXsxl8Z7DLo_6p1XujuHi6XQQinwC
+          bAd7-PHktIt_NUgxW-MvRz9E6VsBDucKTv2rYcxaZ9tHd848SHMUgg5qidB0th
+          hSuIgDnx2Q0EUIrrbrqoLBHnO5bKwHZhZ09Anu99rgMgFUqlZRgw1nCp3WTuPx
+          H3D8A9WDTE109IffzvQ4F5JAjuhp0ZcBlTBPBcZDeC8V7xrAxd37PjTo83mj9D
+          JX1CpUBIqlg0oPBcihu4hm1kYT7UzNHdsJlnxMaMlCAFzSDX5rTePXNw"
+   }
 
-   eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtMyIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
+              Figure 7: Presentation JWP (JSON serialization)
+
+   eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
    mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
-   lQtMyIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
+   lQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
    FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
-   vZSI~IkpheSI~~NDI.pMK8Sl5lXcJnVeNSVWeb2BmGWTolaOuZVbwLRWbjW_IMhQ9KIMI
-   glUEL4TPGwIp2ufW0xM7iropVttSKAT0SKJN2kDN8dLYruuT0SH3p1nzudtz4LIu1ClOt
-   v7865bhEKrMoTZJG0OAL9AwmPAaLcG---8wAy-_skUN8HLGT1GRXUcRji2EZRmVFlAxL_
-   o9IKGZs9BAR1CpYUTobSjmMhXKg5nxeV1EUXl48WrG_EC1n0iUooskU1XoQnrMHOzYXER
-   z0oHbePv5IvAgmjj6YereHCo9gWZgYisku-6DrPY0
+   vZSI~IkpheSI~~NDI.rE70pxzvaDKuQqgxrMVRuPOpsIwTJXsxl8Z7DLo_6p1XujuHi6X
+   QQinwCbAd7-PHktIt_NUgxW-MvRz9E6VsBDucKTv2rYcxaZ9tHd848SHMUgg5qidB0thh
+   SuIgDnx2Q0EUIrrbrqoLBHnO5bKwHZhZ09Anu99rgMgFUqlZRgw1nCp3WTuPxH3D8A9WD
+   TE109IffzvQ4F5JAjuhp0ZcBlTBPBcZDeC8V7xrAxd37PjTo83mj9DJX1CpUBIqlg0oPB
+   cihu4hm1kYT7UzNHdsJlnxMaMlCAFzSDX5rTePXNw
 
-             Figure 7: Presentation JWP (compact serialization)
+             Figure 8: Presentation JWP (compact serialization)
 
 6.2.6.  Presentation Verification
 
    Verification of a presentation is done by the verifier using the
-   ProofVerify operation from Section 3.4.4.
+   ProofVerify operation from Section 3.5.4.
 
    This operation utilizes the issuer's public key as PK, the issuer
    protected header as header, the issuance proof as signature, the
    holder's presentation protected header as ph, and the payloads as
    disclosed_messages.
 
-   In addition, the disclosed_indexes vector value is calculated from
-   the payloads.  For each value present in payloads (e.g. all values
-   not null in JSON serialization or a zero-length string in compact
-   serialization), the index of that payload is added to this vector.
+   In addition, the disclosed_indexes scalar array is calculated from
+   the payloads provided.  Values disclosed in the presented payloads
+   have a zero-based index in this array, while the indices of absent
+   payloads are omitted.
 
 6.3.  Message Authentication Code
 
@@ -822,7 +842,7 @@ Table of Contents
      "d": "jnE0-9YvxQtLJEKcyUHU6HQ3Y9nSDnh0NstYJFn7RuI"
    }
 
-                        Figure 8: issuer-private-jwk
+                        Figure 9: issuer-private-jwk
 
    This is the Signer's generated Shared Secret:
 
@@ -830,7 +850,7 @@ Table of Contents
    228, 4, 35, 177, 75, 96, 11, 205, 144, 189, 42, 95, 135, 170, 107,
    58, 99, 142]
 
-                        Figure 9: mac-shared-secret
+                        Figure 10: mac-shared-secret
 
    This is the Holder's presentation private key in the JWK format:
 
@@ -842,7 +862,7 @@ Table of Contents
      "d": "AvyDPl1I4xwjrI2iEOi6DxM9ipJe_h_VUN5OvoKvvW8"
    }
 
-                     Figure 10: holder-presentation-jwk
+                     Figure 11: holder-presentation-jwk
 
    The first MAC is generated using the key issuer_header and the
    base64url-encoded issuer protected header, resulting in this octet
@@ -852,7 +872,7 @@ Table of Contents
    198, 128, 102, 232, 178, 88, 252, 248, 57, 2, 231, 19, 145, 8, 160,
    197, 66, 166]
 
-                      Figure 11: mac-issuer-header-mac
+                      Figure 12: mac-issuer-header-mac
 
    The issuer generates an array of derived keys with one for each
    payload by using the shared secret as the key and the index of the
@@ -873,7 +893,7 @@ Table of Contents
     242, 236, 21, 138]
    ]
 
-                         Figure 12: mac-issuer-keys
+                         Figure 13: mac-issuer-keys
 
    The first payload is the string "Doe" with the octet sequence of [
    34, 68, 111, 101, 34 ] and base64url-encoded as IkRvZSI.
@@ -907,7 +927,7 @@ Table of Contents
     208, 178, 50]
    ]
 
-                         Figure 13: mac-issuer-macs
+                         Figure 14: mac-issuer-macs
 
    Concatenating the issuer protected header MAC with the array of
    payload MACs produces a single octet array that is signed using the
@@ -919,7 +939,7 @@ Table of Contents
    98, 149, 254, 22, 1, 114, 187, 233, 168, 116, 173, 211, 208, 234,
    245, 76, 238, 143, 157, 83, 202]
 
-                      Figure 14: mac-issuer-signature
+                      Figure 15: mac-issuer-signature
 
    The original shared secret octet string is then concatenated to the
    end of the issuer signature octet string and the result is base64url-
@@ -945,7 +965,7 @@ Table of Contents
      prOmOO"
    }
 
-                         Figure 15: mac-issued-jwp
+                         Figure 16: mac-issued-jwp
 
    The same JWP in compact serialization:
 
@@ -958,7 +978,7 @@ Table of Contents
    Wm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn37
    75AQjsUtgC82QvSpfh6prOmOO
 
-                       Figure 16: mac-issued-compact
+                       Figure 17: mac-issued-compact
 
    Next, we show the presentation of the JWP with selective disclosure.
 
@@ -969,7 +989,7 @@ Table of Contents
      "nonce": "uTEB371l1pzWJl7afB0wi0HWUNk1Le-bComFLxa8K-s"
    }
 
-                     Figure 17: mac-presentation-header
+                     Figure 18: mac-presentation-header
 
    When signed with the holder's presentation key, the resulting
    signature octets are:
@@ -980,7 +1000,7 @@ Table of Contents
    222, 17, 232, 118, 110, 111, 47, 165, 102, 142, 0, 1, 226, 117, 143,
    125, 132, 62, 231, 145]
 
-                Figure 18: mac-presentation-header-signature
+                Figure 19: mac-presentation-header-signature
 
    Then by applying selective disclosure of only the given name and age
    claims (family name and email hidden, payload array indexes 0 and 2),
@@ -1002,7 +1022,7 @@ Table of Contents
     242, 236, 21, 138]
    ]
 
-                    Figure 19: mac-presentation-keyormac
+                    Figure 20: mac-presentation-keyormac
 
    The final presented proof value is generated by concatenating first
    the presentation header signature octet string, followed by the
@@ -1028,7 +1048,7 @@ Table of Contents
    219, 97, 119, 98, 244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49,
    246, 109, 155, 242, 236, 21, 138]
 
-                     Figure 20: mac-presentation-proof
+                     Figure 21: mac-presentation-proof
 
    The resulting presented JWP in JSON serialization is:
 
@@ -1055,7 +1075,7 @@ Table of Contents
      zFMZS1iQ29tRkx4YThLLXMifQ"
    }
 
-                      Figure 21: mac-presentation-jwp
+                      Figure 22: mac-presentation-jwp
 
    The same JWP in compact serialization:
 
@@ -1072,7 +1092,7 @@ Table of Contents
    GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m
    2b8uwVig
 
-                    Figure 22: mac-presentation-compact
+                    Figure 23: mac-presentation-compact
 
 7.  Security Considerations
 
@@ -1463,7 +1483,12 @@ Appendix A.  Acknowledgements
 
 Appendix B.  Document History
 
-   [[ To be removed from the final specification ]]
+   [[ To be removed from the final specification ]] -03
+
+   *  Removed BBS-DRAFT-3 and BBS-PROOF-DRAFT-3 in lieu of BBS-DRAFT-5
+      and BBS-PROOF-DRAFT-5, with signature/proof/verification
+      referencing the revised mechanisms in
+      [I-D.irtf-cfrg-bbs-signatures].
 
    -03
 
@@ -1472,7 +1497,7 @@ Appendix B.  Document History
    -02
 
    *  Add new BBS-DRAFT-3 and BBS-PROOF-DRAFT-3 algorithms based on
-      [I-D.irtf-cfrg-bbs-signatures], Draft 3.
+      draft-irtf-cfrg-bbs-signatures-03.
    *  Remove prior BBS-X algorithm based on a particular implementation
       of earlier drafts.
 
