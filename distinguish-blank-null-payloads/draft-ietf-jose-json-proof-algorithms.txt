@@ -207,7 +207,7 @@ Table of Contents
 5.3.  Present
 
    Used to apply any selective disclosure choices and perform any
-   unlinkability transformations.
+   unlinkability transformations, as well as to show binding.
 
    An algorithm MAY support additional input options from the requesting
    party, such as for predicate proofs and verifiable computation
@@ -458,10 +458,10 @@ Table of Contents
      "alg": "BBS-DRAFT-5",
      "use": "proof",
      "crv": "BLs12381G2",
-     "x": "kusooNCxEEeZGgHptL7TE7A0urHElca-GSucoYx0Nn-wTZW0YLdozGggB7TBu
-          Jq2Aj5sJ6Q1iYnlkLOQthl5SWGoXBjs198vBMnofnrDGj27Um2ZQVehGJLZLtg
-          inmYc",
-     "d": "LmfrvCpBSEJPCT87Gn8T6jEBkXSQ9K6nAiDWTxhcX4w"
+     "x": "t9ksxE01urIWL5wqUQlMw-ot1BMBIe_wDSt5tyj5zzA86GbdD3TvkK68zvXgE
+          uU8AkD9Nxk2IzsfkTKeSjhxe3Gv6XyqpNTTzNYTb9CVR5dJQxitNnx3MsqSJ-7
+          kRxdL",
+     "d": "acjAll1-j9_2qHDUXUw8YFZsTtuquC-k8x5RNi5iZFI"
    }
 
                   Figure 1: BBS private key in JWK format
@@ -519,17 +519,17 @@ Table of Contents
        "ImpheWRvZUBleGFtcGxlLm9yZyI",
        "NDI"
      ],
-     "proof": "oiekStd1lsJbqHtI9U7U4fYypmveor--FPmJ2zPy4ZHgBvXzW6P76-aYw
-          OEqJYkgQm0ZchSAYANBY3f7j36tDtxp96z4v6r2iL05cmQSC2U"
+     "proof": "oStdDsNJje1GqFFxwaSu_Z4_5iSsBldTdYFjHIA6HtTtXvZVbU063Ppx6
+          tMQ0SjaPjTV8GrRI51KzQq5BIMKg9GD6L3sMJJtCzMh6rG0PHU"
    }
 
                  Figure 4: Issued JWP (JSON serialization)
 
    eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
    WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
-   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.oie
-   kStd1lsJbqHtI9U7U4fYypmveor--FPmJ2zPy4ZHgBvXzW6P76-aYwOEqJYkgQm0ZchSA
-   YANBY3f7j36tDtxp96z4v6r2iL05cmQSC2U
+   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.oSt
+   dDsNJje1GqFFxwaSu_Z4_5iSsBldTdYFjHIA6HtTtXvZVbU063Ppx6tMQ0SjaPjTV8GrR
+   I51KzQq5BIMKg9GD6L3sMJJtCzMh6rG0PHU
 
                 Figure 5: Issued JWP (compact serialization)
 
@@ -580,19 +580,39 @@ Table of Contents
    address, and generates a proof.  That proof is represented in the
    following serializations:
 
-   Figure: Presentation JWP (JSON serialization)
+   {
+     "presentation": "eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dH
+          BzOi8vcmVjaXBpZW50LmV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhq
+          USJ9",
+     "issuer": "eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0
+          dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLC
+          JnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0",
+     "payloads": [
+       "IkRvZSI",
+       "IkpheSI",
+       null,
+       "NDI"
+     ],
+     "proof": "sDS8yeIRyUeAeZXf_Minjx2SEdJZ7ueHHDaisLutC4S6QhY5JCGnHvxVm
+          BXefCwoqZiVn9k_uiRPahWC4lAzzmsRVr8Q_v8aSaSw-m2kwsG1i_OuvJwBaFy
+          Ec54muMIgTJCb-8Y3FiwP3F0W59DHoCIWV2-p5fRvCn4v4PTm2QVGTC2yaTnk5
+          SYJ9928mtLjdubNau3ZKwuzg3X4xEBGRGH_TKS9ZGp-FuKDP3FFENCfb61iujs
+          R5yYUyww2v4YhBhjjy6IG2egGVerokTXt9qogiN8k2_4Uckgwi_lkQMk"
+   }
+
+              Figure 7: Presentation JWP (JSON serialization)
 
    eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
    mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
    lQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
    FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
-   vZSI~IkpheSI~~NDI.sJJHFa4oiXBlSX-7WoDkA9nCXbBNYh_CsNQwiHQExRDl6DNj-x0
-   pVO9guYf7X-u0h1jgfSgUqTkICk7Ptbz_LKN9GrIhUzUUehz3klZj1CEhK6l1yi7bY_a6
-   I91vQ--ScJoAVAZkJt_4ToQcQIBUZLAZsu8mBl5pvXz_0hIJndZxFpiaAuA-U9f1wLhk1
-   evxIOFOSobaexcneaXzOLMF_m25New0Y8TmYI92L_b0i2c2YKrkPoBeUzCMxR_s9WpnKI
-   y4gvI_TOhHT_WicZhsdP6cKEEjLCi5f2KdFKXDiCU
+   vZSI~IkpheSI~~NDI.sDS8yeIRyUeAeZXf_Minjx2SEdJZ7ueHHDaisLutC4S6QhY5JCG
+   nHvxVmBXefCwoqZiVn9k_uiRPahWC4lAzzmsRVr8Q_v8aSaSw-m2kwsG1i_OuvJwBaFyE
+   c54muMIgTJCb-8Y3FiwP3F0W59DHoCIWV2-p5fRvCn4v4PTm2QVGTC2yaTnk5SYJ9928m
+   tLjdubNau3ZKwuzg3X4xEBGRGH_TKS9ZGp-FuKDP3FFENCfb61iujsR5yYUyww2v4YhBh
+   jjy6IG2egGVerokTXt9qogiN8k2_4Uckgwi_lkQMk
 
-             Figure 7: Presentation JWP (compact serialization)
+             Figure 8: Presentation JWP (compact serialization)
 
 6.2.6.  Presentation Verification
 
@@ -822,7 +842,7 @@ Table of Contents
      "d": "jnE0-9YvxQtLJEKcyUHU6HQ3Y9nSDnh0NstYJFn7RuI"
    }
 
-                        Figure 8: issuer-private-jwk
+                        Figure 9: issuer-private-jwk
 
    This is the Signer's generated Shared Secret:
 
@@ -830,7 +850,7 @@ Table of Contents
    228, 4, 35, 177, 75, 96, 11, 205, 144, 189, 42, 95, 135, 170, 107,
    58, 99, 142]
 
-                        Figure 9: mac-shared-secret
+                        Figure 10: mac-shared-secret
 
    This is the Holder's presentation private key in the JWK format:
 
@@ -842,7 +862,7 @@ Table of Contents
      "d": "AvyDPl1I4xwjrI2iEOi6DxM9ipJe_h_VUN5OvoKvvW8"
    }
 
-                     Figure 10: holder-presentation-jwk
+                     Figure 11: holder-presentation-jwk
 
    The first MAC is generated using the key issuer_header and the
    base64url-encoded issuer protected header, resulting in this octet
@@ -852,7 +872,7 @@ Table of Contents
    198, 128, 102, 232, 178, 88, 252, 248, 57, 2, 231, 19, 145, 8, 160,
    197, 66, 166]
 
-                      Figure 11: mac-issuer-header-mac
+                      Figure 12: mac-issuer-header-mac
 
    The issuer generates an array of derived keys with one for each
    payload by using the shared secret as the key and the index of the
@@ -873,7 +893,7 @@ Table of Contents
     242, 236, 21, 138]
    ]
 
-                         Figure 12: mac-issuer-keys
+                         Figure 13: mac-issuer-keys
 
    The first payload is the string "Doe" with the octet sequence of [
    34, 68, 111, 101, 34 ] and base64url-encoded as IkRvZSI.
@@ -907,7 +927,7 @@ Table of Contents
     208, 178, 50]
    ]
 
-                         Figure 13: mac-issuer-macs
+                         Figure 14: mac-issuer-macs
 
    Concatenating the issuer protected header MAC with the array of
    payload MACs produces a single octet array that is signed using the
@@ -919,7 +939,7 @@ Table of Contents
    98, 149, 254, 22, 1, 114, 187, 233, 168, 116, 173, 211, 208, 234,
    245, 76, 238, 143, 157, 83, 202]
 
-                      Figure 14: mac-issuer-signature
+                      Figure 15: mac-issuer-signature
 
    The original shared secret octet string is then concatenated to the
    end of the issuer signature octet string and the result is base64url-
@@ -940,12 +960,13 @@ Table of Contents
      JTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb
      2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI
      1NiJ9",
-     "proof": "eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7mqr
-     9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6
-     prOmOO"
+     "proof": [
+       "eKwP5ormlovxxE-GeiuVC_1oOscxVyBA7TJWm5k6P3T1gojFpM_o7mqr9mKV_hYB
+       crvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn3775AQjsUtgC82QvSpfh6prOmOO"
+     ]
    }
 
-                         Figure 15: mac-issued-jwp
+                         Figure 16: mac-issued-jwp
 
    The same JWP in compact serialization:
 
@@ -958,7 +979,7 @@ Table of Contents
    Wm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn37
    75AQjsUtgC82QvSpfh6prOmOO
 
-                       Figure 16: mac-issued-compact
+                       Figure 17: mac-issued-compact
 
    Next, we show the presentation of the JWP with selective disclosure.
 
@@ -969,7 +990,7 @@ Table of Contents
      "nonce": "uTEB371l1pzWJl7afB0wi0HWUNk1Le-bComFLxa8K-s"
    }
 
-                     Figure 17: mac-presentation-header
+                     Figure 18: mac-presentation-header
 
    When signed with the holder's presentation key, the resulting
    signature octets are:
@@ -980,7 +1001,7 @@ Table of Contents
    222, 17, 232, 118, 110, 111, 47, 165, 102, 142, 0, 1, 226, 117, 143,
    125, 132, 62, 231, 145]
 
-                Figure 18: mac-presentation-header-signature
+                Figure 19: mac-presentation-header-signature
 
    Then by applying selective disclosure of only the given name and age
    claims (family name and email hidden, payload array indexes 0 and 2),
@@ -1002,7 +1023,7 @@ Table of Contents
     242, 236, 21, 138]
    ]
 
-                    Figure 19: mac-presentation-keyormac
+                    Figure 20: mac-presentation-keyormac
 
    The final presented proof value is generated by concatenating first
    the presentation header signature octet string, followed by the
@@ -1028,7 +1049,7 @@ Table of Contents
    219, 97, 119, 98, 244, 33, 43, 55, 148, 238, 225, 177, 101, 160, 49,
    246, 109, 155, 242, 236, 21, 138]
 
-                     Figure 20: mac-presentation-proof
+                     Figure 21: mac-presentation-proof
 
    The resulting presented JWP in JSON serialization is:
 
@@ -1045,17 +1066,19 @@ Table of Contents
      JTDYxZlVPT0s1RHBLZ2Q4ajJ6YlpKdHFwSUxEVEpYNkkiLCJ5IjoiM0pxbnJrdWNMb
      2JrZFJ1T3FaWE9QOU1NbGJGeWVuRk9MeUdsRy1GUEFDTSJ9LCJhbGciOiJNQUMtSDI
      1NiJ9",
-     "proof": "foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwB
-     p-veEeh2bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVp
-     uZOj909YKIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8I
-     Vxzc7XChWydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQWKXNI1j
-     lioq4MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQh
-     KzeU7uGxZaAx9m2b8uwVig",
-     "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOa
-     zFMZS1iQ29tRkx4YThLLXMifQ"
+     "proof": [
+       "foavAqUMZwt0SF7k8I5rw8bu2ss_xmmvAUW2BczvI5VVNwSpbfNY1QwBp-veEeh2
+       bm8vpWaOAAHidY99hD7nkXisD-aK5paL8cRPhnorlQv9aDrHMVcgQO0yVpuZOj909
+       YKIxaTP6O5qq_Zilf4WAXK76ah0rdPQ6vVM7o-dU8qcNVp9i-I8qGTcT_8IVxzc7X
+       ChWydEictc8xB0QIE9rI-stpy4iuSs1xqviYkZn43VDNYd58gNXnQWKXNI1jlioq4
+       MG776cAGLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU
+       7uGxZaAx9m2b8uwVig"
+     ],
+     "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOaz
+     FMZS1iQ29tRkx4YThLLXMifQ"
    }
 
-                      Figure 21: mac-presentation-jwp
+                      Figure 22: mac-presentation-jwp
 
    The same JWP in compact serialization:
 
@@ -1072,7 +1095,7 @@ Table of Contents
    GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m
    2b8uwVig
 
-                    Figure 22: mac-presentation-compact
+                    Figure 23: mac-presentation-compact
 
 7.  Security Considerations
 
@@ -1241,7 +1264,7 @@ Table of Contents
 
    *  Algorithm Analysis Documents(s): n/a
 
-   *  Algorithm Name: BBS-DRAFT-3
+   *  Algorithm Name: BBS-DRAFT-5
 
    *  Algorithm Description: Corresponds to a ciphersuite identifier of
       BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_H2G_HM2S_
@@ -1256,7 +1279,7 @@ Table of Contents
 
    *  Algorithm Analysis Documents(s): n/a
 
-   *  Algorithm Name: BBS-PROOF-DRAFT-3
+   *  Algorithm Name: BBS-PROOF-DRAFT-5
 
    *  Algorithm Description: Corresponds to a ciphersuite identifier of
       BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_H2G_HM2S_
@@ -1469,9 +1492,6 @@ Appendix B.  Document History
       and BBS-PROOF-DRAFT-5, with signature/proof/verification
       referencing the revised mechanisms in
       [I-D.irtf-cfrg-bbs-signatures].
-
-   -03
-
    *  Improvements resulting from a full proofreading.
 
    -02

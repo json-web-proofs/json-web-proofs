@@ -1286,14 +1286,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-claims" class="section-name selfRef">Claims</a>
       </h2>
 <p id="section-6-1">A JSON Proof Token assigns each playload a claim name. Payloads MUST each have a negotiated and understood claim name within the application context. The simplest solution to establish payload claim names is as an ordered array that aligns with the included payloads.  This claims array can be conveniently included in the Issuer Protected Header using the <code>claims</code> key.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">When the claims array is stored in the header, any variations of that array between JWP are visible to the verifier, and can indirectly leak user information or provide linkability.  Given the privacy design considerations around linkability it is RECOMMENDED that the claims are defined external to an individual JPT and either referenced or known by the application context.<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">To facilitate this external definition of the claim names, an additional <code>cid</code> key is defined with a required digest value calculated as defined here.  This <code>cid</code> can be used similar to a <code>kid</code> in order to ensure that is it possible to externally resolve and then verify that the correct list of claim names is being used when processing the payloads containing the claim values.<a href="#section-6-3" class="pilcrow">¶</a></p>
-<p id="section-6-4">If there is an associated JWK containing the signing key information, the <code>claims</code> key is also registered there as a convenient location for the claim names.<a href="#section-6-4" class="pilcrow">¶</a></p>
-<p id="section-6-5">All payloads are claim values and MUST be the base64url encoding of the UTF-8 representation of a JSON value.
+<p id="section-6-2">All payloads are claim values and MUST be the base64url encoding of the UTF-8 representation of a JSON value.
 That said, predicate proofs derived from payload values are not represented as claims;
-they are contained in the presentation proof using algorithm-specific representations.<a href="#section-6-5" class="pilcrow">¶</a></p>
-<p id="section-6-6">The following is an example JWP Protected Header that includes a claims array:<a href="#section-6-6" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-6-7">
+they are contained in the presentation proof using algorithm-specific representations.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">The following is an example JWP Issuer Protected Header that includes a claims property:<a href="#section-6-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-6-4">
 <pre>{
   "kid": "HjfcpyjuZQ-O8Ye2hQnNbT9RbbnrobptdnExR0DUjU8",
   "alg": "BBS-DRAFT-5",
@@ -1302,21 +1299,27 @@ they are contained in the presentation proof using algorithm-specific representa
     "exp",
     "family_name",
     "given_name",
-    "email"
+    "email",
+    "address",
+    "age_over_21"
   ]
 }
 
-</pre><a href="#section-6-7" class="pilcrow">¶</a>
+</pre><a href="#section-6-4" class="pilcrow">¶</a>
 </div>
-<p id="section-6-8">The following is an example JWP Protected Header that includes a <code>cid</code>:<a href="#section-6-8" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-6-9">
+<p id="section-6-5">In this example, the "iat" and "exp" would be JSON-formatted numbers, "family_name", "given_name" and "email" would be JSON strings (in quotes), "address" would be a JSON object and "age_over_21" would be expected to be either <code>true</code> or <code>false</code>.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<p id="section-6-6">When the claims array is transferred as a property in the Issuer Protected Header, any variations of that array between JWP will be visible to the verifier, and can leak information about the subject or provide an additional vector for linkability.  Given the privacy design considerations around linkability, it is RECOMMENDED that the claims are defined external to an individual JPT and either referenced or known by the application context.<a href="#section-6-6" class="pilcrow">¶</a></p>
+<p id="section-6-7">To facilitate this external definition of the claim names, an additional <code>cid</code> key is defined with a required digest value calculated as defined here.  This <code>cid</code> can be used similar to a <code>kid</code> in order to ensure that is it possible to externally resolve and then verify that the correct list of claim names is being used when processing the payloads containing the claim values.<a href="#section-6-7" class="pilcrow">¶</a></p>
+<p id="section-6-8">If there is an associated JWK containing the signing key information, the <code>claims</code> key is also registered there as a convenient location for the claim names.<a href="#section-6-8" class="pilcrow">¶</a></p>
+<p id="section-6-9">The following is an example JWP Protected Header that includes a <code>cid</code>:<a href="#section-6-9" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-6-10">
 <pre>{
   "kid": "HjfcpyjuZQ-O8Ye2hQnNbT9RbbnrobptdnExR0DUjU8",
   "alg": "BBS",
   "cid": "guA8PAI14Gkn4273f1rR606yMbRMFg4y"
 }
 
-</pre><a href="#section-6-9" class="pilcrow">¶</a>
+</pre><a href="#section-6-10" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
