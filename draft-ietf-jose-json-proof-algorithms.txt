@@ -458,10 +458,10 @@ Table of Contents
      "alg": "BBS-DRAFT-5",
      "use": "proof",
      "crv": "BLs12381G2",
-     "x": "pGHxExDsjOKuCfeKlSAfeOnADAKPHD-wVrs2RHQaqxFDrW8sdxXQhrlevLLl0
-          F9aAgLpPH999m2YQHD3mSgGWEFxQg0rW3Qc-hh57ZOhWn_yr6oyGbn5MNh4Wfu
-          6w7Hh",
-     "d": "F27i3vpoaf5YOfp7OdSNejJkYLiCHxKQTHw4nUJ0ewE"
+     "x": "rppprKs3xJNm5fkGN8bHvnxV-Z0TaFd_qYqluv3FhWSe3nbIPEmihExhdzF7a
+          avJGDUi9t4hSeq9ErkKCT4zVw49itjypog2HN7Rsm9QC5eZ_VSnYVhp2laca0Z
+          uM1l1",
+     "d": "Z2raqLssyDp9fnCV4Bup_VOmgAN1IsHbXP-NPz6Ivjc"
    }
 
                   Figure 1: BBS private key in JWK format
@@ -519,17 +519,17 @@ Table of Contents
        "ImpheWRvZUBleGFtcGxlLm9yZyI",
        "NDI"
      ],
-     "proof": "ljaEj9NslKsukzMs0yNdB29mdS0K_Ji21b9bRaCTISJR0U-dlJ80ScF8m
-          avmiD1IVxgI22iBdA4bd4rmobBqNIkQ1MDicexeJFIJzjscAks"
+     "proof": "gfYOAN-mKPEHg3-LcvEo9GVNvQos-zl5KmNe09bmP4z_l8TdeM75hE2Fh
+          jNepIZMIgtBKGT6_bEqn4lPL-gKtXNGFysSWcVKVvH0Xtey5LY"
    }
 
                  Figure 4: Issued JWP (JSON serialization)
 
    eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
    WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
-   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.lja
-   Ej9NslKsukzMs0yNdB29mdS0K_Ji21b9bRaCTISJR0U-dlJ80ScF8mavmiD1IVxgI22iB
-   dA4bd4rmobBqNIkQ1MDicexeJFIJzjscAks
+   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.gfY
+   OAN-mKPEHg3-LcvEo9GVNvQos-zl5KmNe09bmP4z_l8TdeM75hE2FhjNepIZMIgtBKGT6
+   _bEqn4lPL-gKtXNGFysSWcVKVvH0Xtey5LY
 
                 Figure 5: Issued JWP (compact serialization)
 
@@ -593,11 +593,11 @@ Table of Contents
        null,
        "NDI"
      ],
-     "proof": "jlVHkEM99enrXbTzgYSylPAFbjpRLNIQPbUyPeY9tjvCROWmQhCPbaRn9
-          A8jTyHAo-LbhtRra6v7XNOhpQEdQryf6MvYQ0CfTel0AKbJfWIVE2qNTHU_FM-
-          vN--BY9FUH_XlZEqxniJv2tTbfZDHNh6i8jeoGuplmNZQu69qH5Bo2KRU9PJPB
-          bSdvjZ-yCehV6xqTTyJrPNOqIgOVvzIQgvPFrB87qt9oqLa51Y3Fpz03OR-5xf
-          ZOTdj9k0ga7ZQUTa4J9wsDyrB-UpCrFWp75LDWaS9tw6K8ozMLNDi8O0"
+     "proof": "kFmeTrNhK-GjxDzNYDDoEV7aoZR1K1kJesfDWSGURr4KAh6a5LVyxhmSi
+          wU8AM4hqjHt5pOUBA1bwYDcdZvpP1LNkDsLxtHSAIDIfJuSFwZKw9QP3qnWxz5
+          Maz4z3LwKQrpUpQUH4umWPyyQT3ZRU0zoG9rDnBrZR7FGcb6j0lxKcr9TdyTwQ
+          oWk337yVoEjNmSYHmis3cf-ZoKhKj17GBSRQCuW8p1sV_eX8zKR6czBVXVMQMG
+          q47qFiXRTgBUTRBb-_Y0U6fhjwNJJ8KcBVjut5uIb7FNnztV9L_-g1Fw"
    }
 
               Figure 7: Presentation JWP (JSON serialization)
@@ -606,11 +606,11 @@ Table of Contents
    mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
    lQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
    FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
-   vZSI~IkpheSI~~NDI.jlVHkEM99enrXbTzgYSylPAFbjpRLNIQPbUyPeY9tjvCROWmQhC
-   PbaRn9A8jTyHAo-LbhtRra6v7XNOhpQEdQryf6MvYQ0CfTel0AKbJfWIVE2qNTHU_FM-v
-   N--BY9FUH_XlZEqxniJv2tTbfZDHNh6i8jeoGuplmNZQu69qH5Bo2KRU9PJPBbSdvjZ-y
-   CehV6xqTTyJrPNOqIgOVvzIQgvPFrB87qt9oqLa51Y3Fpz03OR-5xfZOTdj9k0ga7ZQUT
-   a4J9wsDyrB-UpCrFWp75LDWaS9tw6K8ozMLNDi8O0
+   vZSI~IkpheSI~~NDI.kFmeTrNhK-GjxDzNYDDoEV7aoZR1K1kJesfDWSGURr4KAh6a5LV
+   yxhmSiwU8AM4hqjHt5pOUBA1bwYDcdZvpP1LNkDsLxtHSAIDIfJuSFwZKw9QP3qnWxz5M
+   az4z3LwKQrpUpQUH4umWPyyQT3ZRU0zoG9rDnBrZR7FGcb6j0lxKcr9TdyTwQoWk337yV
+   oEjNmSYHmis3cf-ZoKhKj17GBSRQCuW8p1sV_eX8zKR6czBVXVMQMGq47qFiXRTgBUTRB
+   b-_Y0U6fhjwNJJ8KcBVjut5uIb7FNnztV9L_-g1Fw
 
              Figure 8: Presentation JWP (compact serialization)
 
@@ -1261,7 +1261,7 @@ Table of Contents
 
    *  Algorithm Analysis Documents(s): n/a
 
-   *  Algorithm Name: BBS-DRAFT-3
+   *  Algorithm Name: BBS-DRAFT-5
 
    *  Algorithm Description: Corresponds to a ciphersuite identifier of
       BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_H2G_HM2S_
@@ -1276,7 +1276,7 @@ Table of Contents
 
    *  Algorithm Analysis Documents(s): n/a
 
-   *  Algorithm Name: BBS-PROOF-DRAFT-3
+   *  Algorithm Name: BBS-PROOF-DRAFT-5
 
    *  Algorithm Description: Corresponds to a ciphersuite identifier of
       BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_H2G_HM2S_
@@ -1489,9 +1489,6 @@ Appendix B.  Document History
       and BBS-PROOF-DRAFT-5, with signature/proof/verification
       referencing the revised mechanisms in
       [I-D.irtf-cfrg-bbs-signatures].
-
-   -03
-
    *  Improvements resulting from a full proofreading.
 
    -02
