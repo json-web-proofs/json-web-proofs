@@ -1730,8 +1730,9 @@ Rather, proofs about payloads, such as "age &gt;= 21", are included in the prese
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-compact-serialization" class="section-name selfRef">Compact Serialization</a>
         </h3>
 <p id="section-6.1-1">The individually encoded payloads are concatenated with the <code>~</code> character to form an ordered delimited array. Any non-disclosed payloads are left blank, resulting in sequential <code>~~</code> characters such that all payload positions are preserved.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">Additionally, an algorithm MAY supply multiple octet strings for a proof. These are concatenated with the <code>~</code> character to form an ordered delimited array.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1-3">The headers, concatenated payloads, and proof value are then concatenated with a <code>.</code> character to form the final compact serialization.  The issued form will only contain one header and always have three <code>.</code> separated parts.  The presented form will always have four <code>.</code> separated parts, the issued header, followed by the protected header, then the payloads and the proof.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">A payload which is disclosed but which contains no data (i.e. a zero-length octet string) is encoded as a single <code>_</code> character of data, which is not a valid result from base64url-encoding a value.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">Additionally, an algorithm MAY supply multiple octet strings for a proof. These are concatenated with the <code>~</code> character to form an ordered delimited array.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-4">The headers, concatenated payloads, and proof value are then concatenated with a <code>.</code> character to form the final compact serialization.  The issued form will only contain one header and always have three <code>.</code> separated parts.  The presented form will always have four <code>.</code> separated parts, the issued header, followed by the protected header, then the payloads and the proof.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="json-serialization">
@@ -1739,7 +1740,7 @@ Rather, proofs about payloads, such as "age &gt;= 21", are included in the prese
         <h3 id="name-json-serialization">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-json-serialization" class="section-name selfRef">JSON Serialization</a>
         </h3>
-<p id="section-6.2-1">Non-disclosed payloads in the JSON serialization are represented with a <code>null</code> value in the <code>payloads</code> array.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">Non-disclosed payloads in the JSON serialization are represented with a <code>null</code> value in the <code>payloads</code> array. A zero-length payload is represented as a zero-length base64url encoded sequence, the empty string <code>""</code>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">Proofs are represented as an array of one or more encoded octet strings.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">This example flattened JSON serialization shows the presentation form with both the issuer and presentation headers, and with the first and third payloads hidden.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <span id="name-jwp-final-presentation"></span><figure id="figure-1">

@@ -591,6 +591,10 @@ Table of Contents
    payloads are left blank, resulting in sequential ~~ characters such
    that all payload positions are preserved.
 
+   A payload which is disclosed but which contains no data (i.e. a zero-
+   length octet string) is encoded as a single _ character of data,
+   which is not a valid result from base64url-encoding a value.
+
    Additionally, an algorithm MAY supply multiple octet strings for a
    proof.  These are concatenated with the ~ character to form an
    ordered delimited array.
@@ -605,7 +609,9 @@ Table of Contents
 6.2.  JSON Serialization
 
    Non-disclosed payloads in the JSON serialization are represented with
-   a null value in the payloads array.
+   a null value in the payloads array.  A zero-length payload is
+   represented as a zero-length base64url encoded sequence, the empty
+   string "".
 
    Proofs are represented as an array of one or more encoded octet
    strings.
