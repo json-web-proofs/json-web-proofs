@@ -65,7 +65,8 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-     2.1.  Abbreviations
+     2.1.  Terminology
+     2.2.  Abbreviations
    3.  Background
    4.  JWP Header
      4.1.  Registered Header Parameter Names
@@ -165,7 +166,25 @@ Table of Contents
    avoided in this specification to minimize confusion with other
    definitions.
 
-2.1.  Abbreviations
+2.1.  Terminology
+
+   The following terms are used throughout this series of documents:
+
+   binding: A mechanism, indicated in an issued JWP, for how to verify a
+   presentation was created by the intended holder.
+
+   linkability: The property where multiple presentations may be
+   correlated to a single issued JWP, either through consistency in the
+   cryptographic integrity or due to particulars of JWP usage by an
+   application.  Such issued JWPs may be referred to as single-use, as
+   multiple uses may leak unintended knowledge.
+
+   unlinkability: The property of issuance and presentation algorithms
+   and of application usage, where one presentation can only be
+   correlated with other presentations based on holder-disclosed
+   information.
+
+2.2.  Abbreviations
 
    *  ZKP: Zero-Knowledge Proof
    *  JWP: JSON Web Proof (this specification)

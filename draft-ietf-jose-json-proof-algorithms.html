@@ -1390,7 +1390,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-present">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-present" class="section-name selfRef">Present</a>
         </h3>
-<p id="section-5.3-1">Used to apply any selective disclosure choices and perform any unlinkability transformations.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-1">Used to apply any selective disclosure choices and perform any unlinkability transformations, as well as to show binding.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">An algorithm MAY support additional input options from the requesting party, such as for predicate proofs and verifiable computation requests.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.3-3">Every algorithm MUST support the ability to hide any or all payloads.  It MUST always include the issuer protected header unmodified in the presentation.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <p id="section-5.3-4">The algorithm MUST replace the issued proof value and generate a new presented proof value.  It also MUST include a new presentation protected header that provides replay protection.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
@@ -1565,10 +1565,10 @@ Use of the <code>nonce</code> header parameter is RECOMMENDED for this purpose.<
   "alg": "BBS-DRAFT-5",
   "use": "proof",
   "crv": "BLs12381G2",
-  "x": "kqOYoSx479xq5g9k31xyY3r255JdPvr94ZmBI-viNNqZ9xHDqlB-2DZj3MTPe
-       ZJCAgw-HPzg02QYzIFtIobUMSGON7iJShTUbwvkRd9O02NSpD52hSDjyhp-acn
-       iSVEO",
-  "d": "YL2AhJHu5KdUIWcy0e7POSgWxtDkx9zIYg9LC2mS3v8"
+  "x": "qs9-FbH4BShhLGSENO1nOgZZ2d_waoGxGtfwquvrr7eRG_mi5_cGbFxAkb9z5
+       bXiEqccx7_fikLdueMvnSXScufBzOLbhlFS97v-JaHSgiEv4y9crK6DGn-S9Sl
+       fLwFl",
+  "d": "BQs06eKwisDc_7yjeo_E2fGVY6aBM06P8D-jsbqu-fo"
 }
 
 </pre>
@@ -1633,8 +1633,8 @@ Use of the <code>nonce</code> header parameter is RECOMMENDED for this purpose.<
     "ImpheWRvZUBleGFtcGxlLm9yZyI",
     "NDI"
   ],
-  "proof": "o-VJFMywido2yLqUlpTUUfhgpz8rpFqQQqWPQ6q4fvHJCfTNKbM2fxwjw
-       DXu4nmcArYFaZz8lOEPWKhG6hxuRPP22sAPmgJFoHMhk1lKueE"
+  "proof": "oZgezgm_rYLjqm4ghrBTGldiVWV8FsK8j6QDVbFgQmlkg7-HRxJNpe0Fi
+       PCuk8OfBWx7lWXivyuYx_Ha-tkvzsmthtY60YOQiJ5-Ku1IkSc"
 }
 
 </pre>
@@ -1646,9 +1646,9 @@ Use of the <code>nonce</code> header parameter is RECOMMENDED for this purpose.<
             <div class="lang-wrapped sourcecode" id="section-6.2.3-8.1">
 <pre>eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
 WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
-1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.o-V
-JFMywido2yLqUlpTUUfhgpz8rpFqQQqWPQ6q4fvHJCfTNKbM2fxwjwDXu4nmcArYFaZz8
-lOEPWKhG6hxuRPP22sAPmgJFoHMhk1lKueE
+1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.oZg
+ezgm_rYLjqm4ghrBTGldiVWV8FsK8j6QDVbFgQmlkg7-HRxJNpe0FiPCuk8OfBWx7lWXi
+vyuYx_Ha-tkvzsmthtY60YOQiJ5-Ku1IkSc
 
 </pre>
 </div>
@@ -1706,11 +1706,11 @@ lOEPWKhG6hxuRPP22sAPmgJFoHMhk1lKueE
     null,
     "NDI"
   ],
-  "proof": "o5zHKjtESpkFqMASSvUQc6UheJUJzF3UzHQPnKBEmtq2v2tqN9Y9xnWRb
-       02aNEYzral22ZpIUf0XRXQxiD6g-le_UaxwKr9IZjt3enlfl5mFC25tiBkdcnR
-       bDZFtkd3OG08KExVJiD26e0gjaaJBHQPx46qC9CMgPnzSVdOKbHgCeKuUw3SPJ
-       FnuQD3GYWNbeJBMwCgk7OVWVKEatKVCbg_qzWqSCI9DB6Q8w65aDxeZtl9WfOs
-       t6k4-gCRjwGzGOLOT15pUUg65M5ZDCYsEfWxbOeqWFrFeN8V3BgEJI1E"
+  "proof": "qCb_cni-bte2OzhYGrBT5DM8bFxQcN9gwRyGWymg1tE-MLypV1CCTzR5g
+       KaTG_Xsg45C-Z3dxfyZJRTHTkV9VLzMfHomXrE1n8T0CvZuMyI-zWd2lIluWkX
+       NIAuFQwthJmMRM_M31-2a3rQq7aOs-Sco6MFbdfn8nx4RvDNCGpgahGKmUYENm
+       RTQ85k1SrzicrXpmmi49IZGQ_WCoTM9kjxSqXsNRrywCnnj6xcL9XpiPr2O_41
+       S7EYfYQkQqYPzASpEYLtFngaIhPFUK_o3oYoBlGiIoUYca732WUquR1g"
 }
 
 </pre>
@@ -1724,11 +1724,11 @@ lOEPWKhG6hxuRPP22sAPmgJFoHMhk1lKueE
 mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
 lQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
 FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
-vZSI~IkpheSI~~NDI.o5zHKjtESpkFqMASSvUQc6UheJUJzF3UzHQPnKBEmtq2v2tqN9Y
-9xnWRb02aNEYzral22ZpIUf0XRXQxiD6g-le_UaxwKr9IZjt3enlfl5mFC25tiBkdcnRb
-DZFtkd3OG08KExVJiD26e0gjaaJBHQPx46qC9CMgPnzSVdOKbHgCeKuUw3SPJFnuQD3GY
-WNbeJBMwCgk7OVWVKEatKVCbg_qzWqSCI9DB6Q8w65aDxeZtl9WfOst6k4-gCRjwGzGOL
-OT15pUUg65M5ZDCYsEfWxbOeqWFrFeN8V3BgEJI1E
+vZSI~IkpheSI~~NDI.qCb_cni-bte2OzhYGrBT5DM8bFxQcN9gwRyGWymg1tE-MLypV1C
+CTzR5gKaTG_Xsg45C-Z3dxfyZJRTHTkV9VLzMfHomXrE1n8T0CvZuMyI-zWd2lIluWkXN
+IAuFQwthJmMRM_M31-2a3rQq7aOs-Sco6MFbdfn8nx4RvDNCGpgahGKmUYENmRTQ85k1S
+rzicrXpmmi49IZGQ_WCoTM9kjxSqXsNRrywCnnj6xcL9XpiPr2O_41S7EYfYQkQqYPzAS
+pEYLtFngaIhPFUK_o3oYoBlGiIoUYca732WUquR1g
 
 </pre>
 </div>
