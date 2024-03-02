@@ -77,7 +77,9 @@ Table of Contents
        4.1.5.  "proof_jwk" (Proof JWK) Header Parameter
        4.1.6.  "presentation_jwk" (Presentation JWK) Header Parameter
        4.1.7.  "iss" (Issuer) Header Parameter
-       4.1.8.  "claims" (Claims) Header Parameter
+       4.1.8.  "aud" (Audience) Header Parameter
+       4.1.9.  "nonce" (Nonce) Header Parameter
+       4.1.10. "claims" (Claims) Header Parameter
      4.2.  Public Header Parameter Names
      4.3.  Private Header Parameter Names
    5.  JWP Forms
@@ -400,7 +402,33 @@ Table of Contents
    parallel to the iss claim defined in [RFC7519].  Use of this Header
    Parameter is OPTIONAL.
 
-4.1.8.  "claims" (Claims) Header Parameter
+4.1.8.  "aud" (Audience) Header Parameter
+
+   The aud (audience) Header Parameter identifies the recipients that
+   the JWP is intended for.  Each principal intended to process the JWP
+   MUST identify itself with a value in the audience Header Parameter.
+   If the principal processing the Header Parameter does not identify
+   itself with a value in the aud Header Parameter when this Header
+   Parameter is present, then the JWP MUST be rejected.  In the general
+   case, the aud value is an array of case-sensitive strings, each
+   containing a StringOrURI value.  In the special case when the JWP has
+   one audience, the aud value MAY be a single case-sensitive string
+   containing a StringOrURI value.  The interpretation of audience
+   values is generally application specific.  Its definition is
+   intentionally parallel to the aud claim defined in [RFC7519].  Use of
+   this Header Parameter is OPTIONAL.
+
+4.1.9.  "nonce" (Nonce) Header Parameter
+
+   The nonce (nonce) Header Parameter is a case-sensitive string value
+   used to associate protocol state with a JWP.  This can be used, for
+   instance, to mitigate replay attacks.  The use of nonce values is
+   generally protocol specific.  Its definition is intentionally
+   parallel to the nonce claim registered in the IANA "JSON Web Token
+   Claims" registry (#IANA.JWT.Claims).  Use of this Header Parameter is
+   OPTIONAL.
+
+4.1.10.  "claims" (Claims) Header Parameter
 
    The claims Header Parameter is an array listing the Claim Names
    corresponding to the JWP payloads, in the same order as the payloads.
@@ -797,6 +825,26 @@ Table of Contents
 
    *  Specification Document(s): Section 4.1.7 of this specification
 
+   *  Header Parameter Name: aud
+
+   *  Header Parameter Description: Audience
+
+   *  Header Parameter Usage Location(s): Presented
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 4.1.8 of this specification
+
+   *  Header Parameter Name: nonce
+
+   *  Header Parameter Description: Nonce
+
+   *  Header Parameter Usage Location(s): Presented
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 4.1.9 of this specification
+
    *  Header Parameter Name: claims
 
    *  Header Parameter Description: claims
@@ -805,7 +853,7 @@ Table of Contents
 
    *  Change Controller: IETF
 
-   *  Specification Document(s): Section 4.1.8 of this specification
+   *  Specification Document(s): Section 4.1.10 of this specification
 
 8.2.  Media Type Registration
 
