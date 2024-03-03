@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-29T00:35:58.190320+00:00",
+  "timestamp": "2024-03-03T00:38:11.721269+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -1229,7 +1229,7 @@
       "id": "I_kwDOFsQObc5AMWY4",
       "title": "Are JSON object claims supported?",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/33",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1241,8 +1241,8 @@
       ],
       "body": "Trivial claims, like these can easily be mapped to a payload array.\r\n\r\n```\r\n \"claims\": [\r\n    \"iat\",\r\n    \"exp\",\r\n    \"family_name\",\r\n    \"given_name\",\r\n    \"email\"\r\n  ]\r\n```\r\n\r\nOur use cases involve complex object usually of specific types... \r\n\r\nHow are objects supported by this spec?",
       "createdAt": "2021-12-10T15:43:41Z",
-      "updatedAt": "2024-02-17T22:58:24Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-01T21:50:50Z",
+      "closedAt": "2024-03-01T21:50:50Z",
       "comments": [
         {
           "author": "quartzjer",
@@ -1427,7 +1427,7 @@
       "id": "I_kwDOFsQObc5CayJq",
       "title": "Types of / Definition of \"Binding\"",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/41",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1436,8 +1436,8 @@
       "labels": [],
       "body": "When supporting unlinkability, a JPA can also support a form of \"binding\" that ensures any honest Prover is the only entity that can generate a valid proof when given a challenge from a Verifier.\r\n\r\nThis algorithmic-level binding primitive is different and separate from any higher level types of binding such as using a DID in a payload, a protocol-based Proof of Posession, keychain signatures, or ephemeral keys.  All of those types of higher level bindings are not able to provide unlinkability for a Prover when presenting the same JWP to multiple Verifiers.\r\n\r\nTODO: \r\n- [ ] Define Unlinkability (JWP)\r\n- [ ] Define Unlinkable Binding (JPA)\r\n- [ ] Define Linkable Binding (JPT)",
       "createdAt": "2022-01-25T20:13:02Z",
-      "updatedAt": "2024-02-27T23:31:57Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-01T21:51:55Z",
+      "closedAt": "2024-03-01T21:51:55Z",
       "comments": [
         {
           "author": "selfissued",
@@ -1445,6 +1445,13 @@
           "body": "Per discussion with @dwaite on the JWP editors' call, we think that these should be defined in JWP.",
           "createdAt": "2024-02-20T22:48:22Z",
           "updatedAt": "2024-02-20T22:48:22Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Related to #78 .\r\n\r\n",
+          "createdAt": "2024-03-01T07:26:29Z",
+          "updatedAt": "2024-03-01T07:58:51Z"
         }
       ]
     },
@@ -1796,7 +1803,7 @@
       "id": "I_kwDOFsQObc5LnzNY",
       "title": "Allow algorithms to use ~ separator in proof values",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/59",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "quartzjer",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1808,8 +1815,8 @@
       ],
       "body": "Having worked on the SU and MAC algo drafts which both make use of proof values that are actually arrays, I would like to update the JPT core definition to treat all proof values as an array natively.\r\n\r\nThe array would be identical to how payloads are encoded, in compact it would use `~` separator, and in JSON it would simply be an array of base64url-encoded strings.\r\n\r\nThe JWP implementation would be required to always decode it into an array of individual variable-length octet strings and then pass that array into the algorithm, even if there is only one item.\r\n\r\nThis provides notable cryptographic simplification benefit to algorithm definitions, such that they don't have to internally define their own separators, padding, etc.",
       "createdAt": "2022-06-12T23:00:44Z",
-      "updatedAt": "2024-02-27T23:34:19Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-01T21:51:26Z",
+      "closedAt": "2024-03-01T21:51:26Z",
       "comments": [
         {
           "author": "dwaite",
@@ -1967,7 +1974,7 @@
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> Assume the reader has some awareness of JOSE, and introduce terms like `issuer_header` and `presentation_header` so that they defined in their sections, for example:\r\n>\r\n> https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-00#name-presentation-protected-header-2\r\n>\r\n> does not include \"presentation_header\" header.",
       "createdAt": "2023-07-12T17:06:35Z",
-      "updatedAt": "2024-02-27T23:46:52Z",
+      "updatedAt": "2024-03-02T19:30:54Z",
       "closedAt": null,
       "comments": [
         {
@@ -2002,7 +2009,7 @@
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> An example with a mixed algorithm for issue and holder would be nice here,\r\nor a comment about it being forbidden... for example issuer signing with\r\nES256 and holder presenting with EdDSA.",
       "createdAt": "2023-07-13T06:15:20Z",
-      "updatedAt": "2024-02-27T23:53:30Z",
+      "updatedAt": "2024-03-02T19:30:55Z",
       "closedAt": null,
       "comments": [
         {
@@ -2203,7 +2210,7 @@
       "id": "I_kwDOFsQObc57k3aw",
       "title": "Spec build issues around JPA section 6.2.5",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/95",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2214,9 +2221,17 @@
       ],
       "body": "There is a missing JSON serialization from the build - fix this.",
       "createdAt": "2024-01-09T22:15:33Z",
-      "updatedAt": "2024-02-27T23:54:39Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-03-01T08:13:17Z",
+      "closedAt": "2024-03-01T08:13:17Z",
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Fixed by 64facf8",
+          "createdAt": "2024-03-01T08:13:17Z",
+          "updatedAt": "2024-03-01T08:13:17Z"
+        }
+      ]
     },
     {
       "number": 96,
@@ -2235,7 +2250,7 @@
       ],
       "body": "In evaluating rules described for JPT, it makes sense to describe these in the JWP spec for all applications.",
       "createdAt": "2024-01-09T22:26:48Z",
-      "updatedAt": "2024-02-27T23:55:38Z",
+      "updatedAt": "2024-03-02T19:30:55Z",
       "closedAt": null,
       "comments": []
     },
@@ -2295,7 +2310,7 @@
       ],
       "body": "",
       "createdAt": "2024-01-09T22:34:53Z",
-      "updatedAt": "2024-02-27T23:40:57Z",
+      "updatedAt": "2024-03-02T19:30:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -2336,7 +2351,7 @@
       "id": "I_kwDOFsQObc57k-uU",
       "title": "Represent serialization difference between zero-length payloads and non-disclosed payloads in compact representation",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/101",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2345,8 +2360,8 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-01-09T22:45:26Z",
-      "updatedAt": "2024-02-20T22:30:43Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-01T22:02:48Z",
+      "closedAt": "2024-03-01T22:02:47Z",
       "comments": [
         {
           "author": "selfissued",
@@ -2369,7 +2384,7 @@
       "id": "I_kwDOFsQObc57lBB6",
       "title": "Define audience header parameter",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/102",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2378,8 +2393,8 @@
       "labels": [],
       "body": "Define the use of an `\"aud\"` presentation header parameter to be suggested alongside `\"nonce\"`",
       "createdAt": "2024-01-09T22:54:59Z",
-      "updatedAt": "2024-02-27T23:59:12Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-02T01:54:20Z",
+      "closedAt": "2024-03-02T01:54:20Z",
       "comments": [
         {
           "author": "selfissued",
@@ -2442,7 +2457,7 @@
       "id": "I_kwDOFsQObc5_4FT1",
       "title": "Update BBS to latest draft",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/108",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2451,7 +2466,25 @@
       "labels": [],
       "body": "Currently draft 5",
       "createdAt": "2024-02-20T22:35:37Z",
-      "updatedAt": "2024-02-20T22:35:37Z",
+      "updatedAt": "2024-03-01T21:51:08Z",
+      "closedAt": "2024-03-01T21:51:08Z",
+      "comments": []
+    },
+    {
+      "number": 115,
+      "id": "I_kwDOFsQObc6A_m7-",
+      "title": "Define cid",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/issues/115",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "JPT"
+      ],
+      "body": "It would be good to say more about what `cid` is and how to use it.  For starters, what does \"cid\" stand for?\r\n\r\nHow is the `cid` value computed and what checks are done using it?\r\n\r\nThe need for a clearer definition was first raised in PR #110 .",
+      "createdAt": "2024-03-01T20:51:57Z",
+      "updatedAt": "2024-03-01T20:52:46Z",
       "closedAt": null,
       "comments": []
     }
@@ -7465,6 +7498,340 @@
           "createdAt": "2024-02-27T23:20:28Z",
           "updatedAt": "2024-02-27T23:20:28Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 110,
+      "id": "PR_kwDOFsQObc5oX2DM",
+      "title": "Add 'address' and 'age_over_21' claims as examples.",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/110",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #33 \r\n\r\n* Add two additional claims to illustrate full use of JSON\r\n* Added a paragraph describing the contents of each claim in the given example.\r\n* Describe `claims` as an issuer protected header\r\n* Restructure structure to talk about claims and the `claims` issuer protected header first, then the options to reference external values.",
+      "createdAt": "2024-03-01T06:43:54Z",
+      "updatedAt": "2024-03-01T21:50:49Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "30a0248bf4b7b86a07f3921c6268445c62fd22f3",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "jpt-add-diverse-claims",
+      "headRefOid": "30e3a5ce80faf5b946dda79f53053b932df88d24",
+      "closedAt": "2024-03-01T21:50:49Z",
+      "mergedAt": "2024-03-01T21:50:49Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "a82ad01a80f77d1dadde9f25858cc90dfea5bd12"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5x9lSo",
+          "commit": {
+            "abbreviatedOid": "30e3a5c"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "It would be good to say more about what `cid` is and how to use it, but I don't want to block merging this improvement on that.  Let's file a separate issue.",
+          "createdAt": "2024-03-01T20:36:36Z",
+          "updatedAt": "2024-03-01T20:36:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 111,
+      "id": "PR_kwDOFsQObc5oX3W5",
+      "title": "Correct IANA registry for BBS-DRAFT-3 to -5",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/111",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Also, merge -03 document version sections. Fixes #108 ",
+      "createdAt": "2024-03-01T06:49:18Z",
+      "updatedAt": "2024-03-01T21:51:07Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "30a0248bf4b7b86a07f3921c6268445c62fd22f3",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "fix-iana-bbs",
+      "headRefOid": "0dc1d239266a653db59ccaa638ee59a751a79863",
+      "closedAt": "2024-03-01T21:51:07Z",
+      "mergedAt": "2024-03-01T21:51:07Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "b666a9ef32eafc6380d4046f980005ad5c6450cf"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5x9lfG",
+          "commit": {
+            "abbreviatedOid": "0dc1d23"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-01T20:37:17Z",
+          "updatedAt": "2024-03-01T20:37:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 112,
+      "id": "PR_kwDOFsQObc5oX-L7",
+      "title": "Allow algorithms to use ~ separator in proofs.",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/112",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* Redefined proofs to be one or more octet strings\r\n* Update description of compact serialialization to concatenate these string via tilde\r\n* Update JSON encoding to put proof values into arrays\r\n\r\nFixes #59",
+      "createdAt": "2024-03-01T07:12:00Z",
+      "updatedAt": "2024-03-01T21:51:25Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "30a0248bf4b7b86a07f3921c6268445c62fd22f3",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "jwp-algorithms-use-tildes",
+      "headRefOid": "640e6edc55dcf1339fa00e803e455f11ef35e69d",
+      "closedAt": "2024-03-01T21:51:25Z",
+      "mergedAt": "2024-03-01T21:51:25Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "f5183064ccfe5b1c97ecee8c5ad2795b2ead2a5c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5x9mKS",
+          "commit": {
+            "abbreviatedOid": "640e6ed"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-01T20:39:27Z",
+          "updatedAt": "2024-03-01T20:39:27Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 113,
+      "id": "PR_kwDOFsQObc5oYDZJ",
+      "title": "Compact representation of a zero-length payload.",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/113",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Handle the special case of a zero-length payload in compact encoding, by using the invalid base64url encoded sequence \"_\".\r\n\r\nClarify that JSON encoding would use the more intuitive empty string rather than matching the compact representation.\r\n\r\nThere are currently no examples for this, as it is meant more to maintain consistency between the representations rather than to satisfy an identified use-case.\r\n\r\nFixes #101 ",
+      "createdAt": "2024-03-01T07:21:25Z",
+      "updatedAt": "2024-03-01T22:02:47Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "817e285d82ee17ec85f6c7a4d09f50b6004d3f9a",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "distinguish-blank-null-payloads",
+      "headRefOid": "b81e55f3b161c505c484723e352964f2631d5463",
+      "closedAt": "2024-03-01T22:02:46Z",
+      "mergedAt": "2024-03-01T22:02:46Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "91bd0edc85a8b7eaa3255737e9ca41ed428fcc34"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5x9nGs",
+          "commit": {
+            "abbreviatedOid": "2b9d013"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-01T20:42:10Z",
+          "updatedAt": "2024-03-01T20:42:10Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 114,
+      "id": "PR_kwDOFsQObc5oYRzT",
+      "title": "Create a terminology section.",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/114",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The initial definitions are for binding, linkability and unlinkability.\r\n\r\nFixes #41 ",
+      "createdAt": "2024-03-01T08:06:33Z",
+      "updatedAt": "2024-03-01T21:51:54Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "30a0248bf4b7b86a07f3921c6268445c62fd22f3",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "define-terminology-binding",
+      "headRefOid": "44c491aeac5c28e811d74e531451ffd4aed87d45",
+      "closedAt": "2024-03-01T21:51:54Z",
+      "mergedAt": "2024-03-01T21:51:54Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "817e285d82ee17ec85f6c7a4d09f50b6004d3f9a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5x9pF2",
+          "commit": {
+            "abbreviatedOid": "44c491a"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-01T20:44:28Z",
+          "updatedAt": "2024-03-01T20:44:28Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 116,
+      "id": "PR_kwDOFsQObc5odqJt",
+      "title": "Added history entries for -03 drafts",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/116",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-03-02T00:19:06Z",
+      "updatedAt": "2024-03-02T01:47:23Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "91bd0edc85a8b7eaa3255737e9ca41ed428fcc34",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-03-history",
+      "headRefOid": "1010cf430f2348063dbeffc8e8c94b48ded780b9",
+      "closedAt": "2024-03-02T01:47:23Z",
+      "mergedAt": "2024-03-02T01:47:23Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "5b6069fb91b62957e866ccda202006b5e98ef0a7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5x_fiz",
+          "commit": {
+            "abbreviatedOid": "1010cf4"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-03-02T01:36:58Z",
+          "updatedAt": "2024-03-02T01:36:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 117,
+      "id": "PR_kwDOFsQObc5od3Sf",
+      "title": "Defined aud and nonce Header Parameters",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/117",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #102 ",
+      "createdAt": "2024-03-02T01:26:10Z",
+      "updatedAt": "2024-03-02T01:54:19Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "91bd0edc85a8b7eaa3255737e9ca41ed428fcc34",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-aud-nonce",
+      "headRefOid": "76932b098bafc4c61d8d5eef11ba1101b7f5b300",
+      "closedAt": "2024-03-02T01:54:19Z",
+      "mergedAt": "2024-03-02T01:54:19Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "d942d156573d2ac4c4bba5dd97ef9980d97f5647"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc5x_jGX",
+          "commit": {
+            "abbreviatedOid": "76932b0"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-02T01:51:31Z",
+          "updatedAt": "2024-03-02T01:51:32Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "I've always thought the \"identify itself with a value\" terminology was really confusing, since the verifier (in this case) does not get to set `aud`. \"Confirm its identity is represented by at least one value\" would have been so much better - but I suppose we are stuck with it for consistency.",
+              "createdAt": "2024-03-02T01:51:31Z",
+              "updatedAt": "2024-03-02T01:51:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFsQObc5x_jKL",
+          "commit": {
+            "abbreviatedOid": "76932b0"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-02T01:51:55Z",
+          "updatedAt": "2024-03-02T01:51:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOFsQObc5x_jc6",
+          "commit": {
+            "abbreviatedOid": "76932b0"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-02T01:54:04Z",
+          "updatedAt": "2024-03-02T01:54:04Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "It's because especially in SAML deployments, the audiences are often abstract things like urn:edu:nternet2:federation.",
+              "createdAt": "2024-03-02T01:54:04Z",
+              "updatedAt": "2024-03-02T01:54:04Z"
+            }
+          ]
         }
       ]
     }
