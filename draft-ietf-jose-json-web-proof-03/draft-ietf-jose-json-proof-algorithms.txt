@@ -5,10 +5,10 @@
 jose                                                           J. Miller
 Internet-Draft                                             Ping Identity
 Intended status: Standards Track                                M. Jones
-Expires: 3 September 2024                         Self-Issued Consulting
+Expires: 6 September 2024                         Self-Issued Consulting
                                                                 D. Waite
                                                            Ping Identity
-                                                            2 March 2024
+                                                            5 March 2024
 
 
                          JSON Proof Algorithms
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 September 2024.
+   This Internet-Draft will expire on 6 September 2024.
 
 Copyright Notice
 
@@ -458,10 +458,10 @@ Table of Contents
      "alg": "BBS-DRAFT-5",
      "use": "proof",
      "crv": "BLs12381G2",
-     "x": "qyONnbPqieyEDhJcI7iQKOwuADpchJd9d0vmn6Y6HzFshyT7zhW9NL-SOOEue
-          VMODsInLv77v0gEpGCqBmR3wnMmNnE67qN5CZpmkntUVrGGjpSLgDotNbmu71E
-          kpv82",
-     "d": "StBwFgD8f_L3rSTLRIvT8F7_ejEZPSMgycA8iAyt1H8"
+     "x": "uBJyKdEowP6QPBvjaB5h_sY_p33vk4fvoySL2T2BJtiwR8gwEbSfXjTko86OQ
+          tvABRdcwU7bCgh-rsfpqO9Z9JJhN6hOPF1nBD7H0sejPxAqNF9bCjcvB5I1Y1-
+          uPWOI",
+     "d": "Y5HiVg0YACAIF_u8kRB9lYW0lnaHz5GNvhV6FTuE8Rk"
    }
 
                   Figure 1: BBS private key in JWK format
@@ -519,17 +519,17 @@ Table of Contents
        "ImpheWRvZUBleGFtcGxlLm9yZyI",
        "NDI"
      ],
-     "proof": "jEXrdV6Zhcdv2xX08mkjzQy7EFFsgHmUGRcA2oHFOzJDb3kk63hzrKkLN
-          mZBsuQgHej2Q4ti_fePntJegYgpnLZuBXgJyMODf_n4MgbKyR4"
+     "proof": "iAQanp-35u_A1f7ZPpNpky4pQcKjY0JMJRyjurhuQpxZEb7MAQKKSA23M
+          NS3C9SUcPsXCf8wAbmwRJXeFmIWB9z5tjsBscXvlrEDTyyFBc8"
    }
 
                  Figure 4: Issued JWP (JSON serialization)
 
    eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
    WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
-   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.jEX
-   rdV6Zhcdv2xX08mkjzQy7EFFsgHmUGRcA2oHFOzJDb3kk63hzrKkLNmZBsuQgHej2Q4ti
-   _fePntJegYgpnLZuBXgJyMODf_n4MgbKyR4
+   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.iAQ
+   anp-35u_A1f7ZPpNpky4pQcKjY0JMJRyjurhuQpxZEb7MAQKKSA23MNS3C9SUcPsXCf8w
+   AbmwRJXeFmIWB9z5tjsBscXvlrEDTyyFBc8
 
                 Figure 5: Issued JWP (compact serialization)
 
@@ -593,11 +593,11 @@ Table of Contents
        null,
        "NDI"
      ],
-     "proof": "roYgS8KuG4vSdESzE4xpvPggIQ5qdpiRHLzaIWurcIJ_2wJm_kplGrsAy
-          Z82SOd9j7Tnci0yqSelJ2RAxiGMWzGTphwTgGt0QjLWM0Va2aEeoi25wDbt1nN
-          lTC6i5MwDJuVTQt4b3PbErk9We3-mVqz-aFzY5Hptmvymkn4D6Ko16az00SCmt
-          2U0VOMWKrmFI1fvj3HlOwGwl02-F6sF72XfiuZf15G2B9TYJ4qs91cAhNBtv9B
-          seEFJh-Gajf5STzmCtq9EEBJ11BC02OMDToZ15TqiUQ50Cam0ttela1I"
+     "proof": "uOEBfw9o48IH38_hvl1Lnd0h1Ff7mD0SeB7xZmLvnM_vRYI4o96_OzDPa
+          _ly22KIg-0szO4Glrh2O5TRZirfRKx_Ia5XAaFG6LoWy-SEsHi3cs7lFfXEkKv
+          HlqexTsCTYg4OF3h4sckpFWOL_YvObn6UV6DBHkgg3NppNVinLMNAkUCFO3T2j
+          EAiWVPckrftro_Xlw-7dybhxPOuR3VafW2dF3yf9I3wcRn1lZqPUqpLQkwF_Br
+          qoeL_Nh85GkBuWUgf3IMii7hWW6fu6Mz5nmnuoWYhl-T587OSFjRwhGA"
    }
 
               Figure 7: Presentation JWP (JSON serialization)
@@ -606,11 +606,11 @@ Table of Contents
    mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
    lQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
    FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
-   vZSI~IkpheSI~~NDI.roYgS8KuG4vSdESzE4xpvPggIQ5qdpiRHLzaIWurcIJ_2wJm_kp
-   lGrsAyZ82SOd9j7Tnci0yqSelJ2RAxiGMWzGTphwTgGt0QjLWM0Va2aEeoi25wDbt1nNl
-   TC6i5MwDJuVTQt4b3PbErk9We3-mVqz-aFzY5Hptmvymkn4D6Ko16az00SCmt2U0VOMWK
-   rmFI1fvj3HlOwGwl02-F6sF72XfiuZf15G2B9TYJ4qs91cAhNBtv9BseEFJh-Gajf5STz
-   mCtq9EEBJ11BC02OMDToZ15TqiUQ50Cam0ttela1I
+   vZSI~IkpheSI~~NDI.uOEBfw9o48IH38_hvl1Lnd0h1Ff7mD0SeB7xZmLvnM_vRYI4o96
+   _OzDPa_ly22KIg-0szO4Glrh2O5TRZirfRKx_Ia5XAaFG6LoWy-SEsHi3cs7lFfXEkKvH
+   lqexTsCTYg4OF3h4sckpFWOL_YvObn6UV6DBHkgg3NppNVinLMNAkUCFO3T2jEAiWVPck
+   rftro_Xlw-7dybhxPOuR3VafW2dF3yf9I3wcRn1lZqPUqpLQkwF_BrqoeL_Nh85GkBuWU
+   gf3IMii7hWW6fu6Mz5nmnuoWYhl-T587OSFjRwhGA
 
              Figure 8: Presentation JWP (compact serialization)
 

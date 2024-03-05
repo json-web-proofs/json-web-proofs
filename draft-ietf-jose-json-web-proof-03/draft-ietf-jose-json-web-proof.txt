@@ -5,9 +5,9 @@
 jose                                                           J. Miller
 Internet-Draft                                                  D. Waite
 Intended status: Standards Track                           Ping Identity
-Expires: 3 September 2024                                       M. Jones
+Expires: 6 September 2024                                       M. Jones
                                                   Self-Issued Consulting
-                                                            2 March 2024
+                                                            5 March 2024
 
 
                              JSON Web Proof
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 September 2024.
+   This Internet-Draft will expire on 6 September 2024.
 
 Copyright Notice
 
