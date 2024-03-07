@@ -458,10 +458,10 @@ Table of Contents
      "alg": "BBS-DRAFT-5",
      "use": "proof",
      "crv": "BLs12381G2",
-     "x": "qhCzQDBXAjXm0MCW1NOes31hEYBq4qERHg3nyUiCO1QoZAavUl9cIh_SlR4Vu
-          zA1Afz3U5aluiAIt6x5Sf43dmYprnx80YT8wqGlejWtzVT1gNkMAtTnRZTsSTf
-          SFMZF",
-     "d": "UC5MFSsBJ4e5iPulnrXTffgY_ShKN5HpKOEKxuBMqWw"
+     "x": "t3TRAMLffDBe2hSkKrOHvdwitBuIF22sM4D_rgAIM_JBxPyjsgsbcIGlFGvWL
+          ItFA1a27CRF1JX7wrCEohfk4FNCANlEaxq5JMaaXR2J8N4ZxXFiqcEPMKbzAFR
+          haaSV",
+     "d": "ErlIv-EfpV1nyb9UdTcalJjtJ_qlVhGt2G4i_rgHbIo"
    }
 
                   Figure 1: BBS private key in JWK format
@@ -519,17 +519,17 @@ Table of Contents
        "ImpheWRvZUBleGFtcGxlLm9yZyI",
        "NDI"
      ],
-     "proof": "qVRQlb4YBBX57x7b1iqemkqz2BuiGyhZe8Uft8312WcbFDdQ4-VpLRgMy
-          pPHCi44SYumrwhmuRXaBfd-XiK_TgLvGy6tesAmm5dbIx9vKjQ"
+     "proof": "snGMnaRdrzUWe3e0N9GPFgq-hz9lGO-1_i33dbj07aKvSX2e6cKYhqtDz
+          UIImgBjPznad0JTs72GcfMHs-Vzn-5cLyghenQJL4og1BWhIQI"
    }
 
                  Figure 4: Issued JWP (JSON serialization)
 
    eyJhbGciOiJCQlMtRFJBRlQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzd
    WVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW
-   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.qVR
-   Qlb4YBBX57x7b1iqemkqz2BuiGyhZe8Uft8312WcbFDdQ4-VpLRgMypPHCi44SYumrwhm
-   uRXaBfd-XiK_TgLvGy6tesAmm5dbIx9vKjQ
+   1haWwiLCJhZ2UiXX0.IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~NDI.snG
+   MnaRdrzUWe3e0N9GPFgq-hz9lGO-1_i33dbj07aKvSX2e6cKYhqtDzUIImgBjPznad0JT
+   s72GcfMHs-Vzn-5cLyghenQJL4og1BWhIQI
 
                 Figure 5: Issued JWP (compact serialization)
 
@@ -593,11 +593,11 @@ Table of Contents
        null,
        "NDI"
      ],
-     "proof": "qF6br7DqjpE_tdTRvidFyHDR90Cno704FPuPem0YCqFUTanV6L50RSXdp
-          SCm7ymAjO40SZsXVZ1WmnZU-SHODEdeoQnL2B-Fs3eKHrhvkkMV1Mvi__IuIp3
-          uQ-aVeABLWQ7hDPpPt9Xb85hYrOX6WU231dNtIKGG6--dQVvfB0Eb8WmeO8T_h
-          GO5N6eTF4qOXUPR-Y9SxzM4K3xiQygkQjcHpWmJN2NcOBmDpWpa4ncXU29AZPQ
-          FoLHizXQXXhpjOIsZmjxIaV4ABAlDv-hf_xFb4kJ2nque17__hj42PnY"
+     "proof": "hoDn-lPYLRKCWMpbMBbN8SLn0UAktLZ2nKvfibebIs9_DBIqXiv1Bi0OC
+          49fcYeNlaa9vrmOkFt-rSDPkyg-Uu9SWzzqZxEX_iBbr2T5G-1d1-5CTxlKTXQ
+          qM8hvDFwGRGVnBLikzAQfIPijEzeZoHIPEi55zyafCX93sH7sszRx6POG8crxK
+          BWiSWu-zsUXb5XpgcMCSWv0P6x6cfyXiScl5Gw6356cNv90GRawrK4FcS29DhY
+          3yzFCQbzSOKENJrA19i28NPKTNsLxfV4sssx8gFG-bFbq-f3dK-UGLfI"
    }
 
               Figure 7: Presentation JWP (JSON serialization)
@@ -606,11 +606,11 @@ Table of Contents
    mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJhbGciOiJCQlMtRFJBR
    lQtNSIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyLmV4YW1wbGUiLCJjbG
    FpbXMiOlsiZmFtaWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXX0.IkR
-   vZSI~IkpheSI~~NDI.qF6br7DqjpE_tdTRvidFyHDR90Cno704FPuPem0YCqFUTanV6L5
-   0RSXdpSCm7ymAjO40SZsXVZ1WmnZU-SHODEdeoQnL2B-Fs3eKHrhvkkMV1Mvi__IuIp3u
-   Q-aVeABLWQ7hDPpPt9Xb85hYrOX6WU231dNtIKGG6--dQVvfB0Eb8WmeO8T_hGO5N6eTF
-   4qOXUPR-Y9SxzM4K3xiQygkQjcHpWmJN2NcOBmDpWpa4ncXU29AZPQFoLHizXQXXhpjOI
-   sZmjxIaV4ABAlDv-hf_xFb4kJ2nque17__hj42PnY
+   vZSI~IkpheSI~~NDI.hoDn-lPYLRKCWMpbMBbN8SLn0UAktLZ2nKvfibebIs9_DBIqXiv
+   1Bi0OC49fcYeNlaa9vrmOkFt-rSDPkyg-Uu9SWzzqZxEX_iBbr2T5G-1d1-5CTxlKTXQq
+   M8hvDFwGRGVnBLikzAQfIPijEzeZoHIPEi55zyafCX93sH7sszRx6POG8crxKBWiSWu-z
+   sUXb5XpgcMCSWv0P6x6cfyXiScl5Gw6356cNv90GRawrK4FcS29DhY3yzFCQbzSOKENJr
+   A19i28NPKTNsLxfV4sssx8gFG-bFbq-f3dK-UGLfI
 
              Figure 8: Presentation JWP (compact serialization)
 
