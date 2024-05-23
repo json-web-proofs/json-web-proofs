@@ -637,13 +637,13 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
    mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJraWQiOiJIamZjcHlqd
    VpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTLURSQU
-   ZULTUifQ.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.jRaXVZAlu4G
-   DHvAiATTFLTphYxb1A0mRkmq2QuaHPKJpj0kAfUVe6FneS6M8kwhAr6uYI6JfhX2pVXqS
-   6bMW04LuONhxWSCGVLs_UsbUeDooz5QZFZ9AU-NqaNJBHs_8NbjGdpoTrMr3WD9vyVz5o
-   5BUY1yZfRst59hHzd47MPJS3HcbYN6-AQFGDck-Jy_Lr2MzJhxhHwD-5VNHf7gQSG5r4m
-   31cHICHRkyBUYaqfkY1qeA1IGBKz2yJwv40HtsbJUszaxtGqQrPa1UgsmWGjMXFXJ_66f
-   beUXM2ofR1pU8HWQiPQtkKv-wKi9J6raE4yIInk44wQZWLq8DgYZfkCttDqhAAJVkd7bu
-   CJfVKO7MLKq-vgAvxRGqMzmsew1V
+   ZULTUifQ.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.lb217LY1gN_
+   udgbF7QlyLKNscopUABX_YHX--jMxbc7YPMdXUBtkA01jh4HPOKQVgNHA43VJ3p15fcEY
+   ec7Lvv7qtgAU9iq6AOp15kZ26u91QceyfyoAhBnCmZG09VX4cvR9veUIJQfrW5nApCqCD
+   bwBdvM7UDKBDWquX001mVNPjrdRzM0LAnFBvnAxUlHd4JCxFOkCeLEGtxw33ap6IyLC4G
+   VarOdemYEg-4Qu3Qznhg1rKHI-DpL-1QC0vQwyUsueDkJlj25pZ65n-RDwW613F4GRMyc
+   CGvY7IbGyUSUHcVmG-vUsh0lduvCdqof15xOfgQgOoiRk8Gxt_RNbbgYLKyR7FCYkUaod
+   AlTe-efIp6HUhbG685PzOym0-Rhm
 
    |  Figure: Compact Serialization of Presentation
 
@@ -676,13 +676,13 @@ Table of Contents
        null,
        null
      ],
-     "proof": "jRaXVZAlu4GDHvAiATTFLTphYxb1A0mRkmq2QuaHPKJpj0kAfUVe6FneS
-          6M8kwhAr6uYI6JfhX2pVXqS6bMW04LuONhxWSCGVLs_UsbUeDooz5QZFZ9AU-N
-          qaNJBHs_8NbjGdpoTrMr3WD9vyVz5o5BUY1yZfRst59hHzd47MPJS3HcbYN6-A
-          QFGDck-Jy_Lr2MzJhxhHwD-5VNHf7gQSG5r4m31cHICHRkyBUYaqfkY1qeA1IG
-          BKz2yJwv40HtsbJUszaxtGqQrPa1UgsmWGjMXFXJ_66fbeUXM2ofR1pU8HWQiP
-          QtkKv-wKi9J6raE4yIInk44wQZWLq8DgYZfkCttDqhAAJVkd7buCJfVKO7MLKq
-          -vgAvxRGqMzmsew1V"
+     "proof": "lb217LY1gN_udgbF7QlyLKNscopUABX_YHX--jMxbc7YPMdXUBtkA01jh
+          4HPOKQVgNHA43VJ3p15fcEYec7Lvv7qtgAU9iq6AOp15kZ26u91QceyfyoAhBn
+          CmZG09VX4cvR9veUIJQfrW5nApCqCDbwBdvM7UDKBDWquX001mVNPjrdRzM0LA
+          nFBvnAxUlHd4JCxFOkCeLEGtxw33ap6IyLC4GVarOdemYEg-4Qu3Qznhg1rKHI
+          -DpL-1QC0vQwyUsueDkJlj25pZ65n-RDwW613F4GRMycCGvY7IbGyUSUHcVmG-
+          vUsh0lduvCdqof15xOfgQgOoiRk8Gxt_RNbbgYLKyR7FCYkUaodAlTe-efIp6H
+          UhbG685PzOym0-Rhm"
    }
 
    |  Figure: JSON Serialization of Presentation
@@ -1069,17 +1069,41 @@ A.1.  Example Single-Use JWP
    This is the Issuer's stable private key used in this example in the
    JWK format:
 
-   Figure: Issuer Private Key (es256)
+   {
+     "kty": "EC",
+     "crv": "P-256",
+     "x": "VVdauV9WbVcY-IIiJ4Ldr-5sWF7unv-mN1jXSoPqKMY",
+     "y": "e5_Q3Ww0IfSbj_W5KzMpD1i2Tmb-nnWxgGiT2-5qluM",
+     "d": "fdh8RGLhigoNQZ93KPvCDFyCdwtCTJV5Nxw-ymQwPUM"
+   }
+
+                    Figure 1: Issuer Private Key (es256)
 
    This is the ephemeral private key used in this example in the JWK
    format:
 
-   Figure: Issuer Ephemeral Private Key (es256)
+   {
+     "kty": "EC",
+     "crv": "P-256",
+     "x": "icRJXS8o6zliVvH7P6R6i61L5K4di5tQEdwEqeTUzSw",
+     "y": "xQpzostqJdaTVKUtJEMlbXaVC7rAiQMGhKg483Uxrvs",
+     "d": "gpNxeVth2R5GKcxcrVD1MxtfkbQM3a0y6HBPRtnrp7s"
+   }
+
+               Figure 2: Issuer Ephemeral Private Key (es256)
 
    This is the Holder's presentation private key used in this example in
    the JWK format:
 
-   Figure: Holder Presentation Private Key
+   {
+     "kty": "EC",
+     "crv": "P-256",
+     "x": "9187BELMf8-xzVnO1dQUIsQwFrl57haTlvzW2VZRdrM",
+     "y": "6E3lN_8TCvp8QdXlc3wzIb5nJOJVP1ki_UqHJ0ckeCo",
+     "d": "vDfVtEvycIg9g44O76tvZhcWXT7g9bMhBedyiry7gxw"
+   }
+
+                 Figure 3: Holder Presentation Private Key
 
    The JWP Protected Header declares that the data structure is a JPT
    and the JWP Proof Input is secured using the Single-Use ECDSA
@@ -1087,13 +1111,54 @@ A.1.  Example Single-Use JWP
    the ephemeral public key, the Holder's presentation public key and
    list of claims used for this JPT.
 
-   Figure: Issuer Protected header (es256)
+   {
+     "alg": "SU-ES256",
+     "typ": "JPT",
+     "iss": "https://issuer.example",
+     "claims": [
+       "iat",
+       "exp",
+       "family_name",
+       "given_name",
+       "email",
+       "address",
+       "age_over_21"
+     ],
+     "proof_jwk": {
+       "kty": "EC",
+       "crv": "P-256",
+       "x": "icRJXS8o6zliVvH7P6R6i61L5K4di5tQEdwEqeTUzSw",
+       "y": "xQpzostqJdaTVKUtJEMlbXaVC7rAiQMGhKg483Uxrvs",
+       "d": "gpNxeVth2R5GKcxcrVD1MxtfkbQM3a0y6HBPRtnrp7s"
+     },
+     "presentation_jwk": {
+       "kty": "EC",
+       "crv": "P-256",
+       "x": "9187BELMf8-xzVnO1dQUIsQwFrl57haTlvzW2VZRdrM",
+       "y": "6E3lN_8TCvp8QdXlc3wzIb5nJOJVP1ki_UqHJ0ckeCo",
+       "d": "vDfVtEvycIg9g44O76tvZhcWXT7g9bMhBedyiry7gxw"
+     }
+   }
+
+                 Figure 4: Issuer Protected header (es256)
 
    The JWP Protected Header is serialized (without the above whitespace
    added for readability) into UTF-8, then BASE64URL-encoded.  This
    gives:
 
-   Figure: Encoded Issuer Protected Header (es256)
+   eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyL
+   mV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUiLCJnaXZlbl
+   9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicHJvb2ZfandrIjp
+   7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiaWNSSlhTOG82emxpVnZIN1A2UjZp
+   NjFMNUs0ZGk1dFFFZHdFcWVUVXpTdyIsInkiOiJ4UXB6b3N0cUpkYVRWS1V0SkVNbGJYY
+   VZDN3JBaVFNR2hLZzQ4M1V4cnZzIiwiZCI6ImdwTnhlVnRoMlI1R0tjeGNyVkQxTXh0Zm
+   tiUU0zYTB5NkhCUFJ0bnJwN3MifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyI
+   sImNydiI6IlAtMjU2IiwieCI6IjkxODdCRUxNZjgteHpWbk8xZFFVSXNRd0ZybDU3aGFU
+   bHZ6VzJWWlJkck0iLCJ5IjoiNkUzbE5fOFRDdnA4UWRYbGMzd3pJYjVuSk9KVlAxa2lfV
+   XFISjBja2VDbyIsImQiOiJ2RGZWdEV2eWNJZzlnNDRPNzZ0dlpoY1dYVDdnOWJNaEJlZH
+   lpcnk3Z3h3In19
+
+             Figure 5: Encoded Issuer Protected Header (es256)
 
    The Single Use algorithm utilizes multiple individual JWS Signatures.
    Each signature value is generated by creating a JWS with a single
@@ -1109,24 +1174,102 @@ A.1.  Example Single-Use JWP
 
    The resulting JSON serialized JPT using the above examples is:
 
-   Figure: Issued JWP in JSON Serialization (es256)
+   {
+     "issuer": "eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBz
+          Oi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaW
+          x5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292
+          ZXJfMjEiXSwicHJvb2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLC
+          J4IjoiaWNSSlhTOG82emxpVnZIN1A2UjZpNjFMNUs0ZGk1dFFFZHdFcWVUVXpT
+          dyIsInkiOiJ4UXB6b3N0cUpkYVRWS1V0SkVNbGJYYVZDN3JBaVFNR2hLZzQ4M1
+          V4cnZzIiwiZCI6ImdwTnhlVnRoMlI1R0tjeGNyVkQxTXh0ZmtiUU0zYTB5NkhC
+          UFJ0bnJwN3MifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyIsImNydi
+          I6IlAtMjU2IiwieCI6IjkxODdCRUxNZjgteHpWbk8xZFFVSXNRd0ZybDU3aGFU
+          bHZ6VzJWWlJkck0iLCJ5IjoiNkUzbE5fOFRDdnA4UWRYbGMzd3pJYjVuSk9KVl
+          Axa2lfVXFISjBja2VDbyIsImQiOiJ2RGZWdEV2eWNJZzlnNDRPNzZ0dlpoY1dY
+          VDdnOWJNaEJlZHlpcnk3Z3h3In19",
+     "payloads": [
+       "MTcxNDUyMTYwMA",
+       "MTcxNzE5OTk5OQ",
+       "IkRvZSI",
+       "IkpheSI",
+       "ImpheWRvZUBleGFtcGxlLm9yZyI",
+       "eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b3duLCBDQSAxMjM0NVxu
+          VVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIiwibG9jYWxpdH
+          kiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTIzNDUs
+          ImNvdW50cnkiOiJVU0EifQ",
+       "dHJ1ZQ"
+     ],
+     "proof": "UPnysiebVWwUQrK90xuTQCuVWF0LxL05EUHTweVcWI3qmNi-s3PAwBo23
+          xnd_y_2e0LWHghdU_9Zs4BFCQt0KoHeD3XTUiNOVkGRXCILeb-wjNXiASRxeFV
+          5LPI1F0fawCleNfwerQVkz_YOYADPiCcttWakeXONoOHx-ZImwgNZeLcggDr--
+          F4XlSRjXKK1fWMKfZWN07bEu2jI4kAK_JYL6SvWF827LDLZaatduffkuGed7EA
+          qvWZD1ohkOPoLB2DxmG1MyhWpyWiT6TIkHSF8yNwf9Bf2sTItKn-d3Oj4L0kdo
+          A1RW4O837wg3hymCcU0ybYnFSWJTdpuJWsKSjhFkmvEmEwg8hw0wW4yecgrkHy
+          qwvvxyBJoNaPySaLtb3e2rFqWSYDEP_Tw79N0M_Q2IKa5oaZ2jDcgpJxRbbvXr
+          Ytw-miRAjlhNGcpA9jSFw9Epkn04E3SHSzlbF8MiW8JWOMRAj9gROGoauIm4JS
+          nUkN83YFh8r3MaTStSwS-S72WjCoga9eluwEiJczA0hMnvUrFlJB1_FDn-kCAa
+          DvXxEdzsO_CWsIjXvYeBFdok4OwM0EYOk6TG0q-LmOMgdDr9FaxxiWmOK_ly93
+          o3mwiKXeY2UzpxvonEev-XPIbFOJ36uPKG4SGAJX0OHMwOerubqMNoDYz3RU9j
+          d3qctw"
+   }
+
+             Figure 6: Issued JWP in JSON Serialization (es256)
 
    The compact serialization of the same JPT is:
 
-   Figure: Issued JWP in Compact Serialization (es256)
+   eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyL
+   mV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUiLCJnaXZlbl
+   9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicHJvb2ZfandrIjp
+   7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiaWNSSlhTOG82emxpVnZIN1A2UjZp
+   NjFMNUs0ZGk1dFFFZHdFcWVUVXpTdyIsInkiOiJ4UXB6b3N0cUpkYVRWS1V0SkVNbGJYY
+   VZDN3JBaVFNR2hLZzQ4M1V4cnZzIiwiZCI6ImdwTnhlVnRoMlI1R0tjeGNyVkQxTXh0Zm
+   tiUU0zYTB5NkhCUFJ0bnJwN3MifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyI
+   sImNydiI6IlAtMjU2IiwieCI6IjkxODdCRUxNZjgteHpWbk8xZFFVSXNRd0ZybDU3aGFU
+   bHZ6VzJWWlJkck0iLCJ5IjoiNkUzbE5fOFRDdnA4UWRYbGMzd3pJYjVuSk9KVlAxa2lfV
+   XFISjBja2VDbyIsImQiOiJ2RGZWdEV2eWNJZzlnNDRPNzZ0dlpoY1dYVDdnOWJNaEJlZH
+   lpcnk3Z3h3In19.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~ImpheWRv
+   ZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b3duL
+   CBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIiwibG
+   9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTIzNDU
+   sImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.UPnysiebVWwUQrK90xuTQCuVWF0LxL05EUHTwe
+   VcWI3qmNi-s3PAwBo23xnd_y_2e0LWHghdU_9Zs4BFCQt0KoHeD3XTUiNOVkGRXCILeb-
+   wjNXiASRxeFV5LPI1F0fawCleNfwerQVkz_YOYADPiCcttWakeXONoOHx-ZImwgNZeLcg
+   gDr--F4XlSRjXKK1fWMKfZWN07bEu2jI4kAK_JYL6SvWF827LDLZaatduffkuGed7EAqv
+   WZD1ohkOPoLB2DxmG1MyhWpyWiT6TIkHSF8yNwf9Bf2sTItKn-d3Oj4L0kdoA1RW4O837
+   wg3hymCcU0ybYnFSWJTdpuJWsKSjhFkmvEmEwg8hw0wW4yecgrkHyqwvvxyBJoNaPySaL
+   tb3e2rFqWSYDEP_Tw79N0M_Q2IKa5oaZ2jDcgpJxRbbvXrYtw-miRAjlhNGcpA9jSFw9E
+   pkn04E3SHSzlbF8MiW8JWOMRAj9gROGoauIm4JSnUkN83YFh8r3MaTStSwS-S72WjCoga
+   9eluwEiJczA0hMnvUrFlJB1_FDn-kCAaDvXxEdzsO_CWsIjXvYeBFdok4OwM0EYOk6TG0
+   q-LmOMgdDr9FaxxiWmOK_ly93o3mwiKXeY2UzpxvonEev-XPIbFOJ36uPKG4SGAJX0OHM
+   wOerubqMNoDYz3RU9jd3qctw
+
+           Figure 7: Issued JWP in Compact Serialization (es256)
 
    To present this JPT, we first use the following presentation header
    with a nonce (provided by the Verifier):
 
-   Figure: Presentation Header
+   {
+     "alg": "SU-ES256",
+     "aud": "https://recipient.example.com",
+     "nonce": "E-8X-qYiMwMACi-Y6SU4HO8vFrvH1PFj7MbpIgcff2U"
+   }
+
+                       Figure 8: Presentation Header
 
    When serialized without formatting and BASE64URL-encoded, this
    results in the string:
 
-   Figure: Presentation Header (BASE64URL-encoded)
+   eyJhbGciOiJTVS1FUzI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50LmV4YW1wbGUuY
+   29tIiwibm9uY2UiOiJFLThYLXFZaU13TUFDaS1ZNlNVNEhPOHZGcnZIMVBGajdNYnBJZ2
+   NmZjJVIn0
+
+             Figure 9: Presentation Header (BASE64URL-encoded)
 
    When signed with the holder's presentation key, the resulting
    signature are:
+
+   VlMteFE1bWNqQW9qMXdINUFPeWltYko5ck45X2lFTmlqNzA3U3gwM1V3a19BU0dKWG1ZR
+   W9rUExGcjFVR1pTd2Y1WUsyYmpMM2lYTE1lSG44MFlwOHc
 
    |  Figure: Holder Proof-of-Possession (BASE64URL-encoded)
 
@@ -1134,9 +1277,84 @@ A.1.  Example Single-Use JWP
    claims (family name and email hidden), we get the following presented
    JPT:
 
+   {
+     "presentation": "eyJhbGciOiJTVS1FUzI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaX
+          BpZW50LmV4YW1wbGUuY29tIiwibm9uY2UiOiJFLThYLXFZaU13TUFDaS1ZNlNV
+          NEhPOHZGcnZIMVBGajdNYnBJZ2NmZjJVIn0",
+     "issuer": "eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBz
+          Oi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaW
+          x5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292
+          ZXJfMjEiXSwicHJvb2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLC
+          J4IjoiaWNSSlhTOG82emxpVnZIN1A2UjZpNjFMNUs0ZGk1dFFFZHdFcWVUVXpT
+          dyIsInkiOiJ4UXB6b3N0cUpkYVRWS1V0SkVNbGJYYVZDN3JBaVFNR2hLZzQ4M1
+          V4cnZzIiwiZCI6ImdwTnhlVnRoMlI1R0tjeGNyVkQxTXh0ZmtiUU0zYTB5NkhC
+          UFJ0bnJwN3MifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyIsImNydi
+          I6IlAtMjU2IiwieCI6IjkxODdCRUxNZjgteHpWbk8xZFFVSXNRd0ZybDU3aGFU
+          bHZ6VzJWWlJkck0iLCJ5IjoiNkUzbE5fOFRDdnA4UWRYbGMzd3pJYjVuSk9KVl
+          Axa2lfVXFISjBja2VDbyIsImQiOiJ2RGZWdEV2eWNJZzlnNDRPNzZ0dlpoY1dY
+          VDdnOWJNaEJlZHlpcnk3Z3h3In19",
+     "payloads": [
+       "MTcxNDUyMTYwMA",
+       "MTcxNzE5OTk5OQ",
+       "IkRvZSI",
+       "IkpheSI",
+       "ImpheWRvZUBleGFtcGxlLm9yZyI",
+       "eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b3duLCBDQSAxMjM0NVxu
+          VVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIiwibG9jYWxpdH
+          kiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTIzNDUs
+          ImNvdW50cnkiOiJVU0EifQ",
+       "dHJ1ZQ",
+       null,
+       null
+     ],
+     "proof": "VVBueXNpZWJWV3dVUXJLOTB4dVRRQ3VWV0YwTHhMMDVFVUhUd2VWY1dJM
+          3FtTmktczNQQXdCbzIzeG5kX3lfMmUwTFdIZ2hkVV85WnM0QkZDUXQwS2xVdnN
+          VT1puSXdLSTljQi1RRHNvcG15ZmF6ZmY0aERZby05TzBzZE4xTUpQd0VoaVY1b
+          UJLSkR5eGE5VkJtVXNILVdDdG00eTk0bHl6SGg1X05HS2ZPQjNnOTEwMUlqVGx
+          aQmtWd2lDM21fc0l6VjRnRWtjWGhWZVN6eU5SZEgyc0FwWGpYOEhxMEZaTV8yR
+          G1BQXo0Z25MYlZtcEhsemphRGg4Zm1TSnNJRFdYaTNJSUE2X3ZoZUY1VWtZMXl
+          pdFgxakNuMlZqZE8yeEx0b3lPSkFDdnlXQy1rcjFoZk51eXd5MldtclhibjM1T
+          GhubmV4QUtyMW1ROWFJWkRqNkN3ZGc4Wmh0VE1vVnFjbG9rLWt5SkIwaGZNamN
+          IX1FYOXJFeUxTcF9uZHpvLUM5SkhhQU5VVnVEdk4tOElONGNwZ25GTk1tMkp4V
+          WxpVTNhYmlWckNrbzRSWkpyeEpoTUlQSWNOTUZ1TW5uSUs1Qjhxc0w3OGNnU2F
+          EV2o4a21pN1c5M3RxeGFsa21BeERfMDhPX1RkRFAwTmlDbXVhR21kb3czSUtTY
+          1VXMjcxNjJMY1Bwb2tRSTVZVFJuS1FQWTBoY1BSS1pKOU9CTjBoMHM1V3hmREl
+          sdkNWampFUUlfWUVUaHFHcmlKdUNVcDFKRGZOMkJZZks5ekdrMHJVc0V2Zw"
+   }
+
    |  Figure: Final Presentation in JSON Serialization
 
    And also in compact serialization:
+
+   eyJhbGciOiJTVS1FUzI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50LmV4YW1wbGUuY
+   29tIiwibm9uY2UiOiJFLThYLXFZaU13TUFDaS1ZNlNVNEhPOHZGcnZIMVBGajdNYnBJZ2
+   NmZjJVIn0.eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8
+   vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUi
+   LCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicHJvb
+   2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiaWNSSlhTOG82emxpVn
+   ZIN1A2UjZpNjFMNUs0ZGk1dFFFZHdFcWVUVXpTdyIsInkiOiJ4UXB6b3N0cUpkYVRWS1V
+   0SkVNbGJYYVZDN3JBaVFNR2hLZzQ4M1V4cnZzIiwiZCI6ImdwTnhlVnRoMlI1R0tjeGNy
+   VkQxTXh0ZmtiUU0zYTB5NkhCUFJ0bnJwN3MifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrd
+   HkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6IjkxODdCRUxNZjgteHpWbk8xZFFVSXNRd0
+   ZybDU3aGFUbHZ6VzJWWlJkck0iLCJ5IjoiNkUzbE5fOFRDdnA4UWRYbGMzd3pJYjVuSk9
+   KVlAxa2lfVXFISjBja2VDbyIsImQiOiJ2RGZWdEV2eWNJZzlnNDRPNzZ0dlpoY1dYVDdn
+   OWJNaEJlZHlpcnk3Z3h3In19.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheS
+   I~ImpheWRvZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5
+   Bbnl0b3duLCBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4g
+   U3QuIiwibG9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZ
+   SI6MTIzNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ~~.VVBueXNpZWJWV3dVUXJLOTB4dV
+   RRQ3VWV0YwTHhMMDVFVUhUd2VWY1dJM3FtTmktczNQQXdCbzIzeG5kX3lfMmUwTFdIZ2h
+   kVV85WnM0QkZDUXQwS2xVdnNVT1puSXdLSTljQi1RRHNvcG15ZmF6ZmY0aERZby05TzBz
+   ZE4xTUpQd0VoaVY1bUJLSkR5eGE5VkJtVXNILVdDdG00eTk0bHl6SGg1X05HS2ZPQjNnO
+   TEwMUlqVGxaQmtWd2lDM21fc0l6VjRnRWtjWGhWZVN6eU5SZEgyc0FwWGpYOEhxMEZaTV
+   8yRG1BQXo0Z25MYlZtcEhsemphRGg4Zm1TSnNJRFdYaTNJSUE2X3ZoZUY1VWtZMXlpdFg
+   xakNuMlZqZE8yeEx0b3lPSkFDdnlXQy1rcjFoZk51eXd5MldtclhibjM1TGhubmV4QUty
+   MW1ROWFJWkRqNkN3ZGc4Wmh0VE1vVnFjbG9rLWt5SkIwaGZNamNIX1FYOXJFeUxTcF9uZ
+   HpvLUM5SkhhQU5VVnVEdk4tOElONGNwZ25GTk1tMkp4VWxpVTNhYmlWckNrbzRSWkpyeE
+   poTUlQSWNOTUZ1TW5uSUs1Qjhxc0w3OGNnU2FEV2o4a21pN1c5M3RxeGFsa21BeERfMDh
+   PX1RkRFAwTmlDbXVhR21kb3czSUtTY1VXMjcxNjJMY1Bwb2tRSTVZVFJuS1FQWTBoY1BS
+   S1pKOU9CTjBoMHM1V3hmRElsdkNWampFUUlfWUVUaHFHcmlKdUNVcDFKRGZOMkJZZks5e
+   kdrMHJVc0V2Zw
 
    |  Figure: Final Presentation in Compact Serialization
 
