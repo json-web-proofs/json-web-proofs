@@ -458,10 +458,10 @@ Table of Contents
      "alg": "BBS-DRAFT-5",
      "use": "proof",
      "crv": "BLs12381G2",
-     "x": "q_2aKLbTw00_QhU0d-p0EhcaDKJR6oGtrNnDmP1xx1IImFQhH1Y1Rcwc4irSo
-          0efB_uCLbGCg06BDBxkRsGNLhXYBryvHLiMvjQt8ZG5rzvcOfhZ8SVGkExyAJT
-          arr6K",
-     "d": "N3vyMgyqAeh3FGYnzhSalN_09IFWfNQX3HxazXFaTVo"
+     "x": "ib8II3V_vUXqe1WdzeVTtkzwFiIFSl9-tWJKlcOfKpqP_X4P7W5fGC3AX6PBO
+          3FNB9MWKK3f3ukiAUx0RihselfAI4giSb77XQW0O011KEP7lgWFpOTXtm-cvcH
+          XYOVB",
+     "d": "XDN6huyn980Y0ZstinIYZSzeARnTiV3E-A_7Hae9v_s"
    }
 
                   Figure 1: BBS private key in JWK format
@@ -527,8 +527,8 @@ Table of Contents
           ImNvdW50cnkiOiJVU0EifQ",
        "dHJ1ZQ"
      ],
-     "proof": "oxT9Nc2r8lmxy11HpWZQ19mcH-ypkNLzoqV61Kq-cu7hEZv159HfR0DAv
-          Wk1cCkTIIrEsVWdEyKjIl3bfWE4Wle8BqazBs9N1DfhPgOFdHY"
+     "proof": "hLiri5zwIvkPhyKGSxxXLqSlbw2XqiVW4UcKVEHZwAFcxhG9v3DPC3HAF
+          QznVf0NBP-_At-0V8iQHff4EDSGSDj9C2QA-C7nE_EawrJnjXw"
    }
 
                  Figure 4: Issued JWP (JSON serialization)
@@ -538,9 +538,9 @@ Table of Contents
    kpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3
    QuXG5Bbnl0b3duLCBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1
    haW4gU3QuIiwibG9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxf
-   Y29kZSI6MTIzNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.oxT9Nc2r8lmxy11HpWZQ19m
-   cH-ypkNLzoqV61Kq-cu7hEZv159HfR0DAvWk1cCkTIIrEsVWdEyKjIl3bfWE4Wle8Bqaz
-   Bs9N1DfhPgOFdHY
+   Y29kZSI6MTIzNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.hLiri5zwIvkPhyKGSxxXLqS
+   lbw2XqiVW4UcKVEHZwAFcxhG9v3DPC3HAFQznVf0NBP-_At-0V8iQHff4EDSGSDj9C2QA
+   -C7nE_EawrJnjXw
 
                 Figure 5: Issued JWP (compact serialization)
 
@@ -606,13 +606,13 @@ Table of Contents
        null,
        null
      ],
-     "proof": "lb217LY1gN_udgbF7QlyLKNscopUABX_YHX--jMxbc7YPMdXUBtkA01jh
-          4HPOKQVgNHA43VJ3p15fcEYec7Lvv7qtgAU9iq6AOp15kZ26u91QceyfyoAhBn
-          CmZG09VX4cvR9veUIJQfrW5nApCqCDbwBdvM7UDKBDWquX001mVNPjrdRzM0LA
-          nFBvnAxUlHd4JCxFOkCeLEGtxw33ap6IyLC4GVarOdemYEg-4Qu3Qznhg1rKHI
-          -DpL-1QC0vQwyUsueDkJlj25pZ65n-RDwW613F4GRMycCGvY7IbGyUSUHcVmG-
-          vUsh0lduvCdqof15xOfgQgOoiRk8Gxt_RNbbgYLKyR7FCYkUaodAlTe-efIp6H
-          UhbG685PzOym0-Rhm"
+     "proof": "k1yyi94juA-MN8_EKZPUkQoLLbxKHsADOKAoRq97FJ9tMJkSxsPJkdTWI
+          STb2s4HjrxHVfn7nksPjNCRO5SQaf6DEHKvudujNLyFFtCg-HkE3yN7iOFXHC1
+          Ul5gN3RWNaDaq8kDyJRdsSUyradwhiUjWWkAef9XB7n5S-jz7f5xsv3PN6CCnV
+          T9tB8OUqhpRReGfhSIJMOnrk7LueDKTXGbsgT-QrBPLTIWBXP9bNgYeshi9Zof
+          I9IGH5o3Zzoa5WM13bWeDvgzl7p6s_3nncToE6E4ED2xmI7qJ1TP6jhxw3TtSb
+          _RNSc8q1RJg42qSZ02juMBOADfXK7ogPrQAnSbyZ7KYkkVXAWaOwF2jCIrd4mg
+          CLUD57UfNie8cbu6G"
    }
 
               Figure 7: Presentation JWP (JSON serialization)
@@ -620,13 +620,13 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
    mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJraWQiOiJIamZjcHlqd
    VpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTLURSQU
-   ZULTUifQ.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.lb217LY1gN_
-   udgbF7QlyLKNscopUABX_YHX--jMxbc7YPMdXUBtkA01jh4HPOKQVgNHA43VJ3p15fcEY
-   ec7Lvv7qtgAU9iq6AOp15kZ26u91QceyfyoAhBnCmZG09VX4cvR9veUIJQfrW5nApCqCD
-   bwBdvM7UDKBDWquX001mVNPjrdRzM0LAnFBvnAxUlHd4JCxFOkCeLEGtxw33ap6IyLC4G
-   VarOdemYEg-4Qu3Qznhg1rKHI-DpL-1QC0vQwyUsueDkJlj25pZ65n-RDwW613F4GRMyc
-   CGvY7IbGyUSUHcVmG-vUsh0lduvCdqof15xOfgQgOoiRk8Gxt_RNbbgYLKyR7FCYkUaod
-   AlTe-efIp6HUhbG685PzOym0-Rhm
+   ZULTUifQ.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.k1yyi94juA-
+   MN8_EKZPUkQoLLbxKHsADOKAoRq97FJ9tMJkSxsPJkdTWISTb2s4HjrxHVfn7nksPjNCR
+   O5SQaf6DEHKvudujNLyFFtCg-HkE3yN7iOFXHC1Ul5gN3RWNaDaq8kDyJRdsSUyradwhi
+   UjWWkAef9XB7n5S-jz7f5xsv3PN6CCnVT9tB8OUqhpRReGfhSIJMOnrk7LueDKTXGbsgT
+   -QrBPLTIWBXP9bNgYeshi9ZofI9IGH5o3Zzoa5WM13bWeDvgzl7p6s_3nncToE6E4ED2x
+   mI7qJ1TP6jhxw3TtSb_RNSc8q1RJg42qSZ02juMBOADfXK7ogPrQAnSbyZ7KYkkVXAWaO
+   wF2jCIrd4mgCLUD57UfNie8cbu6G
 
              Figure 8: Presentation JWP (compact serialization)
 
@@ -1502,7 +1502,12 @@ Appendix A.  Acknowledgements
 
 Appendix B.  Document History
 
-   [[ To be removed from the final specification ]] -03
+   [[ To be removed from the final specification ]]
+
+   *  Refactoring figures and examples to be built from a common set
+      across all three documents
+
+   -03
 
    *  Improvements resulting from a full proofreading.
    *  Populated IANA Considerations section.
