@@ -634,13 +634,13 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
    mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJraWQiOiJIamZjcHlqd
    VpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTLURSQU
-   ZULTUifQ.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.kozkEmp2aGk
-   7JNl-OG8TgUTTYWrgtah-8GT9lFQTyPcBo9HxgFfqK1ACc3a_wlszod6lIUcSMeDV996R
-   7SG-Oa5JNuQxKGHvkb2z1sGcH-Phrl2oQuLDBp0yWKV3-ue7WuD_SoMvX5YUP9dX7tSMT
-   c3lAM2cp8fo-9ya-76k1F9a0dMDPWJS3wo2bUxV9vMNhpqf_dFKVRPy-lY7rmCvTF1RvW
-   st-rwhctijnx_JJWx8q9ixrZDxzn_PKy4R2hnGDnycn_yBjoN2Jo_27mBPLG0zQIJYa5m
-   pK6eWhwYgFzc9Tyhv2BHgokEgDeW5oihoxNIJUXMe_l2o3lJnt3e3OTTD5o4VQ2aMU1L2
-   jqXK6nrbwEkmROoFU6QI8PllppmK
+   ZULTUifQ.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.rqKdscVWCAo
+   ZmEGTRtbnjQzPgH3bvd5265TQChlwZorPZUWu0sX1iroGmWUL4GDHuFYqamb9o8-LGwxe
+   5JvHlbzYMM-KrgQOmtQQclFr54hnozjFdiQbAeihp44MXWfTMy7F9-Wep_w-O8cpNPNcp
+   dSsSYR2Y_eHyGDWAQaQq3Ujzf3NhCtiY4ngYNT19Fhh-DEI3YGeBk7FVS7v3w-es3Hngt
+   uY4vS6hGCnfDn9lRSXEX-J7C1ZPt7qMf7QJ32TFlC4yISmidXZG9ZGdXbhWW6FVp3euDk
+   46s5IFa0p6gYgPgw3YCy3wt6vAiSviuK0nQm2YaOTNnFmlzS7fLUBKiTI67f8RbYW9uOO
+   JW-CplkBQfgfPEZ3FhXrnn7YEpw1
 
    |  Figure: Compact Serialization of Presentation
 
@@ -673,13 +673,13 @@ Table of Contents
        null,
        null
      ],
-     "proof": "kozkEmp2aGk7JNl-OG8TgUTTYWrgtah-8GT9lFQTyPcBo9HxgFfqK1ACc
-          3a_wlszod6lIUcSMeDV996R7SG-Oa5JNuQxKGHvkb2z1sGcH-Phrl2oQuLDBp0
-          yWKV3-ue7WuD_SoMvX5YUP9dX7tSMTc3lAM2cp8fo-9ya-76k1F9a0dMDPWJS3
-          wo2bUxV9vMNhpqf_dFKVRPy-lY7rmCvTF1RvWst-rwhctijnx_JJWx8q9ixrZD
-          xzn_PKy4R2hnGDnycn_yBjoN2Jo_27mBPLG0zQIJYa5mpK6eWhwYgFzc9Tyhv2
-          BHgokEgDeW5oihoxNIJUXMe_l2o3lJnt3e3OTTD5o4VQ2aMU1L2jqXK6nrbwEk
-          mROoFU6QI8PllppmK"
+     "proof": "rqKdscVWCAoZmEGTRtbnjQzPgH3bvd5265TQChlwZorPZUWu0sX1iroGm
+          WUL4GDHuFYqamb9o8-LGwxe5JvHlbzYMM-KrgQOmtQQclFr54hnozjFdiQbAei
+          hp44MXWfTMy7F9-Wep_w-O8cpNPNcpdSsSYR2Y_eHyGDWAQaQq3Ujzf3NhCtiY
+          4ngYNT19Fhh-DEI3YGeBk7FVS7v3w-es3HngtuY4vS6hGCnfDn9lRSXEX-J7C1
+          ZPt7qMf7QJ32TFlC4yISmidXZG9ZGdXbhWW6FVp3euDk46s5IFa0p6gYgPgw3Y
+          Cy3wt6vAiSviuK0nQm2YaOTNnFmlzS7fLUBKiTI67f8RbYW9uOOJW-CplkBQfg
+          fPEZ3FhXrnn7YEpw1"
    }
 
    |  Figure: JSON Serialization of Presentation
@@ -780,84 +780,68 @@ Table of Contents
    This section registers the Header Parameter names defined in
    Section 4.1 in this registry.
 
+8.1.2.1.  Algorithm Header Parameter
+
    *  Header Parameter Name: alg
-
    *  Header Parameter Description: Algorithm
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.1 of this specification
 
+8.1.2.2.  Key ID Header Parameter
+
    *  Header Parameter Name: kid
-
    *  Header Parameter Description: Key ID
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.2 of this specification
 
+8.1.2.3.  Type Header Parameter
+
    *  Header Parameter Name: typ
-
    *  Header Parameter Description: Type
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.3 of this specification
 
+8.1.2.4.  Critical Header Parameter
+
    *  Header Parameter Name: crit
-
    *  Header Parameter Description: Critical
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.4 of this specification
 
+8.1.2.5.  Issuer Header Parameter
+
    *  Header Parameter Name: iss
-
    *  Header Parameter Description: Issuer
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.7 of this specification
 
+8.1.2.6.  Audience Header Parameter
+
    *  Header Parameter Name: aud
-
    *  Header Parameter Description: Audience
-
    *  Header Parameter Usage Location(s): Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.8 of this specification
 
+8.1.2.7.  Nonce Header Parameter
+
    *  Header Parameter Name: nonce
-
    *  Header Parameter Description: Nonce
-
    *  Header Parameter Usage Location(s): Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.9 of this specification
 
+8.1.2.8.  Claims Header Parameter
+
    *  Header Parameter Name: claims
-
    *  Header Parameter Description: claims
-
    *  Header Parameter Usage Location(s): Issued
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.10 of this specification
 
 8.2.  Media Type Registration
@@ -872,89 +856,59 @@ Table of Contents
    Types" registry, which can be used to indicate that the content is a
    JWP using the JWP JSON Serialization.
 
+8.2.1.1.  The application/jwp Media Type
+
    *  Type name: application
-
    *  Subtype name: jwp
-
    *  Required parameters: n/a
-
    *  Optional parameters: n/a
-
    *  Encoding considerations: 8bit; application/jwp values are encoded
       as a series of base64url-encoded values (some of which may be the
       empty string), each separated from the next by a single period
       ('.') character.
-
    *  Security considerations: See the Security Considerations section
       of this specification.
-
    *  Interoperability considerations: n/a
-
    *  Published specification: this specification
-
    *  Applications that use this media type: TBD
-
    *  Fragment identifier considerations: n/a
-
-   *  Additional information:<list style="empty">
-
+   *  Additional information:
       -  Magic number(s): n/a
       -  File extension(s): n/a
       -  Macintosh file type code(s): n/a
-
    *  Person & email address to contact for further information: Michael
       B.  Jones, michael_b_jones@hotmail.com
-
    *  Intended usage: COMMON
-
    *  Restrictions on usage: none
-
    *  Author: Michael B.  Jones, michael_b_jones@hotmail.com
-
    *  Change Controller: IETF
-
    *  Provisional registration?  No
 
+8.2.1.2.  The application/jwp+json Media Type
+
    *  Type name: application
-
    *  Subtype name: jwp+json
-
    *  Required parameters: n/a
-
    *  Optional parameters: n/a
-
    *  Encoding considerations: 8bit; application/jwp+json values are
       represented as a JSON Object; UTF-8 encoding SHOULD be employed
       for the JSON object.
-
    *  Security considerations: See the Security Considerations section
       of this specification
-
    *  Interoperability considerations: n/a
-
    *  Published specification: this specification
-
    *  Applications that use this media type: TBD
-
    *  Fragment identifier considerations: n/a
-
-   *  Additional information:<list style="empty">
-
+   *  Additional information:
       -  Magic number(s): n/a
       -  File extension(s): n/a
       -  Macintosh file type code(s): n/a
-
    *  Person & email address to contact for further information: Michael
       B.  Jones, michael_b_jones@hotmail.com
-
    *  Intended usage: COMMON
-
    *  Restrictions on usage: none
-
    *  Author: Michael B.  Jones, michael_b_jones@hotmail.com
-
    *  Change Controller: IETF
-
    *  Provisional registration?  No
 
 9.  References
