@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-23T00:38:46.856229+00:00",
+  "timestamp": "2024-05-26T00:42:28.661800+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -7883,6 +7883,46 @@
               "updatedAt": "2024-03-02T01:54:04Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 120,
+      "id": "PR_kwDOFsQObc5wRXhr",
+      "title": "Scripted creation of all examples",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/120",
+      "state": "OPEN",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "During initial submission, the code to generate examples was disabled to solve formatting issues. Since then, the algorithms have drifted and the implementations of those algorithms has changed.\r\n\r\nThis commit attempts to create a set of scripts to generate all key material examples for all three specifications to pull from.",
+      "createdAt": "2024-05-23T02:02:05Z",
+      "updatedAt": "2024-05-23T07:18:41Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "d942d156573d2ac4c4bba5dd97ef9980d97f5647",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "buildable-examples",
+      "headRefOid": "3eb3fcb8ef8020913b9e97310466ca87eb6a1f27",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc57it99",
+          "commit": {
+            "abbreviatedOid": "58eb699"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-23T02:14:09Z",
+          "updatedAt": "2024-05-23T02:14:09Z",
+          "comments": []
         }
       ]
     }
