@@ -5,9 +5,9 @@
 jose                                                           J. Miller
 Internet-Draft                                                  D. Waite
 Intended status: Standards Track                           Ping Identity
-Expires: 24 November 2024                                       M. Jones
+Expires: 9 January 2025                                         M. Jones
                                                   Self-Issued Consulting
-                                                             23 May 2024
+                                                             8 July 2024
 
 
                              JSON Web Proof
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 November 2024.
+   This Internet-Draft will expire on 9 January 2025.
 
 Copyright Notice
 
@@ -505,7 +505,7 @@ Table of Contents
    For example:
 
    {
-     "alg": "BBS-DRAFT-5"
+     "alg": "BBS"
    }
 
 5.1.2.  Issuer Payloads
@@ -631,16 +631,17 @@ Table of Contents
    have four . separated parts, the issued header, followed by the
    protected header, then the payloads and the proof.
 
-   eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50L
-   mV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhqUSJ9.eyJraWQiOiJIamZjcHlqd
-   VpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTLURSQU
-   ZULTUifQ.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.rqKdscVWCAo
-   ZmEGTRtbnjQzPgH3bvd5265TQChlwZorPZUWu0sX1iroGmWUL4GDHuFYqamb9o8-LGwxe
-   5JvHlbzYMM-KrgQOmtQQclFr54hnozjFdiQbAeihp44MXWfTMy7F9-Wep_w-O8cpNPNcp
-   dSsSYR2Y_eHyGDWAQaQq3Ujzf3NhCtiY4ngYNT19Fhh-DEI3YGeBk7FVS7v3w-es3Hngt
-   uY4vS6hGCnfDn9lRSXEX-J7C1ZPt7qMf7QJ32TFlC4yISmidXZG9ZGdXbhWW6FVp3euDk
-   46s5IFa0p6gYgPgw3YCy3wt6vAiSviuK0nQm2YaOTNnFmlzS7fLUBKiTI67f8RbYW9uOO
-   JW-CplkBQfgfPEZ3FhXrnn7YEpw1
+   eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
+   mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
+   yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.i0iSYdvGMcIlKjpluuOLFJMi9tKGobfy
+   -gRNawp8q77p8e1jeeK7RTurDyyMA-iQtWFgWI5nPhd-h2exi_UvFVQpquhgWrloBrTTx
+   _-OEIysBhXWTcZ6nQygNnI89QE9met8-rKAnRsgGlv7eo9H09WOz4psXuMU6Fxwk3EfQZ
+   ejXYdHMtMTWkUyzlyQXzjyEQNyugz_yYryx-2AkD0L1-1DTCF5277CSiy3vOD9_QIx-x6
+   iCvi50q2Bs54rbQDbaRt5kkiZ_7a-wLskeMycyEK5SPSqfTXun7yLylQZiCoksBUol-jn
+   Y905r5zuLdjeaeFzeWN3XSrJA8efg0xnlnrGKC-vAEOy13Ud9N6au4dDTmhJkDTlh9PwT
+   aVoBJn-rapVLWP2mOJXAsFiWFk3PwgaBMmUlHuFrfTJGj5nJOLtLvVycS6ys1ro5wlb9K
+   tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 
    |  Figure: Compact Serialization of Presentation
 
@@ -659,11 +660,10 @@ Table of Contents
    third payloads hidden.
 
    {
-     "presentation": "eyJhbGciOiJCQlMtUFJPT0YtRFJBRlQtNSIsImF1ZCI6Imh0dH
-          BzOi8vcmVjaXBpZW50LmV4YW1wbGUuY29tIiwibm9uY2UiOiJ3cm1CUmtLdFhq
-          USJ9",
+     "presentation": "eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2
+          lwaWVudC5leGFtcGxlLmNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ",
      "issuer": "eyJraWQiOiJIamZjcHlqdVpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRu
-          RXhSMERValU4IiwiYWxnIjoiQkJTLURSQUZULTUifQ",
+          RXhSMERValU4IiwiYWxnIjoiQkJTIn0",
      "payloads": [
        "MTcxNDUyMTYwMA",
        "MTcxNzE5OTk5OQ",
@@ -673,13 +673,15 @@ Table of Contents
        null,
        null
      ],
-     "proof": "rqKdscVWCAoZmEGTRtbnjQzPgH3bvd5265TQChlwZorPZUWu0sX1iroGm
-          WUL4GDHuFYqamb9o8-LGwxe5JvHlbzYMM-KrgQOmtQQclFr54hnozjFdiQbAei
-          hp44MXWfTMy7F9-Wep_w-O8cpNPNcpdSsSYR2Y_eHyGDWAQaQq3Ujzf3NhCtiY
-          4ngYNT19Fhh-DEI3YGeBk7FVS7v3w-es3HngtuY4vS6hGCnfDn9lRSXEX-J7C1
-          ZPt7qMf7QJ32TFlC4yISmidXZG9ZGdXbhWW6FVp3euDk46s5IFa0p6gYgPgw3Y
-          Cy3wt6vAiSviuK0nQm2YaOTNnFmlzS7fLUBKiTI67f8RbYW9uOOJW-CplkBQfg
-          fPEZ3FhXrnn7YEpw1"
+     "proof": "i0iSYdvGMcIlKjpluuOLFJMi9tKGobfy-gRNawp8q77p8e1jeeK7RTurD
+          yyMA-iQtWFgWI5nPhd-h2exi_UvFVQpquhgWrloBrTTx_-OEIysBhXWTcZ6nQy
+          gNnI89QE9met8-rKAnRsgGlv7eo9H09WOz4psXuMU6Fxwk3EfQZejXYdHMtMTW
+          kUyzlyQXzjyEQNyugz_yYryx-2AkD0L1-1DTCF5277CSiy3vOD9_QIx-x6iCvi
+          50q2Bs54rbQDbaRt5kkiZ_7a-wLskeMycyEK5SPSqfTXun7yLylQZiCoksBUol
+          -jnY905r5zuLdjeaeFzeWN3XSrJA8efg0xnlnrGKC-vAEOy13Ud9N6au4dDTmh
+          JkDTlh9PwTaVoBJn-rapVLWP2mOJXAsFiWFk3PwgaBMmUlHuFrfTJGj5nJOLtL
+          vVycS6ys1ro5wlb9Ktmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
+          "
    }
 
    |  Figure: JSON Serialization of Presentation
@@ -943,9 +945,9 @@ Table of Contents
    [I-D.irtf-cfrg-bbs-signatures]
               Looker, T., Kalos, V., Whitehead, A., and M. Lodder, "The
               BBS Signature Scheme", Work in Progress, Internet-Draft,
-              draft-irtf-cfrg-bbs-signatures-05, 21 December 2023,
+              draft-irtf-cfrg-bbs-signatures-06, 26 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
-              bbs-signatures-05>.
+              bbs-signatures-06>.
 
    [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part One: Format of Internet Message

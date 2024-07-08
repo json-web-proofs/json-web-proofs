@@ -5,10 +5,10 @@
 jose                                                           J. Miller
 Internet-Draft                                             Ping Identity
 Intended status: Standards Track                                M. Jones
-Expires: 24 November 2024                         Self-Issued Consulting
+Expires: 9 January 2025                           Self-Issued Consulting
                                                                 D. Waite
                                                            Ping Identity
-                                                             23 May 2024
+                                                             8 July 2024
 
 
                             JSON Proof Token
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 November 2024.
+   This Internet-Draft will expire on 9 January 2025.
 
 Copyright Notice
 
@@ -207,7 +207,7 @@ Table of Contents
 
    {
      "kid": "HjfcpyjuZQ-O8Ye2hQnNbT9RbbnrobptdnExR0DUjU8",
-     "alg": "BBS-DRAFT-5",
+     "alg": "BBS",
      "claims": [
        "iat",
        "exp",
@@ -247,7 +247,7 @@ Table of Contents
 
    {
      "kid": "HjfcpyjuZQ-O8Ye2hQnNbT9RbbnrobptdnExR0DUjU8",
-     "alg": "BBS-DRAFT-5",
+     "alg": "BBS",
      "cid": "guA8PAI14Gkn4273f1rR606yMbRMFg4y"
    }
 
