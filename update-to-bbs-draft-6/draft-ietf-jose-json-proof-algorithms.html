@@ -1556,7 +1556,7 @@ Use of the <code>nonce</code> header parameter is RECOMMENDED for this purpose.<
 <a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-key-format" class="section-name selfRef">Key Format</a>
           </h4>
 <p id="section-6.2.2-1">The key used for the <code>BBS</code> algorithm is an elliptic curve-based key pair, specifically against the G_2 subgroup of a pairing friendly curve. Additional details on key generation can be found in <a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05#appendix-Section%203.4" class="relref">Section 3.4</a><a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.2-2">The JWK form of this key is an <code>OKP</code> type with a curve of <code>BLs12381G2</code>, with <code>x</code> being the BASE64URL-encoded form of the output of <code>point_to_octets_E2</code>. The use of this curve is described in <span>[<a href="#I-D.ietf-cose-bls-key-representations" class="cite xref">I-D.ietf-cose-bls-key-representations</a>]</span>.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-2">The JWK form of this key is an <code>OKP</code> type with a curve of <code>BLS12381G2</code>, with <code>x</code> being the BASE64URL-encoded form of the output of <code>point_to_octets_E2</code>. The use of this curve is described in <span>[<a href="#I-D.ietf-cose-bls-key-representations" class="cite xref">I-D.ietf-cose-bls-key-representations</a>]</span>.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2.2-3">There is no additional holder key necessary for presentation proofs.<a href="#section-6.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2247,9 +2247,9 @@ established by <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">
 <pre>{
   "kty": "EC",
   "crv": "P-256",
-  "x": "P7KWl9mt11QA7AbXTbwxjfGPNCygj2E89-r594dB2nE",
-  "y": "EUXBQWHqU2x7mMgPFcylTC0eDD8rn5LdGWzDg_uOZfU",
-  "d": "JDbY7-T08A9MrPPmDlDQ2YQUYwDkqsQjF7Tf1nnCY7A"
+  "x": "jRpFoJPAflClg4aqx6rTlXOBf3juURSo54i_LyuYsZU",
+  "y": "fdPIZ9ho7xwG3AiJ9vVaKh8OuPt4an_B6oyBWJgSJG8",
+  "d": "Bt4fg0-QancbXe72Wg_Hu0RsNSVLWViZ0qkBOOgWWuU"
 }
 
 </pre>
@@ -2263,9 +2263,9 @@ established by <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">
 <pre>{
   "kty": "EC",
   "crv": "P-256",
-  "x": "pJGh6D-4tNuLuY-MbbNPcUFLgIApUct0DT6K4COoxNA",
-  "y": "aNQRt6KF4B-y_T7XQJfkTvADgKmxgMle7t_opyDIwN0",
-  "d": "uPu54B89sU2tUvVtyyrSLyAoG7ypYgvLURvarE7H-lo"
+  "x": "nWf3NhUmBz0lVrevvj5IKbuBzH44pGYUfTZZPe6t9W8",
+  "y": "hrhsTBlCn-a9TkGyzzOWpKwmn8Y450Cud0bTyUGsL_E",
+  "d": "vJHSoXv5w5vYXeZE1bWwIb1fQdSigvK1LiaKU5RxD-I"
 }
 
 </pre>
@@ -2279,9 +2279,9 @@ established by <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">
 <pre>{
   "kty": "EC",
   "crv": "P-256",
-  "x": "CIV3LdQyPelbqA2eRNs4UBib323o3Z5aPGhjWJaXWck",
-  "y": "XRepvldn-m0sZxfIXyHr01uectg7pVBLt3FDvVP9gKo",
-  "d": "JyZ1jAOnnGwMeLpooxUKUknRvKrdJKsB0cmAVGg7U4c"
+  "x": "DwBIY1F7LnG9GMtWXwHHkELkXrD5DP7HaTw9e-TWf8s",
+  "y": "YsjT6jKRj6zmleH7-6ADwwDITe_OLE0GcgNgraxjWmo",
+  "d": "AZz53Y21CtuIrPXhoBQvy5L9OT0cTcUCvmknPAogdF0"
 }
 
 </pre>
@@ -2308,16 +2308,16 @@ established by <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">
   "proof_jwk": {
     "kty": "EC",
     "crv": "P-256",
-    "x": "pJGh6D-4tNuLuY-MbbNPcUFLgIApUct0DT6K4COoxNA",
-    "y": "aNQRt6KF4B-y_T7XQJfkTvADgKmxgMle7t_opyDIwN0",
-    "d": "uPu54B89sU2tUvVtyyrSLyAoG7ypYgvLURvarE7H-lo"
+    "x": "nWf3NhUmBz0lVrevvj5IKbuBzH44pGYUfTZZPe6t9W8",
+    "y": "hrhsTBlCn-a9TkGyzzOWpKwmn8Y450Cud0bTyUGsL_E",
+    "d": "vJHSoXv5w5vYXeZE1bWwIb1fQdSigvK1LiaKU5RxD-I"
   },
   "presentation_jwk": {
     "kty": "EC",
     "crv": "P-256",
-    "x": "CIV3LdQyPelbqA2eRNs4UBib323o3Z5aPGhjWJaXWck",
-    "y": "XRepvldn-m0sZxfIXyHr01uectg7pVBLt3FDvVP9gKo",
-    "d": "JyZ1jAOnnGwMeLpooxUKUknRvKrdJKsB0cmAVGg7U4c"
+    "x": "DwBIY1F7LnG9GMtWXwHHkELkXrD5DP7HaTw9e-TWf8s",
+    "y": "YsjT6jKRj6zmleH7-6ADwwDITe_OLE0GcgNgraxjWmo",
+    "d": "AZz53Y21CtuIrPXhoBQvy5L9OT0cTcUCvmknPAogdF0"
   }
 }
 
@@ -2332,14 +2332,14 @@ established by <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">
 <pre>eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyL
 mV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUiLCJnaXZlbl
 9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicHJvb2ZfandrIjp
-7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoicEpHaDZELTR0TnVMdVktTWJiTlBj
-VUZMZ0lBcFVjdDBEVDZLNENPb3hOQSIsInkiOiJhTlFSdDZLRjRCLXlfVDdYUUpma1R2Q
-URnS214Z01sZTd0X29weURJd04wIiwiZCI6InVQdTU0Qjg5c1UydFV2VnR5eXJTTHlBb0
-c3eXBZZ3ZMVVJ2YXJFN0gtbG8ifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyI
-sImNydiI6IlAtMjU2IiwieCI6IkNJVjNMZFF5UGVsYnFBMmVSTnM0VUJpYjMyM28zWjVh
-UEdoaldKYVhXY2siLCJ5IjoiWFJlcHZsZG4tbTBzWnhmSVh5SHIwMXVlY3RnN3BWQkx0M
-0ZEdlZQOWdLbyIsImQiOiJKeVoxakFPbm5Hd01lTHBvb3hVS1VrblJ2S3JkSktzQjBjbU
-FWR2c3VTRjIn19
+7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoibldmM05oVW1CejBsVnJldnZqNUlL
+YnVCekg0NHBHWVVmVFpaUGU2dDlXOCIsInkiOiJocmhzVEJsQ24tYTlUa0d5enpPV3BLd
+21uOFk0NTBDdWQwYlR5VUdzTF9FIiwiZCI6InZKSFNvWHY1dzV2WVhlWkUxYld3SWIxZl
+FkU2lndksxTGlhS1U1UnhELUkifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyI
+sImNydiI6IlAtMjU2IiwieCI6IkR3QklZMUY3TG5HOUdNdFdYd0hIa0VMa1hyRDVEUDdI
+YVR3OWUtVFdmOHMiLCJ5IjoiWXNqVDZqS1JqNnptbGVINy02QUR3d0RJVGVfT0xFMEdjZ
+05ncmF4aldtbyIsImQiOiJBWno1M1kyMUN0dUlyUFhob0JRdnk1TDlPVDBjVGNVQ3Zta2
+5QQW9nZEYwIn19
 
 </pre>
 </div>
@@ -2356,14 +2356,14 @@ FWR2c3VTRjIn19
        Oi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaW
        x5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292
        ZXJfMjEiXSwicHJvb2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLC
-       J4IjoicEpHaDZELTR0TnVMdVktTWJiTlBjVUZMZ0lBcFVjdDBEVDZLNENPb3hO
-       QSIsInkiOiJhTlFSdDZLRjRCLXlfVDdYUUpma1R2QURnS214Z01sZTd0X29weU
-       RJd04wIiwiZCI6InVQdTU0Qjg5c1UydFV2VnR5eXJTTHlBb0c3eXBZZ3ZMVVJ2
-       YXJFN0gtbG8ifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyIsImNydi
-       I6IlAtMjU2IiwieCI6IkNJVjNMZFF5UGVsYnFBMmVSTnM0VUJpYjMyM28zWjVh
-       UEdoaldKYVhXY2siLCJ5IjoiWFJlcHZsZG4tbTBzWnhmSVh5SHIwMXVlY3RnN3
-       BWQkx0M0ZEdlZQOWdLbyIsImQiOiJKeVoxakFPbm5Hd01lTHBvb3hVS1VrblJ2
-       S3JkSktzQjBjbUFWR2c3VTRjIn19",
+       J4IjoibldmM05oVW1CejBsVnJldnZqNUlLYnVCekg0NHBHWVVmVFpaUGU2dDlX
+       OCIsInkiOiJocmhzVEJsQ24tYTlUa0d5enpPV3BLd21uOFk0NTBDdWQwYlR5VU
+       dzTF9FIiwiZCI6InZKSFNvWHY1dzV2WVhlWkUxYld3SWIxZlFkU2lndksxTGlh
+       S1U1UnhELUkifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyIsImNydi
+       I6IlAtMjU2IiwieCI6IkR3QklZMUY3TG5HOUdNdFdYd0hIa0VMa1hyRDVEUDdI
+       YVR3OWUtVFdmOHMiLCJ5IjoiWXNqVDZqS1JqNnptbGVINy02QUR3d0RJVGVfT0
+       xFMEdjZ05ncmF4aldtbyIsImQiOiJBWno1M1kyMUN0dUlyUFhob0JRdnk1TDlP
+       VDBjVGNVQ3Zta25QQW9nZEYwIn19",
   "payloads": [
     "MTcxNDUyMTYwMA",
     "MTcxNzE5OTk5OQ",
@@ -2376,18 +2376,18 @@ FWR2c3VTRjIn19
        ImNvdW50cnkiOiJVU0EifQ",
     "dHJ1ZQ"
   ],
-  "proof": "drpxBJX53hE9Sv7ykjsYNOf9cxcWHUDN0i3wBnJq8QsKTO_QzUdDV8eWy
-       twqBA3Sgquh6QuA1N0BAJ7l7ksbDPZq01uPkDHhHPHFC5EL2rc9f1ZkXxrlvO9
-       Ke9h6c48ndW6ZT3eDlknCiQ_fGeed64trdOl5Td_x-cpOgEQNs22Qs6sdrDgms
-       MCmkqS4YzI6oE5CS2ALHAhko0mnVw5Hz2yOVNRJofFfq6yAzGmjziWVfiQSP4N
-       KWRTDjRSPx4ROSH7lSUwePqxh0iNOG9mYqptJQLevU_YJKMn1mvTcLTGOM0n8C
-       Ox4qRlHSWaWrg-CfnGRtPxmBolvlKZF3ZqIbPfUQbxm4tXwA6oXB3DkD8LQTMw
-       QJjbQejD1K1DbQUlCLzySjj0gqKpJ11jy3gXk3IdRQL0zPlPFpmo_IcxaUlsrn
-       WaS2KrqXkbkflvx_N1_oIJGZlsUoLJK9tUSqKBAouRMxjNFkeGf9RXP886OP5A
-       7wI81Xbk6hED6uYmTAZw5XpA9KJhywIHBXgtt0xgkFjV4Qsjxu-83Srv_y1H29
-       bYB4PSTU9hwNOMiljX439XnB29XjuamDZsTdwqvJCHq78r9DaR5Mk5LuPpW0ks
-       WSe7MQO_NEuaN1BAYHY8LPp52CcrG5B96DdW_m7vJWLGZWhSd0y5v4FKbOvl72
-       Z9-WYA"
+  "proof": "XveXkm4AMZaoe1yHxLAH2k30EzptB1g-5FbLf5sjwZ1rldqX_M_1L_jJC
+       hkKGZoQr57XDojvOLcRri0sanhv7YkeZQSUjbSeikMkbfequICdn6xxzKRjCzV
+       2ZMvY4y4Cxj8ljbvJh2AxvPfm5dxc_wSZAqcjuxXEhFH57G3An2xjG2tL6pRRi
+       QS40irVW0Z2gf8sTehsrZf2B8ZARPP8IaRvD-iKDV85NY8JfXDEADJeuUi2RKd
+       7iQw49AmBkZ79c91cGh4TdkFE4fdMRXDJEQ0hPZb-aSDJHrEaxbiHGR-YJ0WDu
+       sByx0d52t5oLcIYKtI2xAXhRxk7kh9cegdIIIWp6HaU6QyL2s4rqgy5zwF6Eqt
+       rniHF2fECDKXkL9Uvv9TOtIt0kX6YeSP55YISph-Aw4i_cbcLEy8Os-SZZsw2O
+       NiixnzRJuD7pHLBacxOmVU29lnf_fkOBBcpnJS2ZHif6yBN-HHOpD20zOoasKn
+       4593WiIvNvQYu1VP8uv80bhEJAS12dE9MKzmt40z4WLiiT1SogkI9XHtJJmLxi
+       qJmMfAghlSDe6RFkzgkIz8KQ-fGnr0l6McT0_JFrLLfJz1sBbfx1BAnYjM5Gyw
+       WFCxRrwFHD31it486X44FN76kHIg_Lu88XIZ7Xiszzl6_wzG3xKvt-b1IBI98w
+       QsLzoc"
 }
 
 </pre>
@@ -2401,28 +2401,28 @@ FWR2c3VTRjIn19
 <pre>eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyL
 mV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUiLCJnaXZlbl
 9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicHJvb2ZfandrIjp
-7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoicEpHaDZELTR0TnVMdVktTWJiTlBj
-VUZMZ0lBcFVjdDBEVDZLNENPb3hOQSIsInkiOiJhTlFSdDZLRjRCLXlfVDdYUUpma1R2Q
-URnS214Z01sZTd0X29weURJd04wIiwiZCI6InVQdTU0Qjg5c1UydFV2VnR5eXJTTHlBb0
-c3eXBZZ3ZMVVJ2YXJFN0gtbG8ifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyI
-sImNydiI6IlAtMjU2IiwieCI6IkNJVjNMZFF5UGVsYnFBMmVSTnM0VUJpYjMyM28zWjVh
-UEdoaldKYVhXY2siLCJ5IjoiWFJlcHZsZG4tbTBzWnhmSVh5SHIwMXVlY3RnN3BWQkx0M
-0ZEdlZQOWdLbyIsImQiOiJKeVoxakFPbm5Hd01lTHBvb3hVS1VrblJ2S3JkSktzQjBjbU
-FWR2c3VTRjIn19.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~ImpheWRv
+7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoibldmM05oVW1CejBsVnJldnZqNUlL
+YnVCekg0NHBHWVVmVFpaUGU2dDlXOCIsInkiOiJocmhzVEJsQ24tYTlUa0d5enpPV3BLd
+21uOFk0NTBDdWQwYlR5VUdzTF9FIiwiZCI6InZKSFNvWHY1dzV2WVhlWkUxYld3SWIxZl
+FkU2lndksxTGlhS1U1UnhELUkifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyI
+sImNydiI6IlAtMjU2IiwieCI6IkR3QklZMUY3TG5HOUdNdFdYd0hIa0VMa1hyRDVEUDdI
+YVR3OWUtVFdmOHMiLCJ5IjoiWXNqVDZqS1JqNnptbGVINy02QUR3d0RJVGVfT0xFMEdjZ
+05ncmF4aldtbyIsImQiOiJBWno1M1kyMUN0dUlyUFhob0JRdnk1TDlPVDBjVGNVQ3Zta2
+5QQW9nZEYwIn19.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~ImpheWRv
 ZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b3duL
 CBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIiwibG
 9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTIzNDU
-sImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.drpxBJX53hE9Sv7ykjsYNOf9cxcWHUDN0i3wBn
-Jq8QsKTO_QzUdDV8eWytwqBA3Sgquh6QuA1N0BAJ7l7ksbDPZq01uPkDHhHPHFC5EL2rc
-9f1ZkXxrlvO9Ke9h6c48ndW6ZT3eDlknCiQ_fGeed64trdOl5Td_x-cpOgEQNs22Qs6sd
-rDgmsMCmkqS4YzI6oE5CS2ALHAhko0mnVw5Hz2yOVNRJofFfq6yAzGmjziWVfiQSP4NKW
-RTDjRSPx4ROSH7lSUwePqxh0iNOG9mYqptJQLevU_YJKMn1mvTcLTGOM0n8COx4qRlHSW
-aWrg-CfnGRtPxmBolvlKZF3ZqIbPfUQbxm4tXwA6oXB3DkD8LQTMwQJjbQejD1K1DbQUl
-CLzySjj0gqKpJ11jy3gXk3IdRQL0zPlPFpmo_IcxaUlsrnWaS2KrqXkbkflvx_N1_oIJG
-ZlsUoLJK9tUSqKBAouRMxjNFkeGf9RXP886OP5A7wI81Xbk6hED6uYmTAZw5XpA9KJhyw
-IHBXgtt0xgkFjV4Qsjxu-83Srv_y1H29bYB4PSTU9hwNOMiljX439XnB29XjuamDZsTdw
-qvJCHq78r9DaR5Mk5LuPpW0ksWSe7MQO_NEuaN1BAYHY8LPp52CcrG5B96DdW_m7vJWLG
-ZWhSd0y5v4FKbOvl72Z9-WYA
+sImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.XveXkm4AMZaoe1yHxLAH2k30EzptB1g-5FbLf5
+sjwZ1rldqX_M_1L_jJChkKGZoQr57XDojvOLcRri0sanhv7YkeZQSUjbSeikMkbfequIC
+dn6xxzKRjCzV2ZMvY4y4Cxj8ljbvJh2AxvPfm5dxc_wSZAqcjuxXEhFH57G3An2xjG2tL
+6pRRiQS40irVW0Z2gf8sTehsrZf2B8ZARPP8IaRvD-iKDV85NY8JfXDEADJeuUi2RKd7i
+Qw49AmBkZ79c91cGh4TdkFE4fdMRXDJEQ0hPZb-aSDJHrEaxbiHGR-YJ0WDusByx0d52t
+5oLcIYKtI2xAXhRxk7kh9cegdIIIWp6HaU6QyL2s4rqgy5zwF6EqtrniHF2fECDKXkL9U
+vv9TOtIt0kX6YeSP55YISph-Aw4i_cbcLEy8Os-SZZsw2ONiixnzRJuD7pHLBacxOmVU2
+9lnf_fkOBBcpnJS2ZHif6yBN-HHOpD20zOoasKn4593WiIvNvQYu1VP8uv80bhEJAS12d
+E9MKzmt40z4WLiiT1SogkI9XHtJJmLxiqJmMfAghlSDe6RFkzgkIz8KQ-fGnr0l6McT0_
+JFrLLfJz1sBbfx1BAnYjM5GywWFCxRrwFHD31it486X44FN76kHIg_Lu88XIZ7Xiszzl6
+_wzG3xKvt-b1IBI98wQsLzoc
 
 </pre>
 </div>
@@ -2435,7 +2435,7 @@ ZWhSd0y5v4FKbOvl72Z9-WYA
 <pre>{
   "alg": "SU-ES256",
   "aud": "https://recipient.example.com",
-  "nonce": "SbjYBqWoMUk0xXbT8V5Mqhst5mt9oCmiFolAeLOblQA"
+  "nonce": "C-mP5tvgWTa_LS27e12cXOcu8vOc9G9BPdmMvKVhPUY"
 }
 
 </pre>
@@ -2447,8 +2447,8 @@ ZWhSd0y5v4FKbOvl72Z9-WYA
 <span id="name-presentation-header-base64u"></span><figure id="figure-9">
           <div class="lang-wrapped sourcecode" id="appendix-A.1-22.1">
 <pre>eyJhbGciOiJTVS1FUzI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50LmV4YW1wbGUuY
-29tIiwibm9uY2UiOiJTYmpZQnFXb01VazB4WGJUOFY1TXFoc3Q1bXQ5b0NtaUZvbEFlTE
-9ibFFBIn0
+29tIiwibm9uY2UiOiJDLW1QNXR2Z1dUYV9MUzI3ZTEyY1hPY3U4dk9jOUc5QlBkbU12S1
+ZoUFVZIn0
 
 </pre>
 </div>
@@ -2457,8 +2457,8 @@ ZWhSd0y5v4FKbOvl72Z9-WYA
           </figcaption></figure>
 <p id="appendix-A.1-23">When signed with the holder's presentation key, the resulting signature are:<a href="#appendix-A.1-23" class="pilcrow">¶</a></p>
 <div class="lang-wrapped sourcecode" id="appendix-A.1-24">
-<pre>WWtiQW9kRThyMk14MzljSzhhem1sUXZOSHRRdngzVmxFMldCWVRpMHdPc3haNG1pUlp0c
-TNnczd5RlZKbHBDWGhfVGJfU2lNbURkSGZwVU1GWVNpTHc
+<pre>N1JtbWtTT0psWmNLcUdCVlJEaU5ULUEzRklMcUNBRkFpMGR5VldsYmFEQURDNTduZllwR
+G4ydGZSTzZVN0tmR1FETlJVWFhXa3V3dl9TWHFlLUotVGc
 
 </pre><a href="#appendix-A.1-24" class="pilcrow">¶</a>
 </div>
@@ -2469,20 +2469,20 @@ TNnczd5RlZKbHBDWGhfVGJfU2lNbURkSGZwVU1GWVNpTHc
 <div class="lang-wrapped sourcecode" id="appendix-A.1-27">
 <pre>{
   "presentation": "eyJhbGciOiJTVS1FUzI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaX
-       BpZW50LmV4YW1wbGUuY29tIiwibm9uY2UiOiJTYmpZQnFXb01VazB4WGJUOFY1
-       TXFoc3Q1bXQ5b0NtaUZvbEFlTE9ibFFBIn0",
+       BpZW50LmV4YW1wbGUuY29tIiwibm9uY2UiOiJDLW1QNXR2Z1dUYV9MUzI3ZTEy
+       Y1hPY3U4dk9jOUc5QlBkbU12S1ZoUFVZIn0",
   "issuer": "eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBz
        Oi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaW
        x5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292
        ZXJfMjEiXSwicHJvb2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLC
-       J4IjoicEpHaDZELTR0TnVMdVktTWJiTlBjVUZMZ0lBcFVjdDBEVDZLNENPb3hO
-       QSIsInkiOiJhTlFSdDZLRjRCLXlfVDdYUUpma1R2QURnS214Z01sZTd0X29weU
-       RJd04wIiwiZCI6InVQdTU0Qjg5c1UydFV2VnR5eXJTTHlBb0c3eXBZZ3ZMVVJ2
-       YXJFN0gtbG8ifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyIsImNydi
-       I6IlAtMjU2IiwieCI6IkNJVjNMZFF5UGVsYnFBMmVSTnM0VUJpYjMyM28zWjVh
-       UEdoaldKYVhXY2siLCJ5IjoiWFJlcHZsZG4tbTBzWnhmSVh5SHIwMXVlY3RnN3
-       BWQkx0M0ZEdlZQOWdLbyIsImQiOiJKeVoxakFPbm5Hd01lTHBvb3hVS1VrblJ2
-       S3JkSktzQjBjbUFWR2c3VTRjIn19",
+       J4IjoibldmM05oVW1CejBsVnJldnZqNUlLYnVCekg0NHBHWVVmVFpaUGU2dDlX
+       OCIsInkiOiJocmhzVEJsQ24tYTlUa0d5enpPV3BLd21uOFk0NTBDdWQwYlR5VU
+       dzTF9FIiwiZCI6InZKSFNvWHY1dzV2WVhlWkUxYld3SWIxZlFkU2lndksxTGlh
+       S1U1UnhELUkifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyIsImNydi
+       I6IlAtMjU2IiwieCI6IkR3QklZMUY3TG5HOUdNdFdYd0hIa0VMa1hyRDVEUDdI
+       YVR3OWUtVFdmOHMiLCJ5IjoiWXNqVDZqS1JqNnptbGVINy02QUR3d0RJVGVfT0
+       xFMEdjZ05ncmF4aldtbyIsImQiOiJBWno1M1kyMUN0dUlyUFhob0JRdnk1TDlP
+       VDBjVGNVQ3Zta25QQW9nZEYwIn19",
   "payloads": [
     "MTcxNDUyMTYwMA",
     "MTcxNzE5OTk5OQ",
@@ -2497,19 +2497,19 @@ TNnczd5RlZKbHBDWGhfVGJfU2lNbURkSGZwVU1GWVNpTHc
     null,
     null
   ],
-  "proof": "ZHJweEJKWDUzaEU5U3Y3eWtqc1lOT2Y5Y3hjV0hVRE4waTN3Qm5KcThRc
-       0tUT19RelVkRFY4ZVd5dHdxQkEzU2dxdWg2UXVBMU4wQkFKN2w3a3NiREdKR3d
-       LSFJQSzlqTWRfWEN2R3M1cFVMelI3VUw4ZDFaUk5sZ1dFNHRNRHJNV2VKb2tXY
-       mF0NExPOGhWU1phUWw0ZjAyXzBvakpnM1IzNlZEQldFb2lfMmF0TmJqNUF4NFJ
-       6eHhRdVJDOXEzUFg5V1pGOGE1Ynp2U252WWVuT1BKM1Z1bVU5M2c1Wkp3b2tQM
-       3hubm5ldUxhM1RwZVUzZjhmbktUb0JFRGJOdGtMT3JIYXc0SnJEQXBwS2t1R01
-       5T3FCT1FrdGdDeHdJWktOSnAxY09SODlzamxUVVNhSHhYNnVzZ014cG84NGxsW
-       DRrRWotRFNsa1V3NDBVajhlRVRraC01VWxNSGo2c1lkSWpUaHZabUtxYlNVQzN
-       yMVAyQ1NqSjlacjAzQzB4ampOSl9BanNlS2taUjBsbWxxNFBnbjV4a2JUOFpnY
-       UpiNVNtUmQyYWlHejMxRUc4WnVMVjhBT3FGd2R3NUFfQzBFek1FQ1kyMEhvdzl
-       TdFEyMEZKUWk4OGtvNDlJS2lxU2RkWTh0NEY1TnlIVVVDOU16NVR4YVpxUHlIT
-       VdsSmJLNTFta3RpcTZsNUc1SDViOGZ6ZGY2Q0NSbVpiRktDeVN2YlZFcWlnUUt
-       Ma1RNWXpSWkhobl9VVnpfUE9qai1RTzhDUE5WMjVPb1JBLXJtSmt3R2NPUQ"
+  "proof": "WHZlWGttNEFNWmFvZTF5SHhMQUgyazMwRXpwdEIxZy01RmJMZjVzandaM
+       XJsZHFYX01fMUxfakpDaGtLR1pvUXI1N1hEb2p2T0xjUnJpMHNhbmh2N2UwWnB
+       wRWppWldYQ3FoZ1ZVUTRqVV9nTnhTQzZnZ0JRSXRIY2xWcFcyZ3dBd3VlNTMyS
+       1E1OXJYMFR1bE95bnhrQXpVVkYxMXBMc0xfMGw2bnZpZms2SkhtVUVsSTIwbm9
+       wREpHMzNxcmlBblotc2NjeWtZd3MxZG1UTDJPTXVBc1lfSlkyN3lZZGdNYnozN
+       XVYY1hQOEVtUUtuSTdzVnhJUlItZXh0d0o5c1l4dHJTLXFVVVlrRXVOSXExVnR
+       HZG9IX0xFM29iSzJYOWdmR1FFVHpfQ0drYndfb2lnMWZPVFdQQ1gxd3hBQXlYc
+       mxJdGtTbmU0a01PUFFKZ1pHZV9YUGRYQm9lRTNaQlJPSDNURVZ3eVJFTklUMld
+       fbWtneVI2eEdzVzRoeGtmbUNkRmc3ckFjc2RIZWRyZWFDM0NHQ3JTTnNRRjRVY
+       1pPNUlmWEhvSFNDQ0ZxZWgybE9rTWk5ck9LNm9NdWM4QmVoS3JhNTRoeGRueEF
+       neWw1Q19WTDdfVXpyU0xkSkYtbUhrai1lV0NFcVlmZ01PSXYzRzNDeE12RHJQa
+       21XYk1OampZb3NaODBTYmctNlJ5d1duTVRwbFZOdlpaM18zNURnUVhLWnlVdG1
+       SNG4tc2dUZmh4enFROXRNenFHckNwLU9mZDFvaUx6YjBHTHRWVF9Mcl9OQQ"
 }
 
 </pre><a href="#appendix-A.1-27" class="pilcrow">¶</a>
@@ -2520,34 +2520,34 @@ TNnczd5RlZKbHBDWGhfVGJfU2lNbURkSGZwVU1GWVNpTHc
 <p id="appendix-A.1-29">And also in compact serialization:<a href="#appendix-A.1-29" class="pilcrow">¶</a></p>
 <div class="lang-wrapped sourcecode" id="appendix-A.1-30">
 <pre>eyJhbGciOiJTVS1FUzI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50LmV4YW1wbGUuY
-29tIiwibm9uY2UiOiJTYmpZQnFXb01VazB4WGJUOFY1TXFoc3Q1bXQ5b0NtaUZvbEFlTE
-9ibFFBIn0.eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8
+29tIiwibm9uY2UiOiJDLW1QNXR2Z1dUYV9MUzI3ZTEyY1hPY3U4dk9jOUc5QlBkbU12S1
+ZoUFVZIn0.eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8
 vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUi
 LCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicHJvb
-2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoicEpHaDZELTR0TnVMdV
-ktTWJiTlBjVUZMZ0lBcFVjdDBEVDZLNENPb3hOQSIsInkiOiJhTlFSdDZLRjRCLXlfVDd
-YUUpma1R2QURnS214Z01sZTd0X29weURJd04wIiwiZCI6InVQdTU0Qjg5c1UydFV2VnR5
-eXJTTHlBb0c3eXBZZ3ZMVVJ2YXJFN0gtbG8ifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrd
-HkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6IkNJVjNMZFF5UGVsYnFBMmVSTnM0VUJpYj
-MyM28zWjVhUEdoaldKYVhXY2siLCJ5IjoiWFJlcHZsZG4tbTBzWnhmSVh5SHIwMXVlY3R
-nN3BWQkx0M0ZEdlZQOWdLbyIsImQiOiJKeVoxakFPbm5Hd01lTHBvb3hVS1VrblJ2S3Jk
-SktzQjBjbUFWR2c3VTRjIn19.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheS
+2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoibldmM05oVW1CejBsVn
+JldnZqNUlLYnVCekg0NHBHWVVmVFpaUGU2dDlXOCIsInkiOiJocmhzVEJsQ24tYTlUa0d
+5enpPV3BLd21uOFk0NTBDdWQwYlR5VUdzTF9FIiwiZCI6InZKSFNvWHY1dzV2WVhlWkUx
+Yld3SWIxZlFkU2lndksxTGlhS1U1UnhELUkifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrd
+HkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6IkR3QklZMUY3TG5HOUdNdFdYd0hIa0VMa1
+hyRDVEUDdIYVR3OWUtVFdmOHMiLCJ5IjoiWXNqVDZqS1JqNnptbGVINy02QUR3d0RJVGV
+fT0xFMEdjZ05ncmF4aldtbyIsImQiOiJBWno1M1kyMUN0dUlyUFhob0JRdnk1TDlPVDBj
+VGNVQ3Zta25QQW9nZEYwIn19.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheS
 I~ImpheWRvZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5
 Bbnl0b3duLCBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4g
 U3QuIiwibG9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZ
-SI6MTIzNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ~~.ZHJweEJKWDUzaEU5U3Y3eWtqc1
-lOT2Y5Y3hjV0hVRE4waTN3Qm5KcThRc0tUT19RelVkRFY4ZVd5dHdxQkEzU2dxdWg2UXV
-BMU4wQkFKN2w3a3NiREdKR3dLSFJQSzlqTWRfWEN2R3M1cFVMelI3VUw4ZDFaUk5sZ1dF
-NHRNRHJNV2VKb2tXYmF0NExPOGhWU1phUWw0ZjAyXzBvakpnM1IzNlZEQldFb2lfMmF0T
-mJqNUF4NFJ6eHhRdVJDOXEzUFg5V1pGOGE1Ynp2U252WWVuT1BKM1Z1bVU5M2c1Wkp3b2
-tQM3hubm5ldUxhM1RwZVUzZjhmbktUb0JFRGJOdGtMT3JIYXc0SnJEQXBwS2t1R015T3F
-CT1FrdGdDeHdJWktOSnAxY09SODlzamxUVVNhSHhYNnVzZ014cG84NGxsWDRrRWotRFNs
-a1V3NDBVajhlRVRraC01VWxNSGo2c1lkSWpUaHZabUtxYlNVQzNyMVAyQ1NqSjlacjAzQ
-zB4ampOSl9BanNlS2taUjBsbWxxNFBnbjV4a2JUOFpnYUpiNVNtUmQyYWlHejMxRUc4Wn
-VMVjhBT3FGd2R3NUFfQzBFek1FQ1kyMEhvdzlTdFEyMEZKUWk4OGtvNDlJS2lxU2RkWTh
-0NEY1TnlIVVVDOU16NVR4YVpxUHlITVdsSmJLNTFta3RpcTZsNUc1SDViOGZ6ZGY2Q0NS
-bVpiRktDeVN2YlZFcWlnUUtMa1RNWXpSWkhobl9VVnpfUE9qai1RTzhDUE5WMjVPb1JBL
-XJtSmt3R2NPUQ
+SI6MTIzNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ~~.WHZlWGttNEFNWmFvZTF5SHhMQU
+gyazMwRXpwdEIxZy01RmJMZjVzandaMXJsZHFYX01fMUxfakpDaGtLR1pvUXI1N1hEb2p
+2T0xjUnJpMHNhbmh2N2UwWnBwRWppWldYQ3FoZ1ZVUTRqVV9nTnhTQzZnZ0JRSXRIY2xW
+cFcyZ3dBd3VlNTMyS1E1OXJYMFR1bE95bnhrQXpVVkYxMXBMc0xfMGw2bnZpZms2SkhtV
+UVsSTIwbm9wREpHMzNxcmlBblotc2NjeWtZd3MxZG1UTDJPTXVBc1lfSlkyN3lZZGdNYn
+ozNXVYY1hQOEVtUUtuSTdzVnhJUlItZXh0d0o5c1l4dHJTLXFVVVlrRXVOSXExVnRHZG9
+IX0xFM29iSzJYOWdmR1FFVHpfQ0drYndfb2lnMWZPVFdQQ1gxd3hBQXlYcmxJdGtTbmU0
+a01PUFFKZ1pHZV9YUGRYQm9lRTNaQlJPSDNURVZ3eVJFTklUMldfbWtneVI2eEdzVzRoe
+GtmbUNkRmc3ckFjc2RIZWRyZWFDM0NHQ3JTTnNRRjRVY1pPNUlmWEhvSFNDQ0ZxZWgybE
+9rTWk5ck9LNm9NdWM4QmVoS3JhNTRoeGRueEFneWw1Q19WTDdfVXpyU0xkSkYtbUhrai1
+lV0NFcVlmZ01PSXYzRzNDeE12RHJQa21XYk1OampZb3NaODBTYmctNlJ5d1duTVRwbFZO
+dlpaM18zNURnUVhLWnlVdG1SNG4tc2dUZmh4enFROXRNenFHckNwLU9mZDFvaUx6YjBHT
+HRWVF9Mcl9OQQ
 
 </pre><a href="#appendix-A.1-30" class="pilcrow">¶</a>
 </div>
@@ -2562,13 +2562,32 @@ XJtSmt3R2NPUQ
 <a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-example-bbs-jwp" class="section-name selfRef">Example BBS JWP</a>
         </h3>
 <p id="appendix-A.2-1">The following example uses the <code>BBS</code> algorithm.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2-2">This is the Signer's stable private key in the JWK format:
-&lt;{{./fixtures/build/private-key.jwk.wrapped}}
-Figure: BBS private key in JWK format<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.2-3">There is no additional holder key necessary for presentation proofs.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
-<p id="appendix-A.2-4">For the following protected header and array of payloads:<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
-<span id="name-example-issuer-protected-he"></span><figure id="figure-10">
-          <div class="lang-json sourcecode" id="appendix-A.2-5.1">
+<p id="appendix-A.2-2">This is the Signer's stable private key in the JWK format:<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
+<span id="name-bbs-private-key-in-jwk-form"></span><figure id="figure-10">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-3.1">
+<pre>{
+  "kty": "EC2",
+  "alg": "BBS",
+  "use": "proof",
+  "crv": "BLS12381G2",
+  "x": "GOTEOkFwLtpjMyYAJgqHW3wPm1fKyXrkbs1qZctRmEugaN8PQm4g1wt2eB1QW
+       hbGB4MMm77VwKASoLD3R8QhCzwJUP6mOis19NpziMiQO5Wne3-fzDSDMHaYVCA
+       BGFkb",
+  "y": "ExE07OqkE2nQv552Py883bm7B1jyW7PG4zPzxO60FiB6TUFctL8Gv0XRLg7OD
+       hE0FyvSmf9fyHNC_6tVw-QhAkTbL9fPFIP6fIztnf_zgdf9DLgSS1BiC-Ihh2k
+       W74hA",
+  "d": "FPfi_jbGUzYxEiG5ez24ZFV014jEaWcRA58FlK-2L5I"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<a href="#name-bbs-private-key-in-jwk-form" class="selfRef">BBS private key in JWK format</a>
+          </figcaption></figure>
+<p id="appendix-A.2-4">There is no additional holder key necessary for presentation proofs.<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-5">For the following protected header and array of payloads:<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
+<span id="name-example-issuer-protected-he"></span><figure id="figure-11">
+          <div class="lang-json sourcecode" id="appendix-A.2-6.1">
 <pre>{
   "kid": "HjfcpyjuZQ-O8Ye2hQnNbT9RbbnrobptdnExR0DUjU8",
   "alg": "BBS"
@@ -2576,11 +2595,11 @@ Figure: BBS private key in JWK format<a href="#appendix-A.2-2" class="pilcrow">�
 
 </pre>
 </div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
 <a href="#name-example-issuer-protected-he" class="selfRef">Example issuer protected header</a>
           </figcaption></figure>
-<span id="name-example-issuer-payloads-as-"></span><figure id="figure-11">
-          <div class="lang-json sourcecode" id="appendix-A.2-6.1">
+<span id="name-example-issuer-payloads-as-"></span><figure id="figure-12">
+          <div class="lang-json sourcecode" id="appendix-A.2-7.1">
 <pre>[
     1714521600,
     1717199999,
@@ -2600,12 +2619,12 @@ Figure: BBS private key in JWK format<a href="#appendix-A.2-2" class="pilcrow">�
 
 </pre>
 </div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
 <a href="#name-example-issuer-payloads-as-" class="selfRef">Example issuer payloads (as members of a JSON array)</a>
           </figcaption></figure>
-<p id="appendix-A.2-7">These components are signed using the private issuer key previously given, which is then representable in the following serializations:<a href="#appendix-A.2-7" class="pilcrow">¶</a></p>
-<span id="name-issued-jwp-json-serializati"></span><figure id="figure-12">
-          <div class="lang-wrapped sourcecode" id="appendix-A.2-8.1">
+<p id="appendix-A.2-8">These components are signed using the private issuer key previously given, which is then representable in the following serializations:<a href="#appendix-A.2-8" class="pilcrow">¶</a></p>
+<span id="name-issued-jwp-json-serializati"></span><figure id="figure-13">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-9.1">
 <pre>{
   "issuer": "eyJraWQiOiJIamZjcHlqdVpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRu
        RXhSMERValU4IiwiYWxnIjoiQkJTIn0",
@@ -2621,34 +2640,34 @@ Figure: BBS private key in JWK format<a href="#appendix-A.2-2" class="pilcrow">�
        ImNvdW50cnkiOiJVU0EifQ",
     "dHJ1ZQ"
   ],
-  "proof": "pea_yN3ObDZG9dDuESMg0xnUzJ-maLV0pcKABKgFqbz5Vz2KGzXR3eK5R
-       SeEc2nHDyGDEw5rwOcAHNy0WCJuffcVR6rf-4f7lS7nxc7usCQ"
+  "proof": "jdFPqt8KnMQJUMa6JUAICWdQYu7sqG7FdheRpExBhKwrnZRvOTgAQy4Rv
+       2fVmbMcJTeiNQLOVq0wP1QC3TO9It65mjZwhGkZws3oloWgOaU"
 }
 
 </pre>
 </div>
-<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
 <a href="#name-issued-jwp-json-serializati" class="selfRef">Issued JWP (JSON serialization)</a>
           </figcaption></figure>
-<span id="name-issued-jwp-compact-serializ"></span><figure id="figure-13">
-          <div class="lang-wrapped sourcecode" id="appendix-A.2-9.1">
+<span id="name-issued-jwp-compact-serializ"></span><figure id="figure-14">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-10.1">
 <pre>eyJraWQiOiJIamZjcHlqdVpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4I
 iwiYWxnIjoiQkJTIn0.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~Imph
 eWRvZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b
 3duLCBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIi
 wibG9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTI
-zNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.pea_yN3ObDZG9dDuESMg0xnUzJ-maLV0pc
-KABKgFqbz5Vz2KGzXR3eK5RSeEc2nHDyGDEw5rwOcAHNy0WCJuffcVR6rf-4f7lS7nxc7
-usCQ
+zNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.jdFPqt8KnMQJUMa6JUAICWdQYu7sqG7Fdh
+eRpExBhKwrnZRvOTgAQy4Rv2fVmbMcJTeiNQLOVq0wP1QC3TO9It65mjZwhGkZws3oloW
+gOaU
 
 </pre>
 </div>
-<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
 <a href="#name-issued-jwp-compact-serializ" class="selfRef">Issued JWP (compact serialization)</a>
           </figcaption></figure>
-<p id="appendix-A.2-10">For a presentation with the following presentation header:<a href="#appendix-A.2-10" class="pilcrow">¶</a></p>
-<span id="name-holder-presentation-header"></span><figure id="figure-14">
-          <div class="lang-json sourcecode" id="appendix-A.2-11.1">
+<p id="appendix-A.2-11">For a presentation with the following presentation header:<a href="#appendix-A.2-11" class="pilcrow">¶</a></p>
+<span id="name-holder-presentation-header"></span><figure id="figure-15">
+          <div class="lang-json sourcecode" id="appendix-A.2-12.1">
 <pre>{
     "alg": "BBS-PROOF",
     "aud": "https://recipient.example.com",
@@ -2657,12 +2676,12 @@ usCQ
 
 </pre>
 </div>
-<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
 <a href="#name-holder-presentation-header" class="selfRef">Holder Presentation Header</a>
           </figcaption></figure>
-<p id="appendix-A.2-12">The holder decides to share all information other than the email address, and generates a proof. That proof is represented in the following serializations:<a href="#appendix-A.2-12" class="pilcrow">¶</a></p>
-<span id="name-presentation-jwp-json-seria"></span><figure id="figure-15">
-          <div class="lang-wrapped sourcecode" id="appendix-A.2-13.1">
+<p id="appendix-A.2-13">The holder decides to share all information other than the email address, and generates a proof. That proof is represented in the following serializations:<a href="#appendix-A.2-13" class="pilcrow">¶</a></p>
+<span id="name-presentation-jwp-json-seria"></span><figure id="figure-16">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-14.1">
 <pre>{
   "presentation": "eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2
        lwaWVudC5leGFtcGxlLmNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ",
@@ -2677,39 +2696,39 @@ usCQ
     null,
     null
   ],
-  "proof": "i0iSYdvGMcIlKjpluuOLFJMi9tKGobfy-gRNawp8q77p8e1jeeK7RTurD
-       yyMA-iQtWFgWI5nPhd-h2exi_UvFVQpquhgWrloBrTTx_-OEIysBhXWTcZ6nQy
-       gNnI89QE9met8-rKAnRsgGlv7eo9H09WOz4psXuMU6Fxwk3EfQZejXYdHMtMTW
-       kUyzlyQXzjyEQNyugz_yYryx-2AkD0L1-1DTCF5277CSiy3vOD9_QIx-x6iCvi
-       50q2Bs54rbQDbaRt5kkiZ_7a-wLskeMycyEK5SPSqfTXun7yLylQZiCoksBUol
-       -jnY905r5zuLdjeaeFzeWN3XSrJA8efg0xnlnrGKC-vAEOy13Ud9N6au4dDTmh
-       JkDTlh9PwTaVoBJn-rapVLWP2mOJXAsFiWFk3PwgaBMmUlHuFrfTJGj5nJOLtL
-       vVycS6ys1ro5wlb9Ktmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
+  "proof": "taxAU-6fQCVPvGuZ-xGvCshuDaonFWzEt45C0HHqSj7-Whc48W6wujjpv
+       WO_mBQCiObpIAg30I9r5rG-J6XnVLHX4pggU0utFhVfRApFYPhmYH0SjdQPHbS
+       QXAderDIoj_ruqnNCQNbnryH15pB30Y6aUtJxruhOOMZ6U6zNnYlm7nsNChqRU
+       hAc25mUhod3QxB2konF0ScQ3LNU4CYVhYWodNVQGQo9tSPScWH7SaI-okonyOz
+       4--5ynVVeRwxpRMApChxGzuMExC56Uw4B3gwSFuDouh-H4VjbGrgUcMgRF3ApV
+       mrplX6WsRFRI8TDGPbtT9cPcyuITGjp4Y-Kx7kQf3uqb1lC5bmTQAcdAcZeu9w
+       ZEtlS1XJYdUxtzNZbjAZy4zJO9eJOYnC9YGMEflXUQYSodDPDTsuEqTdAM6n9T
+       828J9bdj-dxGb_svmVgDlldn0QJQXVcqOQo2_HHt_ubV0KcVFnhO3OYpk4XlAE
        "
 }
 
 </pre>
 </div>
-<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
 <a href="#name-presentation-jwp-json-seria" class="selfRef">Presentation JWP (JSON serialization)</a>
           </figcaption></figure>
-<span id="name-presentation-jwp-compact-se"></span><figure id="figure-16">
-          <div class="lang-wrapped sourcecode" id="appendix-A.2-14.1">
+<span id="name-presentation-jwp-compact-se"></span><figure id="figure-17">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-15.1">
 <pre>eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
 mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
 yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.i0iSYdvGMcIlKjpluuOLFJMi9tKGobfy
--gRNawp8q77p8e1jeeK7RTurDyyMA-iQtWFgWI5nPhd-h2exi_UvFVQpquhgWrloBrTTx
-_-OEIysBhXWTcZ6nQygNnI89QE9met8-rKAnRsgGlv7eo9H09WOz4psXuMU6Fxwk3EfQZ
-ejXYdHMtMTWkUyzlyQXzjyEQNyugz_yYryx-2AkD0L1-1DTCF5277CSiy3vOD9_QIx-x6
-iCvi50q2Bs54rbQDbaRt5kkiZ_7a-wLskeMycyEK5SPSqfTXun7yLylQZiCoksBUol-jn
-Y905r5zuLdjeaeFzeWN3XSrJA8efg0xnlnrGKC-vAEOy13Ud9N6au4dDTmhJkDTlh9PwT
-aVoBJn-rapVLWP2mOJXAsFiWFk3PwgaBMmUlHuFrfTJGj5nJOLtLvVycS6ys1ro5wlb9K
-tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
+MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.taxAU-6fQCVPvGuZ-xGvCshuDaonFWzE
+t45C0HHqSj7-Whc48W6wujjpvWO_mBQCiObpIAg30I9r5rG-J6XnVLHX4pggU0utFhVfR
+ApFYPhmYH0SjdQPHbSQXAderDIoj_ruqnNCQNbnryH15pB30Y6aUtJxruhOOMZ6U6zNnY
+lm7nsNChqRUhAc25mUhod3QxB2konF0ScQ3LNU4CYVhYWodNVQGQo9tSPScWH7SaI-oko
+nyOz4--5ynVVeRwxpRMApChxGzuMExC56Uw4B3gwSFuDouh-H4VjbGrgUcMgRF3ApVmrp
+lX6WsRFRI8TDGPbtT9cPcyuITGjp4Y-Kx7kQf3uqb1lC5bmTQAcdAcZeu9wZEtlS1XJYd
+UxtzNZbjAZy4zJO9eJOYnC9YGMEflXUQYSodDPDTsuEqTdAM6n9T828J9bdj-dxGb_svm
+VgDlldn0QJQXVcqOQo2_HHt_ubV0KcVFnhO3OYpk4XlAE
 
 </pre>
 </div>
-<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
+<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
 <a href="#name-presentation-jwp-compact-se" class="selfRef">Presentation JWP (compact serialization)</a>
           </figcaption></figure>
 </section>
@@ -2721,7 +2740,7 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
         </h3>
 <p id="appendix-A.3-1">The following example uses the <code>MAC-H256</code> algorithm.<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
 <p id="appendix-A.3-2">This is the Signer's stable private key in the JWK format:<a href="#appendix-A.3-2" class="pilcrow">¶</a></p>
-<span id="name-issuer-private-jwk"></span><figure id="figure-17">
+<span id="name-issuer-private-jwk"></span><figure id="figure-18">
           <div class="lang-json sourcecode" id="appendix-A.3-3.1">
 <pre>{
   "crv": "P-256",
@@ -2733,11 +2752,11 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 
 </pre>
 </div>
-<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
 <a href="#name-issuer-private-jwk" class="selfRef">issuer-private-jwk</a>
           </figcaption></figure>
 <p id="appendix-A.3-4">This is the Signer's generated Shared Secret:<a href="#appendix-A.3-4" class="pilcrow">¶</a></p>
-<span id="name-mac-shared-secret"></span><figure id="figure-18">
+<span id="name-mac-shared-secret"></span><figure id="figure-19">
           <div class="lang-json sourcecode" id="appendix-A.3-5.1">
 <pre>[100, 109, 91, 184, 139, 20, 107, 86, 1, 252, 86, 159, 126, 251,
 228, 4, 35, 177, 75, 96, 11, 205, 144, 189, 42, 95, 135, 170, 107,
@@ -2745,11 +2764,11 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 
 </pre>
 </div>
-<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
 <a href="#name-mac-shared-secret" class="selfRef">mac-shared-secret</a>
           </figcaption></figure>
 <p id="appendix-A.3-6">This is the Holder's presentation private key in the JWK format:<a href="#appendix-A.3-6" class="pilcrow">¶</a></p>
-<span id="name-holder-presentation-jwk"></span><figure id="figure-19">
+<span id="name-holder-presentation-jwk"></span><figure id="figure-20">
           <div class="lang-json sourcecode" id="appendix-A.3-7.1">
 <pre>{
   "crv": "P-256",
@@ -2761,11 +2780,11 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 
 </pre>
 </div>
-<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
 <a href="#name-holder-presentation-jwk" class="selfRef">holder-presentation-jwk</a>
           </figcaption></figure>
 <p id="appendix-A.3-8">The first MAC is generated using the key <code>issuer_header</code> and the base64url-encoded issuer protected header, resulting in this octet array:<a href="#appendix-A.3-8" class="pilcrow">¶</a></p>
-<span id="name-mac-issuer-header-mac"></span><figure id="figure-20">
+<span id="name-mac-issuer-header-mac"></span><figure id="figure-21">
           <div class="lang-json sourcecode" id="appendix-A.3-9.1">
 <pre>[140, 88, 59, 30, 127, 113, 27, 237, 78, 200, 182, 114, 94, 123,
 198, 128, 102, 232, 178, 88, 252, 248, 57, 2, 231, 19, 145, 8, 160,
@@ -2773,11 +2792,11 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 
 </pre>
 </div>
-<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
 <a href="#name-mac-issuer-header-mac" class="selfRef">mac-issuer-header-mac</a>
           </figcaption></figure>
 <p id="appendix-A.3-10">The issuer generates an array of derived keys with one for each payload by using the shared secret as the key and the index of the payload as the input:<a href="#appendix-A.3-10" class="pilcrow">¶</a></p>
-<span id="name-mac-issuer-keys"></span><figure id="figure-21">
+<span id="name-mac-issuer-keys"></span><figure id="figure-22">
           <div class="lang-json sourcecode" id="appendix-A.3-11.1">
 <pre>[
  [180, 129, 55, 94, 125, 158, 179, 245, 30, 199, 148, 60, 184, 28,
@@ -2796,7 +2815,7 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 
 </pre>
 </div>
-<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
 <a href="#name-mac-issuer-keys" class="selfRef">mac-issuer-keys</a>
           </figcaption></figure>
 <p id="appendix-A.3-12">The first payload is the string <code>"Doe"</code> with the octet sequence of <code>[ 34, 68, 111, 101, 34 ]</code> and base64url-encoded as <code>IkRvZSI</code>.<a href="#appendix-A.3-12" class="pilcrow">¶</a></p>
@@ -2804,7 +2823,7 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 <p id="appendix-A.3-14">The third payload is the string <code>"jaydoe@example.org"</code> with the octet sequence of <code>[ 34, 106, 97, 121, 100, 111, 101, 64, 101, 120, 97, 109, 112, 108, 101, 46, 111, 114, 103, 34 ]</code> and base64url-encoded as <code>ImpheWRvZUBleGFtcGxlLm9yZyI</code>.<a href="#appendix-A.3-14" class="pilcrow">¶</a></p>
 <p id="appendix-A.3-15">The fourth payload is the string <code>42</code> with the octet sequence of <code>[ 52, 50 ]</code> and base64url-encoded as <code>NDI</code>.<a href="#appendix-A.3-15" class="pilcrow">¶</a></p>
 <p id="appendix-A.3-16">A MAC is generated for each payload using the generated key for its given index, resulting in an array of MACs:<a href="#appendix-A.3-16" class="pilcrow">¶</a></p>
-<span id="name-mac-issuer-macs"></span><figure id="figure-22">
+<span id="name-mac-issuer-macs"></span><figure id="figure-23">
           <div class="lang-json sourcecode" id="appendix-A.3-17.1">
 <pre>[
  [156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28,
@@ -2823,11 +2842,11 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 
 </pre>
 </div>
-<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
 <a href="#name-mac-issuer-macs" class="selfRef">mac-issuer-macs</a>
           </figcaption></figure>
 <p id="appendix-A.3-18">Concatenating the issuer protected header MAC with the array of payload MACs produces a single octet array that is signed using the issuer's stable key, resulting in the following signature:<a href="#appendix-A.3-18" class="pilcrow">¶</a></p>
-<span id="name-mac-issuer-signature"></span><figure id="figure-23">
+<span id="name-mac-issuer-signature"></span><figure id="figure-24">
           <div class="lang-json sourcecode" id="appendix-A.3-19.1">
 <pre>[120, 172, 15, 230, 138, 230, 150, 139, 241, 196, 79, 134, 122, 43,
 149, 11, 253, 104, 58, 199, 49, 87, 32, 64, 237, 50, 86, 155, 153,
@@ -2837,12 +2856,12 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 
 </pre>
 </div>
-<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
+<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
 <a href="#name-mac-issuer-signature" class="selfRef">mac-issuer-signature</a>
           </figcaption></figure>
 <p id="appendix-A.3-20">The original shared secret octet string is then concatenated to the end of the issuer signature octet string and the result is base64url-encoded as the issuer's proof value.<a href="#appendix-A.3-20" class="pilcrow">¶</a></p>
 <p id="appendix-A.3-21">The final issued JWP in JSON serialization is:<a href="#appendix-A.3-21" class="pilcrow">¶</a></p>
-<span id="name-mac-issued-jwp"></span><figure id="figure-24">
+<span id="name-mac-issued-jwp"></span><figure id="figure-25">
           <div class="lang-json sourcecode" id="appendix-A.3-22.1">
 <pre>{
   "payloads": [
@@ -2865,11 +2884,11 @@ tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
 
 </pre>
 </div>
-<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
+<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
 <a href="#name-mac-issued-jwp" class="selfRef">mac-issued-jwp</a>
           </figcaption></figure>
 <p id="appendix-A.3-23">The same JWP in compact serialization:<a href="#appendix-A.3-23" class="pilcrow">¶</a></p>
-<span id="name-mac-issued-compact"></span><figure id="figure-25">
+<span id="name-mac-issued-compact"></span><figure id="figure-26">
           <div class="lang-text sourcecode" id="appendix-A.3-24.1">
 <pre>eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUi
 LCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJj
@@ -2882,12 +2901,12 @@ Wm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn37
 
 </pre>
 </div>
-<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
+<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
 <a href="#name-mac-issued-compact" class="selfRef">mac-issued-compact</a>
           </figcaption></figure>
 <p id="appendix-A.3-25">Next, we show the presentation of the JWP with selective disclosure.<a href="#appendix-A.3-25" class="pilcrow">¶</a></p>
 <p id="appendix-A.3-26">We start with this presentation header using a nonce provided by the Verifier:<a href="#appendix-A.3-26" class="pilcrow">¶</a></p>
-<span id="name-mac-presentation-header"></span><figure id="figure-26">
+<span id="name-mac-presentation-header"></span><figure id="figure-27">
           <div class="lang-json sourcecode" id="appendix-A.3-27.1">
 <pre>{
   "nonce": "uTEB371l1pzWJl7afB0wi0HWUNk1Le-bComFLxa8K-s"
@@ -2895,11 +2914,11 @@ Wm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn37
 
 </pre>
 </div>
-<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
+<figcaption><a href="#figure-27" class="selfRef">Figure 27</a>:
 <a href="#name-mac-presentation-header" class="selfRef">mac-presentation-header</a>
           </figcaption></figure>
 <p id="appendix-A.3-28">When signed with the holder's presentation key, the resulting signature octets are:<a href="#appendix-A.3-28" class="pilcrow">¶</a></p>
-<span id="name-mac-presentation-header-sig"></span><figure id="figure-27">
+<span id="name-mac-presentation-header-sig"></span><figure id="figure-28">
           <div class="lang-json sourcecode" id="appendix-A.3-29.1">
 <pre>[126, 134, 175, 2, 165, 12, 103, 11, 116, 72, 94, 228, 240, 142,
 107, 195, 198, 238, 218, 203, 63, 198, 105, 175, 1, 69, 182, 5, 204,
@@ -2909,11 +2928,11 @@ Wm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn37
 
 </pre>
 </div>
-<figcaption><a href="#figure-27" class="selfRef">Figure 27</a>:
+<figcaption><a href="#figure-28" class="selfRef">Figure 28</a>:
 <a href="#name-mac-presentation-header-sig" class="selfRef">mac-presentation-header-signature</a>
           </figcaption></figure>
 <p id="appendix-A.3-30">Then by applying selective disclosure of only the given name and age claims (family name and email hidden, payload array indexes 0 and 2), the holder builds a mixed array of either the payload key (if disclosed) or MAC (if hidden):<a href="#appendix-A.3-30" class="pilcrow">¶</a></p>
-<span id="name-mac-presentation-keyormac"></span><figure id="figure-28">
+<span id="name-mac-presentation-keyormac"></span><figure id="figure-29">
           <div class="lang-json sourcecode" id="appendix-A.3-31.1">
 <pre>[
  [156, 53, 90, 125, 139, 226, 60, 168, 100, 220, 79, 255, 8, 87, 28,
@@ -2932,11 +2951,11 @@ Wm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn37
 
 </pre>
 </div>
-<figcaption><a href="#figure-28" class="selfRef">Figure 28</a>:
+<figcaption><a href="#figure-29" class="selfRef">Figure 29</a>:
 <a href="#name-mac-presentation-keyormac" class="selfRef">mac-presentation-keyormac</a>
           </figcaption></figure>
 <p id="appendix-A.3-32">The final presented proof value is generated by concatenating first the presentation header signature octet string, followed by the issuer signature octet string, then followed by the mixed array of keys and MACs:<a href="#appendix-A.3-32" class="pilcrow">¶</a></p>
-<span id="name-mac-presentation-proof"></span><figure id="figure-29">
+<span id="name-mac-presentation-proof"></span><figure id="figure-30">
           <div class="lang-json sourcecode" id="appendix-A.3-33.1">
 <pre>[126, 134, 175, 2, 165, 12, 103, 11, 116, 72, 94, 228, 240, 142,
 107, 195, 198, 238, 218, 203, 63, 198, 105, 175, 1, 69, 182, 5, 204,
@@ -2959,11 +2978,11 @@ Wm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn37
 
 </pre>
 </div>
-<figcaption><a href="#figure-29" class="selfRef">Figure 29</a>:
+<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
 <a href="#name-mac-presentation-proof" class="selfRef">mac-presentation-proof</a>
           </figcaption></figure>
 <p id="appendix-A.3-34">The resulting presented JWP in JSON serialization is:<a href="#appendix-A.3-34" class="pilcrow">¶</a></p>
-<span id="name-mac-presentation-jwp"></span><figure id="figure-30">
+<span id="name-mac-presentation-jwp"></span><figure id="figure-31">
           <div class="lang-json sourcecode" id="appendix-A.3-35.1">
 <pre>{
   "payloads": [
@@ -2992,11 +3011,11 @@ Wm5k6P3T1gojFpM_o7mqr9mKV_hYBcrvpqHSt09Dq9Uzuj51TymRtW7iLFGtWAfxWn37
 
 </pre>
 </div>
-<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
+<figcaption><a href="#figure-31" class="selfRef">Figure 31</a>:
 <a href="#name-mac-presentation-jwp" class="selfRef">mac-presentation-jwp</a>
           </figcaption></figure>
 <p id="appendix-A.3-36">The same JWP in compact serialization:<a href="#appendix-A.3-36" class="pilcrow">¶</a></p>
-<span id="name-mac-presentation-compact"></span><figure id="figure-31">
+<span id="name-mac-presentation-compact"></span><figure id="figure-32">
           <div class="lang-text sourcecode" id="appendix-A.3-37.1">
 <pre>eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUi
 LCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicGp3ayI6eyJj
@@ -3013,7 +3032,7 @@ GLsTF8bslT6Q5tPP15uH55GooF1mFg2FBGN7ZpZYL-6kTg22F3YvQhKzeU7uGxZaAx9m
 
 </pre>
 </div>
-<figcaption><a href="#figure-31" class="selfRef">Figure 31</a>:
+<figcaption><a href="#figure-32" class="selfRef">Figure 32</a>:
 <a href="#name-mac-presentation-compact" class="selfRef">mac-presentation-compact</a>
           </figcaption></figure>
 </section>
@@ -3038,50 +3057,55 @@ for his valuable contributions to this specification.<a href="#appendix-B-2" cla
 <a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-C-1">[[ To be removed from the final specification ]]<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<ul class="compact">
-<li class="compact" id="appendix-C-2.1">Refactoring figures and examples to be built from a common set across all three documents<a href="#appendix-C-2.1" class="pilcrow">¶</a>
+<ul class="normal">
+<li class="normal" id="appendix-C-2.1">Refactoring figures and examples to be built from a common set across all three documents<a href="#appendix-C-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-2.2">Move single-use example appendix from JWP to JPA<a href="#appendix-C-2.2" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-C-2.2">Move single-use example appendix from JWP to JPA<a href="#appendix-C-2.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-2.3">Change algorithm from "BBS-DRAFT-5" to "BBS", and from "BBS-PROOF-DRAFT-5" to "BBS-PROOF"<a href="#appendix-C-2.3" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-C-2.3">Change algorithm from <code>BBS-DRAFT-5</code> to <code>BBS</code>, and from <code>BBS-PROOF-DRAFT-5</code> to <code>BBS-PROOF</code><a href="#appendix-C-2.3" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-2.4">Update BBS ciphersuite ID to "BBS_BLS12381G1_XMD:SHA-256_SSWU<em>RO</em>"<a href="#appendix-C-2.4" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-C-2.4">Update BBS ciphersuite ID to <code>BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_</code><a href="#appendix-C-2.4" class="pilcrow">¶</a>
 </li>
-      </ul>
-<p id="appendix-C-3">-03<a href="#appendix-C-3" class="pilcrow">¶</a></p>
-<ul class="compact">
-<li class="compact" id="appendix-C-4.1">Improvements resulting from a full proofreading.<a href="#appendix-C-4.1" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-C-2.5">
+          <p id="appendix-C-2.5.1">Update to draft 5 BLS key representations
+-03<a href="#appendix-C-2.5.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="compact" id="appendix-C-4.2">Populated IANA Considerations section.<a href="#appendix-C-4.2" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-C-2.6">
+          <p id="appendix-C-2.6.1">Improvements resulting from a full proofreading.<a href="#appendix-C-2.6.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="compact" id="appendix-C-4.3">Updated to use BBS draft -05.<a href="#appendix-C-4.3" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-C-2.7">
+          <p id="appendix-C-2.7.1">Populated IANA Considerations section.<a href="#appendix-C-2.7.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="compact" id="appendix-C-4.4">Updated examples.<a href="#appendix-C-4.4" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-C-2.8">
+          <p id="appendix-C-2.8.1">Updated to use BBS draft -05.<a href="#appendix-C-2.8.1" class="pilcrow">¶</a></p>
 </li>
-      </ul>
-<p id="appendix-C-5">-02<a href="#appendix-C-5" class="pilcrow">¶</a></p>
-<ul class="compact">
-<li class="compact" id="appendix-C-6.1">Add new <code>BBS-DRAFT-3</code> and <code>BBS-PROOF-DRAFT-3</code> algorithms based on draft-irtf-cfrg-bbs-signatures-03.<a href="#appendix-C-6.1" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-6.2">Remove prior <code>BBS-X</code> algorithm based on a particular implementation of earlier drafts.<a href="#appendix-C-6.2" class="pilcrow">¶</a>
+        <li class="normal" id="appendix-C-2.9">
+          <p id="appendix-C-2.9.1">Updated examples.<a href="#appendix-C-2.9.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-C-7">-01<a href="#appendix-C-7" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">-02<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-8.1">Correct cross-references within group<a href="#appendix-C-8.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-4.1">Add new <code>BBS-DRAFT-3</code> and <code>BBS-PROOF-DRAFT-3</code> algorithms based on draft-irtf-cfrg-bbs-signatures-03.<a href="#appendix-C-4.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-8.2">Describe <code>issuer_header</code> and <code>presentation_header</code><a href="#appendix-C-8.2" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-8.3">Update BBS references to CFRG drafts<a href="#appendix-C-8.3" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-8.4">Rework reference to HMAC ( RFC2104 )<a href="#appendix-C-8.4" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-8.5">Remove ZKSnark placeholder<a href="#appendix-C-8.5" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.2">Remove prior <code>BBS-X</code> algorithm based on a particular implementation of earlier drafts.<a href="#appendix-C-4.2" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-C-9">-00<a href="#appendix-C-9" class="pilcrow">¶</a></p>
+<p id="appendix-C-5">-01<a href="#appendix-C-5" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-10.1">Created initial working group draft based on draft-jmiller-jose-json-proof-algorithms-01<a href="#appendix-C-10.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-6.1">Correct cross-references within group<a href="#appendix-C-6.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.2">Describe <code>issuer_header</code> and <code>presentation_header</code><a href="#appendix-C-6.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.3">Update BBS references to CFRG drafts<a href="#appendix-C-6.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.4">Rework reference to HMAC ( RFC2104 )<a href="#appendix-C-6.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.5">Remove ZKSnark placeholder<a href="#appendix-C-6.5" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-7">-00<a href="#appendix-C-7" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-8.1">Created initial working group draft based on draft-jmiller-jose-json-proof-algorithms-01<a href="#appendix-C-8.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>

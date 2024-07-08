@@ -634,14 +634,14 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
    mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
    yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.i0iSYdvGMcIlKjpluuOLFJMi9tKGobfy
-   -gRNawp8q77p8e1jeeK7RTurDyyMA-iQtWFgWI5nPhd-h2exi_UvFVQpquhgWrloBrTTx
-   _-OEIysBhXWTcZ6nQygNnI89QE9met8-rKAnRsgGlv7eo9H09WOz4psXuMU6Fxwk3EfQZ
-   ejXYdHMtMTWkUyzlyQXzjyEQNyugz_yYryx-2AkD0L1-1DTCF5277CSiy3vOD9_QIx-x6
-   iCvi50q2Bs54rbQDbaRt5kkiZ_7a-wLskeMycyEK5SPSqfTXun7yLylQZiCoksBUol-jn
-   Y905r5zuLdjeaeFzeWN3XSrJA8efg0xnlnrGKC-vAEOy13Ud9N6au4dDTmhJkDTlh9PwT
-   aVoBJn-rapVLWP2mOJXAsFiWFk3PwgaBMmUlHuFrfTJGj5nJOLtLvVycS6ys1ro5wlb9K
-   tmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.taxAU-6fQCVPvGuZ-xGvCshuDaonFWzE
+   t45C0HHqSj7-Whc48W6wujjpvWO_mBQCiObpIAg30I9r5rG-J6XnVLHX4pggU0utFhVfR
+   ApFYPhmYH0SjdQPHbSQXAderDIoj_ruqnNCQNbnryH15pB30Y6aUtJxruhOOMZ6U6zNnY
+   lm7nsNChqRUhAc25mUhod3QxB2konF0ScQ3LNU4CYVhYWodNVQGQo9tSPScWH7SaI-oko
+   nyOz4--5ynVVeRwxpRMApChxGzuMExC56Uw4B3gwSFuDouh-H4VjbGrgUcMgRF3ApVmrp
+   lX6WsRFRI8TDGPbtT9cPcyuITGjp4Y-Kx7kQf3uqb1lC5bmTQAcdAcZeu9wZEtlS1XJYd
+   UxtzNZbjAZy4zJO9eJOYnC9YGMEflXUQYSodDPDTsuEqTdAM6n9T828J9bdj-dxGb_svm
+   VgDlldn0QJQXVcqOQo2_HHt_ubV0KcVFnhO3OYpk4XlAE
 
    |  Figure: Compact Serialization of Presentation
 
@@ -673,14 +673,14 @@ Table of Contents
        null,
        null
      ],
-     "proof": "i0iSYdvGMcIlKjpluuOLFJMi9tKGobfy-gRNawp8q77p8e1jeeK7RTurD
-          yyMA-iQtWFgWI5nPhd-h2exi_UvFVQpquhgWrloBrTTx_-OEIysBhXWTcZ6nQy
-          gNnI89QE9met8-rKAnRsgGlv7eo9H09WOz4psXuMU6Fxwk3EfQZejXYdHMtMTW
-          kUyzlyQXzjyEQNyugz_yYryx-2AkD0L1-1DTCF5277CSiy3vOD9_QIx-x6iCvi
-          50q2Bs54rbQDbaRt5kkiZ_7a-wLskeMycyEK5SPSqfTXun7yLylQZiCoksBUol
-          -jnY905r5zuLdjeaeFzeWN3XSrJA8efg0xnlnrGKC-vAEOy13Ud9N6au4dDTmh
-          JkDTlh9PwTaVoBJn-rapVLWP2mOJXAsFiWFk3PwgaBMmUlHuFrfTJGj5nJOLtL
-          vVycS6ys1ro5wlb9Ktmc1LgoOCA8k23xgoiiwjOOBPumWtNIUsr7V-25TStbO4
+     "proof": "taxAU-6fQCVPvGuZ-xGvCshuDaonFWzEt45C0HHqSj7-Whc48W6wujjpv
+          WO_mBQCiObpIAg30I9r5rG-J6XnVLHX4pggU0utFhVfRApFYPhmYH0SjdQPHbS
+          QXAderDIoj_ruqnNCQNbnryH15pB30Y6aUtJxruhOOMZ6U6zNnYlm7nsNChqRU
+          hAc25mUhod3QxB2konF0ScQ3LNU4CYVhYWodNVQGQo9tSPScWH7SaI-okonyOz
+          4--5ynVVeRwxpRMApChxGzuMExC56Uw4B3gwSFuDouh-H4VjbGrgUcMgRF3ApV
+          mrplX6WsRFRI8TDGPbtT9cPcyuITGjp4Y-Kx7kQf3uqb1lC5bmTQAcdAcZeu9w
+          ZEtlS1XJYdUxtzNZbjAZy4zJO9eJOYnC9YGMEflXUQYSodDPDTsuEqTdAM6n9T
+          828J9bdj-dxGb_svmVgDlldn0QJQXVcqOQo2_HHt_ubV0KcVFnhO3OYpk4XlAE
           "
    }
 
