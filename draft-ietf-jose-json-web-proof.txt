@@ -5,9 +5,9 @@
 jose                                                           J. Miller
 Internet-Draft                                                  D. Waite
 Intended status: Standards Track                           Ping Identity
-Expires: 8 September 2024                                       M. Jones
+Expires: 9 January 2025                                         M. Jones
                                                   Self-Issued Consulting
-                                                            7 March 2024
+                                                             8 July 2024
 
 
                              JSON Web Proof
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 September 2024.
+   This Internet-Draft will expire on 9 January 2025.
 
 Copyright Notice
 
@@ -104,12 +104,9 @@ Table of Contents
    9.  References
      9.1.  Normative References
      9.2.  Informative References
-   Appendix A.  Example JWPs
-     A.1.  Example Single-Use JWP
-     A.2.  Example Multi-Use JWP
-   Appendix B.  Acknowledgements
-   Appendix C.  Registries
-   Appendix D.  Document History
+   Appendix A.  Acknowledgements
+   Appendix B.  Registries
+   Appendix C.  Document History
    Authors' Addresses
 
 1.  Introduction
@@ -454,7 +451,7 @@ Table of Contents
    A producer and consumer of a JWP may agree to use Header Parameter
    names that are Private Names (names that are not Registered Header
    Parameter names Section 4.1 or Public Header Parameter names
-   Section 4.2.  Unlike Public Header Parameter names, Private Header
+   Section 4.2.)  Unlike Public Header Parameter names, Private Header
    Parameter names are subject to collision and should be used with
    caution.
 
@@ -508,7 +505,7 @@ Table of Contents
    For example:
 
    {
-       "alg":"BBS-DRAFT-5"
+     "alg": "BBS"
    }
 
 5.1.2.  Issuer Payloads
@@ -634,6 +631,20 @@ Table of Contents
    have four . separated parts, the issued header, followed by the
    protected header, then the payloads and the proof.
 
+   eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
+   mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
+   yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.tiJEkyUQ8rl4NW1Hv-pGgbBy0EE1YNXd
+   8i_SBuF7aPLTDGxpDdLMMD1bvquWostFmQ-MTXXv0FxmSJVgO5Uu_pLNhHgEbQOtHoDqW
+   bg35OSKKxTBLQ62oJAkBHYV3ccqlbFAw0ozBuQPvWniVYxKTjymvpW4QDEhINJolQcnaK
+   78PIG-UTb6yLBvK1NCUZYQIgVzTAxY96s3CHKSoDEMjdBI9jhe3Ri8v2JOWuk41wwgxrb
+   iaBayV0dHr4GMHh7O5lUmO3lonXf1ZFNv6SEmhyCwlPfYeTKfA2bGeOqi6f0xkg75N0PJ
+   T9dYfxXuVqGPaa71PFnwMnabpLcovJEgJ9aZf_rOTrhRYUj30uR889QSMmmfFNMOFcp6K
+   kAYCPIp7JLLtUFi9fnwwfPTfGR7bGN_nzcNCYHMlifHg2z5ENuWh7NOHslYFM0o5PCbcu
+   97LcalBvaNYDCyxIGerzFtF5-DOWazwTLw5YMVoZySEek
+
+   |  Figure: Compact Serialization of Presentation
+
 6.2.  JSON Serialization
 
    Non-disclosed payloads in the JSON serialization are represented with
@@ -649,35 +660,31 @@ Table of Contents
    third payloads hidden.
 
    {
+     "presentation": "eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2
+          lwaWVudC5leGFtcGxlLmNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ",
+     "issuer": "eyJraWQiOiJIamZjcHlqdVpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRu
+          RXhSMERValU4IiwiYWxnIjoiQkJTIn0",
      "payloads": [
-       null,
+       "MTcxNDUyMTYwMA",
+       "MTcxNzE5OTk5OQ",
+       "IkRvZSI",
        "IkpheSI",
        null,
-       "NDI"
+       null,
+       null
      ],
-     "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFt
-     aWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiw
-     icHJvb2ZfandrIjp7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU
-     1zM2k4X3VzekVqSjJ0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5d
-     ldNcHRubUt0bTQ2R3FEejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlv
-     bl9qd2siOnsiY3J2IjoiUC0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw
-     2MWZVT09LNURwS2dkOGoyemJaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2
-     RSdU9xWlhPUDlNTWxiRnllbkZPTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYif
-     Q",
-     "proof": [
-       "LJMiN6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJyyrfjkpAG0cDJKZoUg
-       omHu5MzYhTUsa0YRXVBnMB91RjonrnWVsakfXtfm2h7gHxA_8G1wkB09x09kon2eK
-       9gTv4iKw4GP6Rh02PEIAVAvnhtuiShMnPqVw1tCBdhweWzjyxJbG86J7Y8MDt2H9f
-       5hhHIwmSLwXYzCbD37WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc27EY
-       kRHdRgGQwWNtuExKz7OmwH8oWizplEtjWJ5WIlJpee79gQ9HTa2QIOT9bUDvjjkkO
-       -jK_zuDjZwh5MkrcaQ"
-     ],
-     "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOaz
-     FMZS1iQ29tRkx4YThLLXMifQ"
-     ]
+     "proof": "tiJEkyUQ8rl4NW1Hv-pGgbBy0EE1YNXd8i_SBuF7aPLTDGxpDdLMMD1bv
+          quWostFmQ-MTXXv0FxmSJVgO5Uu_pLNhHgEbQOtHoDqWbg35OSKKxTBLQ62oJA
+          kBHYV3ccqlbFAw0ozBuQPvWniVYxKTjymvpW4QDEhINJolQcnaK78PIG-UTb6y
+          LBvK1NCUZYQIgVzTAxY96s3CHKSoDEMjdBI9jhe3Ri8v2JOWuk41wwgxrbiaBa
+          yV0dHr4GMHh7O5lUmO3lonXf1ZFNv6SEmhyCwlPfYeTKfA2bGeOqi6f0xkg75N
+          0PJT9dYfxXuVqGPaa71PFnwMnabpLcovJEgJ9aZf_rOTrhRYUj30uR889QSMmm
+          fFNMOFcp6KkAYCPIp7JLLtUFi9fnwwfPTfGR7bGN_nzcNCYHMlifHg2z5ENuWh
+          7NOHslYFM0o5PCbcu97LcalBvaNYDCyxIGerzFtF5-DOWazwTLw5YMVoZySEek
+          "
    }
 
-                      Figure 1: jwp-final-presentation
+   |  Figure: JSON Serialization of Presentation
 
 7.  Security Considerations
 
@@ -775,84 +782,68 @@ Table of Contents
    This section registers the Header Parameter names defined in
    Section 4.1 in this registry.
 
+8.1.2.1.  Algorithm Header Parameter
+
    *  Header Parameter Name: alg
-
    *  Header Parameter Description: Algorithm
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.1 of this specification
 
+8.1.2.2.  Key ID Header Parameter
+
    *  Header Parameter Name: kid
-
    *  Header Parameter Description: Key ID
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.2 of this specification
 
+8.1.2.3.  Type Header Parameter
+
    *  Header Parameter Name: typ
-
    *  Header Parameter Description: Type
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.3 of this specification
 
+8.1.2.4.  Critical Header Parameter
+
    *  Header Parameter Name: crit
-
    *  Header Parameter Description: Critical
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.4 of this specification
 
+8.1.2.5.  Issuer Header Parameter
+
    *  Header Parameter Name: iss
-
    *  Header Parameter Description: Issuer
-
    *  Header Parameter Usage Location(s): Issued, Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.7 of this specification
 
+8.1.2.6.  Audience Header Parameter
+
    *  Header Parameter Name: aud
-
    *  Header Parameter Description: Audience
-
    *  Header Parameter Usage Location(s): Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.8 of this specification
 
+8.1.2.7.  Nonce Header Parameter
+
    *  Header Parameter Name: nonce
-
    *  Header Parameter Description: Nonce
-
    *  Header Parameter Usage Location(s): Presented
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.9 of this specification
 
+8.1.2.8.  Claims Header Parameter
+
    *  Header Parameter Name: claims
-
    *  Header Parameter Description: claims
-
    *  Header Parameter Usage Location(s): Issued
-
    *  Change Controller: IETF
-
    *  Specification Document(s): Section 4.1.10 of this specification
 
 8.2.  Media Type Registration
@@ -867,89 +858,59 @@ Table of Contents
    Types" registry, which can be used to indicate that the content is a
    JWP using the JWP JSON Serialization.
 
+8.2.1.1.  The application/jwp Media Type
+
    *  Type name: application
-
    *  Subtype name: jwp
-
    *  Required parameters: n/a
-
    *  Optional parameters: n/a
-
    *  Encoding considerations: 8bit; application/jwp values are encoded
       as a series of base64url-encoded values (some of which may be the
       empty string), each separated from the next by a single period
       ('.') character.
-
    *  Security considerations: See the Security Considerations section
       of this specification.
-
    *  Interoperability considerations: n/a
-
    *  Published specification: this specification
-
    *  Applications that use this media type: TBD
-
    *  Fragment identifier considerations: n/a
-
-   *  Additional information:<list style="empty">
-
+   *  Additional information:
       -  Magic number(s): n/a
       -  File extension(s): n/a
       -  Macintosh file type code(s): n/a
-
    *  Person & email address to contact for further information: Michael
       B.  Jones, michael_b_jones@hotmail.com
-
    *  Intended usage: COMMON
-
    *  Restrictions on usage: none
-
    *  Author: Michael B.  Jones, michael_b_jones@hotmail.com
-
    *  Change Controller: IETF
-
    *  Provisional registration?  No
 
+8.2.1.2.  The application/jwp+json Media Type
+
    *  Type name: application
-
    *  Subtype name: jwp+json
-
    *  Required parameters: n/a
-
    *  Optional parameters: n/a
-
    *  Encoding considerations: 8bit; application/jwp+json values are
       represented as a JSON Object; UTF-8 encoding SHOULD be employed
       for the JSON object.
-
    *  Security considerations: See the Security Considerations section
       of this specification
-
    *  Interoperability considerations: n/a
-
    *  Published specification: this specification
-
    *  Applications that use this media type: TBD
-
    *  Fragment identifier considerations: n/a
-
-   *  Additional information:<list style="empty">
-
+   *  Additional information:
       -  Magic number(s): n/a
       -  File extension(s): n/a
       -  Macintosh file type code(s): n/a
-
    *  Person & email address to contact for further information: Michael
       B.  Jones, michael_b_jones@hotmail.com
-
    *  Intended usage: COMMON
-
    *  Restrictions on usage: none
-
    *  Author: Michael B.  Jones, michael_b_jones@hotmail.com
-
    *  Change Controller: IETF
-
    *  Provisional registration?  No
 
 9.  References
@@ -959,16 +920,16 @@ Table of Contents
    [I-D.ietf-jose-json-proof-algorithms]
               Miller, J., Jones, M. B., and D. Waite, "JSON Proof
               Algorithms", Work in Progress, Internet-Draft, draft-ietf-
-              jose-json-proof-algorithms-02, 21 October 2023,
+              jose-json-proof-algorithms-03, 1 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              json-proof-algorithms-02>.
+              json-proof-algorithms-03>.
 
    [I-D.ietf-jose-json-proof-token]
               Miller, J., Jones, M. B., and D. Waite, "JSON Proof
               Token", Work in Progress, Internet-Draft, draft-ietf-jose-
-              json-proof-token-02, 21 October 2023,
+              json-proof-token-03, 1 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              json-proof-token-02>.
+              json-proof-token-03>.
 
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
@@ -984,9 +945,9 @@ Table of Contents
    [I-D.irtf-cfrg-bbs-signatures]
               Looker, T., Kalos, V., Whitehead, A., and M. Lodder, "The
               BBS Signature Scheme", Work in Progress, Internet-Draft,
-              draft-irtf-cfrg-bbs-signatures-05, 21 December 2023,
+              draft-irtf-cfrg-bbs-signatures-06, 26 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
-              bbs-signatures-05>.
+              bbs-signatures-06>.
 
    [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part One: Format of Internet Message
@@ -1039,432 +1000,7 @@ Table of Contents
               Cohen, "Verifiable Credentials Data Model 2.0", 27
               December 2023, <https://www.w3.org/TR/vc-data-model-2.0>.
 
-Appendix A.  Example JWPs
-
-   The following examples use algorithms defined in JSON Proof
-   Algorithms and also contain the keys used, so that implementations
-   can validate these samples.
-
-A.1.  Example Single-Use JWP
-
-   This example uses the Single-Use Algorithm as defined in JSON Proof
-   Algorithms to create a JSON Proof Token.  It demonstrates how to
-   apply selective disclosure using an array of traditional JWS-based
-   signatures.  Unlinkability is only achieved by using each JWP one
-   time, as multiple uses are inherently linkable via the traditional
-   ECDSA signature embedded in the proof.
-
-   To begin, we need two asymmetric keys for Single Use: one that
-   represents the JPT Signer's stable key and the other is an ephemeral
-   key generated by the Signer just for this JWP.
-
-   This is the Signer's stable private key used in this example in the
-   JWK format:
-
-   {
-     "crv": "P-256",
-     "kty": "EC",
-     "x": "ONebN43-G5DOwZX6jCVpEYEe0bYd5WDybXAG0sL3iDA",
-     "y": "b0MHuYfSxu3Pj4DAyDXabAc0mPjpB1worEpr3yyrft4",
-     "d": "jnE0-9YvxQtLJEKcyUHU6HQ3Y9nSDnh0NstYJFn7RuI"
-   }
-
-                        Figure 2: issuer-private-jwk
-
-   This is the ephemeral private key used in this example in the JWK
-   format:
-
-   {
-     "crv": "P-256",
-     "kty": "EC",
-     "x": "acbIQiuMs3i8_uszEjJ2tpTtRM4EU3yz91PH6CdH2V0",
-     "y": "_KcyLj9vWMptnmKtm46GqDz8wf74I5LKgrl2GzH3nSE"
-   }
-
-                       Figure 3: issuer-ephemeral-jwk
-
-   This is the Holder's presentation private key used in this example in
-   the JWK format:
-
-   {
-     "crv": "P-256",
-     "kty": "EC",
-     "x": "oB1TPrE_QJIL61fUOOK5DpKgd8j2zbZJtqpILDTJX6I",
-     "y": "3JqnrkucLobkdRuOqZXOP9MMlbFyenFOLyGlG-FPACM"
-   }
-
-                     Figure 4: holder-presentation-jwk
-
-   The JWP Protected Header declares that the data structure is a JPT
-   and the JWP Proof Input is secured using the Single-Use ECDSA
-   algorithm with the P-256 curve and SHA-256 digest.  It also includes
-   the ephemeral public key, the Holder's presentation public key and
-   list of claims used for this JPT.
-
-   {
-     "iss": "https://issuer.tld",
-     "claims": [
-       "family_name",
-       "given_name",
-       "email",
-       "age"
-     ],
-     "typ": "jpt",
-     "proof_jwk": {
-       "crv": "P-256",
-       "kty": "EC",
-       "x": "acbIQiuMs3i8_uszEjJ2tpTtRM4EU3yz91PH6CdH2V0",
-       "y": "_KcyLj9vWMptnmKtm46GqDz8wf74I5LKgrl2GzH3nSE"
-     },
-     "presentation_jwk": {
-       "crv": "P-256",
-       "kty": "EC",
-       "x": "oB1TPrE_QJIL61fUOOK5DpKgd8j2zbZJtqpILDTJX6I",
-       "y": "3JqnrkucLobkdRuOqZXOP9MMlbFyenFOLyGlG-FPACM"
-     },
-     "alg": "SU-ES256"
-   }
-
-                        Figure 5: jwp-issuer-header
-
-   After removing formatting whitespace, the octets representing
-   UTF8(JWP Protected Header) in this example (using JSON array
-   notation) are:
-
-   [123, 34, 105, 115, 115, 34, 58, 34, 104, 116, 116, 112, 115, 58, 47,
-    47, 105, 115, 115, 117, 101, 114, 46, 116, 108, 100, 34, 44, 34, 99,
-    108, 97, 105, 109, 115, 34, 58, 91, 34, 102, 97, 109, 105, 108, 121,
-    95, 110, 97, 109, 101, 34, 44, 34, 103, 105, 118, 101, 110, 95, 110,
-    97, 109, 101, 34, 44, 34, 101, 109, 97, 105, 108, 34, 44, 34, 97,
-    103, 101, 34, 93, 44, 34, 116, 121, 112, 34, 58, 34, 74, 80, 84, 34,
-    44, 34, 112, 114, 111, 111, 102, 95, 106, 119, 107, 34, 58, 123, 34,
-    99, 114, 118, 34, 58, 34, 80, 45, 50, 53, 54, 34, 44, 34, 107, 116,
-    121, 35, 58, 34, 69, 67, 34, 44, 34, 120, 34, 58, 34, 97, 99, 98,
-    73, 81, 105, 117, 77, 115, 51, 105, 56, 95, 117, 115, 122, 69, 106,
-    74, 50,116, 112, 84, 116, 82, 77, 52, 69, 85, 51, 121, 122, 57, 49,
-    80, 72, 54, 67, 100, 72, 50, 86, 48, 34, 44, 34, 121, 34, 58, 34,
-    95, 75, 99, 121, 76, 106, 57, 118, 87, 77, 112, 116, 110, 109, 75,
-    116, 109, 52, 54, 71, 113, 68, 122, 56, 119, 102, 55, 52, 73, 53,
-    76, 75, 103, 114, 108, 50, 71, 122, 72, 51, 110, 83, 69, 34, 125,
-    44, 34, 112, 114, 101, 115, 101, 110, 116, 97, 116, 105, 111, 110,
-    95, 106, 119, 107, 34, 58, 123, 34, 99, 114, 118, 34, 58, 34, 80,
-    45, 50, 53, 54, 34, 44, 34, 107, 116, 121, 34, 58, 34, 69, 67, 34,
-    44, 34, 120, 34, 58, 34, 111, 66, 49,  84, 80, 114, 69, 95, 81, 74,
-    73, 76, 54, 49, 102, 85, 79, 79, 75, 53, 68, 112, 75, 103, 100, 56,
-    106, 50, 122, 98, 90, 74, 116, 113, 112, 73, 76, 68, 84, 74, 88, 54,
-    73, 34, 44, 34, 121, 34, 58, 34, 51, 74, 113, 110, 114, 107, 117,
-    99, 76, 111, 98, 107, 100, 82, 117, 79, 113, 90, 88, 79, 80, 57, 77,
-    77, 108, 98, 70, 121, 101, 110, 70, 79, 76, 121, 71, 108, 71, 45,
-    70, 80, 65, 67, 77, 34, 125, 44, 34, 97, 108, 103, 34, 58, 34, 83,
-    85, 45, 69, 83, 50, 53, 54, 34, 125]
-
-                     Figure 6: jwp-issuer-header-octets
-
-   Encoding this JWP Protected Header as BASE64URL(UTF8(JWP Protected
-   Header)) gives this value:
-
-   eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiL
-   CJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicHJvb2ZfandrIj
-   p7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU1zM2k4X3VzekVqSjJ
-   0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5dldNcHRubUt0bTQ2R3FE
-   ejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlvbl9qd2siOnsiY3J2IjoiU
-   C0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw2MWZVT09LNURwS2dkOGoyem
-   JaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2RSdU9xWlhPUDlNTWxiRnllbkZ
-   PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
-
-                     Figure 7: jwp-issuer-header-base64
-
-   Each payload must also be individually encoded:
-
-   The first payload is the JSON string "Doe" with the octet sequence of
-   [ 34, 68, 111, 101, 34 ] and base64url-encoded as IkRvZSI.
-
-   The second payload is the JSON string "Jay" with the octet sequence
-   of [ 34, 74, 97, 121, 34 ] and base64url-encoded as IkpheSI.
-
-   The third payload is the JSON string "jaydoe@example.org" with the
-   octet sequence of [ 34, 106, 97, 121, 100, 111, 101, 64, 101, 120,
-   97, 109, 112, 108, 101, 46, 111, 114, 103, 34 ] and base64url-encoded
-   as ImpheWRvZUBleGFtcGxlLm9yZyI.
-
-   The fourth payload is the JSON number 42 with the octet sequence of
-   [52, 50] and base64url-encoded as NDI.
-
-   The Single Use algorithm utilizes multiple individual JWS Signatures.
-   Each signature value is generated by creating a JWS with a single
-   Protected Header with the associated alg value.  In this example, the
-   fixed header used for each JWS is the serialized JSON Object
-   {"alg":"ES256"}.  The JWS payload for each varies and the resulting
-   signature value is used in its unencoded form (the octet string, not
-   the base64url-encoded form).
-
-   The first signature is generated by creating a JWS using the fixed
-   header with the payload set to the octet string of the JPT protected
-   header from earlier.  The resulting JWS signature using the Signer's
-   _stable key_ is the octet string of:
-
-   [44, 147, 34, 55, 167, 26, 18, 164, 161, 48, 158, 99, 60, 219, 108,
-    240, 231, 172, 114, 163, 106, 230, 242, 146, 170, 71, 192, 117, 43,
-    134, 36, 13, 70, 200, 156, 178, 173, 248, 228, 164, 1, 180, 112, 50,
-    74, 102, 133, 32, 162, 97, 238, 228, 204, 216, 133, 53, 44, 107, 70,
-    17, 93, 80, 103, 48]
-
-                   Figure 8: jwp-issuer-header-signature
-
-   This process is repeated for the JPT payloads, using their octet
-   strings as the payload in the ephemeral JWS in order to generate a
-   signature using the _ephemeral key_ for each:
-
-   The first payload signature is:
-
-   [171, 17, 93, 97, 129, 118, 193, 36, 150, 14, 229, 113, 60, 60, 114,
-    243, 240, 152, 229, 218, 124, 218, 120, 150, 103, 43, 110, 177, 204,
-    182, 28, 156, 72, 243, 36, 140, 160, 218, 241, 207, 27, 106, 88,
-    133, 72, 43, 12, 143, 224, 43, 119, 76, 96, 216, 245, 111, 233, 39,
-    131, 244, 158, 53, 210, 69]
-
-                     Figure 9: jwp-payload-0-signature
-
-   The second payload signature is:
-
-   [112, 121, 108, 227, 203, 18, 91, 27, 206, 137, 237, 143, 12, 14,
-    221, 135, 245, 254, 97, 132, 114, 48, 153, 34, 240, 93, 140, 194,
-    108, 61, 251, 90, 107, 212, 17, 13, 191, 235, 8, 96, 1, 128, 121,
-    186, 4, 144, 55, 112, 99, 92, 75, 226, 8, 15, 255, 85, 125, 229,
-    110, 17, 245, 69, 87, 54]
-
-                     Figure 10: jwp-payload-1-signature
-
-   The third payload signature is:
-
-   [195, 89, 195, 251, 210, 23, 69, 91, 7, 66, 9, 11, 213, 97, 77, 145,
-    134, 185, 227, 131, 55, 23, 175, 179, 151, 206, 164, 26, 240, 254,
-    25, 102, 110, 215, 202, 193, 166, 80, 58, 239, 217, 242, 167, 58,
-    167, 134, 135, 44, 199, 142, 161, 2, 27, 222, 34, 12, 211, 107, 94,
-    51, 190, 187, 120, 123]
-
-                     Figure 11: jwp-payload-2-signature
-
-   The fourth payload signature is:
-
-   [236, 70, 36, 68, 119, 81, 128, 100, 48, 88, 219, 110, 19, 18, 179,
-    236, 233, 176, 31, 202, 22, 139, 58, 101, 18, 216, 214, 39, 149,
-    136, 148, 154, 94, 123, 191, 96, 67, 209, 211, 107, 100, 8, 57, 63,
-    91, 80, 59, 227, 142, 73, 14, 250, 50, 191, 206, 224, 227, 103, 8,
-    121, 50, 74, 220, 105]
-
-                     Figure 12: jwp-payload-3-signature
-
-   Each payload's individual signature is concatenated in order,
-   resulting in a larger octet string with a length of an individual
-   signature (64 octets for ES256) multiplied by the number of payloads
-   (4 for this example).  These payload ephemeral signatures are then
-   appended to the initial protected header stable signature.  Using the
-   above examples, the resulting octet string is 320 bytes in length (5
-   * 64):
-
-   [44, 147, 34, 55, 167, 26, 18, 164, 161, 48, 158, 99, 60, 219, 108,
-    240, 231, 172, 114, 163, 106, 230, 242, 146, 170, 71, 192, 117, 43,
-    134, 36, 13, 70, 200, 156, 178, 173, 248, 228, 164, 1, 180, 112, 50,
-    74, 102, 133, 32, 162, 97, 238, 228, 204, 216, 133, 53, 44, 107, 70,
-    17, 93, 80, 103, 48, 171, 17, 93, 97, 129, 118, 193, 36, 150, 14,
-    229, 113, 60, 60, 114, 243, 240, 152, 229, 218, 124, 218, 120, 150,
-    103, 43, 110, 177, 204, 182, 28, 156, 72, 243, 36, 140, 160, 218,
-    241, 207, 27, 106, 88, 133, 72, 43, 12, 143, 224, 43, 119, 76, 96,
-    216, 245, 111, 233, 39, 131, 244, 158, 53, 210, 69, 112, 121, 108,
-    227, 203, 18, 91, 27, 206, 137, 237, 143, 12, 14, 221, 135, 245,
-    254, 97, 132, 114, 48, 153, 34, 240, 93, 140, 194, 108, 61, 251, 90,
-    107, 212, 17, 13, 191, 235, 8, 96, 1, 128, 121, 186, 4, 144, 55,
-    112, 99, 92, 75, 226, 8, 15, 255, 85, 125, 229, 110, 17, 245, 69,
-    87, 54, 195, 89, 195, 251, 210, 23, 69, 91, 7, 66, 9, 11, 213, 97,
-    77, 145, 134, 185, 227, 131, 55, 23, 175, 179, 151, 206, 164, 26,
-    240, 254, 25, 102, 110, 215, 202, 193, 166, 80, 58, 239, 217, 242,
-    167, 58, 167, 134, 135, 44, 199, 142, 161, 2, 27, 222, 34, 12, 211,
-    107, 94, 51, 190, 187, 120, 123, 236, 70, 36, 68, 119, 81, 128, 100,
-    48, 88, 219, 110, 19, 18, 179, 236, 233, 176, 31, 202, 22, 139, 58,
-    101, 18, 216, 214, 39, 149, 136, 148, 154, 94, 123, 191, 96, 67,
-    209, 211, 107, 100, 8, 57, 63, 91, 80, 59, 227, 142, 73, 14, 250,
-    50, 191, 206, 224, 227, 103, 8, 121, 50, 74, 220, 105]
-
-                         Figure 13: jwp-signatures
-
-   The final Proof value from the Signer is the concatenated array of
-   the header signature followed by all of the payload signatures, then
-   base64url encoded.
-
-   The resulting JSON serialized JPT using the above examples is:
-
-   {
-     "payloads": [
-       "IkRvZSI",
-       "IkpheSI",
-       "ImpheWRvZUBleGFtcGxlLm9yZyI",
-       "NDI"
-     ],
-     "issuer": [
-       "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25h
-       bWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicHJvb
-       2ZfandrIjp7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU1zM2
-       k4X3VzekVqSjJ0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5dld
-       NcHRubUt0bTQ2R3FEejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlv
-       bl9qd2siOnsiY3J2IjoiUC0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKS
-       Uw2MWZVT09LNUR wS2dkOGoyemJaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjT
-       G9ia2RSdU9xWlhPUDlNTWxiRnllbkZPTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRV
-       MyNTYifQ"
-     ],
-     "proof": [
-       "LJMiN6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJyyrfjkpAG0cDJKZoUg
-       omHu5MzYhTUsa0YRXVBnMKsRXWGBdsEklg7lcTw8cvPwmOXafNp4lmcrbrHMthycS
-       PMkjKDa8c8baliFSCsMj-Ard0xg2PVv6SeD9J410kVweWzjyxJbG86J7Y8MDt2H9f
-       5hhHIwmSLwXYzCbD37WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc2w1n
-       D-9IXRVsHQgkL1WFNkYa544M3F6-zl86kGvD-GWZu18rBplA679nypzqnhocsx46h
-       AhveIgzTa14zvrt4e-xGJER3UYBkMFjbbhMSs-zpsB_KFos6ZRLY1ieViJSaXnu_Y
-       EPR02tkCDk_W1A7445JDvoyv87g42cIeTJK3Gk"
-     ]
-   }
-
-                            Figure 14: jwp-final
-
-   The compact serialization of the same JPT is:
-
-   eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiL
-   CJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicHJvb2ZfandrIj
-   p7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU1zM2k4X3VzekVqSjJ
-   0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5dldNcHRubUt0bTQ2R3FE
-   ejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlvbl9qd2siOnsiY3J2IjoiU
-   C0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw2MWZVT09LNURwS2dkOGoyem
-   JaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2RSdU9xWlhPUDlNTWxiRnllbkZ
-   PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ.IkRvZSI~IkpheSI~ImpheWRvZ
-   UBleGFtcGxlLm9yZyI~NDI.LJMiN6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJ
-   yyrfjkpAG0cDJKZoUgomHu5MzYhTUsa0YRXVBnMKsRXWGBdsEklg7lcTw8cvPwmOXafNp
-   4lmcrbrHMthycSPMkjKDa8c8baliFSCsMj-Ard0xg2PVv6SeD9J410kVweWzjyxJbG86J
-   7Y8MDt2H9f5hhHIwmSLwXYzCbD37WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1R
-   Vc2w1nD-9IXRVsHQgkL1WFNkYa544M3F6-zl86kGvD-GWZu18rBplA679nypzqnhocsx4
-   6hAhveIgzTa14zvrt4e-xGJER3UYBkMFjbbhMSs-zpsB_KFos6ZRLY1ieViJSaXnu_YEP
-   R02tkCDk_W1A7445JDvoyv87g42cIeTJK3Gk
-
-                           Figure 15: jwp-compact
-
-   To present this JPT, we first use the following presentation header
-   with a nonce (provided by the Verifier):
-
-   {
-     "nonce": "uTEB371l1pzWJl7afB0wi0HWUNk1Le-bComFLxa8K-s"
-   }
-
-                     Figure 16: jwp-presentation-header
-
-   When serialized, this results in the following octets:
-
-   [123, 34, 110, 111, 110, 99, 101, 34, 58, 34, 117, 84, 69, 66, 51,
-    55, 49, 108, 49, 112, 122, 87, 74, 108, 55, 97, 102, 66, 48, 119,
-    105, 48, 72, 87, 85, 78, 107, 49, 76, 101, 45, 98, 67, 111, 109, 70,
-    76, 120, 97, 56, 75, 45, 115, 34, 125]
-
-                 Figure 17: jwp-presentation-header-octets
-
-   And when base64url encoded results in the string:
-
-   eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLL
-   XMifQ
-
-                 Figure 18: jwp-presentation-header-base64
-
-   When signed with the holder's presentation key, the resulting
-   signature octets are:
-
-   [31, 117, 70, 58, 39, 174, 117, 149, 177, 169, 31, 94, 215, 230, 218,
-    30, 224, 31, 16, 63, 240, 109, 112, 144, 29, 61, 199, 79, 100, 162,
-    125, 158, 43, 216, 19, 191, 136, 138, 195, 129, 143, 233, 24, 116,
-    216, 241, 8, 1, 80, 47, 158, 27, 110, 137, 40, 76, 156, 250, 149,
-    195, 91, 66, 5, 216]
-
-                Figure 19: jwp-presentation-header-signature
-
-   Then by applying selective disclosure of only the given name and age
-   claims (family name and email hidden), the proof value including the
-   signature of the presentation header and removing the ephemeral
-   signatures of the family name and email payloads results in the
-   following octet array:
-
-   [44, 147, 34, 55, 167, 26, 18, 164, 161, 48, 158, 99, 60, 219, 108,
-    240, 231, 172, 114, 163, 106, 230, 242, 146, 170, 71, 192, 117, 43,
-    134, 36, 13, 70, 200, 156, 178, 173, 248, 228, 164, 1, 180, 112, 50,
-    74, 102, 133, 32, 162, 97, 238, 228, 204, 216, 133, 53, 44, 107, 70,
-    17, 93, 80, 103, 48, 31, 117, 70, 58, 39, 174, 117, 149, 177, 169,
-    31, 94, 215, 230, 218, 30, 224, 31, 16, 63, 240, 109, 112, 144, 29,
-    61, 199, 79, 100, 162, 125, 158, 43, 216, 19, 191, 136, 138, 195,
-    129, 143, 233, 24, 116, 216, 241, 8, 1, 80, 47, 158, 27, 110, 137,
-    40, 76, 156, 250, 149, 195, 91, 66, 5, 216, 112, 121, 108, 227, 203,
-    18, 91, 27, 206, 137, 237, 143, 12, 14, 221, 135, 245, 254, 97, 132,
-    114, 48, 153, 34, 240, 93, 140, 194, 108, 61, 251, 90, 107, 212, 17,
-    13, 191, 235, 8, 96, 1, 128, 121, 186, 4, 144, 55, 112, 99, 92, 75,
-    226, 8, 15, 255, 85, 125, 229, 110, 17, 245, 69, 87, 54, 236, 70,
-    36, 68, 119, 81, 128, 100, 48, 88, 219, 110, 19, 18, 179, 236, 233,
-    176, 31, 202, 22, 139, 58, 101, 18, 216, 214, 39, 149, 136, 148,
-    154, 94, 123, 191, 96, 67, 209, 211, 107, 100, 8, 57, 63, 91, 80,
-    59, 227, 142, 73, 14, 250, 50, 191, 206, 224, 227, 103, 8, 121, 50,
-    74, 220, 105]
-
-                   Figure 20: jwp-presentation-signatures
-
-   The resulting presented JPT in JSON serialization:
-
-   {
-     "payloads": [
-       null,
-       "IkpheSI",
-       null,
-       "NDI"
-     ],
-     "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFt
-     aWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiw
-     icHJvb2ZfandrIjp7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU
-     1zM2k4X3VzekVqSjJ0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5d
-     ldNcHRubUt0bTQ2R3FEejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlv
-     bl9qd2siOnsiY3J2IjoiUC0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw
-     2MWZVT09LNURwS2dkOGoyemJaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2
-     RSdU9xWlhPUDlNTWxiRnllbkZPTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYif
-     Q",
-     "proof": [
-       "LJMiN6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJyyrfjkpAG0cDJKZoUg
-       omHu5MzYhTUsa0YRXVBnMB91RjonrnWVsakfXtfm2h7gHxA_8G1wkB09x09kon2eK
-       9gTv4iKw4GP6Rh02PEIAVAvnhtuiShMnPqVw1tCBdhweWzjyxJbG86J7Y8MDt2H9f
-       5hhHIwmSLwXYzCbD37WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc27EY
-       kRHdRgGQwWNtuExKz7OmwH8oWizplEtjWJ5WIlJpee79gQ9HTa2QIOT9bUDvjjkkO
-       -jK_zuDjZwh5MkrcaQ"
-     ],
-     "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOaz
-     FMZS1iQ29tRkx4YThLLXMifQ"
-     ]
-   }
-
-                     Figure 21: jwp-final-presentation
-
-   And also in compact serialization:
-
-   eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiL
-   CJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicHJvb2ZfandrIj
-   p7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU1zM2k4X3VzekVqSjJ
-   0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5dldNcHRubUt0bTQ2R3FE
-   ejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlvbl9qd2siOnsiY3J2IjoiU
-   C0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw2MWZVT09LNURwS2dkOGoyem
-   JaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2RSdU9xWlhPUDlNTWxiRnllbkZ
-   PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ.eyJub25jZSI6InVURUIzNzFsM
-   XB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ.~IkpheSI~~NDI.LJMiN
-   6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJyyrfjkpAG0cDJKZoUgomHu5MzYhT
-   Usa0YRXVBnMB91RjonrnWVsakfXtfm2h7gHxA_8G1wkB09x09kon2eK9gTv4iKw4GP6Rh
-   02PEIAVAvnhtuiShMnPqVw1tCBdhweWzjyxJbG86J7Y8MDt2H9f5hhHIwmSLwXYzCbD37
-   WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc27EYkRHdRgGQwWNtuExKz7OmwH
-   8oWizplEtjWJ5WIlJpee79gQ9HTa2QIOT9bUDvjjkkO-jK_zuDjZwh5MkrcaQ
-
-                    Figure 22: jwp-compact-presentation
-
-A.2.  Example Multi-Use JWP
-
-   See JPA BBS-DRAFT-5 example.
-
-Appendix B.  Acknowledgements
+Appendix A.  Acknowledgements
 
    This work was incubated in the DIF Applied Cryptography Working Group
    (https://identity.foundation/working-groups/crypto.html).
@@ -1472,14 +1008,18 @@ Appendix B.  Acknowledgements
    We would like to thank Brent Zundel for his valuable contributions to
    this specification.
 
-Appendix C.  Registries
+Appendix B.  Registries
 
    *  Issuer Protected Header
    *  Presentation Protected Header
 
-Appendix D.  Document History
+Appendix C.  Document History
 
    [[ To be removed from the final specification ]]
+
+   *  Refactoring figures and examples to be built from a common set
+      across all three documents
+   *  Move single-use example appendix from JWP to JPA
 
    -03
 

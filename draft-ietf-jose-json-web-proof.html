@@ -12,26 +12,25 @@
        The JOSE set of standards established JSON-based container formats for Keys, Signatures, and Encryption.  They also established IANA registries to enable the algorithms and representations used for them to be extended.  Since those were created, newer cryptographic algorithms that support selective disclosure and unlinkability have matured and started seeing early market adoption. 
        This document defines a new container format similar in purpose and design to JSON Web Signature (JWS) called a  JSON Web Proof (JWP) .  Unlike JWS, which integrity-protects only a single payload, JWP can integrity-protect multiple payloads in one message.  It also specifies a new presentation form that supports selective disclosure of individual payloads, enables additional proof computation, and adds a protected header to prevent replay. 
     " name="description">
-<meta content="xml2rfc 3.20.0" name="generator">
+<meta content="xml2rfc 3.22.0" name="generator">
 <meta content="jose" name="keyword">
 <meta content="zkp" name="keyword">
 <meta content="jwp" name="keyword">
 <meta content="jws" name="keyword">
 <meta content="draft-ietf-jose-json-web-proof-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.20.0
-    Python 3.11.8
+  xml2rfc 3.22.0
+    Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
-    Jinja2 3.1.2
-    lxml 4.9.3
-    platformdirs 4.2.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
-    requests 2.31.0
-    setuptools 68.2.2
-    six 1.16.0
+    requests 2.32.3
+    setuptools 69.5.1
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-jose-json-web-proof.xml" rel="alternate" type="application/rfc+xml">
@@ -1031,11 +1030,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">json-web-proof</td>
-<td class="right">March 2024</td>
+<td class="right">July 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Miller, et al.</td>
-<td class="center">Expires 8 September 2024</td>
+<td class="center">Expires 9 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1048,12 +1047,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-jose-json-web-proof-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-03-07" class="published">7 March 2024</time>
+<time datetime="2024-07-08" class="published">8 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-09-08">8 September 2024</time></dd>
+<dd class="expires"><time datetime="2025-01-09">9 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1096,7 +1095,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 9 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1271,27 +1270,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-jwps" class="internal xref">Example JWPs</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-example-single-use-jwp" class="internal xref">Example Single-Use JWP</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-example-multi-use-jwp" class="internal xref">Example Multi-Use JWP</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-registries" class="internal xref">Registries</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-registries" class="internal xref">Registries</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1656,7 +1644,7 @@ they can result in non-interoperable JWPs.<a href="#section-4.2-2" class="pilcro
 <p id="section-4.3-1">A producer and consumer of a JWP may agree to use Header Parameter names
 that are Private Names (names that are
 not Registered Header Parameter names <a href="#RegisteredHeaderParameterNames" class="auto internal xref">Section 4.1</a>
-or Public Header Parameter names <a href="#PublicHeaderParameterName" class="auto internal xref">Section 4.2</a>.
+or Public Header Parameter names <a href="#PublicHeaderParameterName" class="auto internal xref">Section 4.2</a>.)
 Unlike Public Header Parameter names,
 Private Header Parameter names are subject to collision and
 should be used with caution.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
@@ -1690,7 +1678,7 @@ The protected header is always disclosed, whereas payloads can be selectively di
 <p id="section-5.1.1-3">For example:<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
 <div class="lang-json sourcecode" id="section-5.1.1-4">
 <pre>{
-    "alg":"BBS-DRAFT-5"
+  "alg": "BBS"
 }
 
 </pre><a href="#section-5.1.1-4" class="pilcrow">¶</a>
@@ -1776,6 +1764,24 @@ Rather, proofs about payloads, such as "age &gt;= 21", are included in the prese
 <p id="section-6.1-2">A payload which is disclosed but which contains no data (i.e. a zero-length octet string) is encoded as a single <code>_</code> character of data, which is not a valid result from base64url-encoding a value.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.1-3">Additionally, an algorithm MAY supply multiple octet strings for a proof. These are concatenated with the <code>~</code> character to form an ordered delimited array.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <p id="section-6.1-4">The headers, concatenated payloads, and proof value are then concatenated with a <code>.</code> character to form the final compact serialization.  The issued form will only contain one header and always have three <code>.</code> separated parts.  The presented form will always have four <code>.</code> separated parts, the issued header, followed by the protected header, then the payloads and the proof.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<div class="lang-wrapped sourcecode" id="section-6.1-5">
+<pre>eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
+mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
+yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
+MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.tiJEkyUQ8rl4NW1Hv-pGgbBy0EE1YNXd
+8i_SBuF7aPLTDGxpDdLMMD1bvquWostFmQ-MTXXv0FxmSJVgO5Uu_pLNhHgEbQOtHoDqW
+bg35OSKKxTBLQ62oJAkBHYV3ccqlbFAw0ozBuQPvWniVYxKTjymvpW4QDEhINJolQcnaK
+78PIG-UTb6yLBvK1NCUZYQIgVzTAxY96s3CHKSoDEMjdBI9jhe3Ri8v2JOWuk41wwgxrb
+iaBayV0dHr4GMHh7O5lUmO3lonXf1ZFNv6SEmhyCwlPfYeTKfA2bGeOqi6f0xkg75N0PJ
+T9dYfxXuVqGPaa71PFnwMnabpLcovJEgJ9aZf_rOTrhRYUj30uR889QSMmmfFNMOFcp6K
+kAYCPIp7JLLtUFi9fnwwfPTfGR7bGN_nzcNCYHMlifHg2z5ENuWh7NOHslYFM0o5PCbcu
+97LcalBvaNYDCyxIGerzFtF5-DOWazwTLw5YMVoZySEek
+
+</pre><a href="#section-6.1-5" class="pilcrow">¶</a>
+</div>
+<blockquote id="section-6.1-6">
+          <p id="section-6.1-6.1">Figure: Compact Serialization of Presentation<a href="#section-6.1-6.1" class="pilcrow">¶</a></p>
+</blockquote>
 </section>
 </div>
 <div id="json-serialization">
@@ -1786,42 +1792,37 @@ Rather, proofs about payloads, such as "age &gt;= 21", are included in the prese
 <p id="section-6.2-1">Non-disclosed payloads in the JSON serialization are represented with a <code>null</code> value in the <code>payloads</code> array. A zero-length payload is represented as a zero-length base64url encoded sequence, the empty string <code>""</code>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">Proofs are represented as an array of one or more encoded octet strings.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">This example flattened JSON serialization shows the presentation form with both the issuer and presentation headers, and with the first and third payloads hidden.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
-<span id="name-jwp-final-presentation"></span><figure id="figure-1">
-          <div class="lang-json sourcecode" id="section-6.2-4.1">
+<div class="lang-wrapped sourcecode" id="section-6.2-4">
 <pre>{
+  "presentation": "eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2
+       lwaWVudC5leGFtcGxlLmNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ",
+  "issuer": "eyJraWQiOiJIamZjcHlqdVpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRu
+       RXhSMERValU4IiwiYWxnIjoiQkJTIn0",
   "payloads": [
-    null,
+    "MTcxNDUyMTYwMA",
+    "MTcxNzE5OTk5OQ",
+    "IkRvZSI",
     "IkpheSI",
     null,
-    "NDI"
+    null,
+    null
   ],
-  "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFt
-  aWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiw
-  icHJvb2ZfandrIjp7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU
-  1zM2k4X3VzekVqSjJ0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5d
-  ldNcHRubUt0bTQ2R3FEejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlv
-  bl9qd2siOnsiY3J2IjoiUC0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw
-  2MWZVT09LNURwS2dkOGoyemJaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2
-  RSdU9xWlhPUDlNTWxiRnllbkZPTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYif
-  Q",
-  "proof": [
-    "LJMiN6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJyyrfjkpAG0cDJKZoUg
-    omHu5MzYhTUsa0YRXVBnMB91RjonrnWVsakfXtfm2h7gHxA_8G1wkB09x09kon2eK
-    9gTv4iKw4GP6Rh02PEIAVAvnhtuiShMnPqVw1tCBdhweWzjyxJbG86J7Y8MDt2H9f
-    5hhHIwmSLwXYzCbD37WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc27EY
-    kRHdRgGQwWNtuExKz7OmwH8oWizplEtjWJ5WIlJpee79gQ9HTa2QIOT9bUDvjjkkO
-    -jK_zuDjZwh5MkrcaQ"
-  ],
-  "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOaz
-  FMZS1iQ29tRkx4YThLLXMifQ"
-  ]
+  "proof": "tiJEkyUQ8rl4NW1Hv-pGgbBy0EE1YNXd8i_SBuF7aPLTDGxpDdLMMD1bv
+       quWostFmQ-MTXXv0FxmSJVgO5Uu_pLNhHgEbQOtHoDqWbg35OSKKxTBLQ62oJA
+       kBHYV3ccqlbFAw0ozBuQPvWniVYxKTjymvpW4QDEhINJolQcnaK78PIG-UTb6y
+       LBvK1NCUZYQIgVzTAxY96s3CHKSoDEMjdBI9jhe3Ri8v2JOWuk41wwgxrbiaBa
+       yV0dHr4GMHh7O5lUmO3lonXf1ZFNv6SEmhyCwlPfYeTKfA2bGeOqi6f0xkg75N
+       0PJT9dYfxXuVqGPaa71PFnwMnabpLcovJEgJ9aZf_rOTrhRYUj30uR889QSMmm
+       fFNMOFcp6KkAYCPIp7JLLtUFi9fnwwfPTfGR7bGN_nzcNCYHMlifHg2z5ENuWh
+       7NOHslYFM0o5PCbcu97LcalBvaNYDCyxIGerzFtF5-DOWazwTLw5YMVoZySEek
+       "
 }
 
-</pre>
+</pre><a href="#section-6.2-4" class="pilcrow">¶</a>
 </div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-jwp-final-presentation" class="selfRef">jwp-final-presentation</a>
-          </figcaption></figure>
+<blockquote id="section-6.2-5">
+          <p id="section-6.2-5.1">Figure: JSON Serialization of Presentation<a href="#section-6.2-5.1" class="pilcrow">¶</a></p>
+</blockquote>
 </section>
 </div>
 </section>
@@ -1919,124 +1920,158 @@ will typically use different Header Parameter Usage Locations values.<a href="#s
           </h4>
 <p id="section-8.1.2-1">This section registers the Header Parameter names defined in
 <a href="#RegisteredHeaderParameterNames" class="auto internal xref">Section 4.1</a> in this registry.<a href="#section-8.1.2-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-8.1.2-2.1">Header Parameter Name: <code>alg</code><a href="#section-8.1.2-2.1" class="pilcrow">¶</a>
+<div id="algorithm-header-parameter">
+<section id="section-8.1.2.1">
+            <h5 id="name-algorithm-header-parameter">
+<a href="#section-8.1.2.1" class="section-number selfRef">8.1.2.1. </a><a href="#name-algorithm-header-parameter" class="section-name selfRef">Algorithm Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.1-1.1">Header Parameter Name: <code>alg</code><a href="#section-8.1.2.1-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.2">Header Parameter Description: Algorithm<a href="#section-8.1.2-2.2" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.1.2.1-1.2">Header Parameter Description: Algorithm<a href="#section-8.1.2.1-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2-2.3" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.1.2.1-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.1-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.4">Change Controller: IETF<a href="#section-8.1.2-2.4" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.1.2.1-1.4">Change Controller: IETF<a href="#section-8.1.2.1-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.5">
-              <p id="section-8.1.2-2.5.1">Specification Document(s): <a href="#algDef" class="auto internal xref">Section 4.1.1</a> of this specification<a href="#section-8.1.2-2.5.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.1-1.5">Specification Document(s): <a href="#algDef" class="auto internal xref">Section 4.1.1</a> of this specification<a href="#section-8.1.2.1-1.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.6">
-              <p id="section-8.1.2-2.6.1">Header Parameter Name: <code>kid</code><a href="#section-8.1.2-2.6.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="key-id-header-parameter">
+<section id="section-8.1.2.2">
+            <h5 id="name-key-id-header-parameter">
+<a href="#section-8.1.2.2" class="section-number selfRef">8.1.2.2. </a><a href="#name-key-id-header-parameter" class="section-name selfRef">Key ID Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.2-1.1">Header Parameter Name: <code>kid</code><a href="#section-8.1.2.2-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.7">
-              <p id="section-8.1.2-2.7.1">Header Parameter Description: Key ID<a href="#section-8.1.2-2.7.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.2-1.2">Header Parameter Description: Key ID<a href="#section-8.1.2.2-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.8">
-              <p id="section-8.1.2-2.8.1">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2-2.8.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.2-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.2-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.9">
-              <p id="section-8.1.2-2.9.1">Change Controller: IETF<a href="#section-8.1.2-2.9.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.2-1.4">Change Controller: IETF<a href="#section-8.1.2.2-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.10">
-              <p id="section-8.1.2-2.10.1">Specification Document(s): <a href="#kidDef" class="auto internal xref">Section 4.1.2</a> of this specification<a href="#section-8.1.2-2.10.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.2-1.5">Specification Document(s): <a href="#kidDef" class="auto internal xref">Section 4.1.2</a> of this specification<a href="#section-8.1.2.2-1.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.11">
-              <p id="section-8.1.2-2.11.1">Header Parameter Name: <code>typ</code><a href="#section-8.1.2-2.11.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="type-header-parameter">
+<section id="section-8.1.2.3">
+            <h5 id="name-type-header-parameter">
+<a href="#section-8.1.2.3" class="section-number selfRef">8.1.2.3. </a><a href="#name-type-header-parameter" class="section-name selfRef">Type Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.3-1.1">Header Parameter Name: <code>typ</code><a href="#section-8.1.2.3-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.12">
-              <p id="section-8.1.2-2.12.1">Header Parameter Description: Type<a href="#section-8.1.2-2.12.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.3-1.2">Header Parameter Description: Type<a href="#section-8.1.2.3-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.13">
-              <p id="section-8.1.2-2.13.1">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2-2.13.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.3-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.3-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.14">
-              <p id="section-8.1.2-2.14.1">Change Controller: IETF<a href="#section-8.1.2-2.14.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.3-1.4">Change Controller: IETF<a href="#section-8.1.2.3-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.15">
-              <p id="section-8.1.2-2.15.1">Specification Document(s): <a href="#typDef" class="auto internal xref">Section 4.1.3</a> of this specification<a href="#section-8.1.2-2.15.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.3-1.5">Specification Document(s): <a href="#typDef" class="auto internal xref">Section 4.1.3</a> of this specification<a href="#section-8.1.2.3-1.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.16">
-              <p id="section-8.1.2-2.16.1">Header Parameter Name: <code>crit</code><a href="#section-8.1.2-2.16.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="critical-header-parameter">
+<section id="section-8.1.2.4">
+            <h5 id="name-critical-header-parameter">
+<a href="#section-8.1.2.4" class="section-number selfRef">8.1.2.4. </a><a href="#name-critical-header-parameter" class="section-name selfRef">Critical Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.4-1.1">Header Parameter Name: <code>crit</code><a href="#section-8.1.2.4-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.17">
-              <p id="section-8.1.2-2.17.1">Header Parameter Description: Critical<a href="#section-8.1.2-2.17.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.4-1.2">Header Parameter Description: Critical<a href="#section-8.1.2.4-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.18">
-              <p id="section-8.1.2-2.18.1">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2-2.18.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.4-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.4-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.19">
-              <p id="section-8.1.2-2.19.1">Change Controller: IETF<a href="#section-8.1.2-2.19.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.4-1.4">Change Controller: IETF<a href="#section-8.1.2.4-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.20">
-              <p id="section-8.1.2-2.20.1">Specification Document(s): <a href="#critDef" class="auto internal xref">Section 4.1.4</a> of this specification<a href="#section-8.1.2-2.20.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.4-1.5">Specification Document(s): <a href="#critDef" class="auto internal xref">Section 4.1.4</a> of this specification<a href="#section-8.1.2.4-1.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.21">
-              <p id="section-8.1.2-2.21.1">Header Parameter Name: <code>iss</code><a href="#section-8.1.2-2.21.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="issuer-header-parameter">
+<section id="section-8.1.2.5">
+            <h5 id="name-issuer-header-parameter">
+<a href="#section-8.1.2.5" class="section-number selfRef">8.1.2.5. </a><a href="#name-issuer-header-parameter" class="section-name selfRef">Issuer Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.5-1.1">Header Parameter Name: <code>iss</code><a href="#section-8.1.2.5-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.22">
-              <p id="section-8.1.2-2.22.1">Header Parameter Description: Issuer<a href="#section-8.1.2-2.22.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.5-1.2">Header Parameter Description: Issuer<a href="#section-8.1.2.5-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.23">
-              <p id="section-8.1.2-2.23.1">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2-2.23.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.5-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.5-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.24">
-              <p id="section-8.1.2-2.24.1">Change Controller: IETF<a href="#section-8.1.2-2.24.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.5-1.4">Change Controller: IETF<a href="#section-8.1.2.5-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.25">
-              <p id="section-8.1.2-2.25.1">Specification Document(s): <a href="#issDef" class="auto internal xref">Section 4.1.7</a> of this specification<a href="#section-8.1.2-2.25.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.5-1.5">Specification Document(s): <a href="#issDef" class="auto internal xref">Section 4.1.7</a> of this specification<a href="#section-8.1.2.5-1.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.26">
-              <p id="section-8.1.2-2.26.1">Header Parameter Name: <code>aud</code><a href="#section-8.1.2-2.26.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="audience-header-parameter">
+<section id="section-8.1.2.6">
+            <h5 id="name-audience-header-parameter">
+<a href="#section-8.1.2.6" class="section-number selfRef">8.1.2.6. </a><a href="#name-audience-header-parameter" class="section-name selfRef">Audience Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.6-1.1">Header Parameter Name: <code>aud</code><a href="#section-8.1.2.6-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.27">
-              <p id="section-8.1.2-2.27.1">Header Parameter Description: Audience<a href="#section-8.1.2-2.27.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.6-1.2">Header Parameter Description: Audience<a href="#section-8.1.2.6-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.28">
-              <p id="section-8.1.2-2.28.1">Header Parameter Usage Location(s): Presented<a href="#section-8.1.2-2.28.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.6-1.3">Header Parameter Usage Location(s): Presented<a href="#section-8.1.2.6-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.29">
-              <p id="section-8.1.2-2.29.1">Change Controller: IETF<a href="#section-8.1.2-2.29.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.6-1.4">Change Controller: IETF<a href="#section-8.1.2.6-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.30">
-              <p id="section-8.1.2-2.30.1">Specification Document(s): <a href="#audDef" class="auto internal xref">Section 4.1.8</a> of this specification<a href="#section-8.1.2-2.30.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.6-1.5">Specification Document(s): <a href="#audDef" class="auto internal xref">Section 4.1.8</a> of this specification<a href="#section-8.1.2.6-1.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.31">
-              <p id="section-8.1.2-2.31.1">Header Parameter Name: <code>nonce</code><a href="#section-8.1.2-2.31.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="nonce-header-parameter">
+<section id="section-8.1.2.7">
+            <h5 id="name-nonce-header-parameter">
+<a href="#section-8.1.2.7" class="section-number selfRef">8.1.2.7. </a><a href="#name-nonce-header-parameter" class="section-name selfRef">Nonce Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.7-1.1">Header Parameter Name: <code>nonce</code><a href="#section-8.1.2.7-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.32">
-              <p id="section-8.1.2-2.32.1">Header Parameter Description: Nonce<a href="#section-8.1.2-2.32.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.7-1.2">Header Parameter Description: Nonce<a href="#section-8.1.2.7-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.33">
-              <p id="section-8.1.2-2.33.1">Header Parameter Usage Location(s): Presented<a href="#section-8.1.2-2.33.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.7-1.3">Header Parameter Usage Location(s): Presented<a href="#section-8.1.2.7-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.34">
-              <p id="section-8.1.2-2.34.1">Change Controller: IETF<a href="#section-8.1.2-2.34.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.7-1.4">Change Controller: IETF<a href="#section-8.1.2.7-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.35">
-              <p id="section-8.1.2-2.35.1">Specification Document(s): <a href="#nonceDef" class="auto internal xref">Section 4.1.9</a> of this specification<a href="#section-8.1.2-2.35.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.7-1.5">Specification Document(s): <a href="#nonceDef" class="auto internal xref">Section 4.1.9</a> of this specification<a href="#section-8.1.2.7-1.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.36">
-              <p id="section-8.1.2-2.36.1">Header Parameter Name: <code>claims</code><a href="#section-8.1.2-2.36.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="claims-header-parameter">
+<section id="section-8.1.2.8">
+            <h5 id="name-claims-header-parameter">
+<a href="#section-8.1.2.8" class="section-number selfRef">8.1.2.8. </a><a href="#name-claims-header-parameter" class="section-name selfRef">Claims Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.8-1.1">Header Parameter Name: <code>claims</code><a href="#section-8.1.2.8-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.37">
-              <p id="section-8.1.2-2.37.1">Header Parameter Description: claims<a href="#section-8.1.2-2.37.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.8-1.2">Header Parameter Description: claims<a href="#section-8.1.2.8-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.38">
-              <p id="section-8.1.2-2.38.1">Header Parameter Usage Location(s): Issued<a href="#section-8.1.2-2.38.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.8-1.3">Header Parameter Usage Location(s): Issued<a href="#section-8.1.2.8-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.39">
-              <p id="section-8.1.2-2.39.1">Change Controller: IETF<a href="#section-8.1.2-2.39.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.8-1.4">Change Controller: IETF<a href="#section-8.1.2.8-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.1.2-2.40">
-              <p id="section-8.1.2-2.40.1">Specification Document(s): <a href="#claimsDef" class="auto internal xref">Section 4.1.10</a> of this specification<a href="#section-8.1.2-2.40.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.1.2.8-1.5">Specification Document(s): <a href="#claimsDef" class="auto internal xref">Section 4.1.10</a> of this specification<a href="#section-8.1.2.8-1.5" class="pilcrow">¶</a>
 </li>
-          </ul>
+            </ul>
+</section>
+</div>
 </section>
 </div>
 </section>
@@ -2061,111 +2096,110 @@ This section also registers the <code>application/jwp+json</code>
 media type in the IANA "Media Types" registry,
 which can be used to indicate that the content is
 a JWP using the JWP JSON Serialization.<a href="#section-8.2.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-8.2.1-2.1">Type name: application<a href="#section-8.2.1-2.1" class="pilcrow">¶</a>
+<div id="the-application-jwp-media-type">
+<section id="section-8.2.1.1">
+            <h5 id="name-the-application-jwp-media-t">
+<a href="#section-8.2.1.1" class="section-number selfRef">8.2.1.1. </a><a href="#name-the-application-jwp-media-t" class="section-name selfRef">The application/jwp Media Type</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.2.1.1-1.1">Type name: application<a href="#section-8.2.1.1-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.2">Subtype name: jwp<a href="#section-8.2.1-2.2" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.2">Subtype name: jwp<a href="#section-8.2.1.1-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.3">Required parameters: n/a<a href="#section-8.2.1-2.3" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.3">Required parameters: n/a<a href="#section-8.2.1.1-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.4">Optional parameters: n/a<a href="#section-8.2.1-2.4" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.4">Optional parameters: n/a<a href="#section-8.2.1.1-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.5">Encoding considerations: 8bit; application/jwp values are encoded as a series of base64url-encoded values (some of which may be the empty string), each separated from the next by a single period ('.') character.<a href="#section-8.2.1-2.5" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.5">Encoding considerations: 8bit; application/jwp values are encoded as a series of base64url-encoded values (some of which may be the empty string), each separated from the next by a single period ('.') character.<a href="#section-8.2.1.1-1.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.6">Security considerations: See the Security Considerations section of this specification.<a href="#section-8.2.1-2.6" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.6">Security considerations: See the Security Considerations section of this specification.<a href="#section-8.2.1.1-1.6" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.7">Interoperability considerations: n/a<a href="#section-8.2.1-2.7" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.7">Interoperability considerations: n/a<a href="#section-8.2.1.1-1.7" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.8">Published specification: this specification<a href="#section-8.2.1-2.8" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.8">Published specification: this specification<a href="#section-8.2.1.1-1.8" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.9">Applications that use this media type: TBD<a href="#section-8.2.1-2.9" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.9">Applications that use this media type: TBD<a href="#section-8.2.1.1-1.9" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.10">Fragment identifier considerations: n/a<a href="#section-8.2.1-2.10" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.10">Fragment identifier considerations: n/a<a href="#section-8.2.1.1-1.10" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.11">
-              <p id="section-8.2.1-2.11.1">Additional information:&lt;list style="empty"&gt;<a href="#section-8.2.1-2.11.1" class="pilcrow">¶</a></p>
-<ul class="compact normal">
-<li class="compact normal" id="section-8.2.1-2.11.2.1">Magic number(s): n/a<a href="#section-8.2.1-2.11.2.1" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.11">
+                <p id="section-8.2.1.1-1.11.1">Additional information:<a href="#section-8.2.1.1-1.11.1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-8.2.1.1-1.11.2.1">Magic number(s): n/a<a href="#section-8.2.1.1-1.11.2.1" class="pilcrow">¶</a>
 </li>
-                <li class="compact normal" id="section-8.2.1-2.11.2.2">File extension(s): n/a<a href="#section-8.2.1-2.11.2.2" class="pilcrow">¶</a>
+                  <li class="compact" id="section-8.2.1.1-1.11.2.2">File extension(s): n/a<a href="#section-8.2.1.1-1.11.2.2" class="pilcrow">¶</a>
 </li>
-                <li class="compact normal" id="section-8.2.1-2.11.2.3">Macintosh file type code(s): n/a<a href="#section-8.2.1-2.11.2.3" class="pilcrow">¶</a>
+                  <li class="compact" id="section-8.2.1.1-1.11.2.3">Macintosh file type code(s): n/a<a href="#section-8.2.1.1-1.11.2.3" class="pilcrow">¶</a>
 </li>
-              </ul>
+                </ul>
 </li>
-            <li class="normal" id="section-8.2.1-2.12">Person &amp; email address to contact for further information: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1-2.12" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.12">Person &amp; email address to contact for further information: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1.1-1.12" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.13">Intended usage: COMMON<a href="#section-8.2.1-2.13" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.13">Intended usage: COMMON<a href="#section-8.2.1.1-1.13" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.14">Restrictions on usage: none<a href="#section-8.2.1-2.14" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.14">Restrictions on usage: none<a href="#section-8.2.1.1-1.14" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.15">Author: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1-2.15" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.15">Author: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1.1-1.15" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.16">Change Controller: IETF<a href="#section-8.2.1-2.16" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.16">Change Controller: IETF<a href="#section-8.2.1.1-1.16" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.17">
-              <p id="section-8.2.1-2.17.1">Provisional registration? No<a href="#section-8.2.1-2.17.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.1-1.17">Provisional registration? No<a href="#section-8.2.1.1-1.17" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.18">
-              <p id="section-8.2.1-2.18.1">Type name: application<a href="#section-8.2.1-2.18.1" class="pilcrow">¶</a></p>
+            </ul>
+</section>
+</div>
+<div id="the-application-jwp-json-media-type">
+<section id="section-8.2.1.2">
+            <h5 id="name-the-application-jwpjson-med">
+<a href="#section-8.2.1.2" class="section-number selfRef">8.2.1.2. </a><a href="#name-the-application-jwpjson-med" class="section-name selfRef">The application/jwp+json Media Type</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.2.1.2-1.1">Type name: application<a href="#section-8.2.1.2-1.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.19">
-              <p id="section-8.2.1-2.19.1">Subtype name: jwp+json<a href="#section-8.2.1-2.19.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.2">Subtype name: jwp+json<a href="#section-8.2.1.2-1.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.20">
-              <p id="section-8.2.1-2.20.1">Required parameters: n/a<a href="#section-8.2.1-2.20.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.3">Required parameters: n/a<a href="#section-8.2.1.2-1.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.21">
-              <p id="section-8.2.1-2.21.1">Optional parameters: n/a<a href="#section-8.2.1-2.21.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.4">Optional parameters: n/a<a href="#section-8.2.1.2-1.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.22">
-              <p id="section-8.2.1-2.22.1">Encoding considerations: 8bit; application/jwp+json values are represented as a JSON Object; UTF-8 encoding SHOULD be employed for the JSON object.<a href="#section-8.2.1-2.22.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.5">Encoding considerations: 8bit; application/jwp+json values are represented as a JSON Object; UTF-8 encoding SHOULD be employed for the JSON object.<a href="#section-8.2.1.2-1.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.23">
-              <p id="section-8.2.1-2.23.1">Security considerations: See the Security Considerations section of this specification<a href="#section-8.2.1-2.23.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.6">Security considerations: See the Security Considerations section of this specification<a href="#section-8.2.1.2-1.6" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.24">
-              <p id="section-8.2.1-2.24.1">Interoperability considerations: n/a<a href="#section-8.2.1-2.24.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.7">Interoperability considerations: n/a<a href="#section-8.2.1.2-1.7" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.25">
-              <p id="section-8.2.1-2.25.1">Published specification: this specification<a href="#section-8.2.1-2.25.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.8">Published specification: this specification<a href="#section-8.2.1.2-1.8" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.26">
-              <p id="section-8.2.1-2.26.1">Applications that use this media type: TBD<a href="#section-8.2.1-2.26.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.9">Applications that use this media type: TBD<a href="#section-8.2.1.2-1.9" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.27">
-              <p id="section-8.2.1-2.27.1">Fragment identifier considerations: n/a<a href="#section-8.2.1-2.27.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.10">Fragment identifier considerations: n/a<a href="#section-8.2.1.2-1.10" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.28">
-              <p id="section-8.2.1-2.28.1">Additional information:&lt;list style="empty"&gt;<a href="#section-8.2.1-2.28.1" class="pilcrow">¶</a></p>
-<ul class="compact normal">
-<li class="compact normal" id="section-8.2.1-2.28.2.1">Magic number(s): n/a<a href="#section-8.2.1-2.28.2.1" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.2-1.11">
+                <p id="section-8.2.1.2-1.11.1">Additional information:<a href="#section-8.2.1.2-1.11.1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-8.2.1.2-1.11.2.1">Magic number(s): n/a<a href="#section-8.2.1.2-1.11.2.1" class="pilcrow">¶</a>
 </li>
-                <li class="compact normal" id="section-8.2.1-2.28.2.2">File extension(s): n/a<a href="#section-8.2.1-2.28.2.2" class="pilcrow">¶</a>
+                  <li class="compact" id="section-8.2.1.2-1.11.2.2">File extension(s): n/a<a href="#section-8.2.1.2-1.11.2.2" class="pilcrow">¶</a>
 </li>
-                <li class="compact normal" id="section-8.2.1-2.28.2.3">Macintosh file type code(s): n/a<a href="#section-8.2.1-2.28.2.3" class="pilcrow">¶</a>
+                  <li class="compact" id="section-8.2.1.2-1.11.2.3">Macintosh file type code(s): n/a<a href="#section-8.2.1.2-1.11.2.3" class="pilcrow">¶</a>
 </li>
-              </ul>
+                </ul>
 </li>
-            <li class="normal" id="section-8.2.1-2.29">
-              <p id="section-8.2.1-2.29.1">Person &amp; email address to contact for further information: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1-2.29.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.12">Person &amp; email address to contact for further information: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1.2-1.12" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.30">
-              <p id="section-8.2.1-2.30.1">Intended usage: COMMON<a href="#section-8.2.1-2.30.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.13">Intended usage: COMMON<a href="#section-8.2.1.2-1.13" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.31">
-              <p id="section-8.2.1-2.31.1">Restrictions on usage: none<a href="#section-8.2.1-2.31.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.14">Restrictions on usage: none<a href="#section-8.2.1.2-1.14" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.32">
-              <p id="section-8.2.1-2.32.1">Author: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1-2.32.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.15">Author: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1.2-1.15" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.33">
-              <p id="section-8.2.1-2.33.1">Change Controller: IETF<a href="#section-8.2.1-2.33.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.16">Change Controller: IETF<a href="#section-8.2.1.2-1.16" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-8.2.1-2.34">
-              <p id="section-8.2.1-2.34.1">Provisional registration? No<a href="#section-8.2.1-2.34.1" class="pilcrow">¶</a></p>
+              <li class="compact" id="section-8.2.1.2-1.17">Provisional registration? No<a href="#section-8.2.1.2-1.17" class="pilcrow">¶</a>
 </li>
-          </ul>
+            </ul>
+</section>
+</div>
 </section>
 </div>
 </section>
@@ -2183,11 +2217,11 @@ a JWP using the JWP JSON Serialization.<a href="#section-8.2.1-1" class="pilcrow
 <dl class="references">
 <dt id="I-D.ietf-jose-json-proof-algorithms">[I-D.ietf-jose-json-proof-algorithms]</dt>
         <dd>
-<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-algorithms-02</span>, <time datetime="2023-10-21" class="refDate">21 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-02">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-algorithms-03</span>, <time datetime="2024-03-01" class="refDate">1 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-03">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-jose-json-proof-token">[I-D.ietf-jose-json-proof-token]</dt>
         <dd>
-<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Token"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-token-02</span>, <time datetime="2023-10-21" class="refDate">21 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-02">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Token"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-token-03</span>, <time datetime="2024-03-01" class="refDate">1 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-03">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7519">[RFC7519]</dt>
       <dd>
@@ -2206,7 +2240,7 @@ a JWP using the JWP JSON Serialization.<a href="#section-8.2.1-1" class="pilcrow
 <dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-bbs-signatures">[I-D.irtf-cfrg-bbs-signatures]</dt>
         <dd>
-<span class="refAuthor">Looker, T.</span>, <span class="refAuthor">Kalos, V.</span>, <span class="refAuthor">Whitehead, A.</span>, and <span class="refAuthor">M. Lodder</span>, <span class="refTitle">"The BBS Signature Scheme"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bbs-signatures-05</span>, <time datetime="2023-12-21" class="refDate">21 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Looker, T.</span>, <span class="refAuthor">Kalos, V.</span>, <span class="refAuthor">Whitehead, A.</span>, and <span class="refAuthor">M. Lodder</span>, <span class="refTitle">"The BBS Signature Scheme"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bbs-signatures-06</span>, <time datetime="2024-06-26" class="refDate">26 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2045">[RFC2045]</dt>
         <dd>
@@ -2255,534 +2289,78 @@ a JWP using the JWP JSON Serialization.<a href="#section-8.2.1-1" class="pilcrow
 </dl>
 </section>
 </section>
-<div id="example-jwps">
-<section id="appendix-A">
-      <h2 id="name-example-jwps">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-example-jwps" class="section-name selfRef">Example JWPs</a>
-      </h2>
-<p id="appendix-A-1">The following examples use algorithms defined in JSON Proof Algorithms and also contain the keys used, so that implementations can validate these samples.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<div id="example-single-use-jwp">
-<section id="appendix-A.1">
-        <h3 id="name-example-single-use-jwp">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-example-single-use-jwp" class="section-name selfRef">Example Single-Use JWP</a>
-        </h3>
-<p id="appendix-A.1-1">This example uses the Single-Use Algorithm as defined in JSON Proof Algorithms to create a JSON Proof Token.  It demonstrates how to apply selective disclosure using an array of traditional JWS-based signatures.  Unlinkability is only achieved by using each JWP one time, as multiple uses are inherently linkable via the traditional ECDSA signature embedded in the proof.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-2">To begin, we need two asymmetric keys for Single Use: one that represents the JPT Signer's stable key and the other is an ephemeral key generated by the Signer just for this JWP.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-3">This is the Signer's stable private key used in this example in the JWK format:<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
-<span id="name-issuer-private-jwk"></span><figure id="figure-2">
-          <div class="lang-json sourcecode" id="appendix-A.1-4.1">
-<pre>{
-  "crv": "P-256",
-  "kty": "EC",
-  "x": "ONebN43-G5DOwZX6jCVpEYEe0bYd5WDybXAG0sL3iDA",
-  "y": "b0MHuYfSxu3Pj4DAyDXabAc0mPjpB1worEpr3yyrft4",
-  "d": "jnE0-9YvxQtLJEKcyUHU6HQ3Y9nSDnh0NstYJFn7RuI"
-}
-
-</pre>
-</div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-issuer-private-jwk" class="selfRef">issuer-private-jwk</a>
-          </figcaption></figure>
-<p id="appendix-A.1-5">This is the ephemeral private key used in this example in the JWK format:<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
-<span id="name-issuer-ephemeral-jwk"></span><figure id="figure-3">
-          <div class="lang-json sourcecode" id="appendix-A.1-6.1">
-<pre>{
-  "crv": "P-256",
-  "kty": "EC",
-  "x": "acbIQiuMs3i8_uszEjJ2tpTtRM4EU3yz91PH6CdH2V0",
-  "y": "_KcyLj9vWMptnmKtm46GqDz8wf74I5LKgrl2GzH3nSE"
-}
-
-</pre>
-</div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-issuer-ephemeral-jwk" class="selfRef">issuer-ephemeral-jwk</a>
-          </figcaption></figure>
-<p id="appendix-A.1-7">This is the Holder's presentation private key used in this example in the JWK format:<a href="#appendix-A.1-7" class="pilcrow">¶</a></p>
-<span id="name-holder-presentation-jwk"></span><figure id="figure-4">
-          <div class="lang-json sourcecode" id="appendix-A.1-8.1">
-<pre>{
-  "crv": "P-256",
-  "kty": "EC",
-  "x": "oB1TPrE_QJIL61fUOOK5DpKgd8j2zbZJtqpILDTJX6I",
-  "y": "3JqnrkucLobkdRuOqZXOP9MMlbFyenFOLyGlG-FPACM"
-}
-
-</pre>
-</div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-holder-presentation-jwk" class="selfRef">holder-presentation-jwk</a>
-          </figcaption></figure>
-<p id="appendix-A.1-9">The JWP Protected Header declares that the data structure is a JPT and the JWP Proof Input is secured using the Single-Use ECDSA algorithm with the P-256 curve and SHA-256 digest.  It also includes the ephemeral public key, the Holder's presentation public key and list of claims used for this JPT.<a href="#appendix-A.1-9" class="pilcrow">¶</a></p>
-<span id="name-jwp-issuer-header"></span><figure id="figure-5">
-          <div class="lang-json sourcecode" id="appendix-A.1-10.1">
-<pre>{
-  "iss": "https://issuer.tld",
-  "claims": [
-    "family_name",
-    "given_name",
-    "email",
-    "age"
-  ],
-  "typ": "jpt",
-  "proof_jwk": {
-    "crv": "P-256",
-    "kty": "EC",
-    "x": "acbIQiuMs3i8_uszEjJ2tpTtRM4EU3yz91PH6CdH2V0",
-    "y": "_KcyLj9vWMptnmKtm46GqDz8wf74I5LKgrl2GzH3nSE"
-  },
-  "presentation_jwk": {
-    "crv": "P-256",
-    "kty": "EC",
-    "x": "oB1TPrE_QJIL61fUOOK5DpKgd8j2zbZJtqpILDTJX6I",
-    "y": "3JqnrkucLobkdRuOqZXOP9MMlbFyenFOLyGlG-FPACM"
-  },
-  "alg": "SU-ES256"
-}
-
-</pre>
-</div>
-<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-jwp-issuer-header" class="selfRef">jwp-issuer-header</a>
-          </figcaption></figure>
-<p id="appendix-A.1-11">After removing formatting whitespace, the octets representing UTF8(JWP Protected Header) in this example (using JSON array notation) are:<a href="#appendix-A.1-11" class="pilcrow">¶</a></p>
-<span id="name-jwp-issuer-header-octets"></span><figure id="figure-6">
-          <div class="lang-json sourcecode" id="appendix-A.1-12.1">
-<pre>[123, 34, 105, 115, 115, 34, 58, 34, 104, 116, 116, 112, 115, 58, 47,
- 47, 105, 115, 115, 117, 101, 114, 46, 116, 108, 100, 34, 44, 34, 99,
- 108, 97, 105, 109, 115, 34, 58, 91, 34, 102, 97, 109, 105, 108, 121,
- 95, 110, 97, 109, 101, 34, 44, 34, 103, 105, 118, 101, 110, 95, 110,
- 97, 109, 101, 34, 44, 34, 101, 109, 97, 105, 108, 34, 44, 34, 97,
- 103, 101, 34, 93, 44, 34, 116, 121, 112, 34, 58, 34, 74, 80, 84, 34,
- 44, 34, 112, 114, 111, 111, 102, 95, 106, 119, 107, 34, 58, 123, 34,
- 99, 114, 118, 34, 58, 34, 80, 45, 50, 53, 54, 34, 44, 34, 107, 116,
- 121, 35, 58, 34, 69, 67, 34, 44, 34, 120, 34, 58, 34, 97, 99, 98,
- 73, 81, 105, 117, 77, 115, 51, 105, 56, 95, 117, 115, 122, 69, 106,
- 74, 50,116, 112, 84, 116, 82, 77, 52, 69, 85, 51, 121, 122, 57, 49,
- 80, 72, 54, 67, 100, 72, 50, 86, 48, 34, 44, 34, 121, 34, 58, 34,
- 95, 75, 99, 121, 76, 106, 57, 118, 87, 77, 112, 116, 110, 109, 75,
- 116, 109, 52, 54, 71, 113, 68, 122, 56, 119, 102, 55, 52, 73, 53,
- 76, 75, 103, 114, 108, 50, 71, 122, 72, 51, 110, 83, 69, 34, 125,
- 44, 34, 112, 114, 101, 115, 101, 110, 116, 97, 116, 105, 111, 110,
- 95, 106, 119, 107, 34, 58, 123, 34, 99, 114, 118, 34, 58, 34, 80,
- 45, 50, 53, 54, 34, 44, 34, 107, 116, 121, 34, 58, 34, 69, 67, 34,
- 44, 34, 120, 34, 58, 34, 111, 66, 49,  84, 80, 114, 69, 95, 81, 74,
- 73, 76, 54, 49, 102, 85, 79, 79, 75, 53, 68, 112, 75, 103, 100, 56,
- 106, 50, 122, 98, 90, 74, 116, 113, 112, 73, 76, 68, 84, 74, 88, 54,
- 73, 34, 44, 34, 121, 34, 58, 34, 51, 74, 113, 110, 114, 107, 117,
- 99, 76, 111, 98, 107, 100, 82, 117, 79, 113, 90, 88, 79, 80, 57, 77,
- 77, 108, 98, 70, 121, 101, 110, 70, 79, 76, 121, 71, 108, 71, 45,
- 70, 80, 65, 67, 77, 34, 125, 44, 34, 97, 108, 103, 34, 58, 34, 83,
- 85, 45, 69, 83, 50, 53, 54, 34, 125]
-
-</pre>
-</div>
-<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
-<a href="#name-jwp-issuer-header-octets" class="selfRef">jwp-issuer-header-octets</a>
-          </figcaption></figure>
-<p id="appendix-A.1-13">Encoding this JWP Protected Header as BASE64URL(UTF8(JWP Protected Header)) gives this value:<a href="#appendix-A.1-13" class="pilcrow">¶</a></p>
-<span id="name-jwp-issuer-header-base64"></span><figure id="figure-7">
-          <div class="lang-text sourcecode" id="appendix-A.1-14.1">
-<pre>eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiL
-CJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicHJvb2ZfandrIj
-p7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU1zM2k4X3VzekVqSjJ
-0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5dldNcHRubUt0bTQ2R3FE
-ejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlvbl9qd2siOnsiY3J2IjoiU
-C0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw2MWZVT09LNURwS2dkOGoyem
-JaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2RSdU9xWlhPUDlNTWxiRnllbkZ
-PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ
-
-</pre>
-</div>
-<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
-<a href="#name-jwp-issuer-header-base64" class="selfRef">jwp-issuer-header-base64</a>
-          </figcaption></figure>
-<p id="appendix-A.1-15">Each payload must also be individually encoded:<a href="#appendix-A.1-15" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-16">The first payload is the JSON string <code>"Doe"</code> with the octet sequence of <code>[ 34, 68, 111, 101, 34 ]</code> and base64url-encoded as <code>IkRvZSI</code>.<a href="#appendix-A.1-16" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-17">The second payload is the JSON string <code>"Jay"</code> with the octet sequence of <code>[ 34, 74, 97, 121, 34 ]</code> and base64url-encoded as <code>IkpheSI</code>.<a href="#appendix-A.1-17" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-18">The third payload is the JSON string <code>"jaydoe@example.org"</code> with the octet sequence of <code>[ 34, 106, 97, 121, 100, 111, 101, 64, 101, 120, 97, 109, 112, 108, 101, 46, 111, 114, 103, 34 ]</code> and base64url-encoded as <code>ImpheWRvZUBleGFtcGxlLm9yZyI</code>.<a href="#appendix-A.1-18" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-19">The fourth payload is the JSON number <code>42</code> with the octet sequence of <code>[52, 50]</code> and base64url-encoded as <code>NDI</code>.<a href="#appendix-A.1-19" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-20">The Single Use algorithm utilizes multiple individual JWS Signatures.  Each signature value is generated by creating a JWS with a single Protected Header with the associated <code>alg</code> value. In this example, the fixed header used for each JWS is the serialized JSON Object <code>{"alg":"ES256"}</code>.  The JWS payload for each varies and the resulting signature value is used in its unencoded form (the octet string, not the base64url-encoded form).<a href="#appendix-A.1-20" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-21">The first signature is generated by creating a JWS using the fixed header with the payload set to the octet string of the JPT protected header from earlier.  The resulting JWS signature using the Signer's <em>stable key</em> is the octet string of:<a href="#appendix-A.1-21" class="pilcrow">¶</a></p>
-<span id="name-jwp-issuer-header-signature"></span><figure id="figure-8">
-          <div class="lang-json sourcecode" id="appendix-A.1-22.1">
-<pre>[44, 147, 34, 55, 167, 26, 18, 164, 161, 48, 158, 99, 60, 219, 108,
- 240, 231, 172, 114, 163, 106, 230, 242, 146, 170, 71, 192, 117, 43,
- 134, 36, 13, 70, 200, 156, 178, 173, 248, 228, 164, 1, 180, 112, 50,
- 74, 102, 133, 32, 162, 97, 238, 228, 204, 216, 133, 53, 44, 107, 70,
- 17, 93, 80, 103, 48]
-
-</pre>
-</div>
-<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
-<a href="#name-jwp-issuer-header-signature" class="selfRef">jwp-issuer-header-signature</a>
-          </figcaption></figure>
-<p id="appendix-A.1-23">This process is repeated for the JPT payloads, using their octet strings as the payload in the ephemeral JWS in order to generate a signature using the <em>ephemeral key</em> for each:<a href="#appendix-A.1-23" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-24">The first payload signature is:<a href="#appendix-A.1-24" class="pilcrow">¶</a></p>
-<span id="name-jwp-payload-0-signature"></span><figure id="figure-9">
-          <div class="lang-json sourcecode" id="appendix-A.1-25.1">
-<pre>[171, 17, 93, 97, 129, 118, 193, 36, 150, 14, 229, 113, 60, 60, 114,
- 243, 240, 152, 229, 218, 124, 218, 120, 150, 103, 43, 110, 177, 204,
- 182, 28, 156, 72, 243, 36, 140, 160, 218, 241, 207, 27, 106, 88,
- 133, 72, 43, 12, 143, 224, 43, 119, 76, 96, 216, 245, 111, 233, 39,
- 131, 244, 158, 53, 210, 69]
-
-</pre>
-</div>
-<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
-<a href="#name-jwp-payload-0-signature" class="selfRef">jwp-payload-0-signature</a>
-          </figcaption></figure>
-<p id="appendix-A.1-26">The second payload signature is:<a href="#appendix-A.1-26" class="pilcrow">¶</a></p>
-<span id="name-jwp-payload-1-signature"></span><figure id="figure-10">
-          <div class="lang-json sourcecode" id="appendix-A.1-27.1">
-<pre>[112, 121, 108, 227, 203, 18, 91, 27, 206, 137, 237, 143, 12, 14,
- 221, 135, 245, 254, 97, 132, 114, 48, 153, 34, 240, 93, 140, 194,
- 108, 61, 251, 90, 107, 212, 17, 13, 191, 235, 8, 96, 1, 128, 121,
- 186, 4, 144, 55, 112, 99, 92, 75, 226, 8, 15, 255, 85, 125, 229,
- 110, 17, 245, 69, 87, 54]
-
-</pre>
-</div>
-<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
-<a href="#name-jwp-payload-1-signature" class="selfRef">jwp-payload-1-signature</a>
-          </figcaption></figure>
-<p id="appendix-A.1-28">The third payload signature is:<a href="#appendix-A.1-28" class="pilcrow">¶</a></p>
-<span id="name-jwp-payload-2-signature"></span><figure id="figure-11">
-          <div class="lang-json sourcecode" id="appendix-A.1-29.1">
-<pre>[195, 89, 195, 251, 210, 23, 69, 91, 7, 66, 9, 11, 213, 97, 77, 145,
- 134, 185, 227, 131, 55, 23, 175, 179, 151, 206, 164, 26, 240, 254,
- 25, 102, 110, 215, 202, 193, 166, 80, 58, 239, 217, 242, 167, 58,
- 167, 134, 135, 44, 199, 142, 161, 2, 27, 222, 34, 12, 211, 107, 94,
- 51, 190, 187, 120, 123]
-
-</pre>
-</div>
-<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
-<a href="#name-jwp-payload-2-signature" class="selfRef">jwp-payload-2-signature</a>
-          </figcaption></figure>
-<p id="appendix-A.1-30">The fourth payload signature is:<a href="#appendix-A.1-30" class="pilcrow">¶</a></p>
-<span id="name-jwp-payload-3-signature"></span><figure id="figure-12">
-          <div class="lang-json sourcecode" id="appendix-A.1-31.1">
-<pre>[236, 70, 36, 68, 119, 81, 128, 100, 48, 88, 219, 110, 19, 18, 179,
- 236, 233, 176, 31, 202, 22, 139, 58, 101, 18, 216, 214, 39, 149,
- 136, 148, 154, 94, 123, 191, 96, 67, 209, 211, 107, 100, 8, 57, 63,
- 91, 80, 59, 227, 142, 73, 14, 250, 50, 191, 206, 224, 227, 103, 8,
- 121, 50, 74, 220, 105]
-
-</pre>
-</div>
-<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
-<a href="#name-jwp-payload-3-signature" class="selfRef">jwp-payload-3-signature</a>
-          </figcaption></figure>
-<p id="appendix-A.1-32">Each payload's individual signature is concatenated in order, resulting in a larger octet string with a length of an individual signature (64 octets for ES256) multiplied by the number of payloads (4 for this example).  These payload ephemeral signatures are then appended to the initial protected header stable signature.  Using the above examples, the resulting octet string is 320 bytes in length (<code>5 * 64</code>):<a href="#appendix-A.1-32" class="pilcrow">¶</a></p>
-<span id="name-jwp-signatures"></span><figure id="figure-13">
-          <div class="lang-json sourcecode" id="appendix-A.1-33.1">
-<pre>[44, 147, 34, 55, 167, 26, 18, 164, 161, 48, 158, 99, 60, 219, 108,
- 240, 231, 172, 114, 163, 106, 230, 242, 146, 170, 71, 192, 117, 43,
- 134, 36, 13, 70, 200, 156, 178, 173, 248, 228, 164, 1, 180, 112, 50,
- 74, 102, 133, 32, 162, 97, 238, 228, 204, 216, 133, 53, 44, 107, 70,
- 17, 93, 80, 103, 48, 171, 17, 93, 97, 129, 118, 193, 36, 150, 14,
- 229, 113, 60, 60, 114, 243, 240, 152, 229, 218, 124, 218, 120, 150,
- 103, 43, 110, 177, 204, 182, 28, 156, 72, 243, 36, 140, 160, 218,
- 241, 207, 27, 106, 88, 133, 72, 43, 12, 143, 224, 43, 119, 76, 96,
- 216, 245, 111, 233, 39, 131, 244, 158, 53, 210, 69, 112, 121, 108,
- 227, 203, 18, 91, 27, 206, 137, 237, 143, 12, 14, 221, 135, 245,
- 254, 97, 132, 114, 48, 153, 34, 240, 93, 140, 194, 108, 61, 251, 90,
- 107, 212, 17, 13, 191, 235, 8, 96, 1, 128, 121, 186, 4, 144, 55,
- 112, 99, 92, 75, 226, 8, 15, 255, 85, 125, 229, 110, 17, 245, 69,
- 87, 54, 195, 89, 195, 251, 210, 23, 69, 91, 7, 66, 9, 11, 213, 97,
- 77, 145, 134, 185, 227, 131, 55, 23, 175, 179, 151, 206, 164, 26,
- 240, 254, 25, 102, 110, 215, 202, 193, 166, 80, 58, 239, 217, 242,
- 167, 58, 167, 134, 135, 44, 199, 142, 161, 2, 27, 222, 34, 12, 211,
- 107, 94, 51, 190, 187, 120, 123, 236, 70, 36, 68, 119, 81, 128, 100,
- 48, 88, 219, 110, 19, 18, 179, 236, 233, 176, 31, 202, 22, 139, 58,
- 101, 18, 216, 214, 39, 149, 136, 148, 154, 94, 123, 191, 96, 67,
- 209, 211, 107, 100, 8, 57, 63, 91, 80, 59, 227, 142, 73, 14, 250,
- 50, 191, 206, 224, 227, 103, 8, 121, 50, 74, 220, 105]
-
-</pre>
-</div>
-<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
-<a href="#name-jwp-signatures" class="selfRef">jwp-signatures</a>
-          </figcaption></figure>
-<p id="appendix-A.1-34">The final Proof value from the Signer is the concatenated array of the header signature followed by all of the payload signatures, then base64url encoded.<a href="#appendix-A.1-34" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-35">The resulting JSON serialized JPT using the above examples is:<a href="#appendix-A.1-35" class="pilcrow">¶</a></p>
-<span id="name-jwp-final"></span><figure id="figure-14">
-          <div class="lang-json sourcecode" id="appendix-A.1-36.1">
-<pre>{
-  "payloads": [
-    "IkRvZSI",
-    "IkpheSI",
-    "ImpheWRvZUBleGFtcGxlLm9yZyI",
-    "NDI"
-  ],
-  "issuer": [
-    "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25h
-    bWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicHJvb
-    2ZfandrIjp7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU1zM2
-    k4X3VzekVqSjJ0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5dld
-    NcHRubUt0bTQ2R3FEejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlv
-    bl9qd2siOnsiY3J2IjoiUC0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKS
-    Uw2MWZVT09LNUR wS2dkOGoyemJaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjT
-    G9ia2RSdU9xWlhPUDlNTWxiRnllbkZPTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRV
-    MyNTYifQ"
-  ],
-  "proof": [
-    "LJMiN6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJyyrfjkpAG0cDJKZoUg
-    omHu5MzYhTUsa0YRXVBnMKsRXWGBdsEklg7lcTw8cvPwmOXafNp4lmcrbrHMthycS
-    PMkjKDa8c8baliFSCsMj-Ard0xg2PVv6SeD9J410kVweWzjyxJbG86J7Y8MDt2H9f
-    5hhHIwmSLwXYzCbD37WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc2w1n
-    D-9IXRVsHQgkL1WFNkYa544M3F6-zl86kGvD-GWZu18rBplA679nypzqnhocsx46h
-    AhveIgzTa14zvrt4e-xGJER3UYBkMFjbbhMSs-zpsB_KFos6ZRLY1ieViJSaXnu_Y
-    EPR02tkCDk_W1A7445JDvoyv87g42cIeTJK3Gk"
-  ]
-}
-
-</pre>
-</div>
-<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
-<a href="#name-jwp-final" class="selfRef">jwp-final</a>
-          </figcaption></figure>
-<p id="appendix-A.1-37">The compact serialization of the same JPT is:<a href="#appendix-A.1-37" class="pilcrow">¶</a></p>
-<span id="name-jwp-compact"></span><figure id="figure-15">
-          <div class="lang-text sourcecode" id="appendix-A.1-38.1">
-<pre>eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiL
-CJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicHJvb2ZfandrIj
-p7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU1zM2k4X3VzekVqSjJ
-0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5dldNcHRubUt0bTQ2R3FE
-ejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlvbl9qd2siOnsiY3J2IjoiU
-C0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw2MWZVT09LNURwS2dkOGoyem
-JaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2RSdU9xWlhPUDlNTWxiRnllbkZ
-PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ.IkRvZSI~IkpheSI~ImpheWRvZ
-UBleGFtcGxlLm9yZyI~NDI.LJMiN6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJ
-yyrfjkpAG0cDJKZoUgomHu5MzYhTUsa0YRXVBnMKsRXWGBdsEklg7lcTw8cvPwmOXafNp
-4lmcrbrHMthycSPMkjKDa8c8baliFSCsMj-Ard0xg2PVv6SeD9J410kVweWzjyxJbG86J
-7Y8MDt2H9f5hhHIwmSLwXYzCbD37WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1R
-Vc2w1nD-9IXRVsHQgkL1WFNkYa544M3F6-zl86kGvD-GWZu18rBplA679nypzqnhocsx4
-6hAhveIgzTa14zvrt4e-xGJER3UYBkMFjbbhMSs-zpsB_KFos6ZRLY1ieViJSaXnu_YEP
-R02tkCDk_W1A7445JDvoyv87g42cIeTJK3Gk
-
-</pre>
-</div>
-<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
-<a href="#name-jwp-compact" class="selfRef">jwp-compact</a>
-          </figcaption></figure>
-<p id="appendix-A.1-39">To present this JPT, we first use the following presentation header with a nonce (provided by the Verifier):<a href="#appendix-A.1-39" class="pilcrow">¶</a></p>
-<span id="name-jwp-presentation-header"></span><figure id="figure-16">
-          <div class="lang-json sourcecode" id="appendix-A.1-40.1">
-<pre>{
-  "nonce": "uTEB371l1pzWJl7afB0wi0HWUNk1Le-bComFLxa8K-s"
-}
-
-</pre>
-</div>
-<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
-<a href="#name-jwp-presentation-header" class="selfRef">jwp-presentation-header</a>
-          </figcaption></figure>
-<p id="appendix-A.1-41">When serialized, this results in the following octets:<a href="#appendix-A.1-41" class="pilcrow">¶</a></p>
-<span id="name-jwp-presentation-header-oct"></span><figure id="figure-17">
-          <div class="lang-json sourcecode" id="appendix-A.1-42.1">
-<pre>[123, 34, 110, 111, 110, 99, 101, 34, 58, 34, 117, 84, 69, 66, 51,
- 55, 49, 108, 49, 112, 122, 87, 74, 108, 55, 97, 102, 66, 48, 119,
- 105, 48, 72, 87, 85, 78, 107, 49, 76, 101, 45, 98, 67, 111, 109, 70,
- 76, 120, 97, 56, 75, 45, 115, 34, 125]
-
-</pre>
-</div>
-<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
-<a href="#name-jwp-presentation-header-oct" class="selfRef">jwp-presentation-header-octets</a>
-          </figcaption></figure>
-<p id="appendix-A.1-43">And when base64url encoded results in the string:<a href="#appendix-A.1-43" class="pilcrow">¶</a></p>
-<span id="name-jwp-presentation-header-bas"></span><figure id="figure-18">
-          <div class="lang-text sourcecode" id="appendix-A.1-44.1">
-<pre>eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLL
-XMifQ
-
-</pre>
-</div>
-<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
-<a href="#name-jwp-presentation-header-bas" class="selfRef">jwp-presentation-header-base64</a>
-          </figcaption></figure>
-<p id="appendix-A.1-45">When signed with the holder's presentation key, the resulting signature octets are:<a href="#appendix-A.1-45" class="pilcrow">¶</a></p>
-<span id="name-jwp-presentation-header-sig"></span><figure id="figure-19">
-          <div class="lang-json sourcecode" id="appendix-A.1-46.1">
-<pre>[31, 117, 70, 58, 39, 174, 117, 149, 177, 169, 31, 94, 215, 230, 218,
- 30, 224, 31, 16, 63, 240, 109, 112, 144, 29, 61, 199, 79, 100, 162,
- 125, 158, 43, 216, 19, 191, 136, 138, 195, 129, 143, 233, 24, 116,
- 216, 241, 8, 1, 80, 47, 158, 27, 110, 137, 40, 76, 156, 250, 149,
- 195, 91, 66, 5, 216]
-
-</pre>
-</div>
-<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
-<a href="#name-jwp-presentation-header-sig" class="selfRef">jwp-presentation-header-signature</a>
-          </figcaption></figure>
-<p id="appendix-A.1-47">Then by applying selective disclosure of only the given name and age claims (family name and email hidden), the proof value including the signature of the presentation header and removing the ephemeral signatures of the family name and email payloads results in the following octet array:<a href="#appendix-A.1-47" class="pilcrow">¶</a></p>
-<span id="name-jwp-presentation-signatures"></span><figure id="figure-20">
-          <div class="lang-json sourcecode" id="appendix-A.1-48.1">
-<pre>[44, 147, 34, 55, 167, 26, 18, 164, 161, 48, 158, 99, 60, 219, 108,
- 240, 231, 172, 114, 163, 106, 230, 242, 146, 170, 71, 192, 117, 43,
- 134, 36, 13, 70, 200, 156, 178, 173, 248, 228, 164, 1, 180, 112, 50,
- 74, 102, 133, 32, 162, 97, 238, 228, 204, 216, 133, 53, 44, 107, 70,
- 17, 93, 80, 103, 48, 31, 117, 70, 58, 39, 174, 117, 149, 177, 169,
- 31, 94, 215, 230, 218, 30, 224, 31, 16, 63, 240, 109, 112, 144, 29,
- 61, 199, 79, 100, 162, 125, 158, 43, 216, 19, 191, 136, 138, 195,
- 129, 143, 233, 24, 116, 216, 241, 8, 1, 80, 47, 158, 27, 110, 137,
- 40, 76, 156, 250, 149, 195, 91, 66, 5, 216, 112, 121, 108, 227, 203,
- 18, 91, 27, 206, 137, 237, 143, 12, 14, 221, 135, 245, 254, 97, 132,
- 114, 48, 153, 34, 240, 93, 140, 194, 108, 61, 251, 90, 107, 212, 17,
- 13, 191, 235, 8, 96, 1, 128, 121, 186, 4, 144, 55, 112, 99, 92, 75,
- 226, 8, 15, 255, 85, 125, 229, 110, 17, 245, 69, 87, 54, 236, 70,
- 36, 68, 119, 81, 128, 100, 48, 88, 219, 110, 19, 18, 179, 236, 233,
- 176, 31, 202, 22, 139, 58, 101, 18, 216, 214, 39, 149, 136, 148,
- 154, 94, 123, 191, 96, 67, 209, 211, 107, 100, 8, 57, 63, 91, 80,
- 59, 227, 142, 73, 14, 250, 50, 191, 206, 224, 227, 103, 8, 121, 50,
- 74, 220, 105]
-
-</pre>
-</div>
-<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
-<a href="#name-jwp-presentation-signatures" class="selfRef">jwp-presentation-signatures</a>
-          </figcaption></figure>
-<p id="appendix-A.1-49">The resulting presented JPT in JSON serialization:<a href="#appendix-A.1-49" class="pilcrow">¶</a></p>
-<span id="name-jwp-final-presentation-2"></span><figure id="figure-21">
-          <div class="lang-json sourcecode" id="appendix-A.1-50.1">
-<pre>{
-  "payloads": [
-    null,
-    "IkpheSI",
-    null,
-    "NDI"
-  ],
-  "issuer": "eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFt
-  aWx5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiw
-  icHJvb2ZfandrIjp7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU
-  1zM2k4X3VzekVqSjJ0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5d
-  ldNcHRubUt0bTQ2R3FEejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlv
-  bl9qd2siOnsiY3J2IjoiUC0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw
-  2MWZVT09LNURwS2dkOGoyemJaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2
-  RSdU9xWlhPUDlNTWxiRnllbkZPTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYif
-  Q",
-  "proof": [
-    "LJMiN6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJyyrfjkpAG0cDJKZoUg
-    omHu5MzYhTUsa0YRXVBnMB91RjonrnWVsakfXtfm2h7gHxA_8G1wkB09x09kon2eK
-    9gTv4iKw4GP6Rh02PEIAVAvnhtuiShMnPqVw1tCBdhweWzjyxJbG86J7Y8MDt2H9f
-    5hhHIwmSLwXYzCbD37WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc27EY
-    kRHdRgGQwWNtuExKz7OmwH8oWizplEtjWJ5WIlJpee79gQ9HTa2QIOT9bUDvjjkkO
-    -jK_zuDjZwh5MkrcaQ"
-  ],
-  "presentation": "eyJub25jZSI6InVURUIzNzFsMXB6V0psN2FmQjB3aTBIV1VOaz
-  FMZS1iQ29tRkx4YThLLXMifQ"
-  ]
-}
-
-</pre>
-</div>
-<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
-<a href="#name-jwp-final-presentation-2" class="selfRef">jwp-final-presentation</a>
-          </figcaption></figure>
-<p id="appendix-A.1-51">And also in compact serialization:<a href="#appendix-A.1-51" class="pilcrow">¶</a></p>
-<span id="name-jwp-compact-presentation"></span><figure id="figure-22">
-          <div class="lang-text sourcecode" id="appendix-A.1-52.1">
-<pre>eyJpc3MiOiJodHRwczovL2lzc3Vlci50bGQiLCJjbGFpbXMiOlsiZmFtaWx5X25hbWUiL
-CJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZ2UiXSwidHlwIjoiSlBUIiwicHJvb2ZfandrIj
-p7ImNydiI6IlAtMjU2Iiwia3R5IjoiRUMiLCJ4IjoiYWNiSVFpdU1zM2k4X3VzekVqSjJ
-0cFR0Uk00RVUzeXo5MVBINkNkSDJWMCIsInkiOiJfS2N5TGo5dldNcHRubUt0bTQ2R3FE
-ejh3Zjc0STVMS2dybDJHekgzblNFIn0sInByZXNlbnRhdGlvbl9qd2siOnsiY3J2IjoiU
-C0yNTYiLCJrdHkiOiJFQyIsIngiOiJvQjFUUHJFX1FKSUw2MWZVT09LNURwS2dkOGoyem
-JaSnRxcElMRFRKWDZJIiwieSI6IjNKcW5ya3VjTG9ia2RSdU9xWlhPUDlNTWxiRnllbkZ
-PTHlHbEctRlBBQ00ifSwiYWxnIjoiU1UtRVMyNTYifQ.eyJub25jZSI6InVURUIzNzFsM
-XB6V0psN2FmQjB3aTBIV1VOazFMZS1iQ29tRkx4YThLLXMifQ.~IkpheSI~~NDI.LJMiN
-6caEqShMJ5jPNts8OescqNq5vKSqkfAdSuGJA1GyJyyrfjkpAG0cDJKZoUgomHu5MzYhT
-Usa0YRXVBnMB91RjonrnWVsakfXtfm2h7gHxA_8G1wkB09x09kon2eK9gTv4iKw4GP6Rh
-02PEIAVAvnhtuiShMnPqVw1tCBdhweWzjyxJbG86J7Y8MDt2H9f5hhHIwmSLwXYzCbD37
-WmvUEQ2_6whgAYB5ugSQN3BjXEviCA__VX3lbhH1RVc27EYkRHdRgGQwWNtuExKz7OmwH
-8oWizplEtjWJ5WIlJpee79gQ9HTa2QIOT9bUDvjjkkO-jK_zuDjZwh5MkrcaQ
-
-</pre>
-</div>
-<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
-<a href="#name-jwp-compact-presentation" class="selfRef">jwp-compact-presentation</a>
-          </figcaption></figure>
-</section>
-</div>
-<div id="example-multi-use-jwp">
-<section id="appendix-A.2">
-        <h3 id="name-example-multi-use-jwp">
-<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-example-multi-use-jwp" class="section-name selfRef">Example Multi-Use JWP</a>
-        </h3>
-<p id="appendix-A.2-1">See JPA BBS-DRAFT-5 example.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
 <div id="acknowledgements">
-<section id="appendix-B">
+<section id="appendix-A">
       <h2 id="name-acknowledgements">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-B-1">This work was incubated in the DIF <a href="https://identity.foundation/working-groups/crypto.html">Applied Cryptography Working Group</a>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">We would like to thank
+<p id="appendix-A-1">This work was incubated in the DIF <a href="https://identity.foundation/working-groups/crypto.html">Applied Cryptography Working Group</a>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">We would like to thank
 Brent Zundel
-for his valuable contributions to this specification.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+for his valuable contributions to this specification.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="registries">
-<section id="appendix-C">
+<section id="appendix-B">
       <h2 id="name-registries">
-<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-registries" class="section-name selfRef">Registries</a>
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-registries" class="section-name selfRef">Registries</a>
       </h2>
 <ul class="compact">
-<li class="compact" id="appendix-C-1.1">Issuer Protected Header<a href="#appendix-C-1.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-B-1.1">Issuer Protected Header<a href="#appendix-B-1.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-1.2">Presentation Protected Header<a href="#appendix-C-1.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-B-1.2">Presentation Protected Header<a href="#appendix-B-1.2" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
 </div>
 <div id="document-history">
-<section id="appendix-D">
+<section id="appendix-C">
       <h2 id="name-document-history">
-<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
-<p id="appendix-D-1">[[ To be removed from the final specification ]]<a href="#appendix-D-1" class="pilcrow">¶</a></p>
-<p id="appendix-D-2">-03<a href="#appendix-D-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-1">[[ To be removed from the final specification ]]<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-D-3.1">Improvements resulting from a full proofreading.<a href="#appendix-D-3.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-2.1">Refactoring figures and examples to be built from a common set across all three documents<a href="#appendix-C-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-D-3.2">Populated IANA Considerations section.<a href="#appendix-D-3.2" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-D-3.3">Specified JWP Header Parameters.<a href="#appendix-D-3.3" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-D-3.4">Specified representation of zero-length disclosed payloads for the compact serialization.<a href="#appendix-D-3.4" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-D-3.5">Specified that algorithms may supply multiple octet strings for the proof, which are separated by <code>~</code> characters in the compact serialization.<a href="#appendix-D-3.5" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-D-3.6">Updated to use BBS draft -05.<a href="#appendix-D-3.6" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-D-3.7">Added Terminology Section.<a href="#appendix-D-3.7" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-2.2">Move single-use example appendix from JWP to JPA<a href="#appendix-C-2.2" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-D-4">-02<a href="#appendix-D-4" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">-03<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-D-5.1">Update reference to current BBS algorithm<a href="#appendix-D-5.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-4.1">Improvements resulting from a full proofreading.<a href="#appendix-C-4.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.2">Populated IANA Considerations section.<a href="#appendix-C-4.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.3">Specified JWP Header Parameters.<a href="#appendix-C-4.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.4">Specified representation of zero-length disclosed payloads for the compact serialization.<a href="#appendix-C-4.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.5">Specified that algorithms may supply multiple octet strings for the proof, which are separated by <code>~</code> characters in the compact serialization.<a href="#appendix-C-4.5" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.6">Updated to use BBS draft -05.<a href="#appendix-C-4.6" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.7">Added Terminology Section.<a href="#appendix-C-4.7" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-D-6">-01<a href="#appendix-D-6" class="pilcrow">¶</a></p>
+<p id="appendix-C-5">-02<a href="#appendix-C-5" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-D-7.1">Correct cross-references within group.<a href="#appendix-D-7.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-6.1">Update reference to current BBS algorithm<a href="#appendix-C-6.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-D-8">-00<a href="#appendix-D-8" class="pilcrow">¶</a></p>
+<p id="appendix-C-7">-01<a href="#appendix-C-7" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-D-9.1">Created initial working group draft based on draft-jmiller-jose-json-web-proof-01<a href="#appendix-D-9.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-8.1">Correct cross-references within group.<a href="#appendix-C-8.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-9">-00<a href="#appendix-C-9" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-10.1">Created initial working group draft based on draft-jmiller-jose-json-web-proof-01<a href="#appendix-C-10.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-E">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
