@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-07T00:45:20.104964+00:00",
+  "timestamp": "2024-07-09T00:41:29.628412+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -7925,6 +7925,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 121,
+      "id": "PR_kwDOFsQObc50vp1Z",
+      "title": "Update to BBS draft 6",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/121",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-08T20:55:18Z",
+      "updatedAt": "2024-07-08T22:26:14Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "d942d156573d2ac4c4bba5dd97ef9980d97f5647",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "update-to-bbs-draft-6",
+      "headRefOid": "2542fe8bad7f7bac70b7b4cd244c3acc1bba67fe",
+      "closedAt": "2024-07-08T22:26:09Z",
+      "mergedAt": "2024-07-08T22:26:09Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "096806b5f8d9648cb57c300257edb2ff0acdc9ce"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
