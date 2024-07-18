@@ -1,0 +1,2407 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>JSON Web Proof</title>
+<meta content="Jeremie Miller" name="author">
+<meta content="David Waite" name="author">
+<meta content="Michael B. Jones" name="author">
+<meta content="
+       The JOSE set of standards established JSON-based container formats for Keys, Signatures, and Encryption.  They also established IANA registries to enable the algorithms and representations used for them to be extended.  Since those were created, newer cryptographic algorithms that support selective disclosure and unlinkability have matured and started seeing early market adoption. 
+       This document defines a new container format similar in purpose and design to JSON Web Signature (JWS) called a  JSON Web Proof (JWP) .  Unlike JWS, which integrity-protects only a single payload, JWP can integrity-protect multiple payloads in one message.  It also specifies a new presentation form that supports selective disclosure of individual payloads, enables additional proof computation, and adds a protected header to prevent replay. 
+    " name="description">
+<meta content="xml2rfc 3.22.0" name="generator">
+<meta content="jose" name="keyword">
+<meta content="zkp" name="keyword">
+<meta content="jwp" name="keyword">
+<meta content="jws" name="keyword">
+<meta content="draft-ietf-jose-json-web-proof-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.22.0
+    Python 3.12.3
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.0
+    intervaltree 3.1.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
+    pycountry 22.3.5
+    PyYAML 6.0.1
+    requests 2.32.3
+    setuptools 69.5.1
+    wcwidth 0.2.13
+-->
+<link href="draft-ietf-jose-json-web-proof.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 1;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl.olPercent {
+  --indent: 5ch;
+}
+dl > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+  margin-right: 1ch;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 2px 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 10ch;
+  margin-right: 1.5ch;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 12ch !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">json-web-proof</td>
+<td class="right">July 2024</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Miller, et al.</td>
+<td class="center">Expires 19 January 2025</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">jose</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ietf-jose-json-web-proof-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2024-07-18" class="published">18 July 2024</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2025-01-19">19 January 2025</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">J. Miller</div>
+<div class="org">Ping Identity</div>
+</div>
+<div class="author">
+      <div class="author-name">D. Waite</div>
+<div class="org">Ping Identity</div>
+</div>
+<div class="author">
+      <div class="author-name">M. Jones</div>
+<div class="org">Self-Issued Consulting</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">JSON Web Proof</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">The JOSE set of standards established JSON-based container formats for Keys, Signatures, and Encryption.  They also established IANA registries to enable the algorithms and representations used for them to be extended.  Since those were created, newer cryptographic algorithms that support selective disclosure and unlinkability have matured and started seeing early market adoption.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document defines a new container format similar in purpose and design to JSON Web Signature (JWS) called a <em>JSON Web Proof (JWP)</em>.  Unlike JWS, which integrity-protects only a single payload, JWP can integrity-protect multiple payloads in one message.  It also specifies a new presentation form that supports selective disclosure of individual payloads, enables additional proof computation, and adds a protected header to prevent replay.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 19 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-abbreviations" class="internal xref">Abbreviations</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-background" class="internal xref">Background</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-jwp-header" class="internal xref">JWP Header</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-registered-header-parameter" class="internal xref">Registered Header Parameter Names</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
+                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-alg-algorithm-header-parame" class="internal xref">"alg" (Algorithm) Header Parameter</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.2">
+                    <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.  <a href="#name-kid-key-id-header-parameter" class="internal xref">"kid" (Key ID) Header Parameter</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.3">
+                    <p id="section-toc.1-1.4.2.1.2.3.1"><a href="#section-4.1.3" class="auto internal xref">4.1.3</a>.  <a href="#name-typ-type-header-parameter" class="internal xref">"typ" (Type) Header Parameter</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.4">
+                    <p id="section-toc.1-1.4.2.1.2.4.1"><a href="#section-4.1.4" class="auto internal xref">4.1.4</a>.  <a href="#name-crit-critical-header-parame" class="internal xref">"crit" (Critical) Header Parameter</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.5">
+                    <p id="section-toc.1-1.4.2.1.2.5.1"><a href="#section-4.1.5" class="auto internal xref">4.1.5</a>.  <a href="#name-proof_jwk-proof-jwk-header-" class="internal xref">"proof_jwk" (Proof JWK) Header Parameter</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.6">
+                    <p id="section-toc.1-1.4.2.1.2.6.1"><a href="#section-4.1.6" class="auto internal xref">4.1.6</a>.  <a href="#name-presentation_jwk-presentati" class="internal xref">"presentation_jwk" (Presentation JWK) Header Parameter</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.7">
+                    <p id="section-toc.1-1.4.2.1.2.7.1"><a href="#section-4.1.7" class="auto internal xref">4.1.7</a>.  <a href="#name-iss-issuer-header-parameter" class="internal xref">"iss" (Issuer) Header Parameter</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.8">
+                    <p id="section-toc.1-1.4.2.1.2.8.1"><a href="#section-4.1.8" class="auto internal xref">4.1.8</a>.  <a href="#name-aud-audience-header-paramet" class="internal xref">"aud" (Audience) Header Parameter</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.9">
+                    <p id="section-toc.1-1.4.2.1.2.9.1"><a href="#section-4.1.9" class="auto internal xref">4.1.9</a>.  <a href="#name-nonce-nonce-header-paramete" class="internal xref">"nonce" (Nonce) Header Parameter</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.10">
+                    <p id="section-toc.1-1.4.2.1.2.10.1"><a href="#section-4.1.10" class="auto internal xref">4.1.10</a>. <a href="#name-claims-claims-header-parame" class="internal xref">"claims" (Claims) Header Parameter</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-public-header-parameter-nam" class="internal xref">Public Header Parameter Names</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-private-header-parameter-na" class="internal xref">Private Header Parameter Names</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-jwp-forms" class="internal xref">JWP Forms</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-issued-form" class="internal xref">Issued Form</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.1">
+                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.  <a href="#name-issuer-protected-header" class="internal xref">Issuer Protected Header</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.2">
+                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="auto internal xref">5.1.2</a>.  <a href="#name-issuer-payloads" class="internal xref">Issuer Payloads</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.3">
+                    <p id="section-toc.1-1.5.2.1.2.3.1"><a href="#section-5.1.3" class="auto internal xref">5.1.3</a>.  <a href="#name-issuer-proof" class="internal xref">Issuer Proof</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-presented-form" class="internal xref">Presented Form</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.1">
+                    <p id="section-toc.1-1.5.2.2.2.1.1"><a href="#section-5.2.1" class="auto internal xref">5.2.1</a>.  <a href="#name-presentation-protected-head" class="internal xref">Presentation Protected Header</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.2">
+                    <p id="section-toc.1-1.5.2.2.2.2.1"><a href="#section-5.2.2" class="auto internal xref">5.2.2</a>.  <a href="#name-presentation-payloads" class="internal xref">Presentation Payloads</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.3">
+                    <p id="section-toc.1-1.5.2.2.2.3.1"><a href="#section-5.2.3" class="auto internal xref">5.2.3</a>.  <a href="#name-presentation-proof" class="internal xref">Presentation Proof</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-serializations" class="internal xref">Serializations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-compact-serialization" class="internal xref">Compact Serialization</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-json-serialization" class="internal xref">JSON Serialization</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-json-web-proof-header-param" class="internal xref">JSON Web Proof Header Parameters Registry</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.1">
+                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#section-8.1.1" class="auto internal xref">8.1.1</a>.  <a href="#name-registration-template" class="internal xref">Registration Template</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.2">
+                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#section-8.1.2" class="auto internal xref">8.1.2</a>.  <a href="#name-initial-registry-contents" class="internal xref">Initial Registry Contents</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-media-type-registration" class="internal xref">Media Type Registration</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2.2.1">
+                    <p id="section-toc.1-1.8.2.2.2.1.1"><a href="#section-8.2.1" class="auto internal xref">8.2.1</a>.  <a href="#name-registry-contents" class="internal xref">Registry Contents</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-registries" class="internal xref">Registries</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">The JOSE specifications are very widely deployed and well supported, enabling use of cryptographic primitives with a JSON representation.  JWTs <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> are one of the most common representations for identity and access claims.  For instance, they are used by the OpenID Connect and Secure Telephony Identity Revisited (STIR) standards.  Also, JWTs are used by W3C's Verifiable Credentials and are used in many decentralized identity systems.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">With these new use cases, there is an increased focus on adopting privacy-protecting cryptographic primitives.  While such primitives are still an active area of academic and applied research, the leading candidates introduce new patterns that are not currently supported by JOSE.  These new patterns are largely focused on two areas: supporting selective disclosure when presenting information and minimizing correlation through the use of Zero-Knowledge Proofs (ZKPs) in addition to traditional signatures.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">There are a growing number of these cryptographic primitives that support selective disclosure while protecting privacy across multiple presentations.  Examples used in the context of Verifiable Credentials are:<a href="#section-1-3" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-1-4.1">
+          <a href="https://eprint.iacr.org/2012/562.pdf">CL Signatures</a><a href="#section-1-4.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-4.2">
+          <a href="http://www.zurich.ibm.com/idemix">IDEMIX</a><a href="#section-1-4.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-4.3">BBS signatures, described in <span>[<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span><a href="#section-1-4.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-4.4">
+          <a href="https://github.com/transmute-industries/merkle-disclosure-proof-2021">MerkleDisclosureProof2021</a><a href="#section-1-4.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-4.5">
+          <a href="https://eprint.iacr.org/2020/979">Mercurial Signatures</a><a href="#section-1-4.5" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-4.6">
+          <a href="https://eprint.iacr.org/2015/525.pdf">PS Signatures</a><a href="#section-1-4.6" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-4.7">
+          <a href="https://www.microsoft.com/en-us/research/project/u-prove/">U-Prove</a><a href="#section-1-4.7" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-4.8">
+          <a href="https://github.com/microsoft/Spartan">Spartan</a><a href="#section-1-4.8" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="section-1-5">All of these follow the same pattern of taking multiple claims (a.k.a., "attributes" or "messages" in the literature) and binding them together into a single issued token.  These are then later securely one-way transformed into a presentation that reveals potentially only a subset of the original claims, predicate proofs about the claim values, or proofs of knowledge of the claims.<a href="#section-1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="conventions-and-definitions">
+<section id="section-2">
+      <h2 id="name-conventions-and-definitions">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      </h2>
+<p id="section-2-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+"MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">The roles of "issuer", "holder", and "verifier" are used as defined by the VC Data Model <span>[<a href="#VC-DATA-MODEL-2.0" class="cite xref">VC-DATA-MODEL-2.0</a>]</span>.  The term "presentation" is also used as defined by this source, but the term "credential" is avoided in this specification to minimize confusion with other definitions.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<div id="terminology">
+<section id="section-2.1">
+        <h3 id="name-terminology">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+        </h3>
+<p id="section-2.1-1">The following terms are used throughout this series of documents:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">binding:
+  A mechanism, indicated in an issued JWP, for how to verify a presentation was created by the intended holder.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">linkability:
+  The property where multiple presentations may be correlated to a single issued JWP, either through consistency in the cryptographic integrity or due to particulars of JWP usage by an application. Such issued JWPs may be referred to as single-use, as multiple uses may leak unintended knowledge.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-4">unlinkability:
+  The property of issuance and presentation algorithms and of application usage, where one presentation can only be correlated with other presentations based on holder-disclosed information.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="abbreviations">
+<section id="section-2.2">
+        <h3 id="name-abbreviations">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-abbreviations" class="section-name selfRef">Abbreviations</a>
+        </h3>
+<ul class="compact">
+<li class="compact" id="section-2.2-1.1">ZKP: Zero-Knowledge Proof<a href="#section-2.2-1.1" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.2-1.2">JWP: JSON Web Proof (this specification)<a href="#section-2.2-1.2" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.2-1.3">JPA: JSON Proof Algorithms <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span><a href="#section-2.2-1.3" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.2-1.4">JPT: JSON Proof Token <span>[<a href="#I-D.ietf-jose-json-proof-token" class="cite xref">I-D.ietf-jose-json-proof-token</a>]</span><a href="#section-2.2-1.4" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="background">
+<section id="section-3">
+      <h2 id="name-background">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-background" class="section-name selfRef">Background</a>
+      </h2>
+<p id="section-3-1">A <em>JSON Web Proof (JWP)</em> is very similar to a JWS <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, with the addition that it can contain multiple individual secured payloads instead of a single one.  JWP-supporting algorithms are then able to separate and act on the individual payloads contained within.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">The intent of JSON Web Proofs is to establish a common container format for multiple payloads that can be integrity-verified against a cryptographic proof value also in the container.  It does not create or specify any cryptographic protocols, multi-party protocols, or detail any algorithm-specific capabilities.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">To fully support the newer privacy primitives, JWP utilizes the three roles of issuer, holder, and verifier, as defined by the VC Data Model <span>[<a href="#VC-DATA-MODEL-2.0" class="cite xref">VC-DATA-MODEL-2.0</a>]</span>.  There are also two forms of a JWP: the issued form created by an issuer for a holder, and the presented form created by a holder for a verifier.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">The four principal interactions used by JWP are <code>issue</code>, <code>confirm</code>, <code>present</code>, and <code>verify</code>.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">A JWP is initially created by the issuer using the <code>issue</code> interaction.  A successful result is an issued JWP that has a single issuer-protected header, one or more payloads, and an initial proof value that contains the issuing algorithm output.  The holder, upon receiving an issued JWP, then uses the <code>confirm</code> interaction to check the integrity protection of the header and all payloads using the proof value.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6">After validation, the holder uses the <code>present</code> interaction to apply any selective disclosure choices, perform privacy-preserving transformations for unlinkability, and add a presentation-protected header that ensures the resulting presented JWP cannot be replayed.  The verifier then uses the <code>verify</code> interaction to ensure the integrity protection of the protected headers and any disclosed payloads, along with verifying any additional ZKPs covering non-disclosed payloads.<a href="#section-3-6" class="pilcrow">¶</a></p>
+<p id="section-3-7">While <code>issue</code> and <code>confirm</code> only occur when a JWP is initially created by the issuer, the <code>present</code> and <code>verify</code> steps may be safely repeated by a holder on an issued JWP.  He resulting presented JWP is only unlinkable when supported by the underlying algorithm.<a href="#section-3-7" class="pilcrow">¶</a></p>
+<p id="section-3-8">Algorithm definitions that support JWPs are in separate companion specifications - just as the JSON Web Algorithms <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span> specification does for JWS and JWE <span>[<a href="#RFC7516" class="cite xref">RFC7516</a>]</span>.  The JSON Proof Algorithms (JPA) <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span> specification defines how an initial set of algorithms are used with JWP.<a href="#section-3-8" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="jwp-header">
+<section id="section-4">
+      <h2 id="name-jwp-header">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-jwp-header" class="section-name selfRef">JWP Header</a>
+      </h2>
+<p id="section-4-1">The members of the JSON object(s) representing the JWP Header describe
+the proof applied to the Protected Header and the Payload
+and optionally, additional properties of the JWP.
+The Header Parameter names within the JWP Header MUST be unique;
+JWP parsers MUST either reject JWPs with duplicate Header Parameter names
+or use a JSON parser that returns only the lexically last duplicate member name,
+as specified in Section 15.12 ("The JSON Object") of ECMAScript 5.1 <span>[<a href="#ECMAScript" class="cite xref">ECMAScript</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">Implementations are required to understand
+the specific Header Parameters defined by this specification
+that are designated as "MUST be understood"
+and process them in the manner defined in this specification.
+All other Header Parameters defined by this specification that
+are not so designated MUST be ignored when not understood.
+Unless listed as a critical Header Parameter, per <a href="#critDef" class="auto internal xref">Section 4.1.4</a>,
+all Header Parameters not defined by this specification
+MUST be ignored when not understood.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">There are three classes of Header Parameter names:
+Registered Header Parameter names, Public Header Parameter names,
+and Private Header Parameter names.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">These requirements are intentionally parallel to those in Section 4 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<div id="RegisteredHeaderParameterNames">
+<section id="section-4.1">
+        <h3 id="name-registered-header-parameter">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-registered-header-parameter" class="section-name selfRef">Registered Header Parameter Names</a>
+        </h3>
+<p id="section-4.1-1">The following Header Parameter names for use in JWPs are registered
+in the IANA "JSON Web Proof Header Parameters" registry established by <a href="#HdrReg" class="auto internal xref">Section 8.1</a>,
+with meanings as defined in the subsections below.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">As indicated by the common registry, Header Parameters used
+in the Issued Form (see <a href="#issued-form" class="auto internal xref">Section 5.1</a>) and the Presented Form <a href="#presented-form" class="auto internal xref">Section 5.2</a>
+share a common Header Parameter space;
+when a parameter is used by both forms, its usage must be compatible between them.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">These Header Parameters are intentionally parallel to those in Section 4.1 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<div id="algDef">
+<section id="section-4.1.1">
+          <h4 id="name-alg-algorithm-header-parame">
+<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-alg-algorithm-header-parame" class="section-name selfRef">"alg" (Algorithm) Header Parameter</a>
+          </h4>
+<p id="section-4.1.1-1">The <code>alg</code> (algorithm) Header Parameter identifies the cryptographic algorithm
+used to secure the JWP.
+The JWP Proof value is not valid if the <code>alg</code> value does not represent
+a supported algorithm or if there is not a key for use with that algorithm
+associated with the party that secured the content.
+<code>alg</code> values should either be registered in
+the IANA "JSON Web Proof Algorithms" registry
+established by <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span>
+or be a value that contains a Collision-Resistant Name.
+The <code>alg</code> value is a case-sensitive ASCII string containing a StringOrURI value.
+This Header Parameter MUST be present
+and MUST be understood and processed by implementations.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">A list of defined <code>alg</code> values for this use can be found
+in the IANA "JSON Web Proof Algorithms" registry
+established by <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span>;
+the initial contents of this registry are registered
+by <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span>.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="kidDef">
+<section id="section-4.1.2">
+          <h4 id="name-kid-key-id-header-parameter">
+<a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-kid-key-id-header-parameter" class="section-name selfRef">"kid" (Key ID) Header Parameter</a>
+          </h4>
+<p id="section-4.1.2-1">The <code>kid</code> (key ID) Header Parameter
+is a hint indicating which key was used to secure the JWP.
+This parameter allows originators to explicitly signal a change of
+key to recipients.
+The structure of the <code>kid</code> value is unspecified.
+Its value MUST be a case-sensitive string.
+Use of this Header Parameter is OPTIONAL.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.2-2">When used with a JWK,
+the <code>kid</code> value is used to match a JWK <code>kid</code> parameter value.<a href="#section-4.1.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="typDef">
+<section id="section-4.1.3">
+          <h4 id="name-typ-type-header-parameter">
+<a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-typ-type-header-parameter" class="section-name selfRef">"typ" (Type) Header Parameter</a>
+          </h4>
+<p id="section-4.1.3-1">The <code>typ</code> (type) Header Parameter is used by JWP applications to declare the
+media type (#IANA.MediaTypes) of this complete JWP.
+This is intended for use by the application when
+more than one kind of object could be present in
+an application data structure that can contain a JWP;
+the application can use this value to disambiguate among
+the different kinds of objects that might be present.
+It will typically not be used by applications when
+the kind of object is already known.
+This parameter is ignored by JWP implementations;
+any processing of this parameter is performed by the JWP application.
+Use of this Header Parameter is OPTIONAL.<a href="#section-4.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.3-2">Per <span>[<a href="#RFC2045" class="cite xref">RFC2045</a>]</span>, all media type values,
+subtype values, and parameter names are case insensitive.
+However, parameter values are case sensitive unless
+otherwise specified for the specific parameter.<a href="#section-4.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.3-3">To keep messages compact in common situations,
+it is RECOMMENDED that producers omit an "application/" prefix
+of a media type value in a <code>typ</code>
+Header Parameter when no other '/' appears in the media type value.
+A recipient using the media type value MUST treat it as if
+"application/" were prepended to any <code>typ</code> value not containing a '/'.
+For instance, a <code>typ</code> value of <code>example</code> SHOULD be used to represent
+the <code>application/example</code> media type,
+whereas the media type <code>application/example;part="1/2"</code> cannot
+be shortened to <code>example;part="1/2"</code>.<a href="#section-4.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.1.3-4">The <code>typ</code> value <code>jwp</code> can be used by applications
+to indicate that this object is a JWP using the JWP Compact Serialization.
+The <code>typ</code> value <code>jwp+json</code> can be used by applications
+to indicate that this object is a JWP using the JWP JSON Serialization.
+Other type values can also be used by applications.<a href="#section-4.1.3-4" class="pilcrow">¶</a></p>
+<p id="section-4.1.3-5">It is RECOMMENDED that the <code>typ</code> Header Parameter be used for explicit typing,
+in parallel to the recommendations in Section 3.11 of <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span>.<a href="#section-4.1.3-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="critDef">
+<section id="section-4.1.4">
+          <h4 id="name-crit-critical-header-parame">
+<a href="#section-4.1.4" class="section-number selfRef">4.1.4. </a><a href="#name-crit-critical-header-parame" class="section-name selfRef">"crit" (Critical) Header Parameter</a>
+          </h4>
+<p id="section-4.1.4-1">The <code>crit</code> (critical) Header Parameter indicates that extensions to
+this specification and/or <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span>
+are being used that MUST be understood and processed.
+Its value is an array listing the Header Parameter names
+present in the JWP Header that use those extensions.
+If any of the listed extension Header Parameters are not
+understood and supported by the recipient, then the JWP is invalid.
+Producers MUST NOT include Header Parameter names defined by
+this specification or <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span> for use with JWP,
+duplicate names, or
+names that do not occur as Header Parameter names within the JWP Header
+in the <code>crit</code> list.
+Producers MUST NOT use the empty list <code>[]</code> as the <code>crit</code> value.
+Recipients MAY consider the JWP to be invalid if the critical list
+contains any Header Parameter names defined by
+this specification or <span>[<a href="#I-D.ietf-jose-json-proof-algorithms" class="cite xref">I-D.ietf-jose-json-proof-algorithms</a>]</span> for use with JWP
+or if any other constraints on its use are violated.
+When used, this Header Parameter MUST be integrity protected;
+therefore, it MUST occur only within the JWP Protected Header.
+Use of this Header Parameter is OPTIONAL.
+This Header Parameter MUST be understood and processed by implementations.<a href="#section-4.1.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="proof_jwkDef">
+<section id="section-4.1.5">
+          <h4 id="name-proof_jwk-proof-jwk-header-">
+<a href="#section-4.1.5" class="section-number selfRef">4.1.5. </a><a href="#name-proof_jwk-proof-jwk-header-" class="section-name selfRef">"proof_jwk" (Proof JWK) Header Parameter</a>
+          </h4>
+<p id="section-4.1.5-1">The <code>proof_jwk</code> (Proof JWK) represents the public key used by the issuer
+for proof of possession.
+This key is represented as a JSON Web Key public key value.
+It MUST contain only public key parameters and
+SHOULD contain only the minimum JWK parameters necessary to represent the key;
+other JWK parameters included can be checked for consistency and honored, or they can be ignored.
+This Header Parameter MUST be present in the JWP issuer header parameters
+and MUST be understood and processed by implementations.<a href="#section-4.1.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation_jwkDef">
+<section id="section-4.1.6">
+          <h4 id="name-presentation_jwk-presentati">
+<a href="#section-4.1.6" class="section-number selfRef">4.1.6. </a><a href="#name-presentation_jwk-presentati" class="section-name selfRef">"presentation_jwk" (Presentation JWK) Header Parameter</a>
+          </h4>
+<p id="section-4.1.6-1">The <code>presentation_jwk</code> (Presentation JWK) represents the public key used by the holder
+for proof of possession.
+This key is represented as a JSON Web Key public key value.
+It MUST contain only public key parameters and
+SHOULD contain only the minimum JWK parameters necessary to represent the key;
+other JWK parameters included can be checked for consistency and honored, or they can be ignored.
+This Header Parameter MUST be present in the JWP issuer header parameters
+and MUST be understood and processed by implementations.<a href="#section-4.1.6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issDef">
+<section id="section-4.1.7">
+          <h4 id="name-iss-issuer-header-parameter">
+<a href="#section-4.1.7" class="section-number selfRef">4.1.7. </a><a href="#name-iss-issuer-header-parameter" class="section-name selfRef">"iss" (Issuer) Header Parameter</a>
+          </h4>
+<p id="section-4.1.7-1">The <code>iss</code> (issuer) Header Parameter identifies the principal that issued the JWP.
+The processing of this claim is generally application specific.
+The <code>iss</code> value is a case-sensitive string
+containing a StringOrURI value.
+Its definition is intentionally parallel to the <code>iss</code> claim defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>.
+Use of this Header Parameter is OPTIONAL.<a href="#section-4.1.7-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="audDef">
+<section id="section-4.1.8">
+          <h4 id="name-aud-audience-header-paramet">
+<a href="#section-4.1.8" class="section-number selfRef">4.1.8. </a><a href="#name-aud-audience-header-paramet" class="section-name selfRef">"aud" (Audience) Header Parameter</a>
+          </h4>
+<p id="section-4.1.8-1">The <code>aud</code> (audience) Header Parameter
+identifies the recipients that the JWP is intended for.
+Each principal intended to process the JWP MUST identify itself
+with a value in the audience Header Parameter.  If the principal
+processing the Header Parameter does not identify itself with a
+value in the <code>aud</code> Header Parameter when this Header Parameter is present,
+then the JWP MUST be rejected.
+In the general case,
+the <code>aud</code> value is an array of
+case-sensitive strings, each containing a StringOrURI value.
+In the special case when the JWP has one audience,
+the <code>aud</code> value MAY be a single
+case-sensitive string containing a StringOrURI value.
+The interpretation of audience values is generally application specific.
+Its definition is intentionally parallel to the <code>aud</code> claim defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>.
+Use of this Header Parameter is OPTIONAL.<a href="#section-4.1.8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="nonceDef">
+<section id="section-4.1.9">
+          <h4 id="name-nonce-nonce-header-paramete">
+<a href="#section-4.1.9" class="section-number selfRef">4.1.9. </a><a href="#name-nonce-nonce-header-paramete" class="section-name selfRef">"nonce" (Nonce) Header Parameter</a>
+          </h4>
+<p id="section-4.1.9-1">The <code>nonce</code> (nonce) Header Parameter is a case-sensitive string value
+used to associate protocol state with a JWP.
+This can be used, for instance, to mitigate replay attacks.
+The use of nonce values is generally protocol specific.
+Its definition is intentionally parallel to the <code>nonce</code> claim
+registered in the IANA "JSON Web Token Claims" registry (#IANA.JWT.Claims).
+Use of this Header Parameter is OPTIONAL.<a href="#section-4.1.9-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="claimsDef">
+<section id="section-4.1.10">
+          <h4 id="name-claims-claims-header-parame">
+<a href="#section-4.1.10" class="section-number selfRef">4.1.10. </a><a href="#name-claims-claims-header-parame" class="section-name selfRef">"claims" (Claims) Header Parameter</a>
+          </h4>
+<p id="section-4.1.10-1">The <code>claims</code> Header Parameter is an array listing the Claim Names
+corresponding to the JWP payloads, in the same order as the payloads.
+Each array value is a Claim Name, as defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>.
+Use of this Header Parameter is OPTIONAL.<a href="#section-4.1.10-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="PublicHeaderParameterName">
+<section id="section-4.2">
+        <h3 id="name-public-header-parameter-nam">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-public-header-parameter-nam" class="section-name selfRef">Public Header Parameter Names</a>
+        </h3>
+<p id="section-4.2-1">Additional Header Parameter names can be defined by those
+using JWPs. However, in order to prevent collisions, any new
+Header Parameter name should either be registered in the IANA
+"JSON Web Proof Header Parameters" registry
+established by
+<a href="#HdrReg" class="auto internal xref">Section 8.1</a> or be a Public Name
+(a value that contains a Collision-Resistant Name).
+In each case, the definer of the name
+or value needs to take reasonable precautions to make sure they
+are in control of the part of the namespace they use to
+define the Header Parameter name.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">New Header Parameters should be introduced sparingly, as
+they can result in non-interoperable JWPs.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="PrivateHeaderParameterName">
+<section id="section-4.3">
+        <h3 id="name-private-header-parameter-na">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-private-header-parameter-na" class="section-name selfRef">Private Header Parameter Names</a>
+        </h3>
+<p id="section-4.3-1">A producer and consumer of a JWP may agree to use Header Parameter names
+that are Private Names (names that are
+not Registered Header Parameter names <a href="#RegisteredHeaderParameterNames" class="auto internal xref">Section 4.1</a>
+or Public Header Parameter names <a href="#PublicHeaderParameterName" class="auto internal xref">Section 4.2</a>.)
+Unlike Public Header Parameter names,
+Private Header Parameter names are subject to collision and
+should be used with caution.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="jwp-forms">
+<section id="section-5">
+      <h2 id="name-jwp-forms">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-jwp-forms" class="section-name selfRef">JWP Forms</a>
+      </h2>
+<p id="section-5-1">A JWP is always in one of two forms: the issued form or the presented form.  A structural difference between the two forms is the number of protected headers.  An issued JWP has only one issuer protected header, while a presented JWP will have both the issuer protected header and an additional presentation protected header.  Each protected header is a JSON object that is serialized as a UTF-8 encoded octet string.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">All JWP forms have one or more payloads; each payload is an octet string.  The payloads are arranged in an array for which the ordering is preserved in all serializations.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">The JWP proof value is one or more octet strings that are only meant to be generated from and processed by the underlying JPA.  Internally, the proof value may contain one or more cryptographic statements that are used to check the integrity protection of the header(s) and all payloads.  Each of these statements may be a ZKP or a traditional cryptographic signature.  The algorithm is responsible for how these statements are serialized into a single proof value.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<div id="issued-form">
+<section id="section-5.1">
+        <h3 id="name-issued-form">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-issued-form" class="section-name selfRef">Issued Form</a>
+        </h3>
+<p id="section-5.1-1">When a JWP is first created, it is always in the issued form.  It will contain the issuer protected header along with all of the payloads.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">The issued form can only be confirmed by a holder as being correctly formed and protected. It is NOT to be verified directly or presented as-is to a verifier.  The holder SHOULD treat an issued JWP as private and use appropriately protected storage.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<div id="issuer-protected-header">
+<section id="section-5.1.1">
+          <h4 id="name-issuer-protected-header">
+<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-issuer-protected-header" class="section-name selfRef">Issuer Protected Header</a>
+          </h4>
+<p id="section-5.1.1-1">The issuer protected header applies to all of the payloads equally.  It is recommended that any payload-specific information not be included in this header and instead be handled outside of the cryptographic envelope.  This is to minimize any correlatable signals in the metadata, to reduce a verifier's ability to group different presentations based on small header variations from the same issuer.
+The protected header is always disclosed, whereas payloads can be selectively disclosed.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-2">Every issuer protected header MUST have an <code>alg</code> value that identifies a valid JSON Proof Algorithm (JPA).<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-3">For example:<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.1.1-4">
+<pre>{
+  "alg": "BBS"
+}
+
+</pre><a href="#section-5.1.1-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="issuer-payloads">
+<section id="section-5.1.2">
+          <h4 id="name-issuer-payloads">
+<a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-issuer-payloads" class="section-name selfRef">Issuer Payloads</a>
+          </h4>
+<p id="section-5.1.2-1">Payloads are represented and processed as individual octet strings and arranged in an ordered array when there are multiple payloads.  All application context of the placement and encoding of each payload value is out of scope of this specification and SHOULD be well defined and documented by the application or other specifications.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-2">JPAs MAY provide software interfaces that perform the encoding of individual payloads which accept native inputs such as numbers, sets, or elliptic curve points.  This enables the algorithm to support advanced features such as blinded values and predicate proofs.  These interfaces would generate the octet string encoded payload value as well as include protection of that payload in the combined proof value.<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issuer-proof">
+<section id="section-5.1.3">
+          <h4 id="name-issuer-proof">
+<a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-issuer-proof" class="section-name selfRef">Issuer Proof</a>
+          </h4>
+<p id="section-5.1.3-1">The proof value is one or more binary octet strings that are opaque to applications.  Individual proof-supporting algorithms are responsible for the contents and security of the proof value, along with any required internal structures.<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-2">The issuer proof is used by the holder to perform validation, checking that the issuer header and all payloads are properly encoded and protected by the given proof.<a href="#section-5.1.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="presented-form">
+<section id="section-5.2">
+        <h3 id="name-presented-form">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-presented-form" class="section-name selfRef">Presented Form</a>
+        </h3>
+<p id="section-5.2-1">When an issued JWP is presented, it undergoes a transformation that adds a presentation protected header. It may also have one or more payloads hidden, disclosing only a subset of the original issued payloads.  The proof value will always be updated to add integrity protection of the presentation header along with the necessary cryptographic statements to verify the presented JWP.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">When supported by the underling JPA, a single issued JWP can be used to safely generate multiple presented JWPs without becoming correlatable.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">A JWP may also be single use, where an issued JWP can only be used once to generate a presented form. In this case, any additional presentations would be inherently correlatable.  These are still useful for applications needing only selective disclosure or where new unique issued JWPs can be retrieved easily.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<div id="presentation-protected-header">
+<section id="section-5.2.1">
+          <h4 id="name-presentation-protected-head">
+<a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-presentation-protected-head" class="section-name selfRef">Presentation Protected Header</a>
+          </h4>
+<p id="section-5.2.1-1">The presented form of a JWP MUST contain a presentation protected header.  It is added by the holder and MUST be integrity protected by the underling JPA.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-2">This header is used to ensure that a presented JWP cannot be replayed and is cryptographically bound to the verifier it was presented to.<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.1-3">While there are not any required values in the presentation header, it MUST contain one or more header values that uniquely identify the presented JWP to both the holder and verifier.  For example, header values that would satisfy this requirement include <code>nonce</code> and <code>aud</code>.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation-payloads">
+<section id="section-5.2.2">
+          <h4 id="name-presentation-payloads">
+<a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-presentation-payloads" class="section-name selfRef">Presentation Payloads</a>
+          </h4>
+<p id="section-5.2.2-1">Any one or more payloads may be non-disclosed in a presented JWP.  When a payload is not disclosed, the position of other payloads does not change; the resulting array will simply be sparse and only contain the disclosed payloads.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-2">The disclosed payloads will always be in the same array positions to preserve any index-based references by the application between the issued and presented forms of the JWP.  How the sparse array is represented is specific to the serialization used.<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.2-3">Algorithms MAY support including a proof about a payload in the presentation.  Applications then treat that proven payload the same as any other non-disclosed payload and do not include it in the presented array of payloads.
+Rather, proofs about payloads, such as "age &gt;= 21", are included in the presentation proof.<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation-proof">
+<section id="section-5.2.3">
+          <h4 id="name-presentation-proof">
+<a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-presentation-proof" class="section-name selfRef">Presentation Proof</a>
+          </h4>
+<p id="section-5.2.3-1">The proof value of a presented JWP will always be different than the issued proof.  At a minimum, it MUST be updated to include protection of the added presentation header.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-2">Algorithms SHOULD generate an un-correlatable presentation proof in order to support multiple presentations from a single issued JWP.<a href="#section-5.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-3">Any payload specific proofs are included in the single proof value for the presented JWP. The JPA is responsible for internally encoding multiple proof values into one and cryptographically binding them to a specific payload from the issuer.<a href="#section-5.2.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="serializations">
+<section id="section-6">
+      <h2 id="name-serializations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-serializations" class="section-name selfRef">Serializations</a>
+      </h2>
+<p id="section-6-1">Each disclosed payload MUST be base64url encoded when preparing it to be serialized.  The headers and proof are also individually base64url encoded.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">Like JWS, JWP supports both a Compact Serialization and a JSON Serialization.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<div id="compact-serialization">
+<section id="section-6.1">
+        <h3 id="name-compact-serialization">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-compact-serialization" class="section-name selfRef">Compact Serialization</a>
+        </h3>
+<p id="section-6.1-1">The individually encoded payloads are concatenated with the <code>~</code> character to form an ordered delimited array. Any non-disclosed payloads are left blank, resulting in sequential <code>~~</code> characters such that all payload positions are preserved.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">A payload which is disclosed but which contains no data (i.e. a zero-length octet string) is encoded as a single <code>_</code> character of data, which is not a valid result from base64url-encoding a value.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">Additionally, an algorithm MAY supply multiple octet strings for a proof. These are concatenated with the <code>~</code> character to form an ordered delimited array.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-4">The headers, concatenated payloads, and proof value are then concatenated with a <code>.</code> character to form the final compact serialization.  The issued form will only contain one header and always have three <code>.</code> separated parts.  The presented form will always have four <code>.</code> separated parts, the issued header, followed by the protected header, then the payloads and the proof.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<div class="lang-wrapped sourcecode" id="section-6.1-5">
+<pre>eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
+mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
+yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
+MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.j9vr_s3K9rDnHlaNTtLigKmFyxcoHIiW
+Opfd4ySTl5F_lZWTIYToLFCxHohtzzC8tqX5V1iUkLYbn_LBo2IZO7NTqwcFMyBacLOiR
+ztAjDJgUG_q3D4nVKIH2sYH8MycsBY9P-_36AItaqmMl9O8anM7qjDagtXmacdn9zyReQ
+JogkX418U-FgempMQzD5zOYINgQl9faHoib-WqpI1n5KTBMZvlCkXT_IfgH-6WUfVD-6F
+1VGSjOglliutVCk6zYaFotYkHwbTVH4fPUjsIhGS0LQ0tqN94lmwYnoW7DFsXdTGvxwR-
+bNSoglZb8NzWLLTWQrHhgcEj94chupK9KNr3mt43JCNCpCm-UvhdkgJpCRIXylwM61Q75
+Ml0AkaGuurfwwMFIQ-KZmwMrMLY0TRG-TStLK_aRIYuhVjP0JzhLHPwmVIEBHZqtcHxhR
+mZLM_NKO5r9Gh31YXrQqebEsgYsr8ZDwzoDhUlB6FUamw
+
+</pre><a href="#section-6.1-5" class="pilcrow">¶</a>
+</div>
+<blockquote id="section-6.1-6">
+          <p id="section-6.1-6.1">Figure: Compact Serialization of Presentation<a href="#section-6.1-6.1" class="pilcrow">¶</a></p>
+</blockquote>
+</section>
+</div>
+<div id="json-serialization">
+<section id="section-6.2">
+        <h3 id="name-json-serialization">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-json-serialization" class="section-name selfRef">JSON Serialization</a>
+        </h3>
+<p id="section-6.2-1">Non-disclosed payloads in the JSON serialization are represented with a <code>null</code> value in the <code>payloads</code> array. A zero-length payload is represented as a zero-length base64url encoded sequence, the empty string <code>""</code>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">Proofs are represented as an array of one or more encoded octet strings.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">This example flattened JSON serialization shows the presentation form with both the issuer and presentation headers, and with the first and third payloads hidden.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<div class="lang-wrapped sourcecode" id="section-6.2-4">
+<pre>{
+  "presentation": "eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2
+       lwaWVudC5leGFtcGxlLmNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ",
+  "issuer": "eyJraWQiOiJIamZjcHlqdVpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRu
+       RXhSMERValU4IiwiYWxnIjoiQkJTIn0",
+  "payloads": [
+    "MTcxNDUyMTYwMA",
+    "MTcxNzE5OTk5OQ",
+    "IkRvZSI",
+    "IkpheSI",
+    null,
+    null,
+    null
+  ],
+  "proof": "j9vr_s3K9rDnHlaNTtLigKmFyxcoHIiWOpfd4ySTl5F_lZWTIYToLFCxH
+       ohtzzC8tqX5V1iUkLYbn_LBo2IZO7NTqwcFMyBacLOiRztAjDJgUG_q3D4nVKI
+       H2sYH8MycsBY9P-_36AItaqmMl9O8anM7qjDagtXmacdn9zyReQJogkX418U-F
+       gempMQzD5zOYINgQl9faHoib-WqpI1n5KTBMZvlCkXT_IfgH-6WUfVD-6F1VGS
+       jOglliutVCk6zYaFotYkHwbTVH4fPUjsIhGS0LQ0tqN94lmwYnoW7DFsXdTGvx
+       wR-bNSoglZb8NzWLLTWQrHhgcEj94chupK9KNr3mt43JCNCpCm-UvhdkgJpCRI
+       XylwM61Q75Ml0AkaGuurfwwMFIQ-KZmwMrMLY0TRG-TStLK_aRIYuhVjP0JzhL
+       HPwmVIEBHZqtcHxhRmZLM_NKO5r9Gh31YXrQqebEsgYsr8ZDwzoDhUlB6FUamw
+       "
+}
+
+</pre><a href="#section-6.2-4" class="pilcrow">¶</a>
+</div>
+<blockquote id="section-6.2-5">
+          <p id="section-6.2-5.1">Figure: JSON Serialization of Presentation<a href="#section-6.2-5.1" class="pilcrow">¶</a></p>
+</blockquote>
+</section>
+</div>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-7">
+      <h2 id="name-security-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-7-1">Notes to be expanded:<a href="#section-7-1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-7-2.1">Requirements for supporting algorithms, see JPA<a href="#section-7-2.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-7-2.2">Application interface for verification<a href="#section-7-2.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-7-2.3">Data minimization of the protected header<a href="#section-7-2.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-7-2.4">To prevent accidentally introducing linkability, when an issuer uses the same key with the same grouping of payload types, they SHOULD also use the same issuer protected header.  Each of these headers SHOULD have the same base64url-serialized value to avoid any non-deterministic JSON serialization.<a href="#section-7-2.4" class="pilcrow">¶</a>
+</li>
+      </ul>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-8">
+      <h2 id="name-iana-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-8-1">The following registration procedure is used for all the
+registries established by this specification.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">Values are registered on a Specification Required <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span> basis
+after a three-week review period on the jose-reg-review@ietf.org
+mailing list, on the advice of one or more Designated Experts.
+However, to allow for the allocation of values prior to publication,
+the Designated Experts may approve registration once they are
+satisfied that such a specification will be published.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">Registration requests sent to the mailing list for review should use
+an appropriate subject (e.g., "Request to register JWP header parameter: example").<a href="#section-8-3" class="pilcrow">¶</a></p>
+<p id="section-8-4">Within the review period, the Designated Experts will either approve or deny
+the registration request, communicating this decision to the review list and IANA.
+Denials should include an explanation and, if applicable,
+suggestions as to how to make the request successful.
+Registration requests that are undetermined for
+a period longer than 21 days can be brought to the IESG's attention
+(using the iesg@ietf.org mailing list) for resolution.<a href="#section-8-4" class="pilcrow">¶</a></p>
+<p id="section-8-5">Criteria that should be applied by the Designated Experts includes
+determining whether the proposed registration duplicates existing functionality,
+whether it is likely to be of general applicability
+or useful only for a single application,
+and whether the registration description is clear.<a href="#section-8-5" class="pilcrow">¶</a></p>
+<p id="section-8-6">IANA must only accept registry updates from the Designated Experts and should direct
+all requests for registration to the review mailing list.<a href="#section-8-6" class="pilcrow">¶</a></p>
+<p id="section-8-7">It is suggested that multiple Designated Experts be appointed who are able to
+represent the perspectives of different applications using this specification,
+in order to enable broadly informed review of registration decisions.
+In cases where a registration decision could be perceived as
+creating a conflict of interest for a particular Expert,
+that Expert should defer to the judgment of the other Experts.<a href="#section-8-7" class="pilcrow">¶</a></p>
+<div id="HdrReg">
+<section id="section-8.1">
+        <h3 id="name-json-web-proof-header-param">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-json-web-proof-header-param" class="section-name selfRef">JSON Web Proof Header Parameters Registry</a>
+        </h3>
+<p id="section-8.1-1">This specification establishes the
+IANA "JSON Web Proof Header Parameters" registry
+for Header Parameter names.
+The registry records the Header Parameter name
+and a reference to the specification that defines it.
+The same Header Parameter name can be registered multiple times,
+provided that the parameter usage is compatible between the specifications.
+Different registrations of the same Header Parameter name
+will typically use different Header Parameter Usage Locations values.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<div id="HdrTemplate">
+<section id="section-8.1.1">
+          <h4 id="name-registration-template">
+<a href="#section-8.1.1" class="section-number selfRef">8.1.1. </a><a href="#name-registration-template" class="section-name selfRef">Registration Template</a>
+          </h4>
+<ul class="compact">
+<li class="compact" id="section-8.1.1-1.1">Header Parameter Name: The name requested (e.g., "kid"). Because a core goal of this specification is for the resulting representations to be compact, it is RECOMMENDED that the name be short -- not to exceed 8 characters without a compelling reason to do so. This name is case sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.<a href="#section-8.1.1-1.1" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.2">Header Parameter Description: Brief description of the Header Parameter (e.g., "Key ID").<a href="#section-8.1.1-1.2" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.3">Header Parameter Usage Location(s): The Header Parameter usage locations, which should be one or more of the values <code>Issued</code> or <code>Presented</code>.  Other values may be used with the approval of a Designated Expert.<a href="#section-8.1.1-1.3" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.4">Change Controller: For Standards Track RFCs, list the "IETF". For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.<a href="#section-8.1.1-1.4" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.5">Specification Document(s): Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.<a href="#section-8.1.1-1.5" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+<div id="HdrContents">
+<section id="section-8.1.2">
+          <h4 id="name-initial-registry-contents">
+<a href="#section-8.1.2" class="section-number selfRef">8.1.2. </a><a href="#name-initial-registry-contents" class="section-name selfRef">Initial Registry Contents</a>
+          </h4>
+<p id="section-8.1.2-1">This section registers the Header Parameter names defined in
+<a href="#RegisteredHeaderParameterNames" class="auto internal xref">Section 4.1</a> in this registry.<a href="#section-8.1.2-1" class="pilcrow">¶</a></p>
+<div id="algorithm-header-parameter">
+<section id="section-8.1.2.1">
+            <h5 id="name-algorithm-header-parameter">
+<a href="#section-8.1.2.1" class="section-number selfRef">8.1.2.1. </a><a href="#name-algorithm-header-parameter" class="section-name selfRef">Algorithm Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.1-1.1">Header Parameter Name: <code>alg</code><a href="#section-8.1.2.1-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.1-1.2">Header Parameter Description: Algorithm<a href="#section-8.1.2.1-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.1-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.1-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.1-1.4">Change Controller: IETF<a href="#section-8.1.2.1-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.1-1.5">Specification Document(s): <a href="#algDef" class="auto internal xref">Section 4.1.1</a> of this specification<a href="#section-8.1.2.1-1.5" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+<div id="key-id-header-parameter">
+<section id="section-8.1.2.2">
+            <h5 id="name-key-id-header-parameter">
+<a href="#section-8.1.2.2" class="section-number selfRef">8.1.2.2. </a><a href="#name-key-id-header-parameter" class="section-name selfRef">Key ID Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.2-1.1">Header Parameter Name: <code>kid</code><a href="#section-8.1.2.2-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.2-1.2">Header Parameter Description: Key ID<a href="#section-8.1.2.2-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.2-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.2-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.2-1.4">Change Controller: IETF<a href="#section-8.1.2.2-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.2-1.5">Specification Document(s): <a href="#kidDef" class="auto internal xref">Section 4.1.2</a> of this specification<a href="#section-8.1.2.2-1.5" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+<div id="type-header-parameter">
+<section id="section-8.1.2.3">
+            <h5 id="name-type-header-parameter">
+<a href="#section-8.1.2.3" class="section-number selfRef">8.1.2.3. </a><a href="#name-type-header-parameter" class="section-name selfRef">Type Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.3-1.1">Header Parameter Name: <code>typ</code><a href="#section-8.1.2.3-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.3-1.2">Header Parameter Description: Type<a href="#section-8.1.2.3-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.3-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.3-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.3-1.4">Change Controller: IETF<a href="#section-8.1.2.3-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.3-1.5">Specification Document(s): <a href="#typDef" class="auto internal xref">Section 4.1.3</a> of this specification<a href="#section-8.1.2.3-1.5" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+<div id="critical-header-parameter">
+<section id="section-8.1.2.4">
+            <h5 id="name-critical-header-parameter">
+<a href="#section-8.1.2.4" class="section-number selfRef">8.1.2.4. </a><a href="#name-critical-header-parameter" class="section-name selfRef">Critical Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.4-1.1">Header Parameter Name: <code>crit</code><a href="#section-8.1.2.4-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.4-1.2">Header Parameter Description: Critical<a href="#section-8.1.2.4-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.4-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.4-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.4-1.4">Change Controller: IETF<a href="#section-8.1.2.4-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.4-1.5">Specification Document(s): <a href="#critDef" class="auto internal xref">Section 4.1.4</a> of this specification<a href="#section-8.1.2.4-1.5" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+<div id="issuer-header-parameter">
+<section id="section-8.1.2.5">
+            <h5 id="name-issuer-header-parameter">
+<a href="#section-8.1.2.5" class="section-number selfRef">8.1.2.5. </a><a href="#name-issuer-header-parameter" class="section-name selfRef">Issuer Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.5-1.1">Header Parameter Name: <code>iss</code><a href="#section-8.1.2.5-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.5-1.2">Header Parameter Description: Issuer<a href="#section-8.1.2.5-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.5-1.3">Header Parameter Usage Location(s): Issued, Presented<a href="#section-8.1.2.5-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.5-1.4">Change Controller: IETF<a href="#section-8.1.2.5-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.5-1.5">Specification Document(s): <a href="#issDef" class="auto internal xref">Section 4.1.7</a> of this specification<a href="#section-8.1.2.5-1.5" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+<div id="audience-header-parameter">
+<section id="section-8.1.2.6">
+            <h5 id="name-audience-header-parameter">
+<a href="#section-8.1.2.6" class="section-number selfRef">8.1.2.6. </a><a href="#name-audience-header-parameter" class="section-name selfRef">Audience Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.6-1.1">Header Parameter Name: <code>aud</code><a href="#section-8.1.2.6-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.6-1.2">Header Parameter Description: Audience<a href="#section-8.1.2.6-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.6-1.3">Header Parameter Usage Location(s): Presented<a href="#section-8.1.2.6-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.6-1.4">Change Controller: IETF<a href="#section-8.1.2.6-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.6-1.5">Specification Document(s): <a href="#audDef" class="auto internal xref">Section 4.1.8</a> of this specification<a href="#section-8.1.2.6-1.5" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+<div id="nonce-header-parameter">
+<section id="section-8.1.2.7">
+            <h5 id="name-nonce-header-parameter">
+<a href="#section-8.1.2.7" class="section-number selfRef">8.1.2.7. </a><a href="#name-nonce-header-parameter" class="section-name selfRef">Nonce Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.7-1.1">Header Parameter Name: <code>nonce</code><a href="#section-8.1.2.7-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.7-1.2">Header Parameter Description: Nonce<a href="#section-8.1.2.7-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.7-1.3">Header Parameter Usage Location(s): Presented<a href="#section-8.1.2.7-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.7-1.4">Change Controller: IETF<a href="#section-8.1.2.7-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.7-1.5">Specification Document(s): <a href="#nonceDef" class="auto internal xref">Section 4.1.9</a> of this specification<a href="#section-8.1.2.7-1.5" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+<div id="claims-header-parameter">
+<section id="section-8.1.2.8">
+            <h5 id="name-claims-header-parameter">
+<a href="#section-8.1.2.8" class="section-number selfRef">8.1.2.8. </a><a href="#name-claims-header-parameter" class="section-name selfRef">Claims Header Parameter</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.1.2.8-1.1">Header Parameter Name: <code>claims</code><a href="#section-8.1.2.8-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.8-1.2">Header Parameter Description: claims<a href="#section-8.1.2.8-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.8-1.3">Header Parameter Usage Location(s): Issued<a href="#section-8.1.2.8-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.8-1.4">Change Controller: IETF<a href="#section-8.1.2.8-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.1.2.8-1.5">Specification Document(s): <a href="#claimsDef" class="auto internal xref">Section 4.1.10</a> of this specification<a href="#section-8.1.2.8-1.5" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="MediaReg">
+<section id="section-8.2">
+        <h3 id="name-media-type-registration">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-media-type-registration" class="section-name selfRef">Media Type Registration</a>
+        </h3>
+<div id="MediaContents">
+<section id="section-8.2.1">
+          <h4 id="name-registry-contents">
+<a href="#section-8.2.1" class="section-number selfRef">8.2.1. </a><a href="#name-registry-contents" class="section-name selfRef">Registry Contents</a>
+          </h4>
+<p id="section-8.2.1-1">This section registers the <code>application/jwp</code>
+media type <span>[<a href="#RFC2046" class="cite xref">RFC2046</a>]</span>
+in the IANA "Media Types" registry (#IANA.MediaTypes)
+in the manner described in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>,
+which can be used to indicate that the content is
+a JWP using the JWP Compact Serialization.
+This section also registers the <code>application/jwp+json</code>
+media type in the IANA "Media Types" registry,
+which can be used to indicate that the content is
+a JWP using the JWP JSON Serialization.<a href="#section-8.2.1-1" class="pilcrow">¶</a></p>
+<div id="the-application-jwp-media-type">
+<section id="section-8.2.1.1">
+            <h5 id="name-the-application-jwp-media-t">
+<a href="#section-8.2.1.1" class="section-number selfRef">8.2.1.1. </a><a href="#name-the-application-jwp-media-t" class="section-name selfRef">The application/jwp Media Type</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.2.1.1-1.1">Type name: application<a href="#section-8.2.1.1-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.2">Subtype name: jwp<a href="#section-8.2.1.1-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.3">Required parameters: n/a<a href="#section-8.2.1.1-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.4">Optional parameters: n/a<a href="#section-8.2.1.1-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.5">Encoding considerations: 8bit; application/jwp values are encoded as a series of base64url-encoded values (some of which may be the empty string), each separated from the next by a single period ('.') character.<a href="#section-8.2.1.1-1.5" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.6">Security considerations: See the Security Considerations section of this specification.<a href="#section-8.2.1.1-1.6" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.7">Interoperability considerations: n/a<a href="#section-8.2.1.1-1.7" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.8">Published specification: this specification<a href="#section-8.2.1.1-1.8" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.9">Applications that use this media type: TBD<a href="#section-8.2.1.1-1.9" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.10">Fragment identifier considerations: n/a<a href="#section-8.2.1.1-1.10" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.11">
+                <p id="section-8.2.1.1-1.11.1">Additional information:<a href="#section-8.2.1.1-1.11.1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-8.2.1.1-1.11.2.1">Magic number(s): n/a<a href="#section-8.2.1.1-1.11.2.1" class="pilcrow">¶</a>
+</li>
+                  <li class="compact" id="section-8.2.1.1-1.11.2.2">File extension(s): n/a<a href="#section-8.2.1.1-1.11.2.2" class="pilcrow">¶</a>
+</li>
+                  <li class="compact" id="section-8.2.1.1-1.11.2.3">Macintosh file type code(s): n/a<a href="#section-8.2.1.1-1.11.2.3" class="pilcrow">¶</a>
+</li>
+                </ul>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.12">Person &amp; email address to contact for further information: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1.1-1.12" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.13">Intended usage: COMMON<a href="#section-8.2.1.1-1.13" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.14">Restrictions on usage: none<a href="#section-8.2.1.1-1.14" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.15">Author: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1.1-1.15" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.16">Change Controller: IETF<a href="#section-8.2.1.1-1.16" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.1-1.17">Provisional registration? No<a href="#section-8.2.1.1-1.17" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+<div id="the-application-jwp-json-media-type">
+<section id="section-8.2.1.2">
+            <h5 id="name-the-application-jwpjson-med">
+<a href="#section-8.2.1.2" class="section-number selfRef">8.2.1.2. </a><a href="#name-the-application-jwpjson-med" class="section-name selfRef">The application/jwp+json Media Type</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.2.1.2-1.1">Type name: application<a href="#section-8.2.1.2-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.2">Subtype name: jwp+json<a href="#section-8.2.1.2-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.3">Required parameters: n/a<a href="#section-8.2.1.2-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.4">Optional parameters: n/a<a href="#section-8.2.1.2-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.5">Encoding considerations: 8bit; application/jwp+json values are represented as a JSON Object; UTF-8 encoding SHOULD be employed for the JSON object.<a href="#section-8.2.1.2-1.5" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.6">Security considerations: See the Security Considerations section of this specification<a href="#section-8.2.1.2-1.6" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.7">Interoperability considerations: n/a<a href="#section-8.2.1.2-1.7" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.8">Published specification: this specification<a href="#section-8.2.1.2-1.8" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.9">Applications that use this media type: TBD<a href="#section-8.2.1.2-1.9" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.10">Fragment identifier considerations: n/a<a href="#section-8.2.1.2-1.10" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.11">
+                <p id="section-8.2.1.2-1.11.1">Additional information:<a href="#section-8.2.1.2-1.11.1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-8.2.1.2-1.11.2.1">Magic number(s): n/a<a href="#section-8.2.1.2-1.11.2.1" class="pilcrow">¶</a>
+</li>
+                  <li class="compact" id="section-8.2.1.2-1.11.2.2">File extension(s): n/a<a href="#section-8.2.1.2-1.11.2.2" class="pilcrow">¶</a>
+</li>
+                  <li class="compact" id="section-8.2.1.2-1.11.2.3">Macintosh file type code(s): n/a<a href="#section-8.2.1.2-1.11.2.3" class="pilcrow">¶</a>
+</li>
+                </ul>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.12">Person &amp; email address to contact for further information: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1.2-1.12" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.13">Intended usage: COMMON<a href="#section-8.2.1.2-1.13" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.14">Restrictions on usage: none<a href="#section-8.2.1.2-1.14" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.15">Author: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.2.1.2-1.15" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.16">Change Controller: IETF<a href="#section-8.2.1.2-1.16" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.2.1.2-1.17">Provisional registration? No<a href="#section-8.2.1.2-1.17" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<section id="section-9">
+      <h2 id="name-references">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<section id="section-9.1">
+        <h3 id="name-normative-references">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-jose-json-proof-algorithms">[I-D.ietf-jose-json-proof-algorithms]</dt>
+        <dd>
+<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Algorithms"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-algorithms-04</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-04">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-04</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-jose-json-proof-token">[I-D.ietf-jose-json-proof-token]</dt>
+        <dd>
+<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">D. Waite</span>, <span class="refTitle">"JSON Proof Token"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-proof-token-04</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-04">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-token-04</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7519">[RFC7519]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<section id="section-9.2">
+        <h3 id="name-informative-references">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="ECMAScript">[ECMAScript]</dt>
+        <dd>
+<span class="refAuthor">Ecma International</span>, <span class="refTitle">"ECMAScript Language Specification, 5.1 Edition"</span>, <span class="seriesInfo">ECMA 262</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="http://www.ecma-international.org/ecma-262/5.1/ECMA-262.pdf">http://www.ecma-international.org/ecma-262/5.1/ECMA-262.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.irtf-cfrg-bbs-signatures">[I-D.irtf-cfrg-bbs-signatures]</dt>
+        <dd>
+<span class="refAuthor">Looker, T.</span>, <span class="refAuthor">Kalos, V.</span>, <span class="refAuthor">Whitehead, A.</span>, and <span class="refAuthor">M. Lodder</span>, <span class="refTitle">"The BBS Signature Scheme"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bbs-signatures-06</span>, <time datetime="2024-06-26" class="refDate">26 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2045">[RFC2045]</dt>
+        <dd>
+<span class="refAuthor">Freed, N.</span> and <span class="refAuthor">N. Borenstein</span>, <span class="refTitle">"Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies"</span>, <span class="seriesInfo">RFC 2045</span>, <span class="seriesInfo">DOI 10.17487/RFC2045</span>, <time datetime="1996-11" class="refDate">November 1996</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2045">https://www.rfc-editor.org/info/rfc2045</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2046">[RFC2046]</dt>
+        <dd>
+<span class="refAuthor">Freed, N.</span> and <span class="refAuthor">N. Borenstein</span>, <span class="refTitle">"Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types"</span>, <span class="seriesInfo">RFC 2046</span>, <span class="seriesInfo">DOI 10.17487/RFC2046</span>, <time datetime="1996-11" class="refDate">November 1996</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2046">https://www.rfc-editor.org/info/rfc2046</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5226">[RFC5226]</dt>
+        <dd>
+<span class="refAuthor">Narten, T.</span> and <span class="refAuthor">H. Alvestrand</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">RFC 5226</span>, <span class="seriesInfo">DOI 10.17487/RFC5226</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5226">https://www.rfc-editor.org/info/rfc5226</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6838">[RFC6838]</dt>
+        <dd>
+<span class="refAuthor">Freed, N.</span>, <span class="refAuthor">Klensin, J.</span>, and <span class="refAuthor">T. Hansen</span>, <span class="refTitle">"Media Type Specifications and Registration Procedures"</span>, <span class="seriesInfo">BCP 13</span>, <span class="seriesInfo">RFC 6838</span>, <span class="seriesInfo">DOI 10.17487/RFC6838</span>, <time datetime="2013-01" class="refDate">January 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6838">https://www.rfc-editor.org/info/rfc6838</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7515">[RFC7515]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Signature (JWS)"</span>, <span class="seriesInfo">RFC 7515</span>, <span class="seriesInfo">DOI 10.17487/RFC7515</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7515">https://www.rfc-editor.org/info/rfc7515</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7516">[RFC7516]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span> and <span class="refAuthor">J. Hildebrand</span>, <span class="refTitle">"JSON Web Encryption (JWE)"</span>, <span class="seriesInfo">RFC 7516</span>, <span class="seriesInfo">DOI 10.17487/RFC7516</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7516">https://www.rfc-editor.org/info/rfc7516</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7518">[RFC7518]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refTitle">"JSON Web Algorithms (JWA)"</span>, <span class="seriesInfo">RFC 7518</span>, <span class="seriesInfo">DOI 10.17487/RFC7518</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7518">https://www.rfc-editor.org/info/rfc7518</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8725">[RFC8725]</dt>
+        <dd>
+<span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Hardt, D.</span>, and <span class="refAuthor">M. Jones</span>, <span class="refTitle">"JSON Web Token Best Current Practices"</span>, <span class="seriesInfo">BCP 225</span>, <span class="seriesInfo">RFC 8725</span>, <span class="seriesInfo">DOI 10.17487/RFC8725</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8725">https://www.rfc-editor.org/info/rfc8725</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="VC-DATA-MODEL-2.0">[VC-DATA-MODEL-2.0]</dt>
+      <dd>
+<span class="refAuthor">Sporny, M.</span>, <span class="refAuthor">Jr, T. T.</span>, <span class="refAuthor">Herman, I.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">G. Cohen</span>, <span class="refTitle">"Verifiable Credentials Data Model 2.0"</span>, <time datetime="2023-12-27" class="refDate">27 December 2023</time>, <span>&lt;<a href="https://www.w3.org/TR/vc-data-model-2.0">https://www.w3.org/TR/vc-data-model-2.0</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</section>
+<div id="acknowledgements">
+<section id="appendix-A">
+      <h2 id="name-acknowledgements">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
+      </h2>
+<p id="appendix-A-1">This work was incubated in the DIF <a href="https://identity.foundation/working-groups/crypto.html">Applied Cryptography Working Group</a>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">We would like to thank
+Brent Zundel
+for his valuable contributions to this specification.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="registries">
+<section id="appendix-B">
+      <h2 id="name-registries">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-registries" class="section-name selfRef">Registries</a>
+      </h2>
+<ul class="compact">
+<li class="compact" id="appendix-B-1.1">Issuer Protected Header<a href="#appendix-B-1.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-1.2">Presentation Protected Header<a href="#appendix-B-1.2" class="pilcrow">¶</a>
+</li>
+      </ul>
+</section>
+</div>
+<div id="document-history">
+<section id="appendix-C">
+      <h2 id="name-document-history">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
+      </h2>
+<p id="appendix-C-1">[[ To be removed from the final specification ]]<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">-04<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-3.1">Refactoring figures and examples to be built from a common set across all three documents<a href="#appendix-C-3.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.2">Move single-use example appendix from JWP to JPA<a href="#appendix-C-3.2" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-4">-03<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-5.1">Improvements resulting from a full proofreading.<a href="#appendix-C-5.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-5.2">Populated IANA Considerations section.<a href="#appendix-C-5.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-5.3">Specified JWP Header Parameters.<a href="#appendix-C-5.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-5.4">Specified representation of zero-length disclosed payloads for the compact serialization.<a href="#appendix-C-5.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-5.5">Specified that algorithms may supply multiple octet strings for the proof, which are separated by <code>~</code> characters in the compact serialization.<a href="#appendix-C-5.5" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-5.6">Updated to use BBS draft -05.<a href="#appendix-C-5.6" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-5.7">Added Terminology Section.<a href="#appendix-C-5.7" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-6">-02<a href="#appendix-C-6" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-7.1">Update reference to current BBS algorithm<a href="#appendix-C-7.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-8">-01<a href="#appendix-C-8" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-9.1">Correct cross-references within group.<a href="#appendix-C-9.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-10">-00<a href="#appendix-C-10" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-11.1">Created initial working group draft based on draft-jmiller-jose-json-web-proof-01<a href="#appendix-C-11.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-D">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Jeremie Miller</span></div>
+<div dir="auto" class="left"><span class="org">Ping Identity</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:jmiller@pingidentity.com" class="email">jmiller@pingidentity.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">David Waite</span></div>
+<div dir="auto" class="left"><span class="org">Ping Identity</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:dwaite+jwp@pingidentity.com" class="email">dwaite+jwp@pingidentity.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Michael B. Jones</span></div>
+<div dir="auto" class="left"><span class="org">Self-Issued Consulting</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:michael_b_jones@hotmail.com" class="email">michael_b_jones@hotmail.com</a>
+</div>
+<div class="url">
+<span>URI:</span>
+<a href="https://self-issued.info/" class="url">https://self-issued.info/</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
