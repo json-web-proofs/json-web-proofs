@@ -526,7 +526,7 @@ Table of Contents
 
 5.1.3.  Issuer Proof
 
-   The proof value is one or more binary octet strings that are opaque
+   The issuer proof is one or more binary octet strings that are opaque
    to applications.  Individual proof-supporting algorithms are
    responsible for the contents and security of the proof value, along
    with any required internal structures.
@@ -588,17 +588,23 @@ Table of Contents
 
 5.2.3.  Presentation Proof
 
-   The proof value of a presented JWP will always be different than the
-   issued proof.  At a minimum, it MUST be updated to include protection
-   of the added presentation header.
+   The presentation proof is one or more binary octet strings that are
+   opaque to applications.  Individual proof-supporting algorithms are
+   responsible for the contents and security of the proof value, along
+   with any required internal structures.
+
+   The proof of a presented JWP will always be different than the issued
+   proof.  At a minimum, it MUST be updated to include protection of the
+   added presentation header.
 
    Algorithms SHOULD generate an un-correlatable presentation proof in
    order to support multiple presentations from a single issued JWP.
 
-   Any payload specific proofs are included in the single proof value
-   for the presented JWP.  The JPA is responsible for internally
-   encoding multiple proof values into one and cryptographically binding
-   them to a specific payload from the issuer.
+   The algorithm is responsible for representing selective disclosure of
+   payloads in a presented proof.  If multiple octet strings are
+   insufficient for representing a proof as defined by an algorithm, the
+   algorithm is responsible for defining how such information is
+   represented within one or more octet strings.
 
 6.  Serializations
 
@@ -634,14 +640,14 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
    mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
    yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.h6UFs_J_fiVNxAKWkQZ0Z8-i2GtRpnDK
-   UX2BTFvbDwVEqJNzgfpAh08VOJ6V1LMup-etsaxc_5MK8IOmo7lU_UheUJEnKk2btYttm
-   TiCMnfSDpoHq93m_jIQaTNIfIJuk6_rYWlBRitgzeYv_eN5seQGA6xN-UX6bLrODRy7qe
-   8r3W1B9Ijw5R8dL721D_4LMd60UtUFk792GK27mFhE5eG762c77Uu7Uvhtj_q3vt0qndU
-   4PJo0CyoEsjmI6762JSzSNUIUG5OW6T5xPaYIXVxKNkbfJ-R-Xq0aL_rZ5enlepWm3qDi
-   xdy6MXqf6CamXuAe2WQxVDhXOT82KqeV-kZsa-ohatZx9Rp5l9uKMoxpF4FM4BbQa1Us-
-   jiBI7RZ_O8Ky3kddFHCqfXLxW4bQFADI0jUnH35BD46tly3Et1_M90YN6RwuLiC7z53ao
-   xFZ985NF-8IMJnqA6BwRWcE8a4siiZXELfRtR0fNOircU
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.o0TCp_P_Q0LvrO-AR5-DcgKwZW_Sd9Ap
+   YwDI6EOu6imSg4DmEmy-TP-XIQXcUmoWpcpoTOOARPYDGXxeccGfjtfgLyu8yrFlwJh2p
+   H39sJo4HIx4XrXvRsNpLMYqgX-omXlmutoqC4x03N9g5XuwCViRExFh4ZCnKMD9bxgYuD
+   EuK4BA8PvOtE_SbxYX9Dg_QISkVJ-7sTb9AyizPawRfDDmCnwO_ekx1wz7-qRnUZEqah9
+   v4EGANIWh8y-RQAdC7wnJjIMvBvkRexIA-DxZrzH1f-Ihti53AIHxmQG6qAB_bsTpS_1-
+   9RK6KgXynOWPL-SxmhS9o5Y7izqD_FSCSZdlBxEa9Oz8UXyuzBM-67htN3hB7jrrp4lkB
+   fOZsklL_mBYjZR422Fh3ftY72i1mVeZrFx9BueanwRisKNzIOnBjhp6vvQ_htrCaIwihE
+   NeRd311XjobUD2fAtNDgGv3L511XknAteGSECXTvpIkVc
 
    |  Figure: Compact Serialization of Presentation
 
@@ -673,15 +679,16 @@ Table of Contents
        null,
        null
      ],
-     "proof": "h6UFs_J_fiVNxAKWkQZ0Z8-i2GtRpnDKUX2BTFvbDwVEqJNzgfpAh08VO
-          J6V1LMup-etsaxc_5MK8IOmo7lU_UheUJEnKk2btYttmTiCMnfSDpoHq93m_jI
-          QaTNIfIJuk6_rYWlBRitgzeYv_eN5seQGA6xN-UX6bLrODRy7qe8r3W1B9Ijw5
-          R8dL721D_4LMd60UtUFk792GK27mFhE5eG762c77Uu7Uvhtj_q3vt0qndU4PJo
-          0CyoEsjmI6762JSzSNUIUG5OW6T5xPaYIXVxKNkbfJ-R-Xq0aL_rZ5enlepWm3
-          qDixdy6MXqf6CamXuAe2WQxVDhXOT82KqeV-kZsa-ohatZx9Rp5l9uKMoxpF4F
-          M4BbQa1Us-jiBI7RZ_O8Ky3kddFHCqfXLxW4bQFADI0jUnH35BD46tly3Et1_M
-          90YN6RwuLiC7z53aoxFZ985NF-8IMJnqA6BwRWcE8a4siiZXELfRtR0fNOircU
-          "
+     "proof": [
+       "o0TCp_P_Q0LvrO-AR5-DcgKwZW_Sd9ApYwDI6EOu6imSg4DmEmy-TP-XIQXcUmoW
+          pcpoTOOARPYDGXxeccGfjtfgLyu8yrFlwJh2pH39sJo4HIx4XrXvRsNpLMYqgX
+          -omXlmutoqC4x03N9g5XuwCViRExFh4ZCnKMD9bxgYuDEuK4BA8PvOtE_SbxYX
+          9Dg_QISkVJ-7sTb9AyizPawRfDDmCnwO_ekx1wz7-qRnUZEqah9v4EGANIWh8y
+          -RQAdC7wnJjIMvBvkRexIA-DxZrzH1f-Ihti53AIHxmQG6qAB_bsTpS_1-9RK6
+          KgXynOWPL-SxmhS9o5Y7izqD_FSCSZdlBxEa9Oz8UXyuzBM-67htN3hB7jrrp4
+          lkBfOZsklL_mBYjZR422Fh3ftY72i1mVeZrFx9BueanwRisKNzIOnBjhp6vvQ_
+          htrCaIwihENeRd311XjobUD2fAtNDgGv3L511XknAteGSECXTvpIkVc"
+     ]
    }
 
    |  Figure: JSON Serialization of Presentation
@@ -1016,6 +1023,10 @@ Appendix B.  Registries
 Appendix C.  Document History
 
    [[ To be removed from the final specification ]]
+
+   *  Clarify the use of multiple octet strings in presentation proofs.
+   *  Update BBS algorithm example in JSON serialization to show the
+      proof as an array with a single octet string.
 
    -04
 

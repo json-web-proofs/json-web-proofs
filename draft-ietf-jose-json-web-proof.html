@@ -1699,7 +1699,7 @@ The protected header is always disclosed, whereas payloads can be selectively di
           <h4 id="name-issuer-proof">
 <a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-issuer-proof" class="section-name selfRef">Issuer Proof</a>
           </h4>
-<p id="section-5.1.3-1">The proof value is one or more binary octet strings that are opaque to applications.  Individual proof-supporting algorithms are responsible for the contents and security of the proof value, along with any required internal structures.<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.3-1">The issuer proof is one or more binary octet strings that are opaque to applications.  Individual proof-supporting algorithms are responsible for the contents and security of the proof value, along with any required internal structures.<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.1.3-2">The issuer proof is used by the holder to perform validation, checking that the issuer header and all payloads are properly encoded and protected by the given proof.<a href="#section-5.1.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1739,9 +1739,10 @@ Rather, proofs about payloads, such as "age &gt;= 21", are included in the prese
           <h4 id="name-presentation-proof">
 <a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-presentation-proof" class="section-name selfRef">Presentation Proof</a>
           </h4>
-<p id="section-5.2.3-1">The proof value of a presented JWP will always be different than the issued proof.  At a minimum, it MUST be updated to include protection of the added presentation header.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.2.3-2">Algorithms SHOULD generate an un-correlatable presentation proof in order to support multiple presentations from a single issued JWP.<a href="#section-5.2.3-2" class="pilcrow">¶</a></p>
-<p id="section-5.2.3-3">Any payload specific proofs are included in the single proof value for the presented JWP. The JPA is responsible for internally encoding multiple proof values into one and cryptographically binding them to a specific payload from the issuer.<a href="#section-5.2.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-1">The presentation proof is one or more binary octet strings that are opaque to applications. Individual proof-supporting algorithms are responsible for the contents and security of the proof value, along with any required internal structures.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-2">The proof of a presented JWP will always be different than the issued proof.  At a minimum, it MUST be updated to include protection of the added presentation header.<a href="#section-5.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-3">Algorithms SHOULD generate an un-correlatable presentation proof in order to support multiple presentations from a single issued JWP.<a href="#section-5.2.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.2.3-4">The algorithm is responsible for representing selective disclosure of payloads in a presented proof. If multiple octet strings are insufficient for representing a proof as defined by an algorithm, the algorithm is responsible for defining how such information is represented within one or more octet strings.<a href="#section-5.2.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1768,14 +1769,14 @@ Rather, proofs about payloads, such as "age &gt;= 21", are included in the prese
 <pre>eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
 mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
 yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.h6UFs_J_fiVNxAKWkQZ0Z8-i2GtRpnDK
-UX2BTFvbDwVEqJNzgfpAh08VOJ6V1LMup-etsaxc_5MK8IOmo7lU_UheUJEnKk2btYttm
-TiCMnfSDpoHq93m_jIQaTNIfIJuk6_rYWlBRitgzeYv_eN5seQGA6xN-UX6bLrODRy7qe
-8r3W1B9Ijw5R8dL721D_4LMd60UtUFk792GK27mFhE5eG762c77Uu7Uvhtj_q3vt0qndU
-4PJo0CyoEsjmI6762JSzSNUIUG5OW6T5xPaYIXVxKNkbfJ-R-Xq0aL_rZ5enlepWm3qDi
-xdy6MXqf6CamXuAe2WQxVDhXOT82KqeV-kZsa-ohatZx9Rp5l9uKMoxpF4FM4BbQa1Us-
-jiBI7RZ_O8Ky3kddFHCqfXLxW4bQFADI0jUnH35BD46tly3Et1_M90YN6RwuLiC7z53ao
-xFZ985NF-8IMJnqA6BwRWcE8a4siiZXELfRtR0fNOircU
+MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.o0TCp_P_Q0LvrO-AR5-DcgKwZW_Sd9Ap
+YwDI6EOu6imSg4DmEmy-TP-XIQXcUmoWpcpoTOOARPYDGXxeccGfjtfgLyu8yrFlwJh2p
+H39sJo4HIx4XrXvRsNpLMYqgX-omXlmutoqC4x03N9g5XuwCViRExFh4ZCnKMD9bxgYuD
+EuK4BA8PvOtE_SbxYX9Dg_QISkVJ-7sTb9AyizPawRfDDmCnwO_ekx1wz7-qRnUZEqah9
+v4EGANIWh8y-RQAdC7wnJjIMvBvkRexIA-DxZrzH1f-Ihti53AIHxmQG6qAB_bsTpS_1-
+9RK6KgXynOWPL-SxmhS9o5Y7izqD_FSCSZdlBxEa9Oz8UXyuzBM-67htN3hB7jrrp4lkB
+fOZsklL_mBYjZR422Fh3ftY72i1mVeZrFx9BueanwRisKNzIOnBjhp6vvQ_htrCaIwihE
+NeRd311XjobUD2fAtNDgGv3L511XknAteGSECXTvpIkVc
 
 </pre><a href="#section-6.1-5" class="pilcrow">¶</a>
 </div>
@@ -1807,15 +1808,16 @@ xFZ985NF-8IMJnqA6BwRWcE8a4siiZXELfRtR0fNOircU
     null,
     null
   ],
-  "proof": "h6UFs_J_fiVNxAKWkQZ0Z8-i2GtRpnDKUX2BTFvbDwVEqJNzgfpAh08VO
-       J6V1LMup-etsaxc_5MK8IOmo7lU_UheUJEnKk2btYttmTiCMnfSDpoHq93m_jI
-       QaTNIfIJuk6_rYWlBRitgzeYv_eN5seQGA6xN-UX6bLrODRy7qe8r3W1B9Ijw5
-       R8dL721D_4LMd60UtUFk792GK27mFhE5eG762c77Uu7Uvhtj_q3vt0qndU4PJo
-       0CyoEsjmI6762JSzSNUIUG5OW6T5xPaYIXVxKNkbfJ-R-Xq0aL_rZ5enlepWm3
-       qDixdy6MXqf6CamXuAe2WQxVDhXOT82KqeV-kZsa-ohatZx9Rp5l9uKMoxpF4F
-       M4BbQa1Us-jiBI7RZ_O8Ky3kddFHCqfXLxW4bQFADI0jUnH35BD46tly3Et1_M
-       90YN6RwuLiC7z53aoxFZ985NF-8IMJnqA6BwRWcE8a4siiZXELfRtR0fNOircU
-       "
+  "proof": [
+    "o0TCp_P_Q0LvrO-AR5-DcgKwZW_Sd9ApYwDI6EOu6imSg4DmEmy-TP-XIQXcUmoW
+       pcpoTOOARPYDGXxeccGfjtfgLyu8yrFlwJh2pH39sJo4HIx4XrXvRsNpLMYqgX
+       -omXlmutoqC4x03N9g5XuwCViRExFh4ZCnKMD9bxgYuDEuK4BA8PvOtE_SbxYX
+       9Dg_QISkVJ-7sTb9AyizPawRfDDmCnwO_ekx1wz7-qRnUZEqah9v4EGANIWh8y
+       -RQAdC7wnJjIMvBvkRexIA-DxZrzH1f-Ihti53AIHxmQG6qAB_bsTpS_1-9RK6
+       KgXynOWPL-SxmhS9o5Y7izqD_FSCSZdlBxEa9Oz8UXyuzBM-67htN3hB7jrrp4
+       lkBfOZsklL_mBYjZR422Fh3ftY72i1mVeZrFx9BueanwRisKNzIOnBjhp6vvQ_
+       htrCaIwihENeRd311XjobUD2fAtNDgGv3L511XknAteGSECXTvpIkVc"
+  ]
 }
 
 </pre><a href="#section-6.2-4" class="pilcrow">¶</a>
@@ -2319,43 +2321,49 @@ for his valuable contributions to this specification.<a href="#appendix-A-2" cla
 <a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-C-1">[[ To be removed from the final specification ]]<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<p id="appendix-C-2">-04<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-3.1">Refactoring figures and examples to be built from a common set across all three documents<a href="#appendix-C-3.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-2.1">Clarify the use of multiple octet strings in presentation proofs.<a href="#appendix-C-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.2">Move single-use example appendix from JWP to JPA<a href="#appendix-C-3.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-2.2">Update BBS algorithm example in JSON serialization to show the proof as an array with a single octet string.<a href="#appendix-C-2.2" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-C-4">-03<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">-04<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-5.1">Improvements resulting from a full proofreading.<a href="#appendix-C-5.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-4.1">Refactoring figures and examples to be built from a common set across all three documents<a href="#appendix-C-4.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-5.2">Populated IANA Considerations section.<a href="#appendix-C-5.2" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-5.3">Specified JWP Header Parameters.<a href="#appendix-C-5.3" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-5.4">Specified representation of zero-length disclosed payloads for the compact serialization.<a href="#appendix-C-5.4" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-5.5">Specified that algorithms may supply multiple octet strings for the proof, which are separated by <code>~</code> characters in the compact serialization.<a href="#appendix-C-5.5" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-5.6">Updated to use BBS draft -05.<a href="#appendix-C-5.6" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-5.7">Added Terminology Section.<a href="#appendix-C-5.7" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-C-4.2">Move single-use example appendix from JWP to JPA<a href="#appendix-C-4.2" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-C-6">-02<a href="#appendix-C-6" class="pilcrow">¶</a></p>
+<p id="appendix-C-5">-03<a href="#appendix-C-5" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-7.1">Update reference to current BBS algorithm<a href="#appendix-C-7.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-6.1">Improvements resulting from a full proofreading.<a href="#appendix-C-6.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.2">Populated IANA Considerations section.<a href="#appendix-C-6.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.3">Specified JWP Header Parameters.<a href="#appendix-C-6.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.4">Specified representation of zero-length disclosed payloads for the compact serialization.<a href="#appendix-C-6.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.5">Specified that algorithms may supply multiple octet strings for the proof, which are separated by <code>~</code> characters in the compact serialization.<a href="#appendix-C-6.5" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.6">Updated to use BBS draft -05.<a href="#appendix-C-6.6" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.7">Added Terminology Section.<a href="#appendix-C-6.7" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-C-8">-01<a href="#appendix-C-8" class="pilcrow">¶</a></p>
+<p id="appendix-C-7">-02<a href="#appendix-C-7" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-9.1">Correct cross-references within group.<a href="#appendix-C-9.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-8.1">Update reference to current BBS algorithm<a href="#appendix-C-8.1" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-C-10">-00<a href="#appendix-C-10" class="pilcrow">¶</a></p>
+<p id="appendix-C-9">-01<a href="#appendix-C-9" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-11.1">Created initial working group draft based on draft-jmiller-jose-json-web-proof-01<a href="#appendix-C-11.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-C-10.1">Correct cross-references within group.<a href="#appendix-C-10.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-11">-00<a href="#appendix-C-11" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-12.1">Created initial working group draft based on draft-jmiller-jose-json-web-proof-01<a href="#appendix-C-12.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
