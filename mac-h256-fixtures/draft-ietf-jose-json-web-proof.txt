@@ -5,9 +5,9 @@
 jose                                                           J. Miller
 Internet-Draft                                                  D. Waite
 Intended status: Standards Track                           Ping Identity
-Expires: 19 January 2025                                        M. Jones
+Expires: 20 January 2025                                        M. Jones
                                                   Self-Issued Consulting
-                                                            18 July 2024
+                                                            19 July 2024
 
 
                              JSON Web Proof
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 January 2025.
+   This Internet-Draft will expire on 20 January 2025.
 
 Copyright Notice
 
@@ -634,14 +634,14 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
    mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
    yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.j9vr_s3K9rDnHlaNTtLigKmFyxcoHIiW
-   Opfd4ySTl5F_lZWTIYToLFCxHohtzzC8tqX5V1iUkLYbn_LBo2IZO7NTqwcFMyBacLOiR
-   ztAjDJgUG_q3D4nVKIH2sYH8MycsBY9P-_36AItaqmMl9O8anM7qjDagtXmacdn9zyReQ
-   JogkX418U-FgempMQzD5zOYINgQl9faHoib-WqpI1n5KTBMZvlCkXT_IfgH-6WUfVD-6F
-   1VGSjOglliutVCk6zYaFotYkHwbTVH4fPUjsIhGS0LQ0tqN94lmwYnoW7DFsXdTGvxwR-
-   bNSoglZb8NzWLLTWQrHhgcEj94chupK9KNr3mt43JCNCpCm-UvhdkgJpCRIXylwM61Q75
-   Ml0AkaGuurfwwMFIQ-KZmwMrMLY0TRG-TStLK_aRIYuhVjP0JzhLHPwmVIEBHZqtcHxhR
-   mZLM_NKO5r9Gh31YXrQqebEsgYsr8ZDwzoDhUlB6FUamw
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.sme7hFSi2usYkroXcbJQ4W269d1jfgeg
+   wNV0VH9dLDAeFpW5GRCTROYhaN8WDzBep9vmBgWTAOSbzU6cLa-PfL0xErnqb1-mKgMP5
+   qnOXjn-VnjKPIQm04KCNulC6KCXh82FzJ-rfI2OiWSdCJCOvAXwjUXD7XZyCiGFNMLaiJ
+   zZ9I8XQF7o-P-C61IkLeVRDSl6nnM9zsYAmRemqfiA39KVh66KrQoXI6L8vT4z3k1GBKn
+   n3Ybt0Re2SXgHKQerrpXneOF70ZNKRGWkA1EOWBNyQ7x1cWMwxUrpWz6yN2RUtT8XAcYW
+   0WLyWd_pOwYjc548dnXQrbRdU1nCIxMiWQ8Mcx34fep6bJPgkmi-MUwfowgP-h4wV_3FO
+   qHhnafZeAIWgzEeH6Xq_3faziV1_WmDo6gDIx0au-r1EY-r1S1Gw6k-wYetstqkCuUiBX
+   yqNi_DFODuA53q26YEIkdPIGluENTk_GnRtZjjY9EpyP0
 
    |  Figure: Compact Serialization of Presentation
 
@@ -673,14 +673,14 @@ Table of Contents
        null,
        null
      ],
-     "proof": "j9vr_s3K9rDnHlaNTtLigKmFyxcoHIiWOpfd4ySTl5F_lZWTIYToLFCxH
-          ohtzzC8tqX5V1iUkLYbn_LBo2IZO7NTqwcFMyBacLOiRztAjDJgUG_q3D4nVKI
-          H2sYH8MycsBY9P-_36AItaqmMl9O8anM7qjDagtXmacdn9zyReQJogkX418U-F
-          gempMQzD5zOYINgQl9faHoib-WqpI1n5KTBMZvlCkXT_IfgH-6WUfVD-6F1VGS
-          jOglliutVCk6zYaFotYkHwbTVH4fPUjsIhGS0LQ0tqN94lmwYnoW7DFsXdTGvx
-          wR-bNSoglZb8NzWLLTWQrHhgcEj94chupK9KNr3mt43JCNCpCm-UvhdkgJpCRI
-          XylwM61Q75Ml0AkaGuurfwwMFIQ-KZmwMrMLY0TRG-TStLK_aRIYuhVjP0JzhL
-          HPwmVIEBHZqtcHxhRmZLM_NKO5r9Gh31YXrQqebEsgYsr8ZDwzoDhUlB6FUamw
+     "proof": "sme7hFSi2usYkroXcbJQ4W269d1jfgegwNV0VH9dLDAeFpW5GRCTROYha
+          N8WDzBep9vmBgWTAOSbzU6cLa-PfL0xErnqb1-mKgMP5qnOXjn-VnjKPIQm04K
+          CNulC6KCXh82FzJ-rfI2OiWSdCJCOvAXwjUXD7XZyCiGFNMLaiJzZ9I8XQF7o-
+          P-C61IkLeVRDSl6nnM9zsYAmRemqfiA39KVh66KrQoXI6L8vT4z3k1GBKnn3Yb
+          t0Re2SXgHKQerrpXneOF70ZNKRGWkA1EOWBNyQ7x1cWMwxUrpWz6yN2RUtT8XA
+          cYW0WLyWd_pOwYjc548dnXQrbRdU1nCIxMiWQ8Mcx34fep6bJPgkmi-MUwfowg
+          P-h4wV_3FOqHhnafZeAIWgzEeH6Xq_3faziV1_WmDo6gDIx0au-r1EY-r1S1Gw
+          6k-wYetstqkCuUiBXyqNi_DFODuA53q26YEIkdPIGluENTk_GnRtZjjY9EpyP0
           "
    }
 
