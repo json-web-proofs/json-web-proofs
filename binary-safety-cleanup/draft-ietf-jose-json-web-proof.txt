@@ -107,8 +107,7 @@ Table of Contents
      9.1.  Normative References
      9.2.  Informative References
    Appendix A.  Acknowledgements
-   Appendix B.  Registries
-   Appendix C.  Document History
+   Appendix B.  Document History
    Authors' Addresses
 
 1.  Introduction
@@ -642,14 +641,14 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
    mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
    yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.tjwOgdlBeLMvukYt66mIMMxuDE5gfMUB
-   WXAv2btE5-YX050-ObEXtyjdnJ18vH-Dl9Uce0bJc1-s0k27XajwUDhTBIHnSdfDX5OR5
-   lp8GWl8p3BNT8Amop5oJ51AbalLrEWHPMJ7uPsch62DJXXwGrfawdcsms-sHIjDVLnNiO
-   qIZG1Ex7SiLJzAqLllfjLScVMFUi3KvMEB2ZQluSD_cNR1iuwy_UopZ9mwj0_meosKe4R
-   Tk_do81DewB3ogRLRUovsJVPe--hfDiYhL-VeBhEdTD4aRBlsS757mhXYOv74GSqS36Vr
-   cfqdA8kdQ50bcOU0KJAn4-6IluHH9vdP_Sg816MQ_315XqPBDk-l9zc5rHcJjNeulmJDS
-   aEs0ej7BJvdIaV03xW0N-GModmm90mWK0Bl6I6q4BwHfuhBydJsEv3j4gVhBaPxqqiMvY
-   sVWvqRE_nH3t3gBS4oZbK1UdCUZxRLpv8hALEPQ0xFNuA
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.qmIg7TCN9AH2bnXAfd-Vq1AChMdeEqjl
+   Bvpo1VEKicoQSSi91zaskARWt_ykoG5igoT7dc5mHkg_XOBrYz_nLl7xO0dFKbLrURXW3
+   mSSSSfaBCdXUlv03r3Oo69fhXAtlguUB_Bitnjc9_x3fQZOFGO5jansYxCbOuQoqi9Iv6
+   Sii-Q2Ii-pgtw6eHn_z3pHFU_GAbq0LcBkounz2K5ZljpaQ8mDq0x25o6Ll-wwPztogc2
+   TbKPgRjBL0G0tmZOnU62GjinlSAo7PyLbK6y0nwZoU3wQrAX_0MKQSoonrWteEGjn9Kjz
+   IrDJfxdqybyRH01hRnl_NU8GSBkBiIzz2-bQGuhCiqGQ2S7UwEhY1exNCikZu40GiZT9n
+   gbVoWFVY1kLAqPVfYfxosARSf4kJUCNhdeMKpudvcY1zsxmeutizZKLIRNny_Jpn8P1Le
+   3jLbJj04l74SudQlrwIPAyJ1PiT74UOCncHdZELBLmA0w
 
    |  Figure: Compact Serialization of Presentation
 
@@ -682,14 +681,14 @@ Table of Contents
        null
      ],
      "proof": [
-       "tjwOgdlBeLMvukYt66mIMMxuDE5gfMUBWXAv2btE5-YX050-ObEXtyjdnJ18vH-D
-          l9Uce0bJc1-s0k27XajwUDhTBIHnSdfDX5OR5lp8GWl8p3BNT8Amop5oJ51Aba
-          lLrEWHPMJ7uPsch62DJXXwGrfawdcsms-sHIjDVLnNiOqIZG1Ex7SiLJzAqLll
-          fjLScVMFUi3KvMEB2ZQluSD_cNR1iuwy_UopZ9mwj0_meosKe4RTk_do81DewB
-          3ogRLRUovsJVPe--hfDiYhL-VeBhEdTD4aRBlsS757mhXYOv74GSqS36Vrcfqd
-          A8kdQ50bcOU0KJAn4-6IluHH9vdP_Sg816MQ_315XqPBDk-l9zc5rHcJjNeulm
-          JDSaEs0ej7BJvdIaV03xW0N-GModmm90mWK0Bl6I6q4BwHfuhBydJsEv3j4gVh
-          BaPxqqiMvYsVWvqRE_nH3t3gBS4oZbK1UdCUZxRLpv8hALEPQ0xFNuA"
+       "qmIg7TCN9AH2bnXAfd-Vq1AChMdeEqjlBvpo1VEKicoQSSi91zaskARWt_ykoG5i
+          goT7dc5mHkg_XOBrYz_nLl7xO0dFKbLrURXW3mSSSSfaBCdXUlv03r3Oo69fhX
+          AtlguUB_Bitnjc9_x3fQZOFGO5jansYxCbOuQoqi9Iv6Sii-Q2Ii-pgtw6eHn_
+          z3pHFU_GAbq0LcBkounz2K5ZljpaQ8mDq0x25o6Ll-wwPztogc2TbKPgRjBL0G
+          0tmZOnU62GjinlSAo7PyLbK6y0nwZoU3wQrAX_0MKQSoonrWteEGjn9KjzIrDJ
+          fxdqybyRH01hRnl_NU8GSBkBiIzz2-bQGuhCiqGQ2S7UwEhY1exNCikZu40GiZ
+          T9ngbVoWFVY1kLAqPVfYfxosARSf4kJUCNhdeMKpudvcY1zsxmeutizZKLIRNn
+          y_Jpn8P1Le3jLbJj04l74SudQlrwIPAyJ1PiT74UOCncHdZELBLmA0w"
      ]
    }
 
@@ -1054,25 +1053,22 @@ Appendix A.  Acknowledgements
    We would like to thank Brent Zundel for his valuable contributions to
    this specification.
 
-Appendix B.  Registries
-
-   *  Issuer Protected Header
-   *  Presentation Protected Header
-
-Appendix C.  Document History
+Appendix B.  Document History
 
    [[ To be removed from the final specification ]]
+
+   -05
 
    *  Clarify the use of multiple octet strings in presentation proofs.
    *  Update BBS algorithm example in JSON serialization to show the
       proof as an array with a single octet string.
+   *  Move single-use example appendix from JWP to JPA.
+   *  Registered +jwp structured syntax suffix.
 
    -04
 
    *  Refactoring figures and examples to be built from a common set
-      across all three documents
-   *  Move single-use example appendix from JWP to JPA
-   *  Registered +jwp structured syntax suffix.
+      across all three documents.
 
    -03
 
