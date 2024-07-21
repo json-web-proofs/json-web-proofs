@@ -1,0 +1,3176 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>JSON Proof Algorithms</title>
+<meta content="Jeremie Miller" name="author">
+<meta content="Michael B. Jones" name="author">
+<meta content="David Waite" name="author">
+<meta content="
+       The JSON Proof Algorithms (JPA) specification registers cryptographic algorithms and identifiers to be used with the JSON Web Proof and JSON Web Key (JWK) specifications. It defines IANA registries for these identifiers. 
+    " name="description">
+<meta content="xml2rfc 3.22.0" name="generator">
+<meta content="jose" name="keyword">
+<meta content="zkp" name="keyword">
+<meta content="jwp" name="keyword">
+<meta content="jws" name="keyword">
+<meta content="jpa" name="keyword">
+<meta content="draft-ietf-jose-json-proof-algorithms-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.22.0
+    Python 3.12.3
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.0
+    intervaltree 3.1.0
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
+    pycountry 22.3.5
+    PyYAML 6.0.1
+    requests 2.32.3
+    setuptools 69.5.1
+    wcwidth 0.2.13
+-->
+<link href="draft-ietf-jose-json-proof-algorithms.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 1;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl.olPercent {
+  --indent: 5ch;
+}
+dl > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+dl.olPercent > dt {
+  min-width: calc(var(--indent) - 2ch);
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+  margin-right: 1ch;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 2px 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 10ch;
+  margin-right: 1.5ch;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 12ch !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">json-proof-algorithms</td>
+<td class="right">July 2024</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Miller, et al.</td>
+<td class="center">Expires 22 January 2025</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">jose</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ietf-jose-json-proof-algorithms-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2024-07-21" class="published">21 July 2024</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2025-01-22">22 January 2025</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">J. Miller</div>
+<div class="org">Ping Identity</div>
+</div>
+<div class="author">
+      <div class="author-name">M. Jones</div>
+<div class="org">Self-Issued Consulting</div>
+</div>
+<div class="author">
+      <div class="author-name">D. Waite</div>
+<div class="org">Ping Identity</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">JSON Proof Algorithms</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">The JSON Proof Algorithms (JPA) specification registers cryptographic algorithms and identifiers to be used with the JSON Web Proof and JSON Web Key (JWK) specifications. It defines IANA registries for these identifiers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 22 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-background" class="internal xref">Background</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-algorithm-basics" class="internal xref">Algorithm Basics</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-issue" class="internal xref">Issue</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-confirm" class="internal xref">Confirm</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-present" class="internal xref">Present</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-verify" class="internal xref">Verify</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-algorithm-specifications" class="internal xref">Algorithm Specifications</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-single-use" class="internal xref">Single Use</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
+                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-jws-algorithm" class="internal xref">JWS Algorithm</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.2">
+                    <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-holder-setup" class="internal xref">Holder Setup</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.3">
+                    <p id="section-toc.1-1.6.2.1.2.3.1"><a href="#section-6.1.3" class="auto internal xref">6.1.3</a>.  <a href="#name-issuer-setup" class="internal xref">Issuer Setup</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.4">
+                    <p id="section-toc.1-1.6.2.1.2.4.1"><a href="#section-6.1.4" class="auto internal xref">6.1.4</a>.  <a href="#name-using-jws" class="internal xref">Using JWS</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.5">
+                    <p id="section-toc.1-1.6.2.1.2.5.1"><a href="#section-6.1.5" class="auto internal xref">6.1.5</a>.  <a href="#name-issuer-protected-header" class="internal xref">Issuer Protected Header</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.6">
+                    <p id="section-toc.1-1.6.2.1.2.6.1"><a href="#section-6.1.6" class="auto internal xref">6.1.6</a>.  <a href="#name-payloads" class="internal xref">Payloads</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.7">
+                    <p id="section-toc.1-1.6.2.1.2.7.1"><a href="#section-6.1.7" class="auto internal xref">6.1.7</a>.  <a href="#name-proof" class="internal xref">Proof</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.8">
+                    <p id="section-toc.1-1.6.2.1.2.8.1"><a href="#section-6.1.8" class="auto internal xref">6.1.8</a>.  <a href="#name-presentation-protected-head" class="internal xref">Presentation Protected Header</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.9">
+                    <p id="section-toc.1-1.6.2.1.2.9.1"><a href="#section-6.1.9" class="auto internal xref">6.1.9</a>.  <a href="#name-presentation" class="internal xref">Presentation</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.10">
+                    <p id="section-toc.1-1.6.2.1.2.10.1"><a href="#section-6.1.10" class="auto internal xref">6.1.10</a>. <a href="#name-verification" class="internal xref">Verification</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.11">
+                    <p id="section-toc.1-1.6.2.1.2.11.1"><a href="#section-6.1.11" class="auto internal xref">6.1.11</a>. <a href="#name-jpa-registration" class="internal xref">JPA Registration</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-bbs" class="internal xref">BBS</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-jpa-algorithms" class="internal xref">JPA Algorithms</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="auto internal xref">6.2.2</a>.  <a href="#name-key-format" class="internal xref">Key Format</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.3">
+                    <p id="section-toc.1-1.6.2.2.2.3.1"><a href="#section-6.2.3" class="auto internal xref">6.2.3</a>.  <a href="#name-issuance" class="internal xref">Issuance</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.4">
+                    <p id="section-toc.1-1.6.2.2.2.4.1"><a href="#section-6.2.4" class="auto internal xref">6.2.4</a>.  <a href="#name-issuance-proof-verification" class="internal xref">Issuance Proof Verification</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.5">
+                    <p id="section-toc.1-1.6.2.2.2.5.1"><a href="#section-6.2.5" class="auto internal xref">6.2.5</a>.  <a href="#name-presentation-2" class="internal xref">Presentation</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.6">
+                    <p id="section-toc.1-1.6.2.2.2.6.1"><a href="#section-6.2.6" class="auto internal xref">6.2.6</a>.  <a href="#name-presentation-verification" class="internal xref">Presentation Verification</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-message-authentication-code" class="internal xref">Message Authentication Code</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.1">
+                    <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="auto internal xref">6.3.1</a>.  <a href="#name-holder-setup-2" class="internal xref">Holder Setup</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.2">
+                    <p id="section-toc.1-1.6.2.3.2.2.1"><a href="#section-6.3.2" class="auto internal xref">6.3.2</a>.  <a href="#name-issuer-setup-2" class="internal xref">Issuer Setup</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.3">
+                    <p id="section-toc.1-1.6.2.3.2.3.1"><a href="#section-6.3.3" class="auto internal xref">6.3.3</a>.  <a href="#name-issuer-protected-header-2" class="internal xref">Issuer Protected Header</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.4">
+                    <p id="section-toc.1-1.6.2.3.2.4.1"><a href="#section-6.3.4" class="auto internal xref">6.3.4</a>.  <a href="#name-combined-mac-representation" class="internal xref">Combined MAC Representation</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.5">
+                    <p id="section-toc.1-1.6.2.3.2.5.1"><a href="#section-6.3.5" class="auto internal xref">6.3.5</a>.  <a href="#name-issuer-proof" class="internal xref">Issuer Proof</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.6">
+                    <p id="section-toc.1-1.6.2.3.2.6.1"><a href="#section-6.3.6" class="auto internal xref">6.3.6</a>.  <a href="#name-presentation-protected-heade" class="internal xref">Presentation Protected Header</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.7">
+                    <p id="section-toc.1-1.6.2.3.2.7.1"><a href="#section-6.3.7" class="auto internal xref">6.3.7</a>.  <a href="#name-presentation-proof" class="internal xref">Presentation Proof</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.8">
+                    <p id="section-toc.1-1.6.2.3.2.8.1"><a href="#section-6.3.8" class="auto internal xref">6.3.8</a>.  <a href="#name-verification-of-the-present" class="internal xref">Verification of the Presentation Proof</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.9">
+                    <p id="section-toc.1-1.6.2.3.2.9.1"><a href="#section-6.3.9" class="auto internal xref">6.3.9</a>.  <a href="#name-jpa-registration-2" class="internal xref">JPA Registration</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-json-web-proof-algorithms-r" class="internal xref">JSON Web Proof Algorithms Registry</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.1">
+                    <p id="section-toc.1-1.8.2.1.2.1.1"><a href="#section-8.1.1" class="auto internal xref">8.1.1</a>.  <a href="#name-registration-template" class="internal xref">Registration Template</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1.2.2">
+                    <p id="section-toc.1-1.8.2.1.2.2.1"><a href="#section-8.1.2" class="auto internal xref">8.1.2</a>.  <a href="#name-initial-registry-contents" class="internal xref">Initial Registry Contents</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-header-parameter-names-regi" class="internal xref">Header Parameter Names Registration</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2.2.1">
+                    <p id="section-toc.1-1.8.2.2.2.1.1"><a href="#section-8.2.1" class="auto internal xref">8.2.1</a>.  <a href="#name-registry-contents" class="internal xref">Registry Contents</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-jwps" class="internal xref">Example JWPs</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-example-single-use-jwp" class="internal xref">Example Single-Use JWP</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-example-bbs-jwp" class="internal xref">Example BBS JWP</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3">
+                <p id="section-toc.1-1.10.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-example-mac-jwp" class="internal xref">Example MAC JWP</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">The JSON Web Proof (JWP) <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span> draft establishes a new secure container format that supports selective disclosure and unlinkability using Zero-Knowledge Proofs (ZKPs) or other cryptographic algorithms.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<blockquote id="section-1-2">
+        <p id="section-1-2.1">Editor's Note: This draft is still early and incomplete. There will be significant changes to the algorithms as currently defined here.  Please do not use any of these definitions or examples for anything except personal experimentation and learning.  Contributions and feedback are welcomed at <a href="https://github.com/json-web-proofs/json-web-proofs">https://github.com/json-web-proofs/json-web-proofs</a>.<a href="#section-1-2.1" class="pilcrow">¶</a></p>
+</blockquote>
+</section>
+</div>
+<div id="conventions-and-definitions">
+<section id="section-2">
+      <h2 id="name-conventions-and-definitions">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      </h2>
+<p id="section-2-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+"MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">The roles of "issuer", "holder", and "verifier" are used as defined by the VC Data Model <span>[<a href="#VC-DATA-MODEL-2.0" class="cite xref">VC-DATA-MODEL-2.0</a>]</span>.  The term "presentation" is also used as defined by this source, but the term "credential" is avoided in this specification to minimize confusion with other definitions.<a href="#section-2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="terminology">
+<section id="section-3">
+      <h2 id="name-terminology">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+      </h2>
+<p id="section-3-1">The terms "JSON Web Signature (JWS)", "Base64url Encoding", "Header Parameter", "JOSE Header", "JWS Payload", "JWS Signature", and "JWS Protected Header" are defined by <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">The terms "JSON Web Proof (JWP)", "JWP Payload", "JWP Proof", and "JWP Protected Header" are defined by <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">These terms are defined by this specification:<a href="#section-3-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-3-4">
+        <dt id="section-3-4.1">Stable Key:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-4.2">An asymmetric key-pair used by an issuer that is also shared via an out-of-band mechanism to a verifier to validate the signature.<a href="#section-3-4.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-4.3">Ephemeral Key:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-4.4">An asymmetric key-pair that is generated for one-time use by an issuer and never stored or used again outside of the creation of a single JWP.<a href="#section-3-4.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-4.5">Presentation Key:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-4.6">An asymmetric key-pair that is generated by a holder and used to ensure that a presentation is not able to be replayed by any other party.<a href="#section-3-4.6" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="background">
+<section id="section-4">
+      <h2 id="name-background">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-background" class="section-name selfRef">Background</a>
+      </h2>
+<p id="section-4-1">JWP defines a container binding together a protected header, one or more payloads, and a cryptographic proof.  It does not define any details about the interactions between an application and the cryptographic libraries that implement proof-supporting algorithms.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">Due to the nature of ZKPs, this specification also documents the subtle but important differences in proof algorithms versus those defined by the JSON Web Algorithms <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>.  These differences help support more advanced capabilities such as blinded signatures and predicate proofs.<a href="#section-4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="algorithm-basics">
+<section id="section-5">
+      <h2 id="name-algorithm-basics">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-algorithm-basics" class="section-name selfRef">Algorithm Basics</a>
+      </h2>
+<p id="section-5-1">The four principal interactions that every proof algorithm MUST support are <code>[issue](#issue)</code>, <code>[confirm](#confirm)</code>, <code>[present](#present)</code>, and <code>[verify](#verify)</code>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<div id="issue">
+<section id="section-5.1">
+        <h3 id="name-issue">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-issue" class="section-name selfRef">Issue</a>
+        </h3>
+<p id="section-5.1-1">The JWP is first created as the output of a JPA's <code>issue</code> operation.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Every algorithm MUST support a JSON issuer protected header along with one or more octet string payloads.  The algorithm MAY support using additional items provided by the holder for issuance such as blinded payloads, keys for replay prevention, etc.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">All algorithms MUST provide integrity protection for the issuer header and all payloads and MUST specify all digest and/or hash2curve methods used.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="confirm">
+<section id="section-5.2">
+        <h3 id="name-confirm">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-confirm" class="section-name selfRef">Confirm</a>
+        </h3>
+<p id="section-5.2-1">Performed by the holder to validate that the issued JWP is correctly formed and protected.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">Each algorithm MAY support using additional input items options, such as those sent to the issuer for issuance. After confirmation, an algorithm MAY return a modified JWP for serialized storage without the local state (such as with blinded payloads now unblinded).<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">The algorithm MUST fully verify the issued proof value against the issuer protected header and all payloads.  If given a presented JWP instead of an issued one, the confirm process MUST return an error.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="present">
+<section id="section-5.3">
+        <h3 id="name-present">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-present" class="section-name selfRef">Present</a>
+        </h3>
+<p id="section-5.3-1">Used to apply any selective disclosure choices and perform any unlinkability transformations, as well as to show binding.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">An algorithm MAY support additional input options from the requesting party, such as for predicate proofs and verifiable computation requests.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">Every algorithm MUST support the ability to hide any or all payloads.  It MUST always include the issuer protected header unmodified in the presentation.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">The algorithm MUST replace the issued proof value and generate a new presented proof value.  It also MUST include a new presentation protected header that provides replay protection.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="verify">
+<section id="section-5.4">
+        <h3 id="name-verify">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-verify" class="section-name selfRef">Verify</a>
+        </h3>
+<p id="section-5.4-1">Performed by the verifier to verify the protected headers along with any disclosed payloads and/or assertions about them from the proving party, while also verifying they are the same payloads and ordering as witnessed by the issuer.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2">The algorithm MUST verify the integrity of all disclosed payloads and MUST also verify the integrity of both the issuer and presentation protected headers.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.4-3">If the presented proof contains any assertions about the hidden payloads, the algorithm MUST also verify all of those assertions.
+It MAY support additional options, such as those sent to the holder to generate the presentation.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-4">If given an issued JWP for verification, the algorithm MUST return an error.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="algorithm-specifications">
+<section id="section-6">
+      <h2 id="name-algorithm-specifications">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-algorithm-specifications" class="section-name selfRef">Algorithm Specifications</a>
+      </h2>
+<p id="section-6-1">This section defines how to use specific algorithms for JWPs.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<div id="single-use">
+<section id="section-6.1">
+        <h3 id="name-single-use">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-single-use" class="section-name selfRef">Single Use</a>
+        </h3>
+<blockquote id="section-6.1-1">
+          <p id="section-6.1-1.1">Editor's Note: This algorithm may be renamed and slightly refactored.<a href="#section-6.1-1.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="section-6.1-2">The Single Use (SU) algorithm is based on composing multiple traditional JWS values into a JWP proof.  It enables a very simple form of selective disclosure without requiring any advanced cryptographic techniques.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">It does not support unlinkability if the same JWP is presented multiple times, therefore when privacy is required the holder will need to interact with the issuer again to receive new single-use JWPs (dynamically or in batches).<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<div id="jws-algorithm">
+<section id="section-6.1.1">
+          <h4 id="name-jws-algorithm">
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-jws-algorithm" class="section-name selfRef">JWS Algorithm</a>
+          </h4>
+<p id="section-6.1.1-1">The Single Use algorithm is based on using multiple JWS values, all of which are generated with the same JSON Web Algorithm (JWA) for signing.  This JWA identifier is included as part of the Single Use identifier for JWP.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-2">The chosen JWA MUST be an asymmetric signing algorithm so that each signature can be verified without sharing any private values between the parties.  This ensures that the verifier cannot brute force any non-disclosed payloads based only on their disclosed individual signatures.<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="holder-setup">
+<section id="section-6.1.2">
+          <h4 id="name-holder-setup">
+<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-holder-setup" class="section-name selfRef">Holder Setup</a>
+          </h4>
+<p id="section-6.1.2-1">In order to support the protection of a presentation by a holder to a verifier, the holder MUST use a Presentation Key during the issuance and the presentation of every Single Use JWP.  This Presentation Key MUST be generated and used for only one JWP.<a href="#section-6.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.2-2">The issuer MUST verify that the holder has possession of this key.  The holder-issuer communication to exchange this information is out of scope of this specification but can be easily accomplished by the holder using this key to generate a JWS that signs a value the issuer can verify as unique.<a href="#section-6.1.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issuer-setup">
+<section id="section-6.1.3">
+          <h4 id="name-issuer-setup">
+<a href="#section-6.1.3" class="section-number selfRef">6.1.3. </a><a href="#name-issuer-setup" class="section-name selfRef">Issuer Setup</a>
+          </h4>
+<p id="section-6.1.3-1">To create a Single Use JWP, the issuer first generates a unique Ephemeral Key using the selected JWS algorithm.  This key-pair will be used to sign each of the payloads of a single JWP and then discarded.<a href="#section-6.1.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="using-jws">
+<section id="section-6.1.4">
+          <h4 id="name-using-jws">
+<a href="#section-6.1.4" class="section-number selfRef">6.1.4. </a><a href="#name-using-jws" class="section-name selfRef">Using JWS</a>
+          </h4>
+<p id="section-6.1.4-1">JSON Web Signatures are used to create all of the signature values used by the SU algorithm.  This allows an implementation to use an existing JWS library directly for all necessary cryptographic operations without requiring any additional primitives.<a href="#section-6.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.4-2">Each individual JWS uses a fixed protected header containing only the minimum required <code>alg</code> value.  Since this JWS protected header itself is the same for every JWS, it SHOULD be a static value in the form of <code>{"alg":"***"}</code> where <code>***</code> is the JWA asymmetric signing key algorithm identifier being used.  This value is recreated by a verifier using the correct JWA algorithm value included in the SU algorithm identifier.<a href="#section-6.1.4-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.4-3">If an implementation uses an alternative JWS protected header than this fixed value, the octet string representation of that header should be included, base64url-encoded into the <code>jws_header</code> parameter in the issuer protected header.<a href="#section-6.1.4-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issuer-protected-header">
+<section id="section-6.1.5">
+          <h4 id="name-issuer-protected-header">
+<a href="#section-6.1.5" class="section-number selfRef">6.1.5. </a><a href="#name-issuer-protected-header" class="section-name selfRef">Issuer Protected Header</a>
+          </h4>
+<p id="section-6.1.5-1">The JWK of the issuer's Ephemeral Key MUST be included in the issuer protected header with the property name of <code>proof_jwk</code> and contain only the REQUIRED values to represent the public key.<a href="#section-6.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.5-2">The holder's Presentation Key JWK MUST be included in issuer protected header using the <code>presentation_jwk</code> parameter.<a href="#section-6.1.5-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.5-3">The final issuer protected header is then used directly as the body of a JWS and signed using the issuer's Stable Key.  The resulting JWS signature value unencoded octet string is the first value in the JWP proof.<a href="#section-6.1.5-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.5-4">In various examples in this specification, the octet string serialized issuer header is referenced as <code>issuer_header</code>.<a href="#section-6.1.5-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="payloads">
+<section id="section-6.1.6">
+          <h4 id="name-payloads">
+<a href="#section-6.1.6" class="section-number selfRef">6.1.6. </a><a href="#name-payloads" class="section-name selfRef">Payloads</a>
+          </h4>
+<p id="section-6.1.6-1">Each JWP payload is processed in order and signed as a JWS body using the issuer's Ephemeral Key.  The resulting JWS signature value unencoded octet string is appended to the JWP proof.<a href="#section-6.1.6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="proof">
+<section id="section-6.1.7">
+          <h4 id="name-proof">
+<a href="#section-6.1.7" class="section-number selfRef">6.1.7. </a><a href="#name-proof" class="section-name selfRef">Proof</a>
+          </h4>
+<p id="section-6.1.7-1">The proof value is an octet string array. The first entry is the unencoded signature of the issuer protected header, with each additional entry being a unencoded ephemeral key signature of an issued payload.<a href="#section-6.1.7-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation-protected-header">
+<section id="section-6.1.8">
+          <h4 id="name-presentation-protected-head">
+<a href="#section-6.1.8" class="section-number selfRef">6.1.8. </a><a href="#name-presentation-protected-head" class="section-name selfRef">Presentation Protected Header</a>
+          </h4>
+<p id="section-6.1.8-1">To generate a new presentation, the holder first creates a presentation protected header that is specific to the verifier being presented to.  This header MUST contain a parameter that both the holder and verifier trust as being unique and non-replayable.
+Use of the <code>nonce</code> header parameter is RECOMMENDED for this purpose.<a href="#section-6.1.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.8-2">This specification registers the <code>nonce</code> header parameter for the presentation protected header that contains a string value either generated by the verifier or derived from values provided by the verifier.  When present, the verifier MUST ensure the nonce value matches during verification.<a href="#section-6.1.8-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.8-3">The presentation protected header MAY contain other header parameters that are either provided by the verifier or by the holder.  These presentation header parameters SHOULD NOT contain values that are common across multiple presentations and SHOULD be unique to a single presentation and verifier.<a href="#section-6.1.8-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.8-4">In various examples in this specification, the octet string serialized presentation header is referenced as <code>presentation_header</code>.<a href="#section-6.1.8-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation">
+<section id="section-6.1.9">
+          <h4 id="name-presentation">
+<a href="#section-6.1.9" class="section-number selfRef">6.1.9. </a><a href="#name-presentation" class="section-name selfRef">Presentation</a>
+          </h4>
+<blockquote id="section-6.1.9-1">
+            <p id="section-6.1.9-1.1">Editor's Note: The current definition here is incomplete, the holder's signature needs to also incorporate the presented proof.<a href="#section-6.1.9-1.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="section-6.1.9-2">The holder derives a new proof array of octets when presenting it to a verifier.  The presented proof value will always contain the issuer's Stable Key signature for the issuer protected header as the first element.<a href="#section-6.1.9-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.9-3">The second element of the presented proof is the holder's signature of the presentation protected header using the holder's presentation key. This signature is constructed using the same technique desscribed for generating the issuer's signature over the issuer protected header.  Signing only the presentation header with the Presentation Key is sufficient to protect the entire presentation since that key is private to the holder and only the contents of the presentation header are used for replay prevention.<a href="#section-6.1.9-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.9-4">The two header signatures are then followed by only the issuer's Ephemeral Key signatures for each payload that is disclosed.  The order of the payload signatures is preserved and MUST be in the same order as the included disclosed payloads in the presented JWP.  Non-disclosed payloads will NOT have a signature value included.<a href="#section-6.1.9-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.9-5">For example, if the second and fifth of five payloads are not disclosed, then the holder's derived proof would consist of the issuer's signature over the issuer protected header, the holder's signature over the holder's protected header, the ephemeral key signature over the first, third and fourth payloads.<a href="#section-6.1.9-5" class="pilcrow">¶</a></p>
+<p id="section-6.1.9-6">Since the individual signatures in the proof value are unique and remain unchanged across multiple presentations, a Single Use JWP SHOULD only be presented a single time to each verifier in order for the holder to remain unlinkable across multiple presentations.<a href="#section-6.1.9-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="verification">
+<section id="section-6.1.10">
+          <h4 id="name-verification">
+<a href="#section-6.1.10" class="section-number selfRef">6.1.10. </a><a href="#name-verification" class="section-name selfRef">Verification</a>
+          </h4>
+<p id="section-6.1.10-1">The verifier MUST verify the issuer protected header against the first matching JWS signature part in the proof  using the issuer's Stable Key.  It MUST also verify the presentation protected header against the second part in the proof value using the holder's Presentation Key as provided in the <code>presentation_jwk</code> parameter in the issuer protected header.<a href="#section-6.1.10-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.10-2">With the headers verified, the issuer's Ephemeral Key as given in the issuer protected header <code>proof_jwk</code> parameter can then be used to verify each of the disclosed payload signatures.<a href="#section-6.1.10-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="SU-registration">
+<section id="section-6.1.11">
+          <h4 id="name-jpa-registration">
+<a href="#section-6.1.11" class="section-number selfRef">6.1.11. </a><a href="#name-jpa-registration" class="section-name selfRef">JPA Registration</a>
+          </h4>
+<p id="section-6.1.11-1">The proposed JWP <code>alg</code> value is of the format "SU-" appended with the relevant JWS <code>alg</code> value for the chosen public and ephemeral key-pair algorithm, for example "SU-ES256".<a href="#section-6.1.11-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="bbs">
+<section id="section-6.2">
+        <h3 id="name-bbs">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-bbs" class="section-name selfRef">BBS</a>
+        </h3>
+<p id="section-6.2-1">The BBS Signature Scheme <span>[<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span> is under active development within the CRFG.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">This algorithm supports both selective disclosure and unlinkability, enabling the holder to generate multiple presentations from one issued JWP without a verifier being able to correlate those presentations together based on the proof.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<div id="BBS-registration">
+<section id="section-6.2.1">
+          <h4 id="name-jpa-algorithms">
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-jpa-algorithms" class="section-name selfRef">JPA Algorithms</a>
+          </h4>
+<p id="section-6.2.1-1">The <code>BBS</code> <code>alg</code> parameter value in the issuance protected header corresponds to a ciphersuite identifier of <code>BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_</code>.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-2">The <code>BBS-PROOF</code> <code>alg</code> parameter value in the presentation protected header corresponds to the same ciphersuite, but used in presentation form.<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="key-format">
+<section id="section-6.2.2">
+          <h4 id="name-key-format">
+<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-key-format" class="section-name selfRef">Key Format</a>
+          </h4>
+<p id="section-6.2.2-1">The key used for the <code>BBS</code> algorithm is an elliptic curve-based key pair, specifically against the G_2 subgroup of a pairing friendly curve. Additional details on key generation can be found in <a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06#appendix-Section%203.4" class="relref">Section 3.4</a><a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-2">The JWK form of this key is an <code>OKP</code> type with a curve of <code>BLS12381G2</code>, with <code>x</code> being the base64url-encoded form of the output of <code>point_to_octets_E2</code>. The use of this curve is described in <span>[<a href="#I-D.ietf-cose-bls-key-representations" class="cite xref">I-D.ietf-cose-bls-key-representations</a>]</span>.<a href="#section-6.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-3">There is no additional holder key necessary for presentation proofs.<a href="#section-6.2.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issuance">
+<section id="section-6.2.3">
+          <h4 id="name-issuance">
+<a href="#section-6.2.3" class="section-number selfRef">6.2.3. </a><a href="#name-issuance" class="section-name selfRef">Issuance</a>
+          </h4>
+<p id="section-6.2.3-1">Issuance is performed using the <code>Sign</code> operation from <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06#section-3.5.1" class="relref">Section 3.5.1</a> of [<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span>. This operation utilizes the issuer's BLS12-381 G2 key pair as <code>SK</code> and <code>PK</code>, along with desired protected header and payloads as the octets <code>header</code> and the octets array <code>messages</code>.<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.3-2">The octets resulting from this operation form a single octet string in the issuance proof array, to be used along with the protected header and payloads to serialize the JWP.<a href="#section-6.2.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issuance-proof-verification">
+<section id="section-6.2.4">
+          <h4 id="name-issuance-proof-verification">
+<a href="#section-6.2.4" class="section-number selfRef">6.2.4. </a><a href="#name-issuance-proof-verification" class="section-name selfRef">Issuance Proof Verification</a>
+          </h4>
+<p id="section-6.2.4-1">Holder verification of the signature on issuance form is performed using the <code>Verify</code> operation from <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06#section-3.5.2" class="relref">Section 3.5.2</a> of [<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span>.<a href="#section-6.2.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.4-2">This operation utilizes the issuer's public key as <code>PK</code>, the proof as <code>signature</code>, the protected header octets as <code>header</code> and the array of payload octets as <code>messages</code>.<a href="#section-6.2.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation-1">
+<section id="section-6.2.5">
+          <h4 id="name-presentation-2">
+<a href="#section-6.2.5" class="section-number selfRef">6.2.5. </a><a href="#name-presentation-2" class="section-name selfRef">Presentation</a>
+          </h4>
+<p id="section-6.2.5-1">Derivation of a presentation is done by the holder using the <code>ProofGen</code> operation from <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06#section-3.5.3" class="relref">Section 3.5.3</a> of [<a href="#I-D.irtf-cfrg-bbs-signatures" class="cite xref">I-D.irtf-cfrg-bbs-signatures</a>]</span>.<a href="#section-6.2.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.5-2">This operation utilizes the issuer's public key as <code>PK</code>, the issuer protected header as <code>header</code>, the issuance proof as <code>signature</code>, the issuance payloads as <code>messages</code>, and the holder's presentation protected header as <code>ph</code>.<a href="#section-6.2.5-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.5-3">The operation also takes a vector of indexes into <code>messages</code>, describing which payloads the holder wishes to disclose. All payloads are required for proof generation, but only these indicated payloads will be required to be disclosed for later proof verification.<a href="#section-6.2.5-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.5-4">The output of this operation is the presentation proof, as a single octet string.<a href="#section-6.2.5-4" class="pilcrow">¶</a></p>
+<p id="section-6.2.5-5">Presentation serialization leverages the two protected headers and presentation proof, along with the disclosed payloads. Non-disclosed payloads are represented with the absent value of <code>null</code> in JSON serialization and a zero-length string in compact serialization.<a href="#section-6.2.5-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation-verification">
+<section id="section-6.2.6">
+          <h4 id="name-presentation-verification">
+<a href="#section-6.2.6" class="section-number selfRef">6.2.6. </a><a href="#name-presentation-verification" class="section-name selfRef">Presentation Verification</a>
+          </h4>
+<p id="section-6.2.6-1">Verification of a presentation is done by the verifier using the <code>ProofVerify</code> operation from <a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06#appendix-Section%203.5.4" class="relref">Section 3.5.4</a>.<a href="#section-6.2.6-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.6-2">This operation utilizes the issuer's public key as <code>PK</code>, the issuer protected header as <code>header</code>, the issuance proof as <code>signature</code>, the holder's presentation protected header as <code>ph</code>, and the payloads as <code>disclosed_messages</code>.<a href="#section-6.2.6-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.6-3">In addition, the <code>disclosed_indexes</code> scalar array is calculated from the payloads provided. Values disclosed in the presented payloads have a zero-based index in this array, while the indices of absent payloads are omitted.<a href="#section-6.2.6-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="message-authentication-code">
+<section id="section-6.3">
+        <h3 id="name-message-authentication-code">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-message-authentication-code" class="section-name selfRef">Message Authentication Code</a>
+        </h3>
+<p id="section-6.3-1">The Message Authentication Code (MAC) JPA uses a MAC to both generate ephemeral keys and compute authentication codes to protect the issuer header and each payload individually.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">Like the JWS-based JPA, it also does not support unlinkability if the same JWP is presented multiple times and requires an individually issued JWP for each presentation in order to fully protect privacy.  When compared to the JWS approach, using a MAC requires less computation but can result in potentially larger presentation proof values.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.3-3">The design is intentionally minimal and only involves using a single standardized MAC method instead of a mix of MAC/hash methods or a custom hash-based construct.  It is able to use any published cryptographic MAC method such as HMAC <span>[<a href="#RFC2104" class="cite xref">RFC2104</a>]</span> or <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-185.pdf">KMAC</a>.  It uses traditional public-key based signatures to verify the authenticity of the issuer and holder.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
+<div id="holder-setup-1">
+<section id="section-6.3.1">
+          <h4 id="name-holder-setup-2">
+<a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-holder-setup-2" class="section-name selfRef">Holder Setup</a>
+          </h4>
+<p id="section-6.3.1-1">Prior to the issuer creating a new JWP, it must have presentation binding information provided by the holder.  This enables the holder to perform replay prevention while presenting the JWP.<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.1-2">The presentation key used by the holder must be transferred to the issuer and verified, likely through a challenge and self-signing mechanism.  If the holder requires unlinkability, it must also generate a new key that is verified and bound to each new JWP.<a href="#section-6.3.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.3.1-3">How these holder presentation keys are transferred and verified is out of scope of this specification. Protocols such as OpenID Connect can be used to accomplish this.  What is required by this definition is that the holder's presentation key MUST be included in the issuer's protected header using the <code>pjwk</code> parameter with a JWK as the value.<a href="#section-6.3.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issuer-setup-1">
+<section id="section-6.3.2">
+          <h4 id="name-issuer-setup-2">
+<a href="#section-6.3.2" class="section-number selfRef">6.3.2. </a><a href="#name-issuer-setup-2" class="section-name selfRef">Issuer Setup</a>
+          </h4>
+<p id="section-6.3.2-1">To use the MAC algorithm, the issuer must have a stable public key pair to perform signing.  To start the issuance process, a single 32-byte random Shared Secret must first be generated.  This value will be shared privately to the holder as part of the issuer's JWP proof value.<a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.2-2">The Shared Secret is used by both the issuer and holder as the MAC method's key to generate a new set of unique ephemeral keys.  These keys are then used as the input to generate a MAC that protects each payload.<a href="#section-6.3.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issuer-protected-header-1">
+<section id="section-6.3.3">
+          <h4 id="name-issuer-protected-header-2">
+<a href="#section-6.3.3" class="section-number selfRef">6.3.3. </a><a href="#name-issuer-protected-header-2" class="section-name selfRef">Issuer Protected Header</a>
+          </h4>
+<p id="section-6.3.3-1">The holder's presentation key JWK MUST be included in the issuer protected header using the <code>pjwk</code> parameter.  The issuer MUST validate that the holder has possession of this key through a trusted mechanism such as verifying the signature of a unique nonce value from the holder.<a href="#section-6.3.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="combined-mac-representation">
+<section id="section-6.3.4">
+          <h4 id="name-combined-mac-representation">
+<a href="#section-6.3.4" class="section-number selfRef">6.3.4. </a><a href="#name-combined-mac-representation" class="section-name selfRef">Combined MAC Representation</a>
+          </h4>
+<p id="section-6.3.4-1">The combined MAC representation is a single octet string representing the MAC values of the issuer protected header, along with each payload provided by the issuer. This representation is signed by the issuer, but not shared - parties will recreate this octet string and verify the signature to verify the integrity of supplied issuer protected header and the integrity of any disclosed payloads.<a href="#section-6.3.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.4-2">The issuer protected header is included in this value as a MAC created using the fixed key "issuer_header" in UTF-8 encoded octets. The value is the issuer header JSON as a UTF-8 encoded octet string.<a href="#section-6.3.4-2" class="pilcrow">¶</a></p>
+<p id="section-6.3.4-3">A unique key is generated for each payload using a MAC, with the Shared Secret as the key and a value of "payload_X" as UTF-8 encoded octets, where "X" is replaced by the zero-based array index of the payload, for example "payload_0", "payload_1", etc.<a href="#section-6.3.4-3" class="pilcrow">¶</a></p>
+<p id="section-6.3.4-4">Each payload then itself has a corresponding MAC, using the above per-payload key and the payload octet string.<a href="#section-6.3.4-4" class="pilcrow">¶</a></p>
+<p id="section-6.3.4-5">The combined MAC representation is the octet string formed by the the concatentation of the issuer protected header MAC output, along with each payload MAC output.<a href="#section-6.3.4-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="issuer-proof">
+<section id="section-6.3.5">
+          <h4 id="name-issuer-proof">
+<a href="#section-6.3.5" class="section-number selfRef">6.3.5. </a><a href="#name-issuer-proof" class="section-name selfRef">Issuer Proof</a>
+          </h4>
+<p id="section-6.3.5-1">The issuer proof consists of two octet strings.<a href="#section-6.3.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.5-2">The first octet string is the issuer signature over the combined MAC representation. The issuer signs the JWS using its stable public key, and a fixed header containing the <code>alg</code> associated with signing algorithm in use.<a href="#section-6.3.5-2" class="pilcrow">¶</a></p>
+<p id="section-6.3.5-3"><code>jws_header = '{"alg":"ES256"}'</code><a href="#section-6.3.5-3" class="pilcrow">¶</a></p>
+<p id="section-6.3.5-4">The signature value of the JWS is extracted and base64url-decoded into an octet string.<a href="#section-6.3.5-4" class="pilcrow">¶</a></p>
+<p id="section-6.3.5-5">The second octet string is the Shared Secret used to generate the per-payload keys for the combined representation.<a href="#section-6.3.5-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation-protected-header-1">
+<section id="section-6.3.6">
+          <h4 id="name-presentation-protected-heade">
+<a href="#section-6.3.6" class="section-number selfRef">6.3.6. </a><a href="#name-presentation-protected-heade" class="section-name selfRef">Presentation Protected Header</a>
+          </h4>
+<p id="section-6.3.6-1">See the JWS <a href="#presentation-protected-header">Presentation Protected Header</a> section.<a href="#section-6.3.6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="presentation-proof">
+<section id="section-6.3.7">
+          <h4 id="name-presentation-proof">
+<a href="#section-6.3.7" class="section-number selfRef">6.3.7. </a><a href="#name-presentation-proof" class="section-name selfRef">Presentation Proof</a>
+          </h4>
+<blockquote id="section-6.3.7-1">
+            <p id="section-6.3.7-1.1">Editor's Note: The current definition here is incomplete, the holder's signature needs to also incorporate the presented proof.<a href="#section-6.3.7-1.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="section-6.3.7-2">The first value in the presentation proof is the presentation signature. This is a signature over the presentation protected header, using the key specified by the <code>pjwk</code> parameter in the issuer protected header.<a href="#section-6.3.7-2" class="pilcrow">¶</a></p>
+<p id="section-6.3.7-3">The second value is the issuer signature over the Combined MAC Representation provided with the issued form.<a href="#section-6.3.7-3" class="pilcrow">¶</a></p>
+<p id="section-6.3.7-4">The remaining values are used by the verifier to reconstruct the combined MAC representation without access to the Shared Secret. There is one value corresponding to each payload, whether it has been disclosed or not.<a href="#section-6.3.7-4" class="pilcrow">¶</a></p>
+<p id="section-6.3.7-5">If a payload is disclosed, the unique per-payload key derived from the shared secret is used as the payload's entry in the proof array.<a href="#section-6.3.7-5" class="pilcrow">¶</a></p>
+<p id="section-6.3.7-6">If a payload is not disclosed, the payload's MAC in the combined MAC representation is used as the payload's entry in the proof array.<a href="#section-6.3.7-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="verification-of-the-presentation-proof">
+<section id="section-6.3.8">
+          <h4 id="name-verification-of-the-present">
+<a href="#section-6.3.8" class="section-number selfRef">6.3.8. </a><a href="#name-verification-of-the-present" class="section-name selfRef">Verification of the Presentation Proof</a>
+          </h4>
+<p id="section-6.3.8-1">The verifier must recreate the Combined MAC Representation from the presentation proof to verify integrity over the disclosed information.<a href="#section-6.3.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.8-2">The issuer protected header MAC is recreated using the same mechanism described above.<a href="#section-6.3.8-2" class="pilcrow">¶</a></p>
+<p id="section-6.3.8-3">For each payload in the presentation:<a href="#section-6.3.8-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3.8-4.1">
+              <p id="section-6.3.8-4.1.1">If the payload is disclosed, then the presentation proof contains the unique per-payload key. The corresponding payload MAC can be computed by performing the MAC operation with this key and the corresponding payload.<a href="#section-6.3.8-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.3.8-4.2">
+              <p id="section-6.3.8-4.2.1">If the payload is not disclosed, then the presentation proof contains the payload MAC, which can be used directly<a href="#section-6.3.8-4.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.3.8-5">The concatenation of the octets of the issuer protected header MAC and each payload MAC forms the Combined MAC Representation. The issuer signature in the proof is then verified by converting these values to a JWS as described above, and verifying that JWS.<a href="#section-6.3.8-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="MAC-registration">
+<section id="section-6.3.9">
+          <h4 id="name-jpa-registration-2">
+<a href="#section-6.3.9" class="section-number selfRef">6.3.9. </a><a href="#name-jpa-registration-2" class="section-name selfRef">JPA Registration</a>
+          </h4>
+<p id="section-6.3.9-1">Proposed JWP <code>alg</code> value is of the format "MAC-" appended with a unique identifier for the set of MAC and signing algorithms used.  Below are the initial registrations:<a href="#section-6.3.9-1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-6.3.9-2.1">
+              <code>MAC-H256</code> uses <code>HMAC SHA-256</code> as the MAC and <code>ECDSA using P-256 and SHA-256</code> for the signatures<a href="#section-6.3.9-2.1" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-6.3.9-2.2">
+              <code>MAC-H384</code> uses <code>HMAC SHA-384</code> as the MAC and <code>ECDSA using P-384 and SHA-384</code> for the signatures<a href="#section-6.3.9-2.2" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-6.3.9-2.3">
+              <code>MAC-H512</code> uses <code>HMAC SHA-512</code> as the MAC and <code>ECDSA using P-521 and SHA-512</code> for the signatures<a href="#section-6.3.9-2.3" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-6.3.9-2.4">
+              <code>MAC-K25519</code> uses <code>KMAC SHAKE128</code> as the MAC and <code>EdDSA using Curve25519</code> for the signatures<a href="#section-6.3.9-2.4" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-6.3.9-2.5">
+              <code>MAC-K448</code> uses <code>KMAC SHAKE256</code> as the MAC and <code>EdDSA using Curve448</code> for the signatures<a href="#section-6.3.9-2.5" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-6.3.9-2.6">
+              <code>MAC-H256K</code> uses <code>HMAC SHA-256</code> as the MAC and <code>ECDSA using secp256k1 and SHA-256</code> for the signatures<a href="#section-6.3.9-2.6" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-7">
+      <h2 id="name-security-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<blockquote id="section-7-1">
+        <p id="section-7-1.1">Editor's Note: This will follow once the algorithms defined here have become more stable.<a href="#section-7-1.1" class="pilcrow">¶</a></p>
+</blockquote>
+<ul class="compact">
+<li class="compact" id="section-7-2.1">Data minimization of the proof value<a href="#section-7-2.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-7-2.2">Unlinkability of the protected header contents<a href="#section-7-2.2" class="pilcrow">¶</a>
+</li>
+      </ul>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-8">
+      <h2 id="name-iana-considerations">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-8-1">The following registration procedure is used for all the
+registries established by this specification.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">Values are registered on a Specification Required <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span> basis
+after a three-week review period on the jose-reg-review@ietf.org
+mailing list, on the advice of one or more Designated Experts.
+However, to allow for the allocation of values prior to publication,
+the Designated Experts may approve registration once they are
+satisfied that such a specification will be published.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">Registration requests sent to the mailing list for review should use
+an appropriate subject (e.g., "Request to register JWP algorithm: example").<a href="#section-8-3" class="pilcrow">¶</a></p>
+<p id="section-8-4">Within the review period, the Designated Experts will either approve or deny
+the registration request, communicating this decision to the review list and IANA.
+Denials should include an explanation and, if applicable,
+suggestions as to how to make the request successful.
+Registration requests that are undetermined for
+a period longer than 21 days can be brought to the IESG's attention
+(using the iesg@ietf.org mailing list) for resolution.<a href="#section-8-4" class="pilcrow">¶</a></p>
+<p id="section-8-5">Criteria that should be applied by the Designated Experts include
+determining whether the proposed registration duplicates existing functionality,
+whether it is likely to be of general applicability
+or useful only for a single application,
+and whether the registration description is clear.<a href="#section-8-5" class="pilcrow">¶</a></p>
+<p id="section-8-6">IANA must only accept registry updates from the Designated Experts and should direct
+all requests for registration to the review mailing list.<a href="#section-8-6" class="pilcrow">¶</a></p>
+<p id="section-8-7">It is suggested that multiple Designated Experts be appointed who are able to
+represent the perspectives of different applications using this specification,
+in order to enable broadly informed review of registration decisions.
+In cases where a registration decision could be perceived as
+creating a conflict of interest for a particular Expert,
+that Expert should defer to the judgment of the other Experts.<a href="#section-8-7" class="pilcrow">¶</a></p>
+<div id="AlgsReg">
+<section id="section-8.1">
+        <h3 id="name-json-web-proof-algorithms-r">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-json-web-proof-algorithms-r" class="section-name selfRef">JSON Web Proof Algorithms Registry</a>
+        </h3>
+<p id="section-8.1-1">This specification establishes the
+IANA "JSON Web Proof Algorithms" registry
+for values of the JWP <code>alg</code> (algorithm) parameter in JWP Header Parameters.
+The registry records the algorithm name, the algorithm description,
+the algorithm usage locations,
+the implementation requirements, the change controller,
+and a reference to the specification that defines it.
+The same algorithm name can be registered multiple times,
+provided that the sets of usage locations are disjoint.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">It is suggested that the length of the key be included in the algorithm
+name when multiple variations of algorithms are being
+registered that use keys of different lengths and the key lengths for
+each need to be fixed (for instance, because they will be created by
+key derivation functions).
+This allows readers of the JSON text to more easily make security decisions.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-3">The Designated Experts should perform reasonable due diligence
+that algorithms being registered either are currently considered
+cryptographically credible or are being registered as Deprecated
+or Prohibited.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1-4">The implementation requirements of an algorithm may be changed
+over time as the
+cryptographic landscape evolves, for instance,
+to change the status of an algorithm to Deprecated or
+to change the status of an algorithm from Optional
+to Recommended+ or Required.
+Changes of implementation requirements are only permitted
+on a Specification Required basis after review by the Designated Experts,
+with the new specification
+defining the revised implementation requirements level.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+<div id="AlgsTemplate">
+<section id="section-8.1.1">
+          <h4 id="name-registration-template">
+<a href="#section-8.1.1" class="section-number selfRef">8.1.1. </a><a href="#name-registration-template" class="section-name selfRef">Registration Template</a>
+          </h4>
+<ul class="compact">
+<li class="compact" id="section-8.1.1-1.1">Algorithm Name: The name requested (e.g., "SU-ES256"). This name is a case-sensitive ASCII string. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.<a href="#section-8.1.1-1.1" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.2">Algorithm Description: Brief description of the algorithm (e.g., "Single-Use JWP using ES256").<a href="#section-8.1.1-1.2" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.3">Algorithm Usage Location(s): The algorithm usage locations, which should be one or more of the values <code>Issued</code> or <code>Presented</code>.  Other values may be used with the approval of a Designated Expert.<a href="#section-8.1.1-1.3" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.4">JWP Implementation Requirements: The algorithm implementation requirements for JWP, which must be one the words Required, Recommended, Optional, Deprecated, or Prohibited. Optionally, the word can be followed by a "+" or "-". The use of "+" indicates that the requirement strength is likely to be increased in a future version of the specification.  The use of "-" indicates that the requirement strength is likely to be decreased in a future version of the specification. Any identifiers registered for non-authenticated encryption algorithms or other algorithms that are otherwise unsuitable for direct use as JWP algorithms must be registered as "Prohibited".<a href="#section-8.1.1-1.4" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.5">Change Controller: For Standards Track RFCs, list the "IETF". For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.<a href="#section-8.1.1-1.5" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.6">Specification Document(s): Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.<a href="#section-8.1.1-1.6" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-8.1.1-1.7">Algorithm Analysis Documents(s): References to a publication or publications in well-known cryptographic conferences, by national standards bodies, or by other authoritative sources analyzing the cryptographic soundness of the algorithm to be registered. The Designated Experts may require convincing evidence of the cryptographic soundness of a new algorithm to be provided with the registration request unless the algorithm is being registered as Deprecated or Prohibited. Having gone through working group and IETF review, the initial registrations made by this document are exempt from the need to provide this information.<a href="#section-8.1.1-1.7" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+<div id="AlgsContents">
+<section id="section-8.1.2">
+          <h4 id="name-initial-registry-contents">
+<a href="#section-8.1.2" class="section-number selfRef">8.1.2. </a><a href="#name-initial-registry-contents" class="section-name selfRef">Initial Registry Contents</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-8.1.2-1.1">Algorithm Name: <code>SU-ES256</code><a href="#section-8.1.2-1.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.2">Algorithm Description: Single-Use JWP using ES256<a href="#section-8.1.2-1.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.3">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.4">JWP Implementation Requirements: Recommended<a href="#section-8.1.2-1.4" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.5">Change Controller: IETF<a href="#section-8.1.2-1.5" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.6">Specification Document(s): <a href="#SU-registration" class="auto internal xref">Section 6.1.11</a> of this specification<a href="#section-8.1.2-1.6" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.1.2-1.7">
+              <p id="section-8.1.2-1.7.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.7.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.8">
+              <p id="section-8.1.2-1.8.1">Algorithm Name: <code>SU-ES384</code><a href="#section-8.1.2-1.8.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.9">
+              <p id="section-8.1.2-1.9.1">Algorithm Description: Single-Use JWP using ES384<a href="#section-8.1.2-1.9.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.10">
+              <p id="section-8.1.2-1.10.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.10.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.11">
+              <p id="section-8.1.2-1.11.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.11.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.12">
+              <p id="section-8.1.2-1.12.1">Change Controller: IETF<a href="#section-8.1.2-1.12.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.13">
+              <p id="section-8.1.2-1.13.1">Specification Document(s): <a href="#SU-registration" class="auto internal xref">Section 6.1.11</a> of this specification<a href="#section-8.1.2-1.13.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.14">
+              <p id="section-8.1.2-1.14.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.14.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.15">
+              <p id="section-8.1.2-1.15.1">Algorithm Name: <code>SU-ES512</code><a href="#section-8.1.2-1.15.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.16">
+              <p id="section-8.1.2-1.16.1">Algorithm Description: Single-Use JWP using ES512<a href="#section-8.1.2-1.16.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.17">
+              <p id="section-8.1.2-1.17.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.17.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.18">
+              <p id="section-8.1.2-1.18.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.18.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.19">
+              <p id="section-8.1.2-1.19.1">Change Controller: IETF<a href="#section-8.1.2-1.19.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.20">
+              <p id="section-8.1.2-1.20.1">Specification Document(s): <a href="#SU-registration" class="auto internal xref">Section 6.1.11</a> of this specification<a href="#section-8.1.2-1.20.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.21">
+              <p id="section-8.1.2-1.21.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.21.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.22">
+              <p id="section-8.1.2-1.22.1">Algorithm Name: <code>BBS</code><a href="#section-8.1.2-1.22.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.23">
+              <p id="section-8.1.2-1.23.1">Algorithm Description: Corresponds to a ciphersuite identifier of <code>BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_H2G_HM2S_</code><a href="#section-8.1.2-1.23.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.24">
+              <p id="section-8.1.2-1.24.1">Algorithm Usage Location(s): Issued<a href="#section-8.1.2-1.24.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.25">
+              <p id="section-8.1.2-1.25.1">JWP Implementation Requirements: Required<a href="#section-8.1.2-1.25.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.26">
+              <p id="section-8.1.2-1.26.1">Change Controller: IETF<a href="#section-8.1.2-1.26.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.27">
+              <p id="section-8.1.2-1.27.1">Specification Document(s): <a href="#BBS-registration" class="auto internal xref">Section 6.2.1</a> of this specification<a href="#section-8.1.2-1.27.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.28">
+              <p id="section-8.1.2-1.28.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.28.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.29">
+              <p id="section-8.1.2-1.29.1">Algorithm Name: <code>BBS-PROOF</code><a href="#section-8.1.2-1.29.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.30">
+              <p id="section-8.1.2-1.30.1">Algorithm Description: Corresponds to a ciphersuite identifier of <code>BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_H2G_HM2S_</code><a href="#section-8.1.2-1.30.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.31">
+              <p id="section-8.1.2-1.31.1">Algorithm Usage Location(s): Presented<a href="#section-8.1.2-1.31.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.32">
+              <p id="section-8.1.2-1.32.1">JWP Implementation Requirements: Required<a href="#section-8.1.2-1.32.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.33">
+              <p id="section-8.1.2-1.33.1">Change Controller: IETF<a href="#section-8.1.2-1.33.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.34">
+              <p id="section-8.1.2-1.34.1">Specification Document(s): <a href="#BBS-registration" class="auto internal xref">Section 6.2.1</a> of this specification<a href="#section-8.1.2-1.34.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.35">
+              <p id="section-8.1.2-1.35.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.35.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.36">
+              <p id="section-8.1.2-1.36.1">Algorithm Name: <code>MAC-H256</code><a href="#section-8.1.2-1.36.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.37">
+              <p id="section-8.1.2-1.37.1">Algorithm Description: <code>MAC-H256</code> uses <code>HMAC SHA-256</code> as the MAC and <code>ECDSA using P-256 and SHA-256</code> for the signatures<a href="#section-8.1.2-1.37.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.38">
+              <p id="section-8.1.2-1.38.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.38.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.39">
+              <p id="section-8.1.2-1.39.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.39.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.40">
+              <p id="section-8.1.2-1.40.1">Change Controller: IETF<a href="#section-8.1.2-1.40.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.41">
+              <p id="section-8.1.2-1.41.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.41.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.42">
+              <p id="section-8.1.2-1.42.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.42.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.43">
+              <p id="section-8.1.2-1.43.1">Algorithm Name: <code>MAC-H384</code><a href="#section-8.1.2-1.43.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.44">
+              <p id="section-8.1.2-1.44.1">Algorithm Description: <code>MAC-H384</code> uses <code>HMAC SHA-384</code> as the MAC and <code>ECDSA using P-384 and SHA-384</code> for the signatures<a href="#section-8.1.2-1.44.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.45">
+              <p id="section-8.1.2-1.45.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.45.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.46">
+              <p id="section-8.1.2-1.46.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.46.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.47">
+              <p id="section-8.1.2-1.47.1">Change Controller: IETF<a href="#section-8.1.2-1.47.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.48">
+              <p id="section-8.1.2-1.48.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.48.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.49">
+              <p id="section-8.1.2-1.49.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.49.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.50">
+              <p id="section-8.1.2-1.50.1">Algorithm Name: <code>MAC-H512</code><a href="#section-8.1.2-1.50.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.51">
+              <p id="section-8.1.2-1.51.1">Algorithm Description: <code>MAC-H512</code> uses <code>HMAC SHA-512</code> as the MAC and <code>ECDSA using P-521 and SHA-512</code> for the signatures<a href="#section-8.1.2-1.51.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.52">
+              <p id="section-8.1.2-1.52.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.52.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.53">
+              <p id="section-8.1.2-1.53.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.53.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.54">
+              <p id="section-8.1.2-1.54.1">Change Controller: IETF<a href="#section-8.1.2-1.54.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.55">
+              <p id="section-8.1.2-1.55.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.55.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.56">
+              <p id="section-8.1.2-1.56.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.56.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.57">
+              <p id="section-8.1.2-1.57.1">Algorithm Name: <code>MAC-K25519</code><a href="#section-8.1.2-1.57.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.58">
+              <p id="section-8.1.2-1.58.1">Algorithm Description: <code>MAC-K25519</code> uses <code>KMAC SHAKE128</code> as the MAC and <code>EdDSA using Curve25519</code> for the signatures<a href="#section-8.1.2-1.58.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.59">
+              <p id="section-8.1.2-1.59.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.59.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.60">
+              <p id="section-8.1.2-1.60.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.60.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.61">
+              <p id="section-8.1.2-1.61.1">Change Controller: IETF<a href="#section-8.1.2-1.61.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.62">
+              <p id="section-8.1.2-1.62.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.62.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.63">
+              <p id="section-8.1.2-1.63.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.63.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.64">
+              <p id="section-8.1.2-1.64.1">Algorithm Name: <code>MAC-K448</code><a href="#section-8.1.2-1.64.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.65">
+              <p id="section-8.1.2-1.65.1">Algorithm Description: <code>MAC-K448</code> uses <code>KMAC SHAKE256</code> as the MAC and <code>EdDSA using Curve448</code> for the signatures<a href="#section-8.1.2-1.65.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.66">
+              <p id="section-8.1.2-1.66.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.66.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.67">
+              <p id="section-8.1.2-1.67.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.67.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.68">
+              <p id="section-8.1.2-1.68.1">Change Controller: IETF<a href="#section-8.1.2-1.68.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.69">
+              <p id="section-8.1.2-1.69.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.69.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.70">
+              <p id="section-8.1.2-1.70.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.70.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.71">
+              <p id="section-8.1.2-1.71.1">Algorithm Name: <code>MAC-H256K</code><a href="#section-8.1.2-1.71.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.72">
+              <p id="section-8.1.2-1.72.1">Algorithm Description: <code>MAC-H256K</code> uses <code>HMAC SHA-256</code> as the MAC and <code>ECDSA using secp256k1 and SHA-256</code> for the signatures<a href="#section-8.1.2-1.72.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.73">
+              <p id="section-8.1.2-1.73.1">Algorithm Usage Location(s): Issued, Presented<a href="#section-8.1.2-1.73.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.74">
+              <p id="section-8.1.2-1.74.1">JWP Implementation Requirements: Optional<a href="#section-8.1.2-1.74.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.75">
+              <p id="section-8.1.2-1.75.1">Change Controller: IETF<a href="#section-8.1.2-1.75.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.76">
+              <p id="section-8.1.2-1.76.1">Specification Document(s): <a href="#MAC-registration" class="auto internal xref">Section 6.3.9</a> of this specification<a href="#section-8.1.2-1.76.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.1.2-1.77">
+              <p id="section-8.1.2-1.77.1">Algorithm Analysis Documents(s): n/a<a href="#section-8.1.2-1.77.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="HdrReg">
+<section id="section-8.2">
+        <h3 id="name-header-parameter-names-regi">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-header-parameter-names-regi" class="section-name selfRef">Header Parameter Names Registration</a>
+        </h3>
+<p id="section-8.2-1">This section registers the following Header Parameter names
+defined by this specification in the IANA
+"JSON Web Proof Header Parameters" registry
+established by <span>[<a href="#I-D.ietf-jose-json-web-proof" class="cite xref">I-D.ietf-jose-json-web-proof</a>]</span>.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<div id="HdrContents">
+<section id="section-8.2.1">
+          <h4 id="name-registry-contents">
+<a href="#section-8.2.1" class="section-number selfRef">8.2.1. </a><a href="#name-registry-contents" class="section-name selfRef">Registry Contents</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-8.2.1-1.1">Header Parameter Name: <code>proof_jwk</code><a href="#section-8.2.1-1.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.2.1-1.2">Header Parameter Description: Issuer's Ephemeral Key<a href="#section-8.2.1-1.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.2.1-1.3">Header Parameter Usage Location(s): Issued<a href="#section-8.2.1-1.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.2.1-1.4">Change Controller: IETF<a href="#section-8.2.1-1.4" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-8.2.1-1.5">
+              <p id="section-8.2.1-1.5.1">Specification Document(s): <a href="#issuer-protected-header" class="auto internal xref">Section 6.1.5</a> of this specification<a href="#section-8.2.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.6">
+              <p id="section-8.2.1-1.6.1">Header Parameter Name: <code>presentation_jwk</code><a href="#section-8.2.1-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.7">
+              <p id="section-8.2.1-1.7.1">Header Parameter Description: Holder's Presentation Key<a href="#section-8.2.1-1.7.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.8">
+              <p id="section-8.2.1-1.8.1">Header Parameter Usage Location(s): Issued<a href="#section-8.2.1-1.8.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.9">
+              <p id="section-8.2.1-1.9.1">Change Controller: IETF<a href="#section-8.2.1-1.9.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-8.2.1-1.10">
+              <p id="section-8.2.1-1.10.1">Specification Document(s): <a href="#issuer-protected-header" class="auto internal xref">Section 6.1.5</a> of this specification<a href="#section-8.2.1-1.10.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<section id="section-9">
+      <h2 id="name-references">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<section id="section-9.1">
+        <h3 id="name-normative-references">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-cose-bls-key-representations">[I-D.ietf-cose-bls-key-representations]</dt>
+        <dd>
+<span class="refAuthor">Looker, T.</span> and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"Barreto-Lynn-Scott Elliptic Curve Key Representations for JOSE and COSE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-bls-key-representations-05</span>, <time datetime="2024-03-17" class="refDate">17 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-bls-key-representations-05">https://datatracker.ietf.org/doc/html/draft-ietf-cose-bls-key-representations-05</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-jose-json-web-proof">[I-D.ietf-jose-json-web-proof]</dt>
+        <dd>
+<span class="refAuthor">Miller, J.</span>, <span class="refAuthor">Waite, D.</span>, and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"JSON Web Proof"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-json-web-proof-04</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-proof-04">https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-proof-04</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.irtf-cfrg-bbs-signatures">[I-D.irtf-cfrg-bbs-signatures]</dt>
+      <dd>
+<span class="refAuthor">Looker, T.</span>, <span class="refAuthor">Kalos, V.</span>, <span class="refAuthor">Whitehead, A.</span>, and <span class="refAuthor">M. Lodder</span>, <span class="refTitle">"The BBS Signature Scheme"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bbs-signatures-06</span>, <time datetime="2024-06-26" class="refDate">26 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bbs-signatures-06</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<section id="section-9.2">
+        <h3 id="name-informative-references">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC2104">[RFC2104]</dt>
+        <dd>
+<span class="refAuthor">Krawczyk, H.</span>, <span class="refAuthor">Bellare, M.</span>, and <span class="refAuthor">R. Canetti</span>, <span class="refTitle">"HMAC: Keyed-Hashing for Message Authentication"</span>, <span class="seriesInfo">RFC 2104</span>, <span class="seriesInfo">DOI 10.17487/RFC2104</span>, <time datetime="1997-02" class="refDate">February 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2104">https://www.rfc-editor.org/info/rfc2104</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5226">[RFC5226]</dt>
+        <dd>
+<span class="refAuthor">Narten, T.</span> and <span class="refAuthor">H. Alvestrand</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">RFC 5226</span>, <span class="seriesInfo">DOI 10.17487/RFC5226</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5226">https://www.rfc-editor.org/info/rfc5226</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7515">[RFC7515]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Signature (JWS)"</span>, <span class="seriesInfo">RFC 7515</span>, <span class="seriesInfo">DOI 10.17487/RFC7515</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7515">https://www.rfc-editor.org/info/rfc7515</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7518">[RFC7518]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refTitle">"JSON Web Algorithms (JWA)"</span>, <span class="seriesInfo">RFC 7518</span>, <span class="seriesInfo">DOI 10.17487/RFC7518</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7518">https://www.rfc-editor.org/info/rfc7518</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="VC-DATA-MODEL-2.0">[VC-DATA-MODEL-2.0]</dt>
+      <dd>
+<span class="refAuthor">Sporny, M.</span>, <span class="refAuthor">Jr, T. T.</span>, <span class="refAuthor">Herman, I.</span>, <span class="refAuthor">Jones, M. B.</span>, and <span class="refAuthor">G. Cohen</span>, <span class="refTitle">"Verifiable Credentials Data Model 2.0"</span>, <time datetime="2023-12-27" class="refDate">27 December 2023</time>, <span>&lt;<a href="https://www.w3.org/TR/vc-data-model-2.0">https://www.w3.org/TR/vc-data-model-2.0</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</section>
+<div id="example-jwps">
+<section id="appendix-A">
+      <h2 id="name-example-jwps">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-example-jwps" class="section-name selfRef">Example JWPs</a>
+      </h2>
+<p id="appendix-A-1">The following examples use algorithms defined in JSON Proof Algorithms and also contain the keys used, so that implementations can validate these samples.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<div id="example-single-use-jwp">
+<section id="appendix-A.1">
+        <h3 id="name-example-single-use-jwp">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-example-single-use-jwp" class="section-name selfRef">Example Single-Use JWP</a>
+        </h3>
+<p id="appendix-A.1-1">This example uses the Single-Use Algorithm as defined in JSON Proof Algorithms to create a JSON Proof Token.  It demonstrates how to apply selective disclosure using an array of traditional JWS-based signatures.  Unlinkability is only achieved by using each JWP one time, as multiple uses are inherently linkable via the traditional ECDSA signature embedded in the proof.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-2">To begin, we need two asymmetric keys for Single Use: one that represents the JPT Issuer's stable key and the other is an ephemeral key generated by the Issuer just for this JWP.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-3">This is the Issuer's stable private key used in this example in the JWK format:<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
+<span id="name-issuer-private-key-es256"></span><figure id="figure-1">
+          <div class="lang-wrapped sourcecode" id="appendix-A.1-4.1">
+<pre>{
+  "kty": "EC",
+  "crv": "P-256",
+  "x": "ZDwt_eaXXqwD_NPfe4DhBjcJUsMbQqhTGtsLUV-4XOg",
+  "y": "pQJt_rVe_e_9kn1oKzyHN2R1mE7DSu1YhVB62k4yRSM",
+  "d": "auDumr47kQtLQ3gC4WU5BIG6m_EGBUIAhuuEhHaqkNQ"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-issuer-private-key-es256" class="selfRef">Issuer Private Key (es256)</a>
+          </figcaption></figure>
+<p id="appendix-A.1-5">This is the ephemeral private key used in this example in the JWK format:<a href="#appendix-A.1-5" class="pilcrow">¶</a></p>
+<span id="name-issuer-ephemeral-private-ke"></span><figure id="figure-2">
+          <div class="lang-wrapped sourcecode" id="appendix-A.1-6.1">
+<pre>{
+  "kty": "EC",
+  "crv": "P-256",
+  "x": "LY3Neiakmg5FmNe-wJDcyZwG6I5gYrsbdYYA4qD1QYo",
+  "y": "pwcM1oB3DStpJW7virRNHx2xo5DEPNqLa-CWhmMl2zw",
+  "d": "jqUtPfq_V2M5E7IRqJrY9JNCxHNVhgc4YzY6Xk8G8xs"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-issuer-ephemeral-private-ke" class="selfRef">Issuer Ephemeral Private Key (es256)</a>
+          </figcaption></figure>
+<p id="appendix-A.1-7">This is the Holder's presentation private key used in this example in the JWK format:<a href="#appendix-A.1-7" class="pilcrow">¶</a></p>
+<span id="name-holder-presentation-private"></span><figure id="figure-3">
+          <div class="lang-wrapped sourcecode" id="appendix-A.1-8.1">
+<pre>{
+  "kty": "EC",
+  "crv": "P-256",
+  "x": "FBJ8sZ806THUYLfcHZkzEX0KDqic4heBaxpwa519yuE",
+  "y": "5vmvzQfZPcpNCZ2TPUG3Kw9RM4H1uNAk9bWuAgEdWjI",
+  "d": "apPm3svBvwi7w3YUI5ZLAQalK70UXTuHZzFcfLckaBY"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-holder-presentation-private" class="selfRef">Holder Presentation Private Key</a>
+          </figcaption></figure>
+<p id="appendix-A.1-9">The JWP Protected Header declares that the data structure is a JPT and the JWP Proof Input is secured using the Single-Use ECDSA algorithm with the P-256 curve and SHA-256 digest.  It also includes the ephemeral public key, the Holder's presentation public key and list of claims used for this JPT.<a href="#appendix-A.1-9" class="pilcrow">¶</a></p>
+<span id="name-issuer-protected-header-es2"></span><figure id="figure-4">
+          <div class="lang-wrapped sourcecode" id="appendix-A.1-10.1">
+<pre>{
+  "alg": "SU-ES256",
+  "typ": "JPT",
+  "iss": "https://issuer.example",
+  "claims": [
+    "iat",
+    "exp",
+    "family_name",
+    "given_name",
+    "email",
+    "address",
+    "age_over_21"
+  ],
+  "proof_jwk": {
+    "kty": "EC",
+    "crv": "P-256",
+    "x": "LY3Neiakmg5FmNe-wJDcyZwG6I5gYrsbdYYA4qD1QYo",
+    "y": "pwcM1oB3DStpJW7virRNHx2xo5DEPNqLa-CWhmMl2zw",
+    "d": "jqUtPfq_V2M5E7IRqJrY9JNCxHNVhgc4YzY6Xk8G8xs"
+  },
+  "presentation_jwk": {
+    "kty": "EC",
+    "crv": "P-256",
+    "x": "FBJ8sZ806THUYLfcHZkzEX0KDqic4heBaxpwa519yuE",
+    "y": "5vmvzQfZPcpNCZ2TPUG3Kw9RM4H1uNAk9bWuAgEdWjI",
+    "d": "apPm3svBvwi7w3YUI5ZLAQalK70UXTuHZzFcfLckaBY"
+  }
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-issuer-protected-header-es2" class="selfRef">Issuer Protected header (es256)</a>
+          </figcaption></figure>
+<p id="appendix-A.1-11">The JWP Protected Header JSON is serialized (without the above whitespace added for readability) and uses UTF-8 encoding to convert into an octet string. This gives:<a href="#appendix-A.1-11" class="pilcrow">¶</a></p>
+<span id="name-encoded-issuer-protected-he"></span><figure id="figure-5">
+          <div class="lang-wrapped sourcecode" id="appendix-A.1-12.1">
+<pre>eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyL
+mV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUiLCJnaXZlbl
+9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicHJvb2ZfandrIjp
+7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiTFkzTmVpYWttZzVGbU5lLXdKRGN5
+WndHNkk1Z1lyc2JkWVlBNHFEMVFZbyIsInkiOiJwd2NNMW9CM0RTdHBKVzd2aXJSTkh4M
+nhvNURFUE5xTGEtQ1dobU1sMnp3IiwiZCI6ImpxVXRQZnFfVjJNNUU3SVJxSnJZOUpOQ3
+hITlZoZ2M0WXpZNlhrOEc4eHMifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyI
+sImNydiI6IlAtMjU2IiwieCI6IkZCSjhzWjgwNlRIVVlMZmNIWmt6RVgwS0RxaWM0aGVC
+YXhwd2E1MTl5dUUiLCJ5IjoiNXZtdnpRZlpQY3BOQ1oyVFBVRzNLdzlSTTRIMXVOQWs5Y
+ld1QWdFZFdqSSIsImQiOiJhcFBtM3N2QnZ3aTd3M1lVSTVaTEFRYWxLNzBVWFR1SFp6Rm
+NmTGNrYUJZIn19
+
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-encoded-issuer-protected-he" class="selfRef">Encoded Issuer Protected Header (es256, base64url-encoded)</a>
+          </figcaption></figure>
+<p id="appendix-A.1-13">The Single Use algorithm utilizes multiple individual JWS Signatures.  Each signature value is generated by creating a JWS with a single Protected Header with the associated <code>alg</code> value. In this example, the fixed header used for each JWS is the serialized JSON Object <code>{"alg":"ES256"}</code>. This protected header will be used to generate a signature over each corresponding payload in the JWP. The corresponding octet value in the proof is the octet string (base64url-decoded) value of the signature.<a href="#appendix-A.1-13" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-14">The final proof value from the Issuer is an array with the octets of the header signature, followed by entries for each payload signature.<a href="#appendix-A.1-14" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-15">The resulting JSON serialized JPT using the above examples is:<a href="#appendix-A.1-15" class="pilcrow">¶</a></p>
+<span id="name-issued-jwp-in-json-serializ"></span><figure id="figure-6">
+          <div class="lang-wrapped sourcecode" id="appendix-A.1-16.1">
+<pre>{
+  "issuer": "eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBz
+       Oi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaW
+       x5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292
+       ZXJfMjEiXSwicHJvb2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLC
+       J4IjoiTFkzTmVpYWttZzVGbU5lLXdKRGN5WndHNkk1Z1lyc2JkWVlBNHFEMVFZ
+       byIsInkiOiJwd2NNMW9CM0RTdHBKVzd2aXJSTkh4MnhvNURFUE5xTGEtQ1dobU
+       1sMnp3IiwiZCI6ImpxVXRQZnFfVjJNNUU3SVJxSnJZOUpOQ3hITlZoZ2M0WXpZ
+       NlhrOEc4eHMifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyIsImNydi
+       I6IlAtMjU2IiwieCI6IkZCSjhzWjgwNlRIVVlMZmNIWmt6RVgwS0RxaWM0aGVC
+       YXhwd2E1MTl5dUUiLCJ5IjoiNXZtdnpRZlpQY3BOQ1oyVFBVRzNLdzlSTTRIMX
+       VOQWs5Yld1QWdFZFdqSSIsImQiOiJhcFBtM3N2QnZ3aTd3M1lVSTVaTEFRYWxL
+       NzBVWFR1SFp6RmNmTGNrYUJZIn19",
+  "payloads": [
+    "MTcxNDUyMTYwMA",
+    "MTcxNzE5OTk5OQ",
+    "IkRvZSI",
+    "IkpheSI",
+    "ImpheWRvZUBleGFtcGxlLm9yZyI",
+    "eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b3duLCBDQSAxMjM0NVxu
+       VVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIiwibG9jYWxpdH
+       kiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTIzNDUs
+       ImNvdW50cnkiOiJVU0EifQ",
+    "dHJ1ZQ"
+  ],
+  "proof": [
+    "bejPMfzp_HV7xwRe8BtNFIrTW6B8CJ_PnW4EB-kfIM6UX6aPVCwC8W-QErQr7rk0
+       48HrofCKPNP4-bUR5d5cQA",
+    "fu7KloHGxByTXWpSdCUi3Nx7CQJQYK6Z628hF6BEK0RIcBea9lB9R_dhLIICAqbb
+       5YxyBlQruf53XlbCoq1TAQ",
+    "oXgK-Ct87wNZ2cnQxeKoBmtQmVyA6zCCW3RFM62AkgLFwINSNUYupSg3G1EoWlzH
+       0qiqwrJ1FN9PQpF4qdWhhw",
+    "P-AC1ARbn0dEiUVvEwvtAVNTEa1qq0iL73wa61lkCTSFPBPBN8nR3Qo9Y0syJrVQ
+       KcZFXCZoY1AULndZZ6Z1vg",
+    "mKG2kXlbRKNUraqXRf8ReDq04WSTo1Q0c9qmAYQrmnvOeAB0nVcsM27j4zW-F5M1
+       VZs3ADtkH0INRUn1h3yJ8A",
+    "MDzrFAFq5LHZc-zq0Jr8WIeomoysr4dZyEpGKg4fBYM3mwKG7XvGm4hzhvT5rp-h
+       Ip9h7QIeiTI7g6FPEbCwKQ",
+    "6hQUttDKBOwtn4qU6zdkcrlBwOqhSxr0g8gJNPD0Mb9aVCAJXwCbylb5nMP0jNuz
+       PpTjOx8xVQXyNwzPIkXQNA",
+    "e7ZWWsm5dw_9cs8jSIz2bJMu6C4ixi9ErDRteujwSXNLl3_i_Ju_RXGP6kbGJXUb
+       KuIImrhm_9eU_loxPM4aiQ"
+  ]
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-issued-jwp-in-json-serializ" class="selfRef">Issued JWP in JSON Serialization (es256)</a>
+          </figcaption></figure>
+<p id="appendix-A.1-17">The compact serialization of the same JPT is:<a href="#appendix-A.1-17" class="pilcrow">¶</a></p>
+<span id="name-issued-jwp-in-compact-seria"></span><figure id="figure-7">
+          <div class="lang-wrapped sourcecode" id="appendix-A.1-18.1">
+<pre>eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyL
+mV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUiLCJnaXZlbl
+9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicHJvb2ZfandrIjp
+7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiTFkzTmVpYWttZzVGbU5lLXdKRGN5
+WndHNkk1Z1lyc2JkWVlBNHFEMVFZbyIsInkiOiJwd2NNMW9CM0RTdHBKVzd2aXJSTkh4M
+nhvNURFUE5xTGEtQ1dobU1sMnp3IiwiZCI6ImpxVXRQZnFfVjJNNUU3SVJxSnJZOUpOQ3
+hITlZoZ2M0WXpZNlhrOEc4eHMifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyI
+sImNydiI6IlAtMjU2IiwieCI6IkZCSjhzWjgwNlRIVVlMZmNIWmt6RVgwS0RxaWM0aGVC
+YXhwd2E1MTl5dUUiLCJ5IjoiNXZtdnpRZlpQY3BOQ1oyVFBVRzNLdzlSTTRIMXVOQWs5Y
+ld1QWdFZFdqSSIsImQiOiJhcFBtM3N2QnZ3aTd3M1lVSTVaTEFRYWxLNzBVWFR1SFp6Rm
+NmTGNrYUJZIn19.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~ImpheWRv
+ZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b3duL
+CBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIiwibG
+9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTIzNDU
+sImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.bejPMfzp_HV7xwRe8BtNFIrTW6B8CJ_PnW4EB-
+kfIM6UX6aPVCwC8W-QErQr7rk048HrofCKPNP4-bUR5d5cQA~fu7KloHGxByTXWpSdCUi
+3Nx7CQJQYK6Z628hF6BEK0RIcBea9lB9R_dhLIICAqbb5YxyBlQruf53XlbCoq1TAQ~oX
+gK-Ct87wNZ2cnQxeKoBmtQmVyA6zCCW3RFM62AkgLFwINSNUYupSg3G1EoWlzH0qiqwrJ
+1FN9PQpF4qdWhhw~P-AC1ARbn0dEiUVvEwvtAVNTEa1qq0iL73wa61lkCTSFPBPBN8nR3
+Qo9Y0syJrVQKcZFXCZoY1AULndZZ6Z1vg~mKG2kXlbRKNUraqXRf8ReDq04WSTo1Q0c9q
+mAYQrmnvOeAB0nVcsM27j4zW-F5M1VZs3ADtkH0INRUn1h3yJ8A~MDzrFAFq5LHZc-zq0
+Jr8WIeomoysr4dZyEpGKg4fBYM3mwKG7XvGm4hzhvT5rp-hIp9h7QIeiTI7g6FPEbCwKQ
+~6hQUttDKBOwtn4qU6zdkcrlBwOqhSxr0g8gJNPD0Mb9aVCAJXwCbylb5nMP0jNuzPpTj
+Ox8xVQXyNwzPIkXQNA~e7ZWWsm5dw_9cs8jSIz2bJMu6C4ixi9ErDRteujwSXNLl3_i_J
+u_RXGP6kbGJXUbKuIImrhm_9eU_loxPM4aiQ
+
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-issued-jwp-in-compact-seria" class="selfRef">Issued JWP in Compact Serialization (es256)</a>
+          </figcaption></figure>
+<p id="appendix-A.1-19">To present this JPT, we first use the following presentation header with a nonce (provided by the Verifier):<a href="#appendix-A.1-19" class="pilcrow">¶</a></p>
+<span id="name-presentation-header"></span><figure id="figure-8">
+          <div class="lang-wrapped sourcecode" id="appendix-A.1-20.1">
+<pre>{
+  "alg": "SU-ES256",
+  "aud": "https://recipient.example.com",
+  "nonce": "t4BqaUAX7hHRY9CexRGt155Ub6j90BhXXpDNJ3aVxGg"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<a href="#name-presentation-header" class="selfRef">Presentation Header</a>
+          </figcaption></figure>
+<p id="appendix-A.1-21">This header is serialized without whitespace and UTF-8 encoded into an octet string. This gives:<a href="#appendix-A.1-21" class="pilcrow">¶</a></p>
+<span id="name-presentation-header-base64u"></span><figure id="figure-9">
+          <div class="lang-wrapped sourcecode" id="appendix-A.1-22.1">
+<pre>eyJhbGciOiJTVS1FUzI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50LmV4YW1wbGUuY
+29tIiwibm9uY2UiOiJ0NEJxYVVBWDdoSFJZOUNleFJHdDE1NVViNmo5MEJoWFhwRE5KM2
+FWeEdnIn0
+
+</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<a href="#name-presentation-header-base64u" class="selfRef">Presentation Header (base64url-encoded)</a>
+          </figcaption></figure>
+<p id="appendix-A.1-23">When signed with the holder's presentation key, the resulting signature are:<a href="#appendix-A.1-23" class="pilcrow">¶</a></p>
+<div class="lang-wrapped sourcecode" id="appendix-A.1-24">
+<pre>Dja8M35QPzefG9cN-UWDyTrZjJ-YOOCrYfpTVLQnnz1SYXig5fe7Fau4OYLGsjANWhql_
+Eq7qaL0x7HY6kKuow
+
+</pre><a href="#appendix-A.1-24" class="pilcrow">¶</a>
+</div>
+<blockquote id="appendix-A.1-25">
+          <p id="appendix-A.1-25.1">Figure: Holder Proof-of-Possession (base64url-encoded)<a href="#appendix-A.1-25.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="appendix-A.1-26">Then by applying selective disclosure of only the given name and age claims (family name and email hidden), we get the following presented JPT:<a href="#appendix-A.1-26" class="pilcrow">¶</a></p>
+<div class="lang-wrapped sourcecode" id="appendix-A.1-27">
+<pre>{
+  "presentation": "eyJhbGciOiJTVS1FUzI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaX
+       BpZW50LmV4YW1wbGUuY29tIiwibm9uY2UiOiJ0NEJxYVVBWDdoSFJZOUNleFJH
+       dDE1NVViNmo5MEJoWFhwRE5KM2FWeEdnIn0",
+  "issuer": "eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBz
+       Oi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaW
+       x5X25hbWUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292
+       ZXJfMjEiXSwicHJvb2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLC
+       J4IjoiTFkzTmVpYWttZzVGbU5lLXdKRGN5WndHNkk1Z1lyc2JkWVlBNHFEMVFZ
+       byIsInkiOiJwd2NNMW9CM0RTdHBKVzd2aXJSTkh4MnhvNURFUE5xTGEtQ1dobU
+       1sMnp3IiwiZCI6ImpxVXRQZnFfVjJNNUU3SVJxSnJZOUpOQ3hITlZoZ2M0WXpZ
+       NlhrOEc4eHMifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrdHkiOiJFQyIsImNydi
+       I6IlAtMjU2IiwieCI6IkZCSjhzWjgwNlRIVVlMZmNIWmt6RVgwS0RxaWM0aGVC
+       YXhwd2E1MTl5dUUiLCJ5IjoiNXZtdnpRZlpQY3BOQ1oyVFBVRzNLdzlSTTRIMX
+       VOQWs5Yld1QWdFZFdqSSIsImQiOiJhcFBtM3N2QnZ3aTd3M1lVSTVaTEFRYWxL
+       NzBVWFR1SFp6RmNmTGNrYUJZIn19",
+  "payloads": [
+    "MTcxNDUyMTYwMA",
+    "MTcxNzE5OTk5OQ",
+    "IkRvZSI",
+    "IkpheSI",
+    "ImpheWRvZUBleGFtcGxlLm9yZyI",
+    "eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b3duLCBDQSAxMjM0NVxu
+       VVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIiwibG9jYWxpdH
+       kiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTIzNDUs
+       ImNvdW50cnkiOiJVU0EifQ",
+    "dHJ1ZQ",
+    null,
+    null
+  ],
+  "proof": [
+    "bejPMfzp_HV7xwRe8BtNFIrTW6B8CJ_PnW4EB-kfIM6UX6aPVCwC8W-QErQr7rk0
+       48HrofCKPNP4-bUR5d5cQA",
+    "Dja8M35QPzefG9cN-UWDyTrZjJ-YOOCrYfpTVLQnnz1SYXig5fe7Fau4OYLGsjAN
+       Whql_Eq7qaL0x7HY6kKuow",
+    "fu7KloHGxByTXWpSdCUi3Nx7CQJQYK6Z628hF6BEK0RIcBea9lB9R_dhLIICAqbb
+       5YxyBlQruf53XlbCoq1TAQ",
+    "oXgK-Ct87wNZ2cnQxeKoBmtQmVyA6zCCW3RFM62AkgLFwINSNUYupSg3G1EoWlzH
+       0qiqwrJ1FN9PQpF4qdWhhw",
+    "P-AC1ARbn0dEiUVvEwvtAVNTEa1qq0iL73wa61lkCTSFPBPBN8nR3Qo9Y0syJrVQ
+       KcZFXCZoY1AULndZZ6Z1vg",
+    "mKG2kXlbRKNUraqXRf8ReDq04WSTo1Q0c9qmAYQrmnvOeAB0nVcsM27j4zW-F5M1
+       VZs3ADtkH0INRUn1h3yJ8A",
+    "MDzrFAFq5LHZc-zq0Jr8WIeomoysr4dZyEpGKg4fBYM3mwKG7XvGm4hzhvT5rp-h
+       Ip9h7QIeiTI7g6FPEbCwKQ"
+  ]
+}
+
+</pre><a href="#appendix-A.1-27" class="pilcrow">¶</a>
+</div>
+<blockquote id="appendix-A.1-28">
+          <p id="appendix-A.1-28.1">Figure: Final Presentation in JSON Serialization<a href="#appendix-A.1-28.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="appendix-A.1-29">And also in compact serialization:<a href="#appendix-A.1-29" class="pilcrow">¶</a></p>
+<div class="lang-wrapped sourcecode" id="appendix-A.1-30">
+<pre>eyJhbGciOiJTVS1FUzI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50LmV4YW1wbGUuY
+29tIiwibm9uY2UiOiJ0NEJxYVVBWDdoSFJZOUNleFJHdDE1NVViNmo5MEJoWFhwRE5KM2
+FWeEdnIn0.eyJhbGciOiJTVS1FUzI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8
+vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUi
+LCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicHJvb
+2ZfandrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiTFkzTmVpYWttZzVGbU
+5lLXdKRGN5WndHNkk1Z1lyc2JkWVlBNHFEMVFZbyIsInkiOiJwd2NNMW9CM0RTdHBKVzd
+2aXJSTkh4MnhvNURFUE5xTGEtQ1dobU1sMnp3IiwiZCI6ImpxVXRQZnFfVjJNNUU3SVJx
+SnJZOUpOQ3hITlZoZ2M0WXpZNlhrOEc4eHMifSwicHJlc2VudGF0aW9uX2p3ayI6eyJrd
+HkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6IkZCSjhzWjgwNlRIVVlMZmNIWmt6RVgwS0
+RxaWM0aGVCYXhwd2E1MTl5dUUiLCJ5IjoiNXZtdnpRZlpQY3BOQ1oyVFBVRzNLdzlSTTR
+IMXVOQWs5Yld1QWdFZFdqSSIsImQiOiJhcFBtM3N2QnZ3aTd3M1lVSTVaTEFRYWxLNzBV
+WFR1SFp6RmNmTGNrYUJZIn19.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheS
+I~ImpheWRvZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5
+Bbnl0b3duLCBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4g
+U3QuIiwibG9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZ
+SI6MTIzNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ~~.bejPMfzp_HV7xwRe8BtNFIrTW6
+B8CJ_PnW4EB-kfIM6UX6aPVCwC8W-QErQr7rk048HrofCKPNP4-bUR5d5cQA~Dja8M35Q
+PzefG9cN-UWDyTrZjJ-YOOCrYfpTVLQnnz1SYXig5fe7Fau4OYLGsjANWhql_Eq7qaL0x
+7HY6kKuow~fu7KloHGxByTXWpSdCUi3Nx7CQJQYK6Z628hF6BEK0RIcBea9lB9R_dhLII
+CAqbb5YxyBlQruf53XlbCoq1TAQ~oXgK-Ct87wNZ2cnQxeKoBmtQmVyA6zCCW3RFM62Ak
+gLFwINSNUYupSg3G1EoWlzH0qiqwrJ1FN9PQpF4qdWhhw~P-AC1ARbn0dEiUVvEwvtAVN
+TEa1qq0iL73wa61lkCTSFPBPBN8nR3Qo9Y0syJrVQKcZFXCZoY1AULndZZ6Z1vg~mKG2k
+XlbRKNUraqXRf8ReDq04WSTo1Q0c9qmAYQrmnvOeAB0nVcsM27j4zW-F5M1VZs3ADtkH0
+INRUn1h3yJ8A~MDzrFAFq5LHZc-zq0Jr8WIeomoysr4dZyEpGKg4fBYM3mwKG7XvGm4hz
+hvT5rp-hIp9h7QIeiTI7g6FPEbCwKQ
+
+</pre><a href="#appendix-A.1-30" class="pilcrow">¶</a>
+</div>
+<blockquote id="appendix-A.1-31">
+          <p id="appendix-A.1-31.1">Figure: Final Presentation in Compact Serialization<a href="#appendix-A.1-31.1" class="pilcrow">¶</a></p>
+</blockquote>
+</section>
+</div>
+<div id="example-bbs-jwp">
+<section id="appendix-A.2">
+        <h3 id="name-example-bbs-jwp">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-example-bbs-jwp" class="section-name selfRef">Example BBS JWP</a>
+        </h3>
+<p id="appendix-A.2-1">The following example uses the <code>BBS</code> algorithm.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-2">This is the Issuer's stable private key in the JWK format:<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
+<span id="name-bbs-private-key-in-jwk-form"></span><figure id="figure-10">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-3.1">
+<pre>{
+  "kty": "EC2",
+  "alg": "BBS",
+  "use": "proof",
+  "crv": "BLS12381G2",
+  "x": "A9VMXUV5qstZidj5-ez8vbv6TAe2QeDblKE0_Iv5dW0sJtnClu5OMcyPwo1Nu
+       ByLFCk11i1jhKjwIsl27YMyBTBmoFEw54sbPb7114ZZ0zpUcxtnvDHAzwxOBMR
+       nvajM",
+  "y": "BRHymhn6cmDPMxX-Dc9glXeVrQo3kwVLLT-T5zc7L3IvDp-ONKZfx2Q1Vyngb
+       k4oERhwWD-TJn5VuG5kbkuXlJRspzWVjV_L664dQSQSwXl9PbmQMS-Xbsp48Cy
+       IHvc6",
+  "d": "T1a-LkGsMSeDJ6olMM9lIbn2n8FFw3QV8iobb0G1_js"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<a href="#name-bbs-private-key-in-jwk-form" class="selfRef">BBS private key in JWK format</a>
+          </figcaption></figure>
+<p id="appendix-A.2-4">There is no additional holder key necessary for presentation proofs.<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-5">For the following protected header and array of payloads:<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
+<span id="name-example-issuer-protected-he"></span><figure id="figure-11">
+          <div class="lang-json sourcecode" id="appendix-A.2-6.1">
+<pre>{
+  "kid": "HjfcpyjuZQ-O8Ye2hQnNbT9RbbnrobptdnExR0DUjU8",
+  "alg": "BBS"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<a href="#name-example-issuer-protected-he" class="selfRef">Example issuer protected header</a>
+          </figcaption></figure>
+<span id="name-example-issuer-payloads-as-"></span><figure id="figure-12">
+          <div class="lang-json sourcecode" id="appendix-A.2-7.1">
+<pre>[
+    1714521600,
+    1717199999,
+    "Doe",
+    "Jay",
+    "jaydoe@example.org",
+    {
+        "formatted": "1234 Main St.\nAnytown, CA 12345\nUSA",
+        "street_address": "1234 Main St.",
+        "locality": "Anytown",
+        "region": "CA",
+        "postal_code": 12345,
+        "country": "USA"
+    },
+    true
+]
+
+</pre>
+</div>
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<a href="#name-example-issuer-payloads-as-" class="selfRef">Example issuer payloads (as members of a JSON array)</a>
+          </figcaption></figure>
+<p id="appendix-A.2-8">These components are signed using the private issuer key previously given, which is then representable in the following serializations:<a href="#appendix-A.2-8" class="pilcrow">¶</a></p>
+<span id="name-issued-jwp-json-serializati"></span><figure id="figure-13">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-9.1">
+<pre>{
+  "issuer": "eyJraWQiOiJIamZjcHlqdVpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRu
+       RXhSMERValU4IiwiYWxnIjoiQkJTIn0",
+  "payloads": [
+    "MTcxNDUyMTYwMA",
+    "MTcxNzE5OTk5OQ",
+    "IkRvZSI",
+    "IkpheSI",
+    "ImpheWRvZUBleGFtcGxlLm9yZyI",
+    "eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b3duLCBDQSAxMjM0NVxu
+       VVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIiwibG9jYWxpdH
+       kiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTIzNDUs
+       ImNvdW50cnkiOiJVU0EifQ",
+    "dHJ1ZQ"
+  ],
+  "proof": [
+    "pyWbbdz25El98mF3MW0eg4UKE1l1JZ9RjQMi1TucojmPy_IFPhPAj78qjSdT_jAW
+       GC6Y1LHqxWJcmS-Ir43SRARWxFS55HZ9YtTTTaKOC2Q"
+  ]
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<a href="#name-issued-jwp-json-serializati" class="selfRef">Issued JWP (JSON serialization)</a>
+          </figcaption></figure>
+<span id="name-issued-jwp-compact-serializ"></span><figure id="figure-14">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-10.1">
+<pre>eyJraWQiOiJIamZjcHlqdVpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4I
+iwiYWxnIjoiQkJTIn0.MTcxNDUyMTYwMA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~Imph
+eWRvZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b
+3duLCBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIi
+wibG9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTI
+zNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.pyWbbdz25El98mF3MW0eg4UKE1l1JZ9RjQ
+Mi1TucojmPy_IFPhPAj78qjSdT_jAWGC6Y1LHqxWJcmS-Ir43SRARWxFS55HZ9YtTTTaK
+OC2Q
+
+</pre>
+</div>
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<a href="#name-issued-jwp-compact-serializ" class="selfRef">Issued JWP (compact serialization)</a>
+          </figcaption></figure>
+<p id="appendix-A.2-11">For a presentation with the following presentation header:<a href="#appendix-A.2-11" class="pilcrow">¶</a></p>
+<span id="name-holder-presentation-header"></span><figure id="figure-15">
+          <div class="lang-json sourcecode" id="appendix-A.2-12.1">
+<pre>{
+    "alg": "BBS-PROOF",
+    "aud": "https://recipient.example.com",
+    "nonce": "wrmBRkKtXjQ"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
+<a href="#name-holder-presentation-header" class="selfRef">Holder Presentation Header</a>
+          </figcaption></figure>
+<p id="appendix-A.2-13">The holder decides to share all information other than the email address, and generates a proof. That proof is represented in the following serializations:<a href="#appendix-A.2-13" class="pilcrow">¶</a></p>
+<span id="name-presentation-jwp-json-seria"></span><figure id="figure-16">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-14.1">
+<pre>{
+  "presentation": "eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2
+       lwaWVudC5leGFtcGxlLmNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ",
+  "issuer": "eyJraWQiOiJIamZjcHlqdVpRLU84WWUyaFFuTmJUOVJiYm5yb2JwdGRu
+       RXhSMERValU4IiwiYWxnIjoiQkJTIn0",
+  "payloads": [
+    "MTcxNDUyMTYwMA",
+    "MTcxNzE5OTk5OQ",
+    "IkRvZSI",
+    "IkpheSI",
+    null,
+    null,
+    null
+  ],
+  "proof": [
+    "tjwOgdlBeLMvukYt66mIMMxuDE5gfMUBWXAv2btE5-YX050-ObEXtyjdnJ18vH-D
+       l9Uce0bJc1-s0k27XajwUDhTBIHnSdfDX5OR5lp8GWl8p3BNT8Amop5oJ51Aba
+       lLrEWHPMJ7uPsch62DJXXwGrfawdcsms-sHIjDVLnNiOqIZG1Ex7SiLJzAqLll
+       fjLScVMFUi3KvMEB2ZQluSD_cNR1iuwy_UopZ9mwj0_meosKe4RTk_do81DewB
+       3ogRLRUovsJVPe--hfDiYhL-VeBhEdTD4aRBlsS757mhXYOv74GSqS36Vrcfqd
+       A8kdQ50bcOU0KJAn4-6IluHH9vdP_Sg816MQ_315XqPBDk-l9zc5rHcJjNeulm
+       JDSaEs0ej7BJvdIaV03xW0N-GModmm90mWK0Bl6I6q4BwHfuhBydJsEv3j4gVh
+       BaPxqqiMvYsVWvqRE_nH3t3gBS4oZbK1UdCUZxRLpv8hALEPQ0xFNuA"
+  ]
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
+<a href="#name-presentation-jwp-json-seria" class="selfRef">Presentation JWP (JSON serialization)</a>
+          </figcaption></figure>
+<span id="name-presentation-jwp-compact-se"></span><figure id="figure-17">
+          <div class="lang-wrapped sourcecode" id="appendix-A.2-15.1">
+<pre>eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
+mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
+yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
+MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.tjwOgdlBeLMvukYt66mIMMxuDE5gfMUB
+WXAv2btE5-YX050-ObEXtyjdnJ18vH-Dl9Uce0bJc1-s0k27XajwUDhTBIHnSdfDX5OR5
+lp8GWl8p3BNT8Amop5oJ51AbalLrEWHPMJ7uPsch62DJXXwGrfawdcsms-sHIjDVLnNiO
+qIZG1Ex7SiLJzAqLllfjLScVMFUi3KvMEB2ZQluSD_cNR1iuwy_UopZ9mwj0_meosKe4R
+Tk_do81DewB3ogRLRUovsJVPe--hfDiYhL-VeBhEdTD4aRBlsS757mhXYOv74GSqS36Vr
+cfqdA8kdQ50bcOU0KJAn4-6IluHH9vdP_Sg816MQ_315XqPBDk-l9zc5rHcJjNeulmJDS
+aEs0ej7BJvdIaV03xW0N-GModmm90mWK0Bl6I6q4BwHfuhBydJsEv3j4gVhBaPxqqiMvY
+sVWvqRE_nH3t3gBS4oZbK1UdCUZxRLpv8hALEPQ0xFNuA
+
+</pre>
+</div>
+<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
+<a href="#name-presentation-jwp-compact-se" class="selfRef">Presentation JWP (compact serialization)</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="example-mac-jwp">
+<section id="appendix-A.3">
+        <h3 id="name-example-mac-jwp">
+<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-example-mac-jwp" class="section-name selfRef">Example MAC JWP</a>
+        </h3>
+<p id="appendix-A.3-1">The following example uses the <code>MAC-H256</code> algorithm.<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-2">This is the Issuer's stable private key in the JWK format:<a href="#appendix-A.3-2" class="pilcrow">¶</a></p>
+<span id="name-issuer-private-key"></span><figure id="figure-18">
+          <div class="lang-wrapped sourcecode" id="appendix-A.3-3.1">
+<pre>{
+  "kty": "EC",
+  "crv": "P-256",
+  "x": "ZDwt_eaXXqwD_NPfe4DhBjcJUsMbQqhTGtsLUV-4XOg",
+  "y": "pQJt_rVe_e_9kn1oKzyHN2R1mE7DSu1YhVB62k4yRSM",
+  "d": "auDumr47kQtLQ3gC4WU5BIG6m_EGBUIAhuuEhHaqkNQ"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<a href="#name-issuer-private-key" class="selfRef">Issuer private key</a>
+          </figcaption></figure>
+<p id="appendix-A.3-4">This is the Issuer's ephemerally generated shared secret:<a href="#appendix-A.3-4" class="pilcrow">¶</a></p>
+<span id="name-shared-secret"></span><figure id="figure-19">
+          <div class="lang-json sourcecode" id="appendix-A.3-5.1">
+<pre>"jzpgJV4N4LIH1PCIU8gfXiD44l8-ijNPd6pT4H99ZBk"
+
+</pre>
+</div>
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<a href="#name-shared-secret" class="selfRef">Shared Secret</a>
+          </figcaption></figure>
+<p id="appendix-A.3-6">This is the Holder's presentation private key in the JWK format:<a href="#appendix-A.3-6" class="pilcrow">¶</a></p>
+<span id="name-holder-private-key"></span><figure id="figure-20">
+          <div class="lang-wrapped sourcecode" id="appendix-A.3-7.1">
+<pre>{
+  "kty": "EC",
+  "crv": "P-256",
+  "x": "FBJ8sZ806THUYLfcHZkzEX0KDqic4heBaxpwa519yuE",
+  "y": "5vmvzQfZPcpNCZ2TPUG3Kw9RM4H1uNAk9bWuAgEdWjI",
+  "d": "apPm3svBvwi7w3YUI5ZLAQalK70UXTuHZzFcfLckaBY"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<a href="#name-holder-private-key" class="selfRef">Holder private key</a>
+          </figcaption></figure>
+<p id="appendix-A.3-8">For the following protected header and array of payloads:<a href="#appendix-A.3-8" class="pilcrow">¶</a></p>
+<span id="name-example-issuer-protected-hea"></span><figure id="figure-21">
+          <div class="lang-json sourcecode" id="appendix-A.3-9.1">
+<pre>{
+  "alg": "MAC-H256",
+  "typ": "JPT",
+  "iss": "https://issuer.example",
+  "claims": [
+    "iat",
+    "exp",
+    "family_name",
+    "given_name",
+    "email",
+    "address",
+    "age_over_21"
+  ],
+  "pjwk": {
+    "kty": "EC",
+    "crv": "P-256",
+    "use": "sign",
+    "x": "FBJ8sZ806THUYLfcHZkzEX0KDqic4heBaxpwa519yuE",
+    "y": "5vmvzQfZPcpNCZ2TPUG3Kw9RM4H1uNAk9bWuAgEdWjI"
+  }
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<a href="#name-example-issuer-protected-hea" class="selfRef">Example issuer protected header</a>
+          </figcaption></figure>
+<span id="name-example-issuer-payloads-as-m"></span><figure id="figure-22">
+          <div class="lang-json sourcecode" id="appendix-A.3-10.1">
+<pre>[
+    1714521600,
+    1717199999,
+    "Doe",
+    "Jay",
+    "jaydoe@example.org",
+    {
+        "formatted": "1234 Main St.\nAnytown, CA 12345\nUSA",
+        "street_address": "1234 Main St.",
+        "locality": "Anytown",
+        "region": "CA",
+        "postal_code": 12345,
+        "country": "USA"
+    },
+    true
+]
+
+</pre>
+</div>
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
+<a href="#name-example-issuer-payloads-as-m" class="selfRef">Example issuer payloads (as members of a JSON array)</a>
+          </figcaption></figure>
+<p id="appendix-A.3-11">The first MAC is generated using the key <code>issuer_header</code> and a value of the issuer protected header as a UTF-8 encoded octet string. This results in the following MAC:<a href="#appendix-A.3-11" class="pilcrow">¶</a></p>
+<span id="name-issuer-mac-of-protected-hea"></span><figure id="figure-23">
+          <div class="lang-txt sourcecode" id="appendix-A.3-12.1">
+<pre>uEK6PhSTPLj0qskcCOUN3RcBW-jemoEEtOsPO_xULiQ
+
+</pre>
+</div>
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
+<a href="#name-issuer-mac-of-protected-hea" class="selfRef">Issuer MAC of protected header (base64url-encoded)</a>
+          </figcaption></figure>
+<p id="appendix-A.3-13">The issuer generates an array of derived keys with one for each payload by using the shared secret as the key, and the index of the payload (as <code>payload_{n}</code> in UTF-8 encoded octets) as the input in a HMAC operation. This results in the following set of derived keys:<a href="#appendix-A.3-13" class="pilcrow">¶</a></p>
+<span id="name-derived-payload-keys-base64"></span><figure id="figure-24">
+          <div class="lang-json sourcecode" id="appendix-A.3-14.1">
+<pre>[
+  "7sFopcQNCoantnuLOdiPJkBAs2pqyZ4Tq7QjJUJcITQ",
+  "2SEcCay1xjmGh5lX5hFdtoRYdDH3-6bkOcQB2J7lSeM",
+  "N4zdFo3-1b2qQ2Q1tloSDl2M1Uwa2vl6xwJkm3DVfac",
+  "v7Eo9tQ59PSSBo9cafFJACN4n9vPmQGlzGSf6NXjW6s",
+  "O_skKsBxkLgphuDUmhFi1bmTurSBiKBLAiA8Jzxr4c4",
+  "YDmxcE2ep9F9tYMS-imZrZ830Fn9Zrog0_v9Znt5UbA",
+  "0Ktuy9F5mvS4t2ElNipGkL6epNMqoHlvPSHwaz_2U7A"
+]
+
+</pre>
+</div>
+<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
+<a href="#name-derived-payload-keys-base64" class="selfRef">Derived payload keys (base64url-encoded)</a>
+          </figcaption></figure>
+<p id="appendix-A.3-15">A MAC is generated for each payload using the corresponding derived payload key. This results in the following set of MAC values:<a href="#appendix-A.3-15" class="pilcrow">¶</a></p>
+<span id="name-payload-mac-values-base64ur"></span><figure id="figure-25">
+          <div class="lang-json sourcecode" id="appendix-A.3-16.1">
+<pre>[
+  "AcikwSof_t4EZLYkTCKzKSA-O9MffEvS76_RFgYDuPI",
+  "EphDqVESoCMkJSEC6AcCG1_3bryr-Yp0sCIfmbg-VCA",
+  "qBVRd03OU8Zi9wuXObLd-pq2BHXiN3Tz9vQLtqoRBOo",
+  "oklJ0fthK4VCnnMKfqaXASevYuFiV7kjrEufd0dW2lM",
+  "yy87GOLXXReAOzZLwes4yH4hDz3I6qyziLn68V7XsO0",
+  "dQYRP7N7dISxQZaM8ycFEPzCsbbDFgC31A6mX2fiuZU",
+  "YU9zzbatOqNpcGwIc1yyHi5uIq-vjEUvTSAuylKSFOE"
+]
+
+</pre>
+</div>
+<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
+<a href="#name-payload-mac-values-base64ur" class="selfRef">Payload MAC values (base64url-encoded)</a>
+          </figcaption></figure>
+<p id="appendix-A.3-17">The issuer protected header MAC and the payload MAC octet strings are concatenated into a single value known as the combined MAC representation. This representation is signed with the issuer's private key.<a href="#appendix-A.3-17" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-18">The proof consists of two octet string values: the signature over the combined MAC representation, and the shared secret.<a href="#appendix-A.3-18" class="pilcrow">¶</a></p>
+<span id="name-issued-proof-base64url-enco"></span><figure id="figure-26">
+          <div class="lang-wrapped sourcecode" id="appendix-A.3-19.1">
+<pre>[
+  "3q89EGa4a-sfYCqzz8fabm-w0VIDLMWTbiJB7mlO6oJfC31DjiA1EgKrWeWqm3VHH6
+fYsZHMsrIZhV5WdBZ12w",
+  "wVBdRB-ZogTyczCi79al2N-08YS2AzwSsyQFMz5QnyM"
+]
+
+</pre>
+</div>
+<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
+<a href="#name-issued-proof-base64url-enco" class="selfRef">Issued Proof (base64url-encoded)</a>
+          </figcaption></figure>
+<p id="appendix-A.3-20">The final issued JWP in JSON serialization is:<a href="#appendix-A.3-20" class="pilcrow">¶</a></p>
+<span id="name-issued-jwp-in-json-serializa"></span><figure id="figure-27">
+          <div class="lang-wrapped sourcecode" id="appendix-A.3-21.1">
+<pre>{
+  "issuer": "eyJhbGciOiJNQUMtSDI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBz
+Oi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hb
+WUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicG
+p3ayI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwidXNlIjoic2lnbiIsIngiOiJGQko
+4c1o4MDZUSFVZTGZjSFprekVYMEtEcWljNGhlQmF4cHdhNTE5eXVFIiwieSI6IjV2bXZ6
+UWZaUGNwTkNaMlRQVUczS3c5Uk00SDF1TkFrOWJXdUFnRWRXakkifX0",
+  "payloads": [
+    "MTcxNDUyMTYwMA",
+    "MTcxNzE5OTk5OQ",
+    "IkRvZSI",
+    "IkpheSI",
+    "ImpheWRvZUBleGFtcGxlLm9yZyI",
+    "eyJmb3JtYXR0ZWQiOiIxMjM0IE1haW4gU3QuXG5Bbnl0b3duLCBDQSAxMjM0NVxu
+VVNBIiwic3RyZWV0X2FkZHJlc3MiOiIxMjM0IE1haW4gU3QuIiwibG9jYWxpdHkiOiJBb
+nl0b3duIiwicmVnaW9uIjoiQ0EiLCJwb3N0YWxfY29kZSI6MTIzNDUsImNvdW50cnkiOi
+JVU0EifQ",
+    "dHJ1ZQ"
+  ],
+  "proof": [
+    "3q89EGa4a-sfYCqzz8fabm-w0VIDLMWTbiJB7mlO6oJfC31DjiA1EgKrWeWqm3VH
+H6fYsZHMsrIZhV5WdBZ12w",
+    "wVBdRB-ZogTyczCi79al2N-08YS2AzwSsyQFMz5QnyM"
+  ]
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-27" class="selfRef">Figure 27</a>:
+<a href="#name-issued-jwp-in-json-serializa" class="selfRef">Issued JWP (in JSON serialization)</a>
+          </figcaption></figure>
+<p id="appendix-A.3-22">The same JWP in compact serialization:<a href="#appendix-A.3-22" class="pilcrow">¶</a></p>
+<span id="name-issued-jwp-in-compact-serial"></span><figure id="figure-28">
+          <div class="lang-wrapped sourcecode" id="appendix-A.3-23.1">
+<pre>eyJhbGciOiJNQUMtSDI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8vaXNzdWVyL
+mV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUiLCJnaXZlbl
+9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicGp3ayI6eyJrdHk
+iOiJFQyIsImNydiI6IlAtMjU2IiwidXNlIjoic2lnbiIsIngiOiJGQko4c1o4MDZUSFVZ
+TGZjSFprekVYMEtEcWljNGhlQmF4cHdhNTE5eXVFIiwieSI6IjV2bXZ6UWZaUGNwTkNaM
+lRQVUczS3c5Uk00SDF1TkFrOWJXdUFnRWRXakkifX0.MTcxNDUyMTYwMA~MTcxNzE5OTk
+5OQ~IkRvZSI~IkpheSI~ImpheWRvZUBleGFtcGxlLm9yZyI~eyJmb3JtYXR0ZWQiOiIxM
+jM0IE1haW4gU3QuXG5Bbnl0b3duLCBDQSAxMjM0NVxuVVNBIiwic3RyZWV0X2FkZHJlc3
+MiOiIxMjM0IE1haW4gU3QuIiwibG9jYWxpdHkiOiJBbnl0b3duIiwicmVnaW9uIjoiQ0E
+iLCJwb3N0YWxfY29kZSI6MTIzNDUsImNvdW50cnkiOiJVU0EifQ~dHJ1ZQ.3q89EGa4a-
+sfYCqzz8fabm-w0VIDLMWTbiJB7mlO6oJfC31DjiA1EgKrWeWqm3VHH6fYsZHMsrIZhV5
+WdBZ12w~wVBdRB-ZogTyczCi79al2N-08YS2AzwSsyQFMz5QnyM
+
+</pre>
+</div>
+<figcaption><a href="#figure-28" class="selfRef">Figure 28</a>:
+<a href="#name-issued-jwp-in-compact-serial" class="selfRef">Issued JWP (in compact serialization)</a>
+          </figcaption></figure>
+<p id="appendix-A.3-24">Next, we show the presentation of the JWP with selective disclosure.<a href="#appendix-A.3-24" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-25">For presentation with the following presentation protected header:<a href="#appendix-A.3-25" class="pilcrow">¶</a></p>
+<span id="name-presentation-protected-header"></span><figure id="figure-29">
+          <div class="lang-wrapped sourcecode" id="appendix-A.3-26.1">
+<pre>{
+  "alg": "MAC-H256",
+  "aud": "https://recipient.example.com",
+  "nonce": "t4BqaUAX7hHRY9CexRGt155Ub6j90BhXXpDNJ3aVxGg"
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-29" class="selfRef">Figure 29</a>:
+<a href="#name-presentation-protected-header" class="selfRef">Presentation Protected Header</a>
+          </figcaption></figure>
+<p id="appendix-A.3-27">The holder will take the issuer proof (including shared secret) and derive the same individual payload MAC values (above).<a href="#appendix-A.3-27" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-28">In this case, the holder has decided not to disclose the last three claims provided by the issuer (corresponding to <code>email</code>, <code>address</code>, and <code>age_over_21</code>)<a href="#appendix-A.3-28" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-29">For the disclosed payloads, the holder will provide the corresponding derived key. For the non-disclosed payloads, the holder will provide the corresponding MAC value.<a href="#appendix-A.3-29" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-30">The final presented proof value is an array of octet strings. The contents are presentation header signature, followed by the issuer signature, then the value disclosed by the holder for each payload. This results in the following proof:<a href="#appendix-A.3-30" class="pilcrow">¶</a></p>
+<span id="name-presentation-proof-base64ur"></span><figure id="figure-30">
+          <div class="lang-wrapped sourcecode" id="appendix-A.3-31.1">
+<pre>[
+  "fcJoDAe_d5aJFYOFt_9CEBePub2lXXfLgOfVsSF6YjEXko69m8NJb5rijy22IJeVG6
+23t8X3Fh-uPUYAl7PZxw",
+  "3q89EGa4a-sfYCqzz8fabm-w0VIDLMWTbiJB7mlO6oJfC31DjiA1EgKrWeWqm3VHH6
+fYsZHMsrIZhV5WdBZ12w",
+  "7sFopcQNCoantnuLOdiPJkBAs2pqyZ4Tq7QjJUJcITQ",
+  "2SEcCay1xjmGh5lX5hFdtoRYdDH3-6bkOcQB2J7lSeM",
+  "N4zdFo3-1b2qQ2Q1tloSDl2M1Uwa2vl6xwJkm3DVfac",
+  "v7Eo9tQ59PSSBo9cafFJACN4n9vPmQGlzGSf6NXjW6s",
+  "yy87GOLXXReAOzZLwes4yH4hDz3I6qyziLn68V7XsO0",
+  "dQYRP7N7dISxQZaM8ycFEPzCsbbDFgC31A6mX2fiuZU",
+  "YU9zzbatOqNpcGwIc1yyHi5uIq-vjEUvTSAuylKSFOE"
+]
+
+</pre>
+</div>
+<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
+<a href="#name-presentation-proof-base64ur" class="selfRef">Presentation proof (base64url-encoded)</a>
+          </figcaption></figure>
+<p id="appendix-A.3-32">The final presented JWP in JSON serialization is:<a href="#appendix-A.3-32" class="pilcrow">¶</a></p>
+<span id="name-presented-jwp-in-json-seria"></span><figure id="figure-31">
+          <div class="lang-wrapped sourcecode" id="appendix-A.3-33.1">
+<pre>{
+  "presentation": "eyJhbGciOiJNQUMtSDI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaX
+BpZW50LmV4YW1wbGUuY29tIiwibm9uY2UiOiJ0NEJxYVVBWDdoSFJZOUNleFJHdDE1NVV
+iNmo5MEJoWFhwRE5KM2FWeEdnIn0",
+  "issuer": "eyJhbGciOiJNQUMtSDI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBz
+Oi8vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hb
+WUiLCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicG
+p3ayI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwidXNlIjoic2lnbiIsIngiOiJGQko
+4c1o4MDZUSFVZTGZjSFprekVYMEtEcWljNGhlQmF4cHdhNTE5eXVFIiwieSI6IjV2bXZ6
+UWZaUGNwTkNaMlRQVUczS3c5Uk00SDF1TkFrOWJXdUFnRWRXakkifX0",
+  "payloads": [
+    "MTcxNDUyMTYwMA",
+    "MTcxNzE5OTk5OQ",
+    "IkRvZSI",
+    "IkpheSI",
+    null,
+    null,
+    null
+  ],
+  "proof": [
+    "fcJoDAe_d5aJFYOFt_9CEBePub2lXXfLgOfVsSF6YjEXko69m8NJb5rijy22IJeV
+G623t8X3Fh-uPUYAl7PZxw",
+    "3q89EGa4a-sfYCqzz8fabm-w0VIDLMWTbiJB7mlO6oJfC31DjiA1EgKrWeWqm3VH
+H6fYsZHMsrIZhV5WdBZ12w",
+    "7sFopcQNCoantnuLOdiPJkBAs2pqyZ4Tq7QjJUJcITQ",
+    "2SEcCay1xjmGh5lX5hFdtoRYdDH3-6bkOcQB2J7lSeM",
+    "N4zdFo3-1b2qQ2Q1tloSDl2M1Uwa2vl6xwJkm3DVfac",
+    "v7Eo9tQ59PSSBo9cafFJACN4n9vPmQGlzGSf6NXjW6s",
+    "yy87GOLXXReAOzZLwes4yH4hDz3I6qyziLn68V7XsO0",
+    "dQYRP7N7dISxQZaM8ycFEPzCsbbDFgC31A6mX2fiuZU",
+    "YU9zzbatOqNpcGwIc1yyHi5uIq-vjEUvTSAuylKSFOE"
+  ]
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-31" class="selfRef">Figure 31</a>:
+<a href="#name-presented-jwp-in-json-seria" class="selfRef">Presented JWP (in JSON serialization)</a>
+          </figcaption></figure>
+<p id="appendix-A.3-34">The same JWP in compact serialization:<a href="#appendix-A.3-34" class="pilcrow">¶</a></p>
+<span id="name-presented-jwp-in-compact-se"></span><figure id="figure-32">
+          <div class="lang-wrapped sourcecode" id="appendix-A.3-35.1">
+<pre>eyJhbGciOiJNQUMtSDI1NiIsImF1ZCI6Imh0dHBzOi8vcmVjaXBpZW50LmV4YW1wbGUuY
+29tIiwibm9uY2UiOiJ0NEJxYVVBWDdoSFJZOUNleFJHdDE1NVViNmo5MEJoWFhwRE5KM2
+FWeEdnIn0.eyJhbGciOiJNQUMtSDI1NiIsInR5cCI6IkpQVCIsImlzcyI6Imh0dHBzOi8
+vaXNzdWVyLmV4YW1wbGUiLCJjbGFpbXMiOlsiaWF0IiwiZXhwIiwiZmFtaWx5X25hbWUi
+LCJnaXZlbl9uYW1lIiwiZW1haWwiLCJhZGRyZXNzIiwiYWdlX292ZXJfMjEiXSwicGp3a
+yI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwidXNlIjoic2lnbiIsIngiOiJGQko4c1
+o4MDZUSFVZTGZjSFprekVYMEtEcWljNGhlQmF4cHdhNTE5eXVFIiwieSI6IjV2bXZ6UWZ
+aUGNwTkNaMlRQVUczS3c5Uk00SDF1TkFrOWJXdUFnRWRXakkifX0.MTcxNDUyMTYwMA~M
+TcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.fcJoDAe_d5aJFYOFt_9CEBePub2lXXfLgOfV
+sSF6YjEXko69m8NJb5rijy22IJeVG623t8X3Fh-uPUYAl7PZxw~3q89EGa4a-sfYCqzz8
+fabm-w0VIDLMWTbiJB7mlO6oJfC31DjiA1EgKrWeWqm3VHH6fYsZHMsrIZhV5WdBZ12w~
+7sFopcQNCoantnuLOdiPJkBAs2pqyZ4Tq7QjJUJcITQ~2SEcCay1xjmGh5lX5hFdtoRYd
+DH3-6bkOcQB2J7lSeM~N4zdFo3-1b2qQ2Q1tloSDl2M1Uwa2vl6xwJkm3DVfac~v7Eo9t
+Q59PSSBo9cafFJACN4n9vPmQGlzGSf6NXjW6s~yy87GOLXXReAOzZLwes4yH4hDz3I6qy
+ziLn68V7XsO0~dQYRP7N7dISxQZaM8ycFEPzCsbbDFgC31A6mX2fiuZU~YU9zzbatOqNp
+cGwIc1yyHi5uIq-vjEUvTSAuylKSFOE
+
+</pre>
+</div>
+<figcaption><a href="#figure-32" class="selfRef">Figure 32</a>:
+<a href="#name-presented-jwp-in-compact-se" class="selfRef">Presented JWP (in compact serialization)</a>
+          </figcaption></figure>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgements">
+<section id="appendix-B">
+      <h2 id="name-acknowledgements">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
+      </h2>
+<p id="appendix-B-1">This work was incubated in the DIF <a href="https://identity.foundation/working-groups/crypto.html">Applied Cryptography Working Group</a>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">We would like to thank
+Alberto Solavagione
+for his valuable contributions to this specification.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-3">The BBS examples were generated using the library at <a href="https://github.com/mattrglobal/pairing_crypto">https://github.com/mattrglobal/pairing_crypto</a> .<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="document-history">
+<section id="appendix-C">
+      <h2 id="name-document-history">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
+      </h2>
+<p id="appendix-C-1">[[ To be removed from the final specification ]]<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-C-2.1">Update of appendix describing MAC-H256 to now also be generated by the build system from a common set of code and templates<a href="#appendix-C-2.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-C-2.2">Update single use algorithm to use an array of octet values rather than requiring splitting an octet buffer into parts during generation of a presentation and during verification.<a href="#appendix-C-2.2" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-C-2.3">Update BBS algorithm description and examples to clarify the proof is an array with a single octet string.<a href="#appendix-C-2.3" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-C-2.4">Update MAC algorithm to use an array of octet values for the proof, rather than requiring splitting an octet buffer into parts.<a href="#appendix-C-2.4" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-C-2.5">Add new section on the Combined MAC Representation to clarify operations are serving to recreate this octet string value.<a href="#appendix-C-2.5" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-C-2.6">Correct reference to the latest BBS draft<a href="#appendix-C-2.6" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-C-2.7">
+          <p id="appendix-C-2.7.1">Change algorithms to not use base64url-encoding internally. Algorithms are meant to operate on octets, while base64url-encoding is used to represent those octets in JSON and compact serializations.
+-04<a href="#appendix-C-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.8">
+          <p id="appendix-C-2.8.1">Refactoring figures and examples to be built from a common set across all three documents<a href="#appendix-C-2.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.9">
+          <p id="appendix-C-2.9.1">Move single-use example appendix from JWP to JPA<a href="#appendix-C-2.9.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.10">
+          <p id="appendix-C-2.10.1">Change algorithm from <code>BBS-DRAFT-5</code> to <code>BBS</code>, and from <code>BBS-PROOF-DRAFT-5</code> to <code>BBS-PROOF</code><a href="#appendix-C-2.10.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.11">
+          <p id="appendix-C-2.11.1">Update BBS ciphersuite ID to <code>BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_</code><a href="#appendix-C-2.11.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.12">
+          <p id="appendix-C-2.12.1">Update to draft 5 BLS key representations<a href="#appendix-C-2.12.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-C-3">-03<a href="#appendix-C-3" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-4.1">Improvements resulting from a full proofreading.<a href="#appendix-C-4.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.2">Populated IANA Considerations section.<a href="#appendix-C-4.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.3">Updated to use BBS draft -05.<a href="#appendix-C-4.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.4">Updated examples.<a href="#appendix-C-4.4" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-5">-02<a href="#appendix-C-5" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-6.1">Add new <code>BBS-DRAFT-3</code> and <code>BBS-PROOF-DRAFT-3</code> algorithms based on draft-irtf-cfrg-bbs-signatures-03.<a href="#appendix-C-6.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-6.2">Remove prior <code>BBS-X</code> algorithm based on a particular implementation of earlier drafts.<a href="#appendix-C-6.2" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-7">-01<a href="#appendix-C-7" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-8.1">Correct cross-references within group<a href="#appendix-C-8.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-8.2">Describe <code>issuer_header</code> and <code>presentation_header</code><a href="#appendix-C-8.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-8.3">Update BBS references to CFRG drafts<a href="#appendix-C-8.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-8.4">Rework reference to HMAC ( RFC2104 )<a href="#appendix-C-8.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-8.5">Remove ZKSnark placeholder<a href="#appendix-C-8.5" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-C-9">-00<a href="#appendix-C-9" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-C-10.1">Created initial working group draft based on draft-jmiller-jose-json-proof-algorithms-01<a href="#appendix-C-10.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-D">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Jeremie Miller</span></div>
+<div dir="auto" class="left"><span class="org">Ping Identity</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:jmiller@pingidentity.com" class="email">jmiller@pingidentity.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Michael B. Jones</span></div>
+<div dir="auto" class="left"><span class="org">Self-Issued Consulting</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:michael_b_jones@hotmail.com" class="email">michael_b_jones@hotmail.com</a>
+</div>
+<div class="url">
+<span>URI:</span>
+<a href="https://self-issued.info/" class="url">https://self-issued.info/</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">David Waite</span></div>
+<div dir="auto" class="left"><span class="org">Ping Identity</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:dwaite+jwp@pingidentity.com" class="email">dwaite+jwp@pingidentity.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
