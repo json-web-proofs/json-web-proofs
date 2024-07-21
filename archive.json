@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-18T00:41:26.162247+00:00",
+  "timestamp": "2024-07-21T00:46:04.749660+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -7891,25 +7891,33 @@
       "id": "PR_kwDOFsQObc5wRXhr",
       "title": "Scripted creation of all examples",
       "url": "https://github.com/json-web-proofs/json-web-proofs/pull/120",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "During initial submission, the code to generate examples was disabled to solve formatting issues. Since then, the algorithms have drifted and the implementations of those algorithms has changed.\r\n\r\nThis commit attempts to create a set of scripts to generate all key material examples for all three specifications to pull from.",
       "createdAt": "2024-05-23T02:02:05Z",
-      "updatedAt": "2024-05-23T07:18:41Z",
+      "updatedAt": "2024-07-19T05:21:21Z",
       "baseRepository": "json-web-proofs/json-web-proofs",
       "baseRefName": "main",
       "baseRefOid": "d942d156573d2ac4c4bba5dd97ef9980d97f5647",
       "headRepository": "json-web-proofs/json-web-proofs",
       "headRefName": "buildable-examples",
       "headRefOid": "3eb3fcb8ef8020913b9e97310466ca87eb6a1f27",
-      "closedAt": null,
+      "closedAt": "2024-07-19T05:21:12Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closing due to other merges",
+          "createdAt": "2024-07-19T05:21:12Z",
+          "updatedAt": "2024-07-19T05:21:12Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOFsQObc57it99",
@@ -7953,6 +7961,90 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 122,
+      "id": "PR_kwDOFsQObc511Xrr",
+      "title": "MAC-H256 fixtures",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/122",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This completes the refactoring of the example generation and import into the spec. \r\n\r\nI unfortunately didn't have time to update generation of the MAC-H256 examples before the IETF120 submission cut-off.",
+      "createdAt": "2024-07-18T22:12:07Z",
+      "updatedAt": "2024-07-19T05:20:50Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "de9a70537bf657715a86e2d5e97e97fb9a79aa29",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "mac-h256-fixtures",
+      "headRefOid": "ed3f7f8aca364d510275c7f021a7a1855367bb72",
+      "closedAt": "2024-07-19T05:20:45Z",
+      "mergedAt": "2024-07-19T05:20:45Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "b1f06d3374025a277ed593eb7a1f45bbd270a833"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6CW2Rq",
+          "commit": {
+            "abbreviatedOid": "23211fc"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Please update the history entries accordingly.",
+          "createdAt": "2024-07-18T22:49:43Z",
+          "updatedAt": "2024-07-18T22:49:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 123,
+      "id": "PR_kwDOFsQObc513YbP",
+      "title": "Refactor algorithms to use multi-part proofs",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/123",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is the implementation of the previous spec change describing proofs as being a sequence of octet strings, rather than a single octet string.\r\n\r\nThis change is meant to simplify parsing logic and to reduce the need to unpack dynamically sized buffers, especially in implementations using languages without protections from out-of-bound conditions.\r\n\r\n1. For BBS, I corrected examples to use a single-value array for the proof value.\r\n2. For Single Use, it was mostly a straight translation\r\n3. For MAC, I attempted to do a bit more of a cleanup.:\r\n     - A new section was created describing a Combined MAC Representation, which synthesized by various operations to create or verify the issuer signature\r\n     - Sections received a bit more work to unify around this concept\r\n     - The section on verification was heavily reworked, as it described a process well beyond MAC validation.",
+      "createdAt": "2024-07-19T07:38:14Z",
+      "updatedAt": "2024-07-19T16:51:12Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "b1f06d3374025a277ed593eb7a1f45bbd270a833",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "multi-part-proofs",
+      "headRefOid": "0a266f3bacf8e3774abe655daabd9e78d883111d",
+      "closedAt": "2024-07-19T16:51:08Z",
+      "mergedAt": "2024-07-19T16:51:08Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "bd0ea8a6bc64af139a2028021ec2b72d3fdd0d6b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6CbeUr",
+          "commit": {
+            "abbreviatedOid": "0a266f3"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks for doing this. ",
+          "createdAt": "2024-07-19T13:25:04Z",
+          "updatedAt": "2024-07-19T13:25:04Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
