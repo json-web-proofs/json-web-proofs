@@ -1034,7 +1034,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Miller, et al.</td>
-<td class="center">Expires 20 January 2025</td>
+<td class="center">Expires 22 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1047,12 +1047,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-jose-json-web-proof-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-19" class="published">19 July 2024</time>
+<time datetime="2024-07-21" class="published">21 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-01-20">20 January 2025</time></dd>
+<dd class="expires"><time datetime="2025-01-22">22 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1095,7 +1095,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1253,6 +1253,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2.2.1">
                     <p id="section-toc.1-1.8.2.2.2.1.1"><a href="#section-8.2.1" class="auto internal xref">8.2.1</a>.  <a href="#name-registry-contents" class="internal xref">Registry Contents</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-structured-syntax-suffix-re" class="internal xref">Structured Syntax Suffix Registration</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3.2.1">
+                    <p id="section-toc.1-1.8.2.3.2.1.1"><a href="#section-8.3.1" class="auto internal xref">8.3.1</a>.  <a href="#name-registry-contents-2" class="internal xref">Registry Contents</a></p>
 </li>
                 </ul>
 </li>
@@ -1756,7 +1764,7 @@ Rather, proofs about payloads, such as "age &gt;= 21", are included in the prese
       </h2>
 <p id="section-6-1">Each disclosed payload MUST be base64url encoded when preparing it to be serialized.  The headers and proof are also individually base64url encoded.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">Like JWS, JWP supports both a Compact Serialization and a JSON Serialization.<a href="#section-6-2" class="pilcrow">¶</a></p>
-<div id="compact-serialization">
+<div id="CompactSerialization">
 <section id="section-6.1">
         <h3 id="name-compact-serialization">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-compact-serialization" class="section-name selfRef">Compact Serialization</a>
@@ -1769,14 +1777,14 @@ Rather, proofs about payloads, such as "age &gt;= 21", are included in the prese
 <pre>eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
 mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
 yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.o0TCp_P_Q0LvrO-AR5-DcgKwZW_Sd9Ap
-YwDI6EOu6imSg4DmEmy-TP-XIQXcUmoWpcpoTOOARPYDGXxeccGfjtfgLyu8yrFlwJh2p
-H39sJo4HIx4XrXvRsNpLMYqgX-omXlmutoqC4x03N9g5XuwCViRExFh4ZCnKMD9bxgYuD
-EuK4BA8PvOtE_SbxYX9Dg_QISkVJ-7sTb9AyizPawRfDDmCnwO_ekx1wz7-qRnUZEqah9
-v4EGANIWh8y-RQAdC7wnJjIMvBvkRexIA-DxZrzH1f-Ihti53AIHxmQG6qAB_bsTpS_1-
-9RK6KgXynOWPL-SxmhS9o5Y7izqD_FSCSZdlBxEa9Oz8UXyuzBM-67htN3hB7jrrp4lkB
-fOZsklL_mBYjZR422Fh3ftY72i1mVeZrFx9BueanwRisKNzIOnBjhp6vvQ_htrCaIwihE
-NeRd311XjobUD2fAtNDgGv3L511XknAteGSECXTvpIkVc
+MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.olhAkFp2fPqNs-Hw4h6RZq3zjW6cwYWX
+BlcJRsYyWsPI6UFRXspev-AgVZwCq31OqCqMaXtLK6qjqS-zD49fgkDsMy88pzFwmKIRm
+VPYb2GpXhOp1b2dN0BMaKylfiDMhYY7XtQK8mTAo0_N8f5m7GM9LIDXcI2-I5sjxNW1ba
+W2XJTzAD7b1XmPLTcT2n_gO0DAi4L3PH86WDAhSVSJB6JG-WzWL0fiUvXweypJbiok51y
+5wwjH7IfQKRcXqb0CavKLsIvXVFd-72ta63nGdRgPI8svji-MU2EytT09UHAzhPuR4Q8n
+l54krrv08g6pVdn7xlha29qq8c1WzagAb6JbnX5soEaYfyHPiiCtKws3XfVzds3aQetcQ
+7pC4KbbtmcIHErxnPMgv9G-SUB0zCncqQWmmEh71owugtDXhWhy0-j-w-N9vsUE3T2787
+JgWT9KO4p1-Y7KUk5brbGNDgrq86ZgyFGrJbWVksaRg-E
 
 </pre><a href="#section-6.1-5" class="pilcrow">¶</a>
 </div>
@@ -1785,7 +1793,7 @@ NeRd311XjobUD2fAtNDgGv3L511XknAteGSECXTvpIkVc
 </blockquote>
 </section>
 </div>
-<div id="json-serialization">
+<div id="JSONSerialization">
 <section id="section-6.2">
         <h3 id="name-json-serialization">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-json-serialization" class="section-name selfRef">JSON Serialization</a>
@@ -1809,14 +1817,14 @@ NeRd311XjobUD2fAtNDgGv3L511XknAteGSECXTvpIkVc
     null
   ],
   "proof": [
-    "o0TCp_P_Q0LvrO-AR5-DcgKwZW_Sd9ApYwDI6EOu6imSg4DmEmy-TP-XIQXcUmoW
-       pcpoTOOARPYDGXxeccGfjtfgLyu8yrFlwJh2pH39sJo4HIx4XrXvRsNpLMYqgX
-       -omXlmutoqC4x03N9g5XuwCViRExFh4ZCnKMD9bxgYuDEuK4BA8PvOtE_SbxYX
-       9Dg_QISkVJ-7sTb9AyizPawRfDDmCnwO_ekx1wz7-qRnUZEqah9v4EGANIWh8y
-       -RQAdC7wnJjIMvBvkRexIA-DxZrzH1f-Ihti53AIHxmQG6qAB_bsTpS_1-9RK6
-       KgXynOWPL-SxmhS9o5Y7izqD_FSCSZdlBxEa9Oz8UXyuzBM-67htN3hB7jrrp4
-       lkBfOZsklL_mBYjZR422Fh3ftY72i1mVeZrFx9BueanwRisKNzIOnBjhp6vvQ_
-       htrCaIwihENeRd311XjobUD2fAtNDgGv3L511XknAteGSECXTvpIkVc"
+    "olhAkFp2fPqNs-Hw4h6RZq3zjW6cwYWXBlcJRsYyWsPI6UFRXspev-AgVZwCq31O
+       qCqMaXtLK6qjqS-zD49fgkDsMy88pzFwmKIRmVPYb2GpXhOp1b2dN0BMaKylfi
+       DMhYY7XtQK8mTAo0_N8f5m7GM9LIDXcI2-I5sjxNW1baW2XJTzAD7b1XmPLTcT
+       2n_gO0DAi4L3PH86WDAhSVSJB6JG-WzWL0fiUvXweypJbiok51y5wwjH7IfQKR
+       cXqb0CavKLsIvXVFd-72ta63nGdRgPI8svji-MU2EytT09UHAzhPuR4Q8nl54k
+       rrv08g6pVdn7xlha29qq8c1WzagAb6JbnX5soEaYfyHPiiCtKws3XfVzds3aQe
+       tcQ7pC4KbbtmcIHErxnPMgv9G-SUB0zCncqQWmmEh71owugtDXhWhy0-j-w-N9
+       vsUE3T2787JgWT9KO4p1-Y7KUk5brbGNDgrq86ZgyFGrJbWVksaRg-E"
   ]
 }
 
@@ -1829,7 +1837,7 @@ NeRd311XjobUD2fAtNDgGv3L511XknAteGSECXTvpIkVc
 </div>
 </section>
 </div>
-<div id="security-considerations">
+<div id="SecurityConsiderations">
 <section id="section-7">
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
@@ -2112,9 +2120,9 @@ a JWP using the JWP JSON Serialization.<a href="#section-8.2.1-1" class="pilcrow
 </li>
               <li class="compact" id="section-8.2.1.1-1.4">Optional parameters: n/a<a href="#section-8.2.1.1-1.4" class="pilcrow">¶</a>
 </li>
-              <li class="compact" id="section-8.2.1.1-1.5">Encoding considerations: 8bit; application/jwp values are encoded as a series of base64url-encoded values (some of which may be the empty string), each separated from the next by a single period ('.') character.<a href="#section-8.2.1.1-1.5" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.5">Encoding considerations: 8bit; application/jwp values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') and tilde ('~') characters<a href="#section-8.2.1.1-1.5" class="pilcrow">¶</a>
 </li>
-              <li class="compact" id="section-8.2.1.1-1.6">Security considerations: See the Security Considerations section of this specification.<a href="#section-8.2.1.1-1.6" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.1-1.6">Security considerations: See <a href="#SecurityConsiderations" class="auto internal xref">Section 7</a> of this specification<a href="#section-8.2.1.1-1.6" class="pilcrow">¶</a>
 </li>
               <li class="compact" id="section-8.2.1.1-1.7">Interoperability considerations: n/a<a href="#section-8.2.1.1-1.7" class="pilcrow">¶</a>
 </li>
@@ -2166,7 +2174,7 @@ a JWP using the JWP JSON Serialization.<a href="#section-8.2.1-1" class="pilcrow
 </li>
               <li class="compact" id="section-8.2.1.2-1.5">Encoding considerations: 8bit; application/jwp+json values are represented as a JSON Object; UTF-8 encoding SHOULD be employed for the JSON object.<a href="#section-8.2.1.2-1.5" class="pilcrow">¶</a>
 </li>
-              <li class="compact" id="section-8.2.1.2-1.6">Security considerations: See the Security Considerations section of this specification<a href="#section-8.2.1.2-1.6" class="pilcrow">¶</a>
+              <li class="compact" id="section-8.2.1.2-1.6">Security considerations: See <a href="#SecurityConsiderations" class="auto internal xref">Section 7</a> of this specification<a href="#section-8.2.1.2-1.6" class="pilcrow">¶</a>
 </li>
               <li class="compact" id="section-8.2.1.2-1.7">Interoperability considerations: n/a<a href="#section-8.2.1.2-1.7" class="pilcrow">¶</a>
 </li>
@@ -2198,6 +2206,63 @@ a JWP using the JWP JSON Serialization.<a href="#section-8.2.1-1" class="pilcrow
               <li class="compact" id="section-8.2.1.2-1.16">Change Controller: IETF<a href="#section-8.2.1.2-1.16" class="pilcrow">¶</a>
 </li>
               <li class="compact" id="section-8.2.1.2-1.17">Provisional registration? No<a href="#section-8.2.1.2-1.17" class="pilcrow">¶</a>
+</li>
+            </ul>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="SuffixReg">
+<section id="section-8.3">
+        <h3 id="name-structured-syntax-suffix-re">
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-structured-syntax-suffix-re" class="section-name selfRef">Structured Syntax Suffix Registration</a>
+        </h3>
+<div id="SuffixContents">
+<section id="section-8.3.1">
+          <h4 id="name-registry-contents-2">
+<a href="#section-8.3.1" class="section-number selfRef">8.3.1. </a><a href="#name-registry-contents-2" class="section-name selfRef">Registry Contents</a>
+          </h4>
+<p id="section-8.3.1-1">This section registers the <code>+jwp</code>
+structured syntax suffix <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>
+in the IANA "Structured Syntax Suffix" registry (#IANA.StructuredSuffix)
+in the manner described in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>,
+which can be used to indicate that the media type is encoded as a JWP.<a href="#section-8.3.1-1" class="pilcrow">¶</a></p>
+<div id="the-jwp-structured-syntax-suffix">
+<section id="section-8.3.1.1">
+            <h5 id="name-the-jwp-structured-syntax-s">
+<a href="#section-8.3.1.1" class="section-number selfRef">8.3.1.1. </a><a href="#name-the-jwp-structured-syntax-s" class="section-name selfRef">The +jwp Structured Syntax Suffix</a>
+            </h5>
+<ul class="compact">
+<li class="compact" id="section-8.3.1.1-1.1">Name: JSON Web Proof (JWP)<a href="#section-8.3.1.1-1.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.3.1.1-1.2">+suffix: +jwp<a href="#section-8.3.1.1-1.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.3.1.1-1.3">References: <a href="#CompactSerialization" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-8.3.1.1-1.3" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.3.1.1-1.4">Encoding considerations: binary; JWP values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') and tilde ('~') characters<a href="#section-8.3.1.1-1.4" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.3.1.1-1.5">Interoperability considerations: n/a<a href="#section-8.3.1.1-1.5" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.3.1.1-1.6">Fragment identifier considerations: The syntax and semantics of fragment identifiers specified for +jwp SHOULD be as specified for "application/jwp".  (At publication of this document, there is no fragment identification syntax defined for "application/jwp".)<a href="#section-8.3.1.1-1.6" class="pilcrow">¶</a>
+</li>
+            </ul>
+<p id="section-8.3.1.1-2">The syntax and semantics for fragment identifiers for a specific
+  "xxx/yyy+jwp" SHOULD be processed as follows:<a href="#section-8.3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.3.1.1-3">For cases defined in +jwp, where the fragment identifier resolves
+  per the +jwp rules, then process as specified in +jwp.<a href="#section-8.3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.3.1.1-4">For cases defined in +jwp, where the fragment identifier does not
+  resolve per the +jwp rules, then process as specified in
+  "xxx/yyy+jwp".<a href="#section-8.3.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-8.3.1.1-5">For cases not defined in +jwp, then process as specified in
+  "xxx/yyy+jwp".<a href="#section-8.3.1.1-5" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-8.3.1.1-6.1">Security considerations: See <a href="#SecurityConsiderations" class="auto internal xref">Section 7</a> of this specification<a href="#section-8.3.1.1-6.1" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.3.1.1-6.2">Contact: Michael B. Jones, michael_b_jones@hotmail.com<a href="#section-8.3.1.1-6.2" class="pilcrow">¶</a>
+</li>
+              <li class="compact" id="section-8.3.1.1-6.3">Author/Change controller: IETF<a href="#section-8.3.1.1-6.3" class="pilcrow">¶</a>
 </li>
             </ul>
 </section>
@@ -2332,6 +2397,8 @@ for his valuable contributions to this specification.<a href="#appendix-A-2" cla
 <li class="compact" id="appendix-C-4.1">Refactoring figures and examples to be built from a common set across all three documents<a href="#appendix-C-4.1" class="pilcrow">¶</a>
 </li>
         <li class="compact" id="appendix-C-4.2">Move single-use example appendix from JWP to JPA<a href="#appendix-C-4.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-4.3">Registered <code>+jwp</code> structured syntax suffix.<a href="#appendix-C-4.3" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-5">-03<a href="#appendix-C-5" class="pilcrow">¶</a></p>
