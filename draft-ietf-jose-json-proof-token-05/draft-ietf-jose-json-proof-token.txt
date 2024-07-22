@@ -76,6 +76,7 @@ Table of Contents
    11. IANA Considerations
      11.1.  JSON Web Proof Header Parameters Registration
        11.1.1.  Registry Contents
+         11.1.1.1.  Claims ID Header Parameter
    12. References
      12.1.  Normative References
      12.2.  Informative References
