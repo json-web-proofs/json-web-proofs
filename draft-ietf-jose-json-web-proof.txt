@@ -652,14 +652,14 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
    mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
    yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.l7cckIiFBBuGRbTJnJPvJ6EzuWXGBvki
-   VAgpBRLqLabMPVIsIHZ6s-XC3PXRDvfWj0UEMURy1WLzABxC5fYYx9q7UrBJIikWpiPdG
-   -wIkQWEZwH2XOJex2sugaEHy5-1slX4ozvxKBnokCtV4sG2PvmZZuX6jERNJND3bhScAN
-   IZXb61L_IOm1jG2P9obtJRYyn816AfOVTAB2ySWWv03hS1OuDNGCxCK-iM-xwENcRFf3U
-   cbKiq-o1N0ufFqgeRzLQLaU6oLQYhg8BoYJ0W8y0CX1zQ0rGh5PC76-R9MADe8wzXS58F
-   oWjpLJp7mSAXLv1YTqyoowUK1RGrc5c7biZXye_atHQmhVOesY8UwnRh5kc5e6rdRxT4y
-   syd3RNcnEFCpFzQlLOhOmo3IkD_wzAIU2dDhU8v6QaBkv0dVl2IxaXG-aNBZqFEz2DPLR
-   9hXl14ney_znHUHK2cjTQPkf02GjDCcTlM4ALVQzXJM0A
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.s2zPV9D3n9eOYHX7kJS8bVdEpbims35v
+   09xzpi0jExttxzVBAeHN4AEyoP71xMaTjLZDsrttjFXDLL0lVN1x8xeemkntC-Mskl2nR
+   htSB-kD-oA8u8oRKowyI2SJ7WU1iy_9aeEWB3RPbzEnE_szGzqbeAmeLjHVgH3M3ZalU8
+   6-OUaQk6gpQ_MffqSr-SIAAWGufqSAYNvFadWNladsGooBbv0OiLrJph3BkQxBDeVmRS1
+   axgFZlo7E0lCGecPBkv2vVxni4nLqJWp_uu2qRDwYJ3bZOSCMrxfr0W4ERwdMmB4dR51s
+   bjTzG9fK77TtYFYD9OkPWhXydDYzTJPl6tEtGjxTUmFkeU_O7U-d6Tk-uwYk8aum3apSn
+   hfmMFatyckdUf1R1SToN7PQEtwJ_Fff_WBd4mRow1FQcZbw21R6hTVdyCLGBQ97RjlbU0
+   EfI6LVp-51ueAY1S-JjrdM0cVCYZImprNPMjBlcRQWlSk
 
    |  Figure: Compact Serialization of Presentation
 
@@ -692,14 +692,14 @@ Table of Contents
        null
      ],
      "proof": [
-       "l7cckIiFBBuGRbTJnJPvJ6EzuWXGBvkiVAgpBRLqLabMPVIsIHZ6s-XC3PXRDvfW
-          j0UEMURy1WLzABxC5fYYx9q7UrBJIikWpiPdG-wIkQWEZwH2XOJex2sugaEHy5
-          -1slX4ozvxKBnokCtV4sG2PvmZZuX6jERNJND3bhScANIZXb61L_IOm1jG2P9o
-          btJRYyn816AfOVTAB2ySWWv03hS1OuDNGCxCK-iM-xwENcRFf3UcbKiq-o1N0u
-          fFqgeRzLQLaU6oLQYhg8BoYJ0W8y0CX1zQ0rGh5PC76-R9MADe8wzXS58FoWjp
-          LJp7mSAXLv1YTqyoowUK1RGrc5c7biZXye_atHQmhVOesY8UwnRh5kc5e6rdRx
-          T4ysyd3RNcnEFCpFzQlLOhOmo3IkD_wzAIU2dDhU8v6QaBkv0dVl2IxaXG-aNB
-          ZqFEz2DPLR9hXl14ney_znHUHK2cjTQPkf02GjDCcTlM4ALVQzXJM0A"
+       "s2zPV9D3n9eOYHX7kJS8bVdEpbims35v09xzpi0jExttxzVBAeHN4AEyoP71xMaT
+          jLZDsrttjFXDLL0lVN1x8xeemkntC-Mskl2nRhtSB-kD-oA8u8oRKowyI2SJ7W
+          U1iy_9aeEWB3RPbzEnE_szGzqbeAmeLjHVgH3M3ZalU86-OUaQk6gpQ_MffqSr
+          -SIAAWGufqSAYNvFadWNladsGooBbv0OiLrJph3BkQxBDeVmRS1axgFZlo7E0l
+          CGecPBkv2vVxni4nLqJWp_uu2qRDwYJ3bZOSCMrxfr0W4ERwdMmB4dR51sbjTz
+          G9fK77TtYFYD9OkPWhXydDYzTJPl6tEtGjxTUmFkeU_O7U-d6Tk-uwYk8aum3a
+          pSnhfmMFatyckdUf1R1SToN7PQEtwJ_Fff_WBd4mRow1FQcZbw21R6hTVdyCLG
+          BQ97RjlbU0EfI6LVp-51ueAY1S-JjrdM0cVCYZImprNPMjBlcRQWlSk"
      ]
    }
 
