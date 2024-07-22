@@ -99,10 +99,21 @@ Table of Contents
      8.1.  JSON Web Proof Header Parameters Registry
        8.1.1.  Registration Template
        8.1.2.  Initial Registry Contents
+         8.1.2.1.  Algorithm Header Parameter
+         8.1.2.2.  Key ID Header Parameter
+         8.1.2.3.  Type Header Parameter
+         8.1.2.4.  Critical Header Parameter
+         8.1.2.5.  Issuer Header Parameter
+         8.1.2.6.  Audience Header Parameter
+         8.1.2.7.  Nonce Header Parameter
+         8.1.2.8.  Claims Header Parameter
      8.2.  Media Type Registration
        8.2.1.  Registry Contents
+         8.2.1.1.  The application/jwp Media Type
+         8.2.1.2.  The application/jwp+json Media Type
      8.3.  Structured Syntax Suffix Registration
        8.3.1.  Registry Contents
+         8.3.1.1.  The +jwp Structured Syntax Suffix
    9.  References
      9.1.  Normative References
      9.2.  Informative References
@@ -641,14 +652,14 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
    mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
    yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.kSwr87wZQn7HvoeoUWhoIBqYUJTfznos
-   TEJSaz0Ix4W5VPuasGeywupMabXQqq1jhqUBejK92ww9hxMQV2WW2pM4ziLZhfrL03o6G
-   vEdgwh54Bt48JXgXx3W0AQ7LFF2jyE6dML-HsJgsapEXU_olaew71lHsNqMEG-H5Cg2uT
-   LqjNytobyvggs3FkQu4JDhFXVNAIftWhoTwuGr1q2HvkNmb-8dJ0uPbdMlcTWu-41baoY
-   To3jr2UphpwVaFtGKVB4_6fMbkT-MFJjdN5DRh2UzxBtHUsVo7Eat86GtUdb0R4vA6tyF
-   yeJ_yd9TYKQbSIZ_Jqd0EpQZ576fSRmGii2XYv45gGv5ESx1oeSiVLpxC7iJpCub20Gge
-   NAvE4RgmDua4B4mEAuL_1-DT1Axd0IzHBIR-0vFWQ9QPiQl6WDrh6Ym-NW_n30FftUdoS
-   YUNtu5P7H7V0iNhtBExkSZ_TXrmg8z6NLs78vDvul0G0U
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.l7cckIiFBBuGRbTJnJPvJ6EzuWXGBvki
+   VAgpBRLqLabMPVIsIHZ6s-XC3PXRDvfWj0UEMURy1WLzABxC5fYYx9q7UrBJIikWpiPdG
+   -wIkQWEZwH2XOJex2sugaEHy5-1slX4ozvxKBnokCtV4sG2PvmZZuX6jERNJND3bhScAN
+   IZXb61L_IOm1jG2P9obtJRYyn816AfOVTAB2ySWWv03hS1OuDNGCxCK-iM-xwENcRFf3U
+   cbKiq-o1N0ufFqgeRzLQLaU6oLQYhg8BoYJ0W8y0CX1zQ0rGh5PC76-R9MADe8wzXS58F
+   oWjpLJp7mSAXLv1YTqyoowUK1RGrc5c7biZXye_atHQmhVOesY8UwnRh5kc5e6rdRxT4y
+   syd3RNcnEFCpFzQlLOhOmo3IkD_wzAIU2dDhU8v6QaBkv0dVl2IxaXG-aNBZqFEz2DPLR
+   9hXl14ney_znHUHK2cjTQPkf02GjDCcTlM4ALVQzXJM0A
 
    |  Figure: Compact Serialization of Presentation
 
@@ -681,14 +692,14 @@ Table of Contents
        null
      ],
      "proof": [
-       "kSwr87wZQn7HvoeoUWhoIBqYUJTfznosTEJSaz0Ix4W5VPuasGeywupMabXQqq1j
-          hqUBejK92ww9hxMQV2WW2pM4ziLZhfrL03o6GvEdgwh54Bt48JXgXx3W0AQ7LF
-          F2jyE6dML-HsJgsapEXU_olaew71lHsNqMEG-H5Cg2uTLqjNytobyvggs3FkQu
-          4JDhFXVNAIftWhoTwuGr1q2HvkNmb-8dJ0uPbdMlcTWu-41baoYTo3jr2Uphpw
-          VaFtGKVB4_6fMbkT-MFJjdN5DRh2UzxBtHUsVo7Eat86GtUdb0R4vA6tyFyeJ_
-          yd9TYKQbSIZ_Jqd0EpQZ576fSRmGii2XYv45gGv5ESx1oeSiVLpxC7iJpCub20
-          GgeNAvE4RgmDua4B4mEAuL_1-DT1Axd0IzHBIR-0vFWQ9QPiQl6WDrh6Ym-NW_
-          n30FftUdoSYUNtu5P7H7V0iNhtBExkSZ_TXrmg8z6NLs78vDvul0G0U"
+       "l7cckIiFBBuGRbTJnJPvJ6EzuWXGBvkiVAgpBRLqLabMPVIsIHZ6s-XC3PXRDvfW
+          j0UEMURy1WLzABxC5fYYx9q7UrBJIikWpiPdG-wIkQWEZwH2XOJex2sugaEHy5
+          -1slX4ozvxKBnokCtV4sG2PvmZZuX6jERNJND3bhScANIZXb61L_IOm1jG2P9o
+          btJRYyn816AfOVTAB2ySWWv03hS1OuDNGCxCK-iM-xwENcRFf3UcbKiq-o1N0u
+          fFqgeRzLQLaU6oLQYhg8BoYJ0W8y0CX1zQ0rGh5PC76-R9MADe8wzXS58FoWjp
+          LJp7mSAXLv1YTqyoowUK1RGrc5c7biZXye_atHQmhVOesY8UwnRh5kc5e6rdRx
+          T4ysyd3RNcnEFCpFzQlLOhOmo3IkD_wzAIU2dDhU8v6QaBkv0dVl2IxaXG-aNB
+          ZqFEz2DPLR9hXl14ney_znHUHK2cjTQPkf02GjDCcTlM4ALVQzXJM0A"
      ]
    }
 
