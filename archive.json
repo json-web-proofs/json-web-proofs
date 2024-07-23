@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-21T00:46:04.749660+00:00",
+  "timestamp": "2024-07-23T00:42:25.383357+00:00",
   "repo": "json-web-proofs/json-web-proofs",
   "labels": [
     {
@@ -2475,7 +2475,7 @@
       "id": "I_kwDOFsQObc6A_m7-",
       "title": "Define cid",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/115",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -2484,8 +2484,8 @@
       ],
       "body": "It would be good to say more about what `cid` is and how to use it.  For starters, what does \"cid\" stand for?\r\n\r\nHow is the `cid` value computed and what checks are done using it?\r\n\r\nThe need for a clearer definition was first raised in PR #110 .",
       "createdAt": "2024-03-01T20:51:57Z",
-      "updatedAt": "2024-03-05T22:19:30Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-22T00:05:09Z",
+      "closedAt": "2024-07-22T00:05:09Z",
       "comments": []
     },
     {
@@ -2493,7 +2493,7 @@
       "id": "I_kwDOFsQObc6BQLo_",
       "title": "Update to draft-ietf-cose-bls-key-representations-04",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/118",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2502,8 +2502,8 @@
       "labels": [],
       "body": "This is currently pending upstream library changes for access to x/y coordinates",
       "createdAt": "2024-03-05T07:35:57Z",
-      "updatedAt": "2024-03-05T17:33:21Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-21T17:44:04Z",
+      "closedAt": "2024-07-21T17:44:03Z",
       "comments": [
         {
           "author": "selfissued",
@@ -2518,6 +2518,13 @@
           "body": "Opened as mattrglobal/pairing_crypto#185",
           "createdAt": "2024-03-05T17:33:21Z",
           "updatedAt": "2024-03-05T17:33:21Z"
+        },
+        {
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "updated in drafts 4",
+          "createdAt": "2024-07-21T17:44:03Z",
+          "updatedAt": "2024-07-21T17:44:03Z"
         }
       ]
     },
@@ -2526,7 +2533,7 @@
       "id": "I_kwDOFsQObc6BW3Wl",
       "title": "Register +jwp Structured Syntax Suffix",
       "url": "https://github.com/json-web-proofs/json-web-proofs/issues/119",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2535,8 +2542,8 @@
       "labels": [],
       "body": "... so people can use typ=\"foo+jwp\" for foo JWP objects.",
       "createdAt": "2024-03-05T22:33:57Z",
-      "updatedAt": "2024-03-05T22:33:57Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-21T17:11:25Z",
+      "closedAt": "2024-07-21T17:11:25Z",
       "comments": []
     }
   ],
@@ -8045,6 +8052,272 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 124,
+      "id": "PR_kwDOFsQObc52BO0z",
+      "title": "Register +jwp structured syntax suffix",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/124",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #119 ",
+      "createdAt": "2024-07-21T16:34:40Z",
+      "updatedAt": "2024-07-21T17:11:24Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "bd0ea8a6bc64af139a2028021ec2b72d3fdd0d6b",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-jwp-suffix",
+      "headRefOid": "c5cb17a8a333d814eaf6d6138b9929f6813a3c01",
+      "closedAt": "2024-07-21T17:11:24Z",
+      "mergedAt": "2024-07-21T17:11:24Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "e2d2d04474b28dbd66c9d699f4eb1ada97769576"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6CjmpO",
+          "commit": {
+            "abbreviatedOid": "c5cb17a"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-21T17:11:13Z",
+          "updatedAt": "2024-07-21T17:11:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 125,
+      "id": "PR_kwDOFsQObc52BYbq",
+      "title": "Correct -05 history entries",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/125",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-21T18:59:33Z",
+      "updatedAt": "2024-07-21T19:19:24Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "957c89500e6c4c6cf52c909a9441162b05ca3702",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-05-history",
+      "headRefOid": "3ac0824cff894ce86c743535b3848074b55af160",
+      "closedAt": "2024-07-21T19:19:24Z",
+      "mergedAt": "2024-07-21T19:19:24Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "8f6d31230ee13bbc537deb6be8386bda5ca6f011"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 126,
+      "id": "PR_kwDOFsQObc52BZZ5",
+      "title": "Delete vacuous Registries section",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/126",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-21T19:15:21Z",
+      "updatedAt": "2024-07-21T19:19:37Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "957c89500e6c4c6cf52c909a9441162b05ca3702",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-delete-registries",
+      "headRefOid": "637748ff097f7b8f0dafc549b8b73a8308e436bd",
+      "closedAt": "2024-07-21T19:19:36Z",
+      "mergedAt": "2024-07-21T19:19:36Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "a992873a77beb03be2a341ba7ac485c3694c3f70"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6CjqQv",
+          "commit": {
+            "abbreviatedOid": "637748f"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-21T19:16:07Z",
+          "updatedAt": "2024-07-21T19:16:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 127,
+      "id": "PR_kwDOFsQObc52BaGV",
+      "title": "Move to have base64url-encoding only done for",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/127",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Change algorithms to not use base64url encoded data in say internal synthesized values.\r\n\r\nAlso change examples in the algorithm appendix to clarify the figures are using base64url encoding, vs the internal algorithm data.",
+      "createdAt": "2024-07-21T19:26:17Z",
+      "updatedAt": "2024-07-22T01:48:53Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "a992873a77beb03be2a341ba7ac485c3694c3f70",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "binary-safety-cleanup",
+      "headRefOid": "ba35335bdcac42b60dbdb457b7c6e8daae0a9ca5",
+      "closedAt": "2024-07-22T01:48:51Z",
+      "mergedAt": "2024-07-22T01:48:51Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "2e5e93861bea3f15807a527eab31fb420139ade6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6CjqoA",
+          "commit": {
+            "abbreviatedOid": "ba35335"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-21T19:29:42Z",
+          "updatedAt": "2024-07-21T19:29:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 128,
+      "id": "PR_kwDOFsQObc52BiPS",
+      "title": "Define cid Header Parameter",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/128",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #115 ",
+      "createdAt": "2024-07-21T21:42:30Z",
+      "updatedAt": "2024-07-22T00:05:08Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "a992873a77beb03be2a341ba7ac485c3694c3f70",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-cid",
+      "headRefOid": "4e3337fc1b7c18f824671f5de3bbea256ad6c40e",
+      "closedAt": "2024-07-22T00:05:08Z",
+      "mergedAt": "2024-07-22T00:05:08Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "bceb7c7d50b2d5b055d8248ce3f7e52f2df9b388"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6Cj0RI",
+          "commit": {
+            "abbreviatedOid": "4e3337f"
+          },
+          "author": "dwaite",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-22T00:05:02Z",
+          "updatedAt": "2024-07-22T00:05:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 129,
+      "id": "PR_kwDOFsQObc52Bzt7",
+      "title": "Use raw algorithms",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/129",
+      "state": "MERGED",
+      "author": "dwaite",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Use raw algorithms (as defined in JWA) rather than composing via JWS and synthesized headers.\r\n\r\nIn addition to simplifying the description (no longer need to explain the manipulations to add a synthesized header or to grab just the base64url-decoded octets of the signature), this should make it much easier to map the algorithms to a CBOR based format.\r\n\r\n",
+      "createdAt": "2024-07-22T00:59:09Z",
+      "updatedAt": "2024-07-22T02:50:50Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "2e5e93861bea3f15807a527eab31fb420139ade6",
+      "headRepository": "json-web-proofs/json-web-proofs",
+      "headRefName": "use-raw-algorithms",
+      "headRefOid": "96dc6bbb9a89ef9760beeb2c303477ed0354d366",
+      "closedAt": "2024-07-22T02:50:44Z",
+      "mergedAt": "2024-07-22T02:50:44Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "3fef730010e57c640ecdf23a02ead0cc3eca52b0"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6Cj-7K",
+          "commit": {
+            "abbreviatedOid": "ffa69da"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-22T01:45:04Z",
+          "updatedAt": "2024-07-22T01:45:04Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 130,
+      "id": "PR_kwDOFsQObc52CIT4",
+      "title": "Use tocdepth = 4",
+      "url": "https://github.com/json-web-proofs/json-web-proofs/pull/130",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Show four Table of Contents levels so that all IANA Registration headings are indexed.",
+      "createdAt": "2024-07-22T02:57:12Z",
+      "updatedAt": "2024-07-22T03:25:23Z",
+      "baseRepository": "json-web-proofs/json-web-proofs",
+      "baseRefName": "main",
+      "baseRefOid": "3fef730010e57c640ecdf23a02ead0cc3eca52b0",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-tocdepth-4",
+      "headRefOid": "dfdc69f62bd643c376067cbd42dbb28e296ad01c",
+      "closedAt": "2024-07-22T03:25:23Z",
+      "mergedAt": "2024-07-22T03:25:23Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "3a1ae01cbf0372d4ef91bed749f8eb4f44e7824a"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
