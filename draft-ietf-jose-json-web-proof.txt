@@ -163,6 +163,14 @@ Table of Contents
    potentially only a subset of the original claims, predicate proofs
    about the claim values, or proofs of knowledge of the claims.
 
+   |  Editor's Note: This draft is still early and incomplete.  There
+   |  will be significant changes to the algorithms as currently defined
+   |  here.  Please do not use any of these definitions or examples for
+   |  anything except personal experimentation and learning.
+   |  Contributions and feedback are welcomed at https://github.com/
+   |  ietf-wg-jose/json-web-proof (https://github.com/ietf-wg-jose/json-
+   |  web-proof).
+
 2.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -209,7 +217,7 @@ Table of Contents
    instead of a single one.  JWP-supporting algorithms are then able to
    separate and act on the individual payloads contained within.
 
-   The intent of JSON Web Proofs is to establish a common container
+   The intent of JSON Web Proof is to establish a common container
    format for multiple payloads that can be integrity-verified against a
    cryptographic proof value also in the container.  It does not create
    or specify any cryptographic protocols, multi-party protocols, or
@@ -652,14 +660,14 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
    mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
    yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.mK4rF4_ZNJkMYVJA56wLRfxwnbRq0iGy
-   RvtQvXrsI3hgjzIp2vblKy6OTTqX4yPKoNk0d_5bHLCAA7qO0gkFvxPJi58HDJdQfCRJX
-   hGKB4EgBiwMFkEly-RiVtfFNUc2txx3mjRzjZzn71E73mZo2lZpOsOaKdb5khHS7LLprt
-   9b3tmFXQry_4TeZa7rjB8DGgCmjXGbBv7Zqsqx8eAUxe1uz4W6q394Jp2sWgPRsxghVmE
-   S2o0GybyTEtcIxic6nh2cLqA7LTXMjSo_jHt2Iz_igqX-Y5xnP7Bpx7Ev3Eef4wXzm0BU
-   FwAcGOhwSmIiRMWtW94_2jiqptGIbGI6l7RlwPz2I1P0m1SKQEtzcaZHbDLJJEvsvRoz5
-   kt2YI7uxFvaeDhw3HmUxM5H32SoVQ8oSywjcajtIrQxxt5mR-nCyRQVESzm-0WAUGAxc-
-   dJaMxnBifrpx7SSCjewoxJmNm8VkZVu2w4tVDwKJjiK4E
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.kQV6z2eUkApmq69bfumW-we4RPEYCPIg
+   IzpgMRoEvC790fBPByUgz2ms6ModN-P7qku1cr7lz6gDgpLvwMLSBWbdOlq0AJkwtZP6C
+   X5axXdCl2pQP60OV1K7ayTWmviUtLqHqCrhUI5ilz6411pAvEcZ9BTxOVLpFl4VBY4MGH
+   KiFCIEEHbgNM3LDdl5-g8yWJV3TE4BcM8FCJt2JEL-A7TiGOTHzLInU9Ue9srz7MUNdrp
+   hFJBjJBsESfuDFIMG1pNy0tl0VZhLcGgrrr2B6Teaalsz5b3l33d1yJA33Z9tS0tvfxiu
+   FmLhGwcxuBWINFeRNMwSAUkizeBxFYkbPyZ61UI53JAZuW6r3pIPFG8GBdd08BF8lxvf9
+   UEKkiopMrSpDrVNDWOAIEHS0INbxTX1xtull-wtjMUQvITBnf6Tzb8b_rHOeVzvmJOwS_
+   SGVW5O3Djxr0jnA7m1P4IYrNiNpmWy9fv4j32L6bkzd1I
 
    |  Figure: Compact Serialization of Presentation
 
@@ -692,14 +700,14 @@ Table of Contents
        null
      ],
      "proof": [
-       "mK4rF4_ZNJkMYVJA56wLRfxwnbRq0iGyRvtQvXrsI3hgjzIp2vblKy6OTTqX4yPK
-          oNk0d_5bHLCAA7qO0gkFvxPJi58HDJdQfCRJXhGKB4EgBiwMFkEly-RiVtfFNU
-          c2txx3mjRzjZzn71E73mZo2lZpOsOaKdb5khHS7LLprt9b3tmFXQry_4TeZa7r
-          jB8DGgCmjXGbBv7Zqsqx8eAUxe1uz4W6q394Jp2sWgPRsxghVmES2o0GybyTEt
-          cIxic6nh2cLqA7LTXMjSo_jHt2Iz_igqX-Y5xnP7Bpx7Ev3Eef4wXzm0BUFwAc
-          GOhwSmIiRMWtW94_2jiqptGIbGI6l7RlwPz2I1P0m1SKQEtzcaZHbDLJJEvsvR
-          oz5kt2YI7uxFvaeDhw3HmUxM5H32SoVQ8oSywjcajtIrQxxt5mR-nCyRQVESzm
-          -0WAUGAxc-dJaMxnBifrpx7SSCjewoxJmNm8VkZVu2w4tVDwKJjiK4E"
+       "kQV6z2eUkApmq69bfumW-we4RPEYCPIgIzpgMRoEvC790fBPByUgz2ms6ModN-P7
+          qku1cr7lz6gDgpLvwMLSBWbdOlq0AJkwtZP6CX5axXdCl2pQP60OV1K7ayTWmv
+          iUtLqHqCrhUI5ilz6411pAvEcZ9BTxOVLpFl4VBY4MGHKiFCIEEHbgNM3LDdl5
+          -g8yWJV3TE4BcM8FCJt2JEL-A7TiGOTHzLInU9Ue9srz7MUNdrphFJBjJBsESf
+          uDFIMG1pNy0tl0VZhLcGgrrr2B6Teaalsz5b3l33d1yJA33Z9tS0tvfxiuFmLh
+          GwcxuBWINFeRNMwSAUkizeBxFYkbPyZ61UI53JAZuW6r3pIPFG8GBdd08BF8lx
+          vf9UEKkiopMrSpDrVNDWOAIEHS0INbxTX1xtull-wtjMUQvITBnf6Tzb8b_rHO
+          eVzvmJOwS_SGVW5O3Djxr0jnA7m1P4IYrNiNpmWy9fv4j32L6bkzd1I"
      ]
    }
 
@@ -1067,6 +1075,8 @@ Appendix A.  Acknowledgements
 Appendix B.  Document History
 
    [[ To be removed from the final specification ]]
+
+   *  Update reference to new repository home
 
    -05
 

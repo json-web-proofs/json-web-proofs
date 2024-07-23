@@ -101,8 +101,8 @@ Table of Contents
    |  here.  Please do not use any of these definitions or examples for
    |  anything except personal experimentation and learning.
    |  Contributions and feedback are welcomed at https://github.com/
-   |  json-web-proofs/json-web-proofs (https://github.com/json-web-
-   |  proofs/json-web-proofs).
+   |  ietf-wg-jose/json-web-proof (https://github.com/ietf-wg-jose/json-
+   |  web-proof).
 
 2.  Conventions and Definitions
 
@@ -354,6 +354,8 @@ Appendix A.  Acknowledgements
 Appendix B.  Document History
 
    [[ To be removed from the final specification ]]
+
+   *  Update reference to new repository home
 
    -05
 
