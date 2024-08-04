@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-01T00:47:08.594499+00:00",
+  "timestamp": "2024-08-04T00:46:35.009396+00:00",
   "repo": "ietf-wg-jose/json-web-proof",
   "labels": [
     {
@@ -8353,6 +8353,32 @@
           "updatedAt": "2024-07-23T23:18:54Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 132,
+      "id": "PR_kwDOFsQObc53Tkgh",
+      "title": "Add -06 history labels",
+      "url": "https://github.com/ietf-wg-jose/json-web-proof/pull/132",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-02T23:13:05Z",
+      "updatedAt": "2024-08-02T23:13:05Z",
+      "baseRepository": "ietf-wg-jose/json-web-proof",
+      "baseRefName": "main",
+      "baseRefOid": "45c73dd5568d3c5c08722a8dbe3fb1d1369148a5",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-06-history-labels",
+      "headRefOid": "00157fcd5b4fbe21c1b0dd7f8cdd0bbda7b40fe4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
