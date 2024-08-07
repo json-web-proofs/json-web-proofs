@@ -5,9 +5,9 @@
 jose                                                           J. Miller
 Internet-Draft                                                  D. Waite
 Intended status: Standards Track                           Ping Identity
-Expires: 24 January 2025                                        M. Jones
+Expires: 8 February 2025                                        M. Jones
                                                   Self-Issued Consulting
-                                                            23 July 2024
+                                                           7 August 2024
 
 
                              JSON Web Proof
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 January 2025.
+   This Internet-Draft will expire on 8 February 2025.
 
 Copyright Notice
 
@@ -660,14 +660,14 @@ Table of Contents
    eyJhbGciOiJCQlMtUFJPT0YiLCJhdWQiOiJodHRwczovL3JlY2lwaWVudC5leGFtcGxlL
    mNvbSIsIm5vbmNlIjoid3JtQlJrS3RYalEifQ.eyJraWQiOiJIamZjcHlqdVpRLU84WWU
    yaFFuTmJUOVJiYm5yb2JwdGRuRXhSMERValU4IiwiYWxnIjoiQkJTIn0.MTcxNDUyMTYw
-   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.kQV6z2eUkApmq69bfumW-we4RPEYCPIg
-   IzpgMRoEvC790fBPByUgz2ms6ModN-P7qku1cr7lz6gDgpLvwMLSBWbdOlq0AJkwtZP6C
-   X5axXdCl2pQP60OV1K7ayTWmviUtLqHqCrhUI5ilz6411pAvEcZ9BTxOVLpFl4VBY4MGH
-   KiFCIEEHbgNM3LDdl5-g8yWJV3TE4BcM8FCJt2JEL-A7TiGOTHzLInU9Ue9srz7MUNdrp
-   hFJBjJBsESfuDFIMG1pNy0tl0VZhLcGgrrr2B6Teaalsz5b3l33d1yJA33Z9tS0tvfxiu
-   FmLhGwcxuBWINFeRNMwSAUkizeBxFYkbPyZ61UI53JAZuW6r3pIPFG8GBdd08BF8lxvf9
-   UEKkiopMrSpDrVNDWOAIEHS0INbxTX1xtull-wtjMUQvITBnf6Tzb8b_rHOeVzvmJOwS_
-   SGVW5O3Djxr0jnA7m1P4IYrNiNpmWy9fv4j32L6bkzd1I
+   MA~MTcxNzE5OTk5OQ~IkRvZSI~IkpheSI~~~.gbLO90aWDmi41zq9GMaBhxQn13TF1poO
+   2eY14f2cIAZMPTBWjsCK2Jwznre0prSMk9kGp6IwvM-3udAfnRr3OOq6N3f51RnI4nlXo
+   tuTOqcmRAM-5mj668ANYN9X_mG-oGLeRlStSV9m56bRm2V-uTzs6wwI7Zpm6DIhfBqZfH
+   n0JKhze0MZFQ5mPA2hW3MUBTXfVGmaXFp6xvUzSwsxL94j8RsxX7toJlkIZmlDYscKqfq
+   RS8Hb3mozMJ_WHkhHG8wieTefegqU2KSh4eaQaz6AvtkSvmw__gupjzBjc0jS70DP8taw
+   TMUHkDTM4tPWXdujPrAfWFGQbIdLVwrUNYEf_qudvFurkEWm_tj5h6tkeXot9dJrY9tle
+   sMyxYgG59ydmxEQeTain3NBtIPQd0_9mGv6u7Azlk4VK4zxhSoqrUXYk_9zpMlXfCdNMF
+   YgcfJLVWiHOSarIprLvEQ9vsruFKJANmvh4qf9BrrE_Sk
 
    |  Figure: Compact Serialization of Presentation
 
@@ -700,14 +700,14 @@ Table of Contents
        null
      ],
      "proof": [
-       "kQV6z2eUkApmq69bfumW-we4RPEYCPIgIzpgMRoEvC790fBPByUgz2ms6ModN-P7
-          qku1cr7lz6gDgpLvwMLSBWbdOlq0AJkwtZP6CX5axXdCl2pQP60OV1K7ayTWmv
-          iUtLqHqCrhUI5ilz6411pAvEcZ9BTxOVLpFl4VBY4MGHKiFCIEEHbgNM3LDdl5
-          -g8yWJV3TE4BcM8FCJt2JEL-A7TiGOTHzLInU9Ue9srz7MUNdrphFJBjJBsESf
-          uDFIMG1pNy0tl0VZhLcGgrrr2B6Teaalsz5b3l33d1yJA33Z9tS0tvfxiuFmLh
-          GwcxuBWINFeRNMwSAUkizeBxFYkbPyZ61UI53JAZuW6r3pIPFG8GBdd08BF8lx
-          vf9UEKkiopMrSpDrVNDWOAIEHS0INbxTX1xtull-wtjMUQvITBnf6Tzb8b_rHO
-          eVzvmJOwS_SGVW5O3Djxr0jnA7m1P4IYrNiNpmWy9fv4j32L6bkzd1I"
+       "gbLO90aWDmi41zq9GMaBhxQn13TF1poO2eY14f2cIAZMPTBWjsCK2Jwznre0prSM
+          k9kGp6IwvM-3udAfnRr3OOq6N3f51RnI4nlXotuTOqcmRAM-5mj668ANYN9X_m
+          G-oGLeRlStSV9m56bRm2V-uTzs6wwI7Zpm6DIhfBqZfHn0JKhze0MZFQ5mPA2h
+          W3MUBTXfVGmaXFp6xvUzSwsxL94j8RsxX7toJlkIZmlDYscKqfqRS8Hb3mozMJ
+          _WHkhHG8wieTefegqU2KSh4eaQaz6AvtkSvmw__gupjzBjc0jS70DP8tawTMUH
+          kDTM4tPWXdujPrAfWFGQbIdLVwrUNYEf_qudvFurkEWm_tj5h6tkeXot9dJrY9
+          tlesMyxYgG59ydmxEQeTain3NBtIPQd0_9mGv6u7Azlk4VK4zxhSoqrUXYk_9z
+          pMlXfCdNMFYgcfJLVWiHOSarIprLvEQ9vsruFKJANmvh4qf9BrrE_Sk"
      ]
    }
 
@@ -984,16 +984,16 @@ Table of Contents
    [I-D.ietf-jose-json-proof-algorithms]
               Miller, J., Jones, M. B., and D. Waite, "JSON Proof
               Algorithms", Work in Progress, Internet-Draft, draft-ietf-
-              jose-json-proof-algorithms-04, 8 July 2024,
+              jose-json-proof-algorithms-05, 22 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              json-proof-algorithms-04>.
+              json-proof-algorithms-05>.
 
    [I-D.ietf-jose-json-proof-token]
               Miller, J., Jones, M. B., and D. Waite, "JSON Proof
               Token", Work in Progress, Internet-Draft, draft-ietf-jose-
-              json-proof-token-04, 8 July 2024,
+              json-proof-token-05, 22 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              json-proof-token-04>.
+              json-proof-token-05>.
 
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
