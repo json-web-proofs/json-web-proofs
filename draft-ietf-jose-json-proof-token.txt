@@ -71,7 +71,7 @@ Table of Contents
    8.  Payloads
      8.1.  Disclosed
      8.2.  Proof Methods
-   9.  Example JPT
+   9.  Example JPTs
    10. Security Considerations
    11. IANA Considerations
      11.1.  JSON Web Proof Header Parameters Registration
@@ -287,9 +287,10 @@ Table of Contents
       -  knowledge
       -  linking
 
-9.  Example JPT
+9.  Example JPTs
 
-   See the [I-D.ietf-jose-json-web-proof] appendix.
+   See the examples in Appendix A.1 of
+   [I-D.ietf-jose-json-proof-algorithms].
 
 10.  Security Considerations
 
@@ -329,6 +330,13 @@ Table of Contents
               <https://www.rfc-editor.org/info/rfc7519>.
 
 12.2.  Informative References
+
+   [I-D.ietf-jose-json-proof-algorithms]
+              Miller, J., Jones, M. B., and D. Waite, "JSON Proof
+              Algorithms", Work in Progress, Internet-Draft, draft-ietf-
+              jose-json-proof-algorithms-05, 22 July 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
+              json-proof-algorithms-05>.
 
    [IANA.JWT.Claims]
               IANA, "JSON Web Token Claims",
