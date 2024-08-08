@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-06T00:42:34.290000+00:00",
+  "timestamp": "2024-08-08T00:42:56.428150+00:00",
   "repo": "ietf-wg-jose/json-web-proof",
   "labels": [
     {
@@ -1122,7 +1122,7 @@
       ],
       "body": "As we already know, the existing set of Json Web Algorithms (JWA) only really support proof of authenticity (I.e., that a message was signed by a certain key, and that it was not modified). I propose extending some of the existing JWAs, enabling them to support more extensive proof types such as selective-disclosure, compound proofs, and predicate proofs. \r\n\r\n \r\n\r\nI believe this could be achieved with the following approach. \r\n\r\n \r\n\r\nGenerating a digital signature. \r\n\r\n1. Create a vector Pedersen commitment on the messages (m1...mi). \r\n    * COMMITMENT = g<sub>1</sub><sup>m1</sup> * g<sub>2</sub><sup>m2</sup> * g<sub>i</sub><sup>mi</sup> * g<sub>n</sub><sup>nonce</sup> . \r\n2. Sign the commitment using an existing digital signature algorithm (e.g., [ECDSA](https://datatracker.ietf.org/doc/html/rfc7518#section-3.4)). \r\n    * SIGNING_INPUT = HASH (COMMITMENT) \r\n    * SIGNATURE = GENERATE_SIGNATURE (SIGNING_INPUT) \r\n\r\nGenerating a proof. \r\n\r\n1. Generate the required message proofs (MESSAGE_PROOFS), e.g., [selective-disclosure/proof-of-knowledge](https://github.com/hyperledger/ursa/blob/main/libzmix/bbs/src/pok_vc.rs) \r\n2. PROOF = (COMMITMENT, MESSAGE_PROOFS, SIGNATURE) \r\n\r\n \r\n\r\nVerifying a proof. \r\n\r\n1. VERIFICATION_INPUT = HASH (COMMITMENT) \r\n2. VERIFY_SIGNATURE (VERIFICATION_INPUT, SIGNATURE) \r\n3. VERIFY_MESSAGE_PROOFS (MESSAGE_PROOFS, COMMITMENT) \r\n\r\n \r\n\r\nThe homomorphic encryption property of a Pedersen Commitment would enable a prover to create a larger set of proof types on hidden messages. In fact, this is how the Ursa [BBS+](https://github.com/hyperledger/ursa/blob/d83240bea7e9c3fa48bb3bec208255e24c72423d/libzmix/bbs/src/lib.rs#L202) and [PS signatures](https://github.com/hyperledger/ursa/tree/main/libzmix/src/signatures/ps) implementations support it. \r\n\r\n \r\n\r\n### Some Pros and Cons of this approach \r\n\r\nPros: \r\n\r\n* A small component to implement on top of existing digital signature libraries \r\n* Allows for  multiple messages to be signed instead of one\r\n* Could enable predicate proofs\r\n* Could enable compound proofs, even between unlinkable proof algorithms such as BBS+ (needs some investigating) \r\n\r\nCons: \r\n* Proofs are still linkable \r\n\r\n### Jpa Identifier \r\n\r\nA JPA identifier for ES256 plus the described approach could be `ES256+C`, where `C` stands for commitment. \r\n\r\n \r\n### Pedersen Commitment Building Block\r\n\r\nAnother aspect to take into consideration is that the Pedersen Commitment is a building block for many of the ZKP proof algorithms. With this into consideration, I am wondering if we should create a section in the JPA draft spec to document the different proof algorithms that could be applied to Pedersen Commitments. JPAs can then refer to those algorithms.  \r\n\r\n \r\n\r\nUseful Links \r\n\r\n* https://asecuritysite.com/encryption/ped \r\n* [Vector Pedersen Commitment Proof of Knowledge URSA RFC (this is how selective disclosure is done for BBS+ and PS Signatures)](https://github.com/hyperledger/ursa-rfcs/tree/main/text/pok-vpc)\r\n\r\n \r\n\r\nNoah ",
       "createdAt": "2021-11-17T16:35:37Z",
-      "updatedAt": "2024-02-16T22:52:17Z",
+      "updatedAt": "2024-08-07T02:20:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -1187,6 +1187,13 @@
           "body": "This is a bit of a call-out to see if there is still interest in this family of algorithms.",
           "createdAt": "2024-02-16T22:52:17Z",
           "updatedAt": "2024-02-16T22:52:17Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is related to #104.  Volunteers to specify how to use these algorithms would be appreciated, as having more algorithms will help ensure the generality of the JWP approach.\r\n\r\nThat said, unless the new algorithms are clearly standards-bound, we should put them in a separate Additional Algorithms specification rather than JPA, so that JPA can finish when BBS Signatures does.",
+          "createdAt": "2024-08-07T02:20:51Z",
+          "updatedAt": "2024-08-07T02:20:51Z"
         }
       ]
     },
@@ -1540,7 +1547,7 @@
       "labels": [],
       "body": "H/T @OR13 on looping me into a thread about the difficulty (complete lack-of) of supporting multiple signatures in JWTs,  this is definitely a use case we should try to directly support for JWPs.\r\n\r\nMy initial take would be to extend the use of ~ to support compound issuer headers and proofs:\r\n`issuer_header_alice~issuer_header_bob.payload_1~payload_2~payload_3.issuer_proof_alice~issuer_proof_bob`\r\nand the presentation\r\n`issuer_header_alice~issuer_header_bob.payload_1~~payload_3.presentation_proof_alice~presentation_proof_bob`\r\n\r\nThe multiple issuer headers/proofs wouldn't have any intrinsic linking/relationship (unless they encoded such internally in their headers), so the presenter would be free to include/exclude whatever ones they choose to.  The verifier would be required to verify _all_ of them (that are included).",
       "createdAt": "2022-05-02T16:49:39Z",
-      "updatedAt": "2024-02-27T23:44:01Z",
+      "updatedAt": "2024-08-07T02:11:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -1633,6 +1640,13 @@
           "body": "@dwaite and I propose to close this unless concrete use cases necessitating multiple signatures is endorsed by the working group.",
           "createdAt": "2024-02-20T22:14:55Z",
           "updatedAt": "2024-02-27T23:44:01Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Note that this somewhat related to #100, since like in JWS, it's much more straightforward to represent multiple signatures/proofs when the representation is a JSON Serialization that can contain arrays, versus a Compact Serialization that can't without utilizing unpleasant encoding tricks.  If we want multiple signatures/proofs, we probably only want that to be possible in a JSON Serialization.\r\n",
+          "createdAt": "2024-08-07T02:11:45Z",
+          "updatedAt": "2024-08-07T02:11:45Z"
         }
       ]
     },
@@ -1963,7 +1977,7 @@
       "id": "I_kwDOFsQObc5rXy_-",
       "title": "Define parameters and terminology in appropriate sections",
       "url": "https://github.com/ietf-wg-jose/json-web-proof/issues/77",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1974,8 +1988,8 @@
       ],
       "body": "From @OR13, https://mailarchive.ietf.org/arch/msg/jose/GkL3I9hEoKjaIDCgno_rYqQsSP0/ :\r\n\r\n> Assume the reader has some awareness of JOSE, and introduce terms like `issuer_header` and `presentation_header` so that they defined in their sections, for example:\r\n>\r\n> https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-proof-algorithms-00#name-presentation-protected-header-2\r\n>\r\n> does not include \"presentation_header\" header.",
       "createdAt": "2023-07-12T17:06:35Z",
-      "updatedAt": "2024-03-02T19:30:54Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-07T07:47:50Z",
+      "closedAt": "2024-08-07T07:47:50Z",
       "comments": [
         {
           "author": "selfissued",
@@ -2334,7 +2348,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-01-09T22:45:03Z",
-      "updatedAt": "2024-02-27T23:57:14Z",
+      "updatedAt": "2024-08-07T00:33:06Z",
       "closedAt": null,
       "comments": [
         {
@@ -2343,6 +2357,20 @@
           "body": "I will talk to people about this at IETF 119 in Brisbane.",
           "createdAt": "2024-02-27T23:56:54Z",
           "updatedAt": "2024-02-27T23:56:54Z"
+        },
+        {
+          "author": "mprorock",
+          "authorAssociation": "NONE",
+          "body": "If coming back over an API as a response it is helpful to get the JSON serialization compared to compact",
+          "createdAt": "2024-08-06T23:56:09Z",
+          "updatedAt": "2024-08-06T23:56:09Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> If coming back over an API as a response it is helpful to get the JSON serialization compared to compact\r\n\r\nHelpful how?  I'll make two guesses as to what you may be referring to:\r\n\r\n1. You don't have to extract the fields from the periods separating because you can instead extract them as JSON member values.\r\n2. You can put extra stuff that's not actually part of the JWP in the top-level JSON structure by adding JSON members not understood or processed by the JWP itself.\r\n\r\nI'm a little bit sympathetic to (1).  In my view, (2) is a layering violation - mixing protocol features into a data structure that's intended to be used as a protocol element.\r\n\r\nOr is there a (3) that I didn't think of?\r\n\r\nOur motivation is to have a single JSON serialization, like JWT does, to increase interoperability.",
+          "createdAt": "2024-08-07T00:33:05Z",
+          "updatedAt": "2024-08-07T00:33:05Z"
         }
       ]
     },
@@ -2417,15 +2445,15 @@
       "id": "I_kwDOFsQObc57lCyk",
       "title": "Should we keep non-ZKP algorithms",
       "url": "https://github.com/ietf-wg-jose/json-web-proof/issues/103",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "dwaite",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Per discussion in IETF 118 microphone comments, should we keep algorithms which do not have a reasonably inexpensive nonsinkable presentation.",
       "createdAt": "2024-01-09T23:01:58Z",
-      "updatedAt": "2024-02-17T23:09:35Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-07T02:03:18Z",
+      "closedAt": "2024-08-07T02:03:18Z",
       "comments": [
         {
           "author": "selfissued",
@@ -2433,6 +2461,13 @@
           "body": "Being able to represent and use non-ZKP algorithms is a forcing function that we're writing the specifications in widely-applicable manner.  That doesn't mean that, in the end, we need to have the single-use algorithms be REQUIRED or even RECOMMENDED.  But I'm loathe to rip them out now, because having multiple algorithms and multiple kinds of algorithms will help keep us honest.",
           "createdAt": "2024-02-17T23:09:34Z",
           "updatedAt": "2024-02-17T23:09:34Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Per discussions at IETF 120 in Vancouver, it makes sense to keep several algorithms in the specs to ensure that the representations we're using are flexible and general-purpose.",
+          "createdAt": "2024-08-07T02:03:18Z",
+          "updatedAt": "2024-08-07T02:03:18Z"
         }
       ]
     },
@@ -8380,6 +8415,217 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 133,
+      "id": "PR_kwDOFsQObc53n_iA",
+      "title": "Remove vestigial use of presentation_header",
+      "url": "https://github.com/ietf-wg-jose/json-web-proof/pull/133",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #77 ",
+      "createdAt": "2024-08-07T00:10:27Z",
+      "updatedAt": "2024-08-07T07:47:49Z",
+      "baseRepository": "ietf-wg-jose/json-web-proof",
+      "baseRefName": "main",
+      "baseRefOid": "45c73dd5568d3c5c08722a8dbe3fb1d1369148a5",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-remove-presentation_header",
+      "headRefOid": "3734ae0d97e2ac8494720af75ed40a514988b29c",
+      "closedAt": "2024-08-07T07:47:49Z",
+      "mergedAt": "2024-08-07T07:47:49Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "eaa0ece617f3b2b39b804cf68547f7d9a4c604ef"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6EgXQq",
+          "commit": {
+            "abbreviatedOid": "3734ae0"
+          },
+          "author": "dwaite",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-07T07:47:43Z",
+          "updatedAt": "2024-08-07T07:47:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 134,
+      "id": "PR_kwDOFsQObc53oQWr",
+      "title": "Correct JPT example location",
+      "url": "https://github.com/ietf-wg-jose/json-web-proof/pull/134",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-07T01:15:55Z",
+      "updatedAt": "2024-08-07T07:48:22Z",
+      "baseRepository": "ietf-wg-jose/json-web-proof",
+      "baseRefName": "main",
+      "baseRefOid": "45c73dd5568d3c5c08722a8dbe3fb1d1369148a5",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-jpt-example-location",
+      "headRefOid": "d4457454f8a9a5a55dd404085843d794e82fb04a",
+      "closedAt": "2024-08-07T07:48:22Z",
+      "mergedAt": "2024-08-07T07:48:22Z",
+      "mergedBy": "dwaite",
+      "mergeCommit": {
+        "oid": "7c266a405225447faa6f2db0e76759bf9edb03e3"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6EgYB-",
+          "commit": {
+            "abbreviatedOid": "d445745"
+          },
+          "author": "dwaite",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2024-08-07T07:48:17Z",
+          "updatedAt": "2024-08-07T07:48:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 135,
+      "id": "PR_kwDOFsQObc53ob38",
+      "title": "Discuss issued and presented forms of JPTs",
+      "url": "https://github.com/ietf-wg-jose/json-web-proof/pull/135",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #96 ",
+      "createdAt": "2024-08-07T01:47:01Z",
+      "updatedAt": "2024-08-07T02:00:06Z",
+      "baseRepository": "ietf-wg-jose/json-web-proof",
+      "baseRefName": "main",
+      "baseRefOid": "45c73dd5568d3c5c08722a8dbe3fb1d1369148a5",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-enhance-jpt-payload-description",
+      "headRefOid": "5827a5ce72a3081c83955f8869f0c4d05162e177",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixes #99 ",
+          "createdAt": "2024-08-07T01:59:36Z",
+          "updatedAt": "2024-08-07T01:59:36Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 136,
+      "id": "PR_kwDOFsQObc53pmOO",
+      "title": "Add encrypted JWPs",
+      "url": "https://github.com/ietf-wg-jose/json-web-proof/pull/136",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #83 \r\n\r\nCc @brentzundel ",
+      "createdAt": "2024-08-07T04:23:25Z",
+      "updatedAt": "2024-08-07T19:30:50Z",
+      "baseRepository": "ietf-wg-jose/json-web-proof",
+      "baseRefName": "main",
+      "baseRefOid": "45c73dd5568d3c5c08722a8dbe3fb1d1369148a5",
+      "headRepository": "selfissued/json-web-proofs",
+      "headRefName": "mbj-encryption",
+      "headRefOid": "ea53c45432d497e0cfa608ab2b10bf0d375ea6a3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOFsQObc6EgtVq",
+          "commit": {
+            "abbreviatedOid": "ea53c45"
+          },
+          "author": "dwaite",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-07T08:03:09Z",
+          "updatedAt": "2024-08-07T08:04:04Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "These seem like they should be identical to the guidance in JWP around `typ` - if present, they SHOULD be the effective media type of the contained JWP.  This MAY be in the JWP as the `typ` protected header parameter, or omitted from the JWP based on context.",
+              "createdAt": "2024-08-07T08:03:09Z",
+              "updatedAt": "2024-08-07T08:04:04Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "\ud83d\udc4d",
+              "createdAt": "2024-08-07T08:03:44Z",
+              "updatedAt": "2024-08-07T08:04:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFsQObc6ErmA6",
+          "commit": {
+            "abbreviatedOid": "ea53c45"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-07T19:28:35Z",
+          "updatedAt": "2024-08-07T19:28:36Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "We would need to define two new \"typ\" values saying that the whole thing is an encrypted JWT using one or the other serializations if we were to go that route.  But it would be better to use application-defined \"typ\" values using the +jwp suffix and/or application-defined \"typ\" values using the JSON Serialization.\r\n\r\nInstead, the encryption treatment is intentionally exactly the same as for JWKs.  Compare the language in this PR with that at https://www.rfc-editor.org/rfc/rfc7517.html#section-7 and let me know if there are changes you'd like to make it even more paralle.",
+              "createdAt": "2024-08-07T19:28:35Z",
+              "updatedAt": "2024-08-07T19:28:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOFsQObc6Erm25",
+          "commit": {
+            "abbreviatedOid": "ea53c45"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-07T19:30:50Z",
+          "updatedAt": "2024-08-07T19:30:50Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Oh wait - I get it now.  Now that we have explicit typing, we should use the \"typ\" value of the enclosed JWP as the JWE \"cty\" value.  I'll take a stab at that.",
+              "createdAt": "2024-08-07T19:30:50Z",
+              "updatedAt": "2024-08-07T19:30:50Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
