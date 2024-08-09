@@ -451,6 +451,34 @@ This example flattened JSON serialization shows the presentation form with both 
 <{{./fixtures/build/bbs-holder.json.jwp.wrapped}}>
 Figure: JSON Serialization of Presentation
 
+# Encrypted JSON Web Proofs
+
+Access to JWPs containing non-public material
+by parties without legitimate access to the non-public information
+MUST be prevented.
+This can be accomplished by encrypting the JWP
+when potentially observable by such parties
+to prevent the disclosure of private information.
+The use of an Encrypted JWP, which is a JWE [@!RFC7516]
+with a JWP as its plaintext value,
+is recommended for this purpose.
+The processing of Encrypted JWPs is identical to
+the processing of other JWEs.
+
+The `cty` (content type) JWE Header Parameter is used to indicate
+that the content of the JWE is a JWP.
+The `cty` value of the JWE SHOULD be the same as
+the `typ` (type) JWP Header Parameter value of the JWP.
+If the JWP has no `typ` value, then the following JWE Header Parameter `cty` (content type) values SHOULD be used:
+
+* `jwp` is used to indicate that the content of the JWE is a JWP using the JWP Compact Serialization.
+* `jwp+json` is used to indicate that the content of the JWE is the UTF-8 encoding of a JWP using the JWP JSON Serialization.
+
+The `cty` (content type) Header Parameter MUST be present
+unless the application knows that the encrypted content is
+a JWP by another means or convention,
+in which case the `cty` value MAY be omitted.
+
 # Security Considerations {#SecurityConsiderations}
 
 Notes to be expanded:
@@ -657,7 +685,8 @@ This section registers the `+jwp`
 structured syntax suffix [@RFC6838]
 in the IANA "Structured Syntax Suffix" registry (#IANA.StructuredSuffix)
 in the manner described in [@RFC6838],
-which can be used to indicate that the media type is encoded as a JWP.
+which can be used to indicate that the media type is encoded as a JWP
+using the JWP Compact Serialization.
 
 #### The +jwp Structured Syntax Suffix
 
@@ -767,7 +796,8 @@ for his valuable contributions to this specification.
 
   [[ To be removed from the final specification ]]
 
-  * Update reference to new repository home
+  * Update reference to new repository home.
+  * Fixed #83: Added encrypted JWPs.
 
  -05
 
